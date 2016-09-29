@@ -21,10 +21,10 @@
       <div>
         <h3>{{breadcrumb}}</h3>
         <div class="load_products" v-on:click.stop v-show="show_load">
-          Load Products ....
+          <load-products></load-products>
         </div>
         <div class="products_name" v-on:click.stop v-show="show_names">
-          Form for configuring Product Names
+          <product-names></product-names>
         </div>
         <div class="products_description" v-on:click.stop v-show="show_descriptions">
           Form for configuring Products Descriptions
@@ -42,10 +42,32 @@
   </div>
 
   <script>
+    var ComboBox = Vue.extend({
+      template: '<div>Combobox</div>>'
+    });
+
+    var LoadProducts =Vue.extend({
+      template: '<div>Load Products template</div>'
+    });
+    var ProductNames =Vue.extend({
+      template: '<div>' +
+        '<h3>Product Names template</h3>' +
+        '<combo-box></combo-box>' +
+      '</div>',
+      components:{
+        'combo-box': ComboBox
+      }
+    });
+
+
+    //register components
+    Vue.component('load-products', LoadProducts);
+    Vue.component('product-names', ProductNames);
+
     new Vue({
       el: '#app',
       data: {
-        breadcrumb:"Please add Products",
+        breadcrumb:"Please add some Products",
         productsName: '#productsName',
         productsDescription: '#productsDescription',
         productsMeta: '#productsMetatags',
@@ -54,7 +76,7 @@
         show_names: false,
         show_descriptions: false,
         show_metatags: false,
-        show_rss: false,
+        show_rss: false
       },
       methods: {
         makeActive: function(item){
