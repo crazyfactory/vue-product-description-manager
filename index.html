@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to the product descriptor</title>
+  <script src="https://unpkg.com/vue@next/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+  <div id="app">
+    <p>
+      <img src="https://www.crazy-factory.com/templates/cf2010/img/crazy-factory-logo-big.png" alt="CF logo">
+    </p>
+    <nav v-bind:class="breadcrumb" v-on:click.prevent>
+      <a href="#" class="load" v-on:click="makeActive('load')">Load Products</a>
+      <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
+      <a href="#" class="description" v-on:click="makeActive('description')">Product Descriptions</a>
+      <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatag List</a>
+      <a href="#" class="rss" v-on:click="makeActive('rss')">RSS</a>
+    </nav>
+    <hr />
+      <div>
+        <h3>{{breadcrumb}}</h3>
+        <div class="load_products" v-on:click.stop v-show="show_load">
+          Load Products ....
+        </div>
+        <div class="products_name" v-on:click.stop v-show="show_names">
+          Form for configuring Product Names
+        </div>
+        <div class="products_description" v-on:click.stop v-show="show_descriptions">
+          Form for configuring Products Descriptions
+        </div>
+        <div class="products_metatags" v-on:click.stop v-if="show_metatags">
+          Form for configuring Metatags
+        </div>
+        <div class="products_rss" v-on:click.stop v-if="show_rss">
+          Form for RSS
+        </div>
+
+      </div>
+    <hr />
+
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        breadcrumb:"Please add Products",
+        productsName: '#productsName',
+        productsDescription: '#productsDescription',
+        productsMeta: '#productsMetatags',
+        productsRSS: '#productsRss',
+        show_load: true,
+        show_names: false,
+        show_descriptions: false,
+        show_metatags: false,
+        show_rss: false,
+      },
+      methods: {
+        makeActive: function(item){
+
+          // deactivate all
+          this.show_names= false;
+          this.show_descriptions= false;
+          this.show_metatags= false;
+          this.show_rss= false;
+          this.show_load=false;
+
+          this.breadcrumb = item;
+          switch(item){
+            case 'load':
+              this.show_load= true;
+              this.breadcrumb = 'Load Products';
+              break;
+            case 'names':
+              this.show_names= true;
+              this.breadcrumb = 'Configure Product Names';
+              break;
+            case 'description':
+              this.show_descriptions= true;
+              this.breadcrumb = 'Configure Product Descriptions';
+              break;
+            case 'metatags':
+              this.show_metatags= true;
+              this.breadcrumb = 'Configure Product Metatags';
+              break;
+            case 'rss':
+              this.show_rss= true;
+              this.breadcrumb = 'Configure RSS Export';
+              break;
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
