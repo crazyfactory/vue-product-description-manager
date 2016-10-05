@@ -4,13 +4,25 @@
   <title>Welcome to the ProductDescriptor</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <!-- get vue.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+  <!-- get select extension -->
   <script src="https://npmcdn.com/vue-select@latest"></script>
+  <!-- get the product class -->
+  <!--
+  <script src="assets/product.js"></script>
+  -->
+  <!-- load data -->
   <script src="config/de/attributes.js"></script>
   <script src="config/de/categories.js"></script>
-
+  <!-- get css styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+  <!-- Products stuff -->
+ <!-- <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css/index.css"> -->
+  <script src="https:unpkg.com/director/build/director.js"></script>
+  <style>[v-cloak] { display: none; }</style>
 
 </head>
 <body>
@@ -26,7 +38,37 @@
       <div class="container">
         <h3>{{breadcrumb}}</h3>
         <div class="load_products" v-on:click.stop v-show="show_load">
-          Load my products
+          <!-- Add Products -->
+          <section class="productapp">
+            <header class="header">
+              <input class="new-product"
+                     autofocus autocomplete="off"
+                     placeholder="Enter product ID"
+                     v-model="newProduct"
+                     @keyup.enter="addProduct">
+            </header>
+            <section class="main" v-show="products.length" v-cloak>
+              <ul class="product-list">
+                <li v-for="product in products"
+                    class="product"
+                    :key="product.id"
+                    :class="{ completed: product.completed, editing: product == editedProduct }">
+                  <div class="view">
+                    <input class="toggle" type="checkbox" v-model="product.completed">
+                    <label @dblclick="editProduct(product)">{{ product.title }}</label>
+                    <button class="destroy" @click="removeProduct(product)"></button>
+                  </div>
+                  <input class="edit" type="text"
+                         v-model="product.title"
+                         v-product-focus="product == editedProduct"
+                         @blur="doneEdit(product)"
+                         @keyup.enter="doneEdit(product)"
+                         @keyup.esc="cancelEdit(product)">
+                </li>
+              </ul>
+            </section>
+          </section>
+          <!-- Add Products end -->
         </div>
         <div class="products_name row" v-on:click.stop v-show="show_names">
           <div class="col-xs-12 col-sm-6 col-md-4">
