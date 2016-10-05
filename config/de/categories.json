@@ -4,325 +4,325 @@
   "content":
   [
     {
-      "id":"ball",
-      "name":"Kugel",
+      "value":"ball",
+      "label":"Kugel",
       "children":[
         {
-          "id":"black_ball",
-          "name":"Schwarze Kugel"
+          "value":"black_ball",
+          "label":"Schwarze Kugel"
         }
       ]
     },
     {
-      "id":"banana",
-      "name":"Banane",
+      "value":"banana",
+      "label":"Banane",
       "children":[
         {
-          "id":"black_banana",
-          "name":"Schwarze Banane"
+          "value":"black_banana",
+          "label":"Schwarze Banane"
         }
       ]
     },
     {
-      "id":"barbell",
-      "name":"Barbell",
+      "value":"barbell",
+      "label":"Barbell",
       "children":[
         {
-          "id":"black_barbell",
-          "name":"Schwarzer Barbell"
+          "value":"black_barbell",
+          "label":"Schwarzer Barbell"
         },
         {
-          "id":"circular_barbell",
-          "name":"Circular Barbell"
+          "value":"circular_barbell",
+          "label":"Circular Barbell"
         },
         {
-          "id":"black_circular_barbell",
-          "name":"Schwarzer Circular Barbell"
+          "value":"black_circular_barbell",
+          "label":"Schwarzer Circular Barbell"
         }
 
       ]
     },
     {
-      "id":"dermal_anchor",
-      "name":"Dermal Anchor",
+      "value":"dermal_anchor",
+      "label":"Dermal Anchor",
       "children":[
         {
-          "id":"black_dermal_anchor",
-          "name":"Schwarzer Dermal Anchor"
+          "value":"black_dermal_anchor",
+          "label":"Schwarzer Dermal Anchor"
         }
       ]
     },
     {
-      "id": "expander",
-      "name": "Expander",
+      "value": "expander",
+      "label": "Expander",
       "children":[
         {
-          "id":"acrylic_expander",
-          "name":"Acrylexpander"
+          "value":"acrylic_expander",
+          "label":"Acrylexpander"
         },
         {
-          "id":"black_acrylic_expander",
-          "name":"Schwarzer Acrylexpander"
+          "value":"black_acrylic_expander",
+          "label":"Schwarzer Acrylexpander"
         },
         {
-          "id":"black_expander",
-          "name":"Schwarzer Expander"
+          "value":"black_expander",
+          "label":"Schwarzer Expander"
         },
         {
-          "id":"black_wood_expander",
-          "name":"Schwarzer HolzExpander"
+          "value":"black_wood_expander",
+          "label":"Schwarzer HolzExpander"
         },
         {
-          "id":"wood_expander",
-          "name":"Holzexpander"
+          "value":"wood_expander",
+          "label":"Holzexpander"
         }
       ]
     },
     {
-      "id":"ear_cuff",
-      "name":"Ear Cuff",
+      "value":"ear_cuff",
+      "label":"Ear Cuff",
       "children":[
         {
-          "id":"black_ear_cuff",
-          "name":"Schwarzer Ear Cuff"
+          "value":"black_ear_cuff",
+          "label":"Schwarzer Ear Cuff"
         }
       ]
     },
     {
-      "id":"fake",
-      "name": "Fake",
+      "value":"fake",
+      "label": "Fake",
       "children":[
         {
-          "id":"fake_claw",
-          "name": "Fake Claw"
+          "value":"fake_claw",
+          "label": "Fake Claw"
         },
         {
-          "id":"black_fake_claw",
-          "name": "Schwarze Fake Claw"
+          "value":"black_fake_claw",
+          "label": "Schwarze Fake Claw"
         },
         {
-          "id":"fake_expander",
-          "name": "Fake Expander"
+          "value":"fake_expander",
+          "label": "Fake Expander"
         },
         {
-          "id":"black_fake_expander",
-          "name": "Schwarzer Fake Expander"
+          "value":"black_fake_expander",
+          "label": "Schwarzer Fake Expander"
         },
         {
-          "id":"fake_plug",
-          "name": "Fake Plug"
+          "value":"fake_plug",
+          "label": "Fake Plug"
         },
         {
-          "id":"black_fake_plug",
-          "name": "Schwarzer Fake Plug"
+          "value":"black_fake_plug",
+          "label": "Schwarzer Fake Plug"
         },
         {
-          "id":"fake_septum",
-          "name": "Fake Septum"
+          "value":"fake_septum",
+          "label": "Fake Septum"
         },
         {
-          "id":"black_fake_septum",
-          "name": "Schwarzes Fake Septum"
+          "value":"black_fake_septum",
+          "label": "Schwarzes Fake Septum"
         },
         {
-          "id":"fake_spiral",
-          "name": "Fake Spirale"
+          "value":"fake_spiral",
+          "label": "Fake Spirale"
         },
         {
-          "id":"black_fake_spiral",
-          "name": "Schwarze Fake Spirale"
+          "value":"black_fake_spiral",
+          "label": "Schwarze Fake Spirale"
         }
       ]
     },
     {
-      "id":"helix_piercing",
-      "name":"Helix Piercing",
+      "value":"helix_piercing",
+      "label":"Helix Piercing",
       "children":[
         {
-          "id":"black_helix_piercing",
-          "name":"Schwarzes Helix Piercing"
+          "value":"black_helix_piercing",
+          "label":"Schwarzes Helix Piercing"
         }
       ]
     },
     {
-      "id":"labret",
-      "name":"Labret",
+      "value":"labret",
+      "label":"Labret",
       "children":[
         {
-          "id":"black_labret",
-          "name":"Schwarzes Labret"
+          "value":"black_labret",
+          "label":"Schwarzes Labret"
         }
       ]
     },
     {
-      "id":"nipple_piercing",
-      "name":"Brustwarzenpiercing",
+      "value":"nipple_piercing",
+      "label":"Brustwarzenpiercing",
       "children":[
         {
-          "id":"black_nipple_piercing",
-          "name":"Schwarzes Brustwarzenpiercing"
+          "value":"black_nipple_piercing",
+          "label":"Schwarzes Brustwarzenpiercing"
         },
         {
-          "id":"nipple_clicker",
-          "name":"Brustwarzenklicker"
+          "value":"nipple_clicker",
+          "label":"Brustwarzenklicker"
         },
         {
-          "id":"black_nipple_clicker",
-          "name":"Schwarzer Brustwarzenklicker"
+          "value":"black_nipple_clicker",
+          "label":"Schwarzer Brustwarzenklicker"
         },
         {
-          "id":"nipple_shield",
-          "name":"Nipple-Schild"
+          "value":"nipple_shield",
+          "label":"Nipple-Schild"
         },
         {
-          "id":"black_nipple_shield",
-          "name":"Schwarzer Nipple-Schild"
+          "value":"black_nipple_shield",
+          "label":"Schwarzer Nipple-Schild"
         },
         {
-          "id":"nipple_stirrup",
-          "name":"Nipple-Stirrup"
+          "value":"nipple_stirrup",
+          "label":"Nipple-Stirrup"
         },
         {
-          "id":"black_nipple_stirrup",
-          "name":"Schwarzer Nipple-Stirrup"
+          "value":"black_nipple_stirrup",
+          "label":"Schwarzer Nipple-Stirrup"
         }
       ]
     },
     {
-      "id":"plug",
-      "name":"Plug",
+      "value":"plug",
+      "label":"Plug",
       "children":[
         {
-          "id":"acrylic_plug",
-          "name":"Acrylplug"
+          "value":"acrylic_plug",
+          "label":"Acrylplug"
         },
         {
-          "id":"black_acrylic_plug",
-          "name":"Schwarzer Acrylplug"
+          "value":"black_acrylic_plug",
+          "label":"Schwarzer Acrylplug"
         },
         {
-          "id":"black_plug",
-          "name":"Schwarzer Plug"
+          "value":"black_plug",
+          "label":"Schwarzer Plug"
         }
       ]
     },
     {
-      "id":"ring",
-      "name":"Ring",
+      "value":"ring",
+      "label":"Ring",
       "children":[
         {
-          "id":"piercing_ring",
-          "name":"Piercing Ring"
+          "value":"piercing_ring",
+          "label":"Piercing Ring"
         },
         {
-          "id":"ball_closure_ring",
-          "name":"Ball Closure Ring"
+          "value":"ball_closure_ring",
+          "label":"Ball Closure Ring"
         },
         {
-          "id":"black_ball_closure_ring",
-          "name":"Schwarzer Ball Closure Ring"
+          "value":"black_ball_closure_ring",
+          "label":"Schwarzer Ball Closure Ring"
         },
         {
-          "id":"black_continuous_ring",
-          "name":"Schwarzer Continuous Ring"
+          "value":"black_continuous_ring",
+          "label":"Schwarzer Continuous Ring"
         },
         {
-          "id":"black_piercing_ring",
-          "name":"Schwarzer Piercing Ring"
+          "value":"black_piercing_ring",
+          "label":"Schwarzer Piercing Ring"
         },
         {
-          "id":"black_segment_ring",
-          "name":"Schwarzer Segment Ring"
+          "value":"black_segment_ring",
+          "label":"Schwarzer Segment Ring"
         },
         {
-          "id":"continuous_ring",
-          "name":"Continuous Ring"
+          "value":"continuous_ring",
+          "label":"Continuous Ring"
         },
         {
-          "id":"nose_ring",
-          "name":"Nasenring"
+          "value":"nose_ring",
+          "label":"Nasenring"
         },
         {
-          "id":"black_nose_ring",
-          "name":"Schwarzer Nasenring"
+          "value":"black_nose_ring",
+          "label":"Schwarzer Nasenring"
         },
         {
-          "id":"segment_ring",
-          "name":"Segment Ring"
+          "value":"segment_ring",
+          "label":"Segment Ring"
         }
       ]
     },
     {
-      "id":"septum",
-      "name":"Septum",
+      "value":"septum",
+      "label":"Septum",
       "children":[
         {
-          "id":"black_septum",
-          "name":"Schwarzes Septum"
+          "value":"black_septum",
+          "label":"Schwarzes Septum"
         }
       ]
     },
     {
-      "id":"spiral",
-      "name":"Spirale",
+      "value":"spiral",
+      "label":"Spirale",
       "children":[
         {
-          "id":"black_spiral",
-          "name":"Schwarze Spirale"
+          "value":"black_spiral",
+          "label":"Schwarze Spirale"
         }
       ]
     },
     {
-      "id":"stud",
-      "name":"Stecker",
+      "value":"stud",
+      "label":"Stecker",
       "children":[
         {
-          "id":"nose_stud",
-          "name":"Nasenstecker"
+          "value":"nose_stud",
+          "label":"Nasenstecker"
         },
         {
-          "id":"black_nose_stud",
-          "name":"Schwarzer Nasenstecker"
+          "value":"black_nose_stud",
+          "label":"Schwarzer Nasenstecker"
         },
         {
-          "id":"ear_stud",
-          "name":"Ohrstecker"
+          "value":"ear_stud",
+          "label":"Ohrstecker"
         }
       ]
     },
     {
-      "id":"tragus_piercing",
-      "name":"Tragus Piercing",
+      "value":"tragus_piercing",
+      "label":"Tragus Piercing",
       "children":[
         {
-          "id":"black_tragus_piercing",
-          "name":"Schwarzes Tragus Piercing"
+          "value":"black_tragus_piercing",
+          "label":"Schwarzes Tragus Piercing"
         }
       ]
     },
     {
-      "id": "tunnel",
-      "name": "Tunnel",
+      "value": "tunnel",
+      "label": "Tunnel",
       "children":[
         {
-          "id":"acrylic_tunnel",
-          "name":"Acryltunnel"
+          "value":"acrylic_tunnel",
+          "label":"Acryltunnel"
         },
         {
-          "id":"black_acrylic_tunnel",
-          "name":"Schwarzer Acryltunnel"
+          "value":"black_acrylic_tunnel",
+          "label":"Schwarzer Acryltunnel"
         },
         {
-          "id":"black_tunnel",
-          "name":"Schwarzer Tunnel"
+          "value":"black_tunnel",
+          "label":"Schwarzer Tunnel"
         },
         {
-          "id":"black_steel_tunnel",
-          "name":"Schwarzer Stahltunnel"
+          "value":"black_steel_tunnel",
+          "label":"Schwarzer Stahltunnel"
         },
         {
-          "id":"steel_tunnel",
-          "name":"Stahltunnel"
+          "value":"steel_tunnel",
+          "label":"Stahltunnel"
         }
       ]
     }
