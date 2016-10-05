@@ -8,8 +8,10 @@ var ProductNames =Vue.extend({
     '</div>'
 });
 
+var CategoriesData=[];
 var AttributeData=[];
 var AttributeConjunction=[];
+CategoriesData['de']=Categories_de.content;
 AttributeData['de']=Attributes_de.content;
 AttributeConjunction['de']=Attributes_de.conjunction;
 
@@ -28,15 +30,13 @@ new Vue({
         show_names: false,
         show_descriptions: false,
 
-        category_options:[
-            { label: 'Plug', value: 'plug' },
-            { label: 'Expander', value: 'expander'}
-        ],
+        category_options:CategoriesData['de'],
         attribute_options_1:AttributeData['de'],
         attribute_options_2:AttributeData['de'],
         selected_category:"",
         selected_attribute_1:"",
         selected_attribute_2:"",
+        // Preview
         conjunction_1:AttributeConjunction['de'].with,
         conjunction_2:AttributeConjunction['de'].and
     },

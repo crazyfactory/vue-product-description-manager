@@ -1,3 +1,4 @@
+var Categories_de =
 {
   "id": "categories",
   "language": "de",
