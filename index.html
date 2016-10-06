@@ -17,12 +17,8 @@
   <script src="config/de/categories.js"></script>
   <!-- get css styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="assets/style.css">
-
-  <!-- Products stuff -->
- <!-- <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css/index.css"> -->
-  <script src="https:unpkg.com/director/build/director.js"></script>
-  <style>[v-cloak] { display: none; }</style>
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/products.css" />
 
 </head>
 <body>
@@ -39,7 +35,7 @@
         <h3>{{breadcrumb}}</h3>
         <div class="load_products" v-on:click.stop v-show="show_load">
           <!-- Add Products -->
-          <section class="productapp">
+          <section class="product-management">
             <header class="header">
               <input class="new-product"
                      autofocus autocomplete="off"
@@ -48,6 +44,7 @@
                      @keyup.enter="addProduct">
             </header>
             <section class="main" v-show="products.length" v-cloak>
+              <input class="toggle-all" type="checkbox">
               <ul class="product-list">
                 <li v-for="product in products"
                     class="product"
