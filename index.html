@@ -48,6 +48,11 @@
                   <div class="view">
                     <input class="toggle" type="checkbox" v-model="product.active">
                     <label>{{ product.model_code }}</label>
+                      <small>
+                        <span v-if="product.category" class="product_category">{{product.category.label}}</span>
+                        <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>
+                        <span v-if="product.attribute2" class="product_attrbute2"> {{conjunction_2}} {{product.attribute2.label}}</span>
+                      </small>
                     <button class="destroy" @click="removeProduct(product)"></button>
                   </div>
                 </li>
@@ -63,20 +68,16 @@
           <div class="col-xs-12 col-sm-6 col-md-4">
             <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-4" v-show="selected_attribute_1">
+          <div class="col-xs-12 col-sm-6 col-md-4">
             <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute" :options="attribute_options_2"></v-select>
           </div>
           <div class="row">
-            <div v-if="selected_category || selected_attribute_1 || selected_attribute_2" class="col-xs-12 col-sm-12 col-md-12">
-              <h2>Preview</h2>
-              <blockquote>
-                <span v-if="selected_category ">{{selected_category.label}}</span>
-                <span v-if="selected_attribute_1"> {{conjunction_1}} {{selected_attribute_1.label}}</span>
-                <span v-if="selected_attribute_2 && selected_attribute_1"> {{conjunction_2}} {{selected_attribute_2.label}}</span>
-              </blockquote>
+            <div class="actions">
+              <button type="button" class="btn btn-success save_name"
+
+                      @click="saveNameScheme()">Save</button>
             </div>
           </div>
-        </div>
         <div class="products_description" v-on:click.stop v-show="show_descriptions">
           Form for configuring Products Descriptions
         </div>

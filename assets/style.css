@@ -74,6 +74,10 @@ ul{
     list-style: none;
 }
 
+.products_name{
+    margin-top:1.5em;
+}
+
 html,
 body {
     margin: 0;
@@ -262,13 +266,15 @@ label[for='toggle-all'] {
 
 .product-list li label {
     white-space: pre;
-    word-break: break-word;
-    padding: 20px 60px 15px 15px;
+    padding: 20px 60px 0 15px;
     margin-left: 45px;
     display: block;
     line-height: 1.2;
     transition: color 0.4s;
     font-weight:300;
+}
+.product-list li small{
+    margin-left: 60px;
 }
 
 .product-list li.active label {
@@ -348,6 +354,9 @@ html .clear-completed:active {
 }
 input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus{
     outline: none;
+}
+div.actions{
+    margin-top:3.5em;
 }
 
 /*

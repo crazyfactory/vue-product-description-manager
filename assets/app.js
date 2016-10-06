@@ -59,7 +59,6 @@ new Vue({
          */
         products:productStorage.fetch(),
         newProduct:'',
-        visibility:'all',
 
         /*
          * Language Management
@@ -123,13 +122,39 @@ new Vue({
                 active: false,
                 model_code:value,
                 name_scheme:null,
-                names:[]
+                names:[],
+                category:null,
+                attribute1:null,
+                attribute2:null
             })
             this.newProduct = ''
         },
-
         removeProduct: function (product) {
-            this.products.splice(this.products.indexOf(product), 1)
+            
+            this.products.splice(this.products.indexOf(), 1)
+        },
+        saveNameScheme: function(){
+            var scheme = '';
+            var category = this.selected_category;
+            var attr1 = this.selected_attribute_1;
+            var attr2 = this.selected_attribute_2;
+
+            this.products.forEach(function (product) {
+                if(product.active){
+                    console.log('saving rasta ...');
+                    scheme = '';
+                    if (typeof category == 'object' && category !=null){
+                        product.category=category;
+                    }
+                    if(typeof attr1=='object' && attr1!=null){
+                        product.attribute1=attr1;
+                    }
+                    if(typeof attr2=='object' && attr2!=null){
+                        product.attribute2=attr2;
+                    }
+                }
+            })
         }
+
     }
 })
