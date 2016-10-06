@@ -8,10 +8,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
   <!-- get select extension -->
   <script src="https://npmcdn.com/vue-select@latest"></script>
-  <!-- get the product class -->
-  <!--
-  <script src="assets/product.js"></script>
-  -->
   <!-- load data -->
   <script src="config/de/attributes.js"></script>
   <script src="config/de/categories.js"></script>
@@ -39,28 +35,22 @@
             <header class="header">
               <input class="new-product"
                      autofocus autocomplete="off"
-                     placeholder="Enter product ID"
+                     placeholder="Enter products model code"
                      v-model="newProduct"
                      @keyup.enter="addProduct">
             </header>
             <section class="main" v-show="products.length" v-cloak>
-              <input class="toggle-all" type="checkbox">
+              <input class="toggle-all" type="checkbox" v-model="allActive">
               <ul class="product-list">
                 <li v-for="product in products"
                     class="product"
                     :key="product.id"
-                    :class="{ completed: product.completed, editing: product == editedProduct }">
+                    :class="{ active: product.active }">
                   <div class="view">
-                    <input class="toggle" type="checkbox" v-model="product.completed">
-                    <label @dblclick="editProduct(product)">{{ product.title }}</label>
+                    <input class="toggle" type="checkbox" v-model="product.active">
+                    <label>{{ product.model_code }}</label>
                     <button class="destroy" @click="removeProduct(product)"></button>
                   </div>
-                  <input class="edit" type="text"
-                         v-model="product.title"
-                         v-product-focus="product == editedProduct"
-                         @blur="doneEdit(product)"
-                         @keyup.enter="doneEdit(product)"
-                         @keyup.esc="cancelEdit(product)">
                 </li>
               </ul>
             </section>

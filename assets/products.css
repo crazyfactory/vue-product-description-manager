@@ -58,23 +58,22 @@ input[type="checkbox"] {
 .product-management input::-webkit-input-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #e6e6e6;
+    color: #969696;
 }
 
 .product-management input::-moz-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #e6e6e6;
+    color: #969696;
 }
 
 .product-management input::input-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #e6e6e6;
+    color: #969696;
 }
 
-.new-product,
-.edit {
+.new-product{
     position: relative;
     margin: 0;
     width: 100%;
@@ -128,7 +127,7 @@ label[for='toggle-all'] {
 }
 
 .toggle-all:checked:before {
-    color: #737373;
+    color: green;
 }
 
 .product-list {
@@ -188,16 +187,17 @@ label[for='toggle-all'] {
 .product-list li label {
     white-space: pre;
     word-break: break-word;
-    padding: 15px 60px 15px 15px;
+    padding: 20px 60px 15px 15px;
     margin-left: 45px;
     display: block;
     line-height: 1.2;
     transition: color 0.4s;
+    font-weight:300;
 }
 
-.product-list li.completed label {
-    color: #d9d9d9;
-    text-decoration: line-through;
+.product-list li.active label {
+    color: green;
+    font-weight:400;
 }
 
 .product-list li .destroy {
@@ -235,69 +235,6 @@ label[for='toggle-all'] {
     margin-bottom: -1px;
 }
 
-.footer {
-    color: #777;
-    padding: 10px 15px;
-    height: 20px;
-    text-align: center;
-    border-top: 1px solid #e6e6e6;
-}
-
-.footer:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    overflow: hidden;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-    0 8px 0 -3px #f6f6f6,
-    0 9px 1px -3px rgba(0, 0, 0, 0.2),
-    0 16px 0 -6px #f6f6f6,
-    0 17px 2px -6px rgba(0, 0, 0, 0.2);
-}
-
-.product-count {
-    float: left;
-    text-align: left;
-}
-
-.product-count strong {
-    font-weight: 300;
-}
-
-.filters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    right: 0;
-    left: 0;
-}
-
-.filters li {
-    display: inline;
-}
-
-.filters li a {
-    color: inherit;
-    margin: 3px;
-    padding: 3px 7px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 3px;
-}
-
-.filters li a.selected,
-.filters li a:hover {
-    border-color: rgba(175, 47, 47, 0.1);
-}
-
-.filters li a.selected {
-    border-color: rgba(175, 47, 47, 0.2);
-}
-
 .clear-completed,
 html .clear-completed:active {
     float: right;
@@ -333,6 +270,9 @@ html .clear-completed:active {
 .info a:hover {
     text-decoration: underline;
 }
+input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus{
+    outline: none;
+}
 
 /*
 	Hack to remove background from Mobile Safari.
@@ -356,12 +296,3 @@ html .clear-completed:active {
     }
 }
 
-@media (max-width: 430px) {
-    .footer {
-        height: 50px;
-    }
-
-    .filters {
-        bottom: 10px;
-    }
-}

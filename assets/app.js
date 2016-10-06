@@ -27,22 +27,7 @@ var productStorage = {
     }
 }
 
-// visibility filters
-var filters = {
-    all: function (products) {
-        return products
-    },
-    active: function (products) {
-        return products.filter(function (product) {
-            return !product.completed
-        })
-    },
-    completed: function (products) {
-        return products.filter(function (product) {
-            return product.completed
-        })
-    }
-}
+
 // end new products
 
 new Vue({
@@ -51,9 +36,9 @@ new Vue({
         /*
          * Navigation Behavior
          */
-        breadcrumb:"Please add some Products",
+        breadcrumb:"Manage Products",
         show_load: true,
-        show_names: false,
+        show_names: true,
         show_descriptions: false,
         /*
          * create Name Scheme
@@ -74,7 +59,6 @@ new Vue({
          */
         products:productStorage.fetch(),
         newProduct:'',
-        editedProduct:null,
         visibility:'all',
 
         /*
@@ -92,6 +76,15 @@ new Vue({
             deep: true
         }
     },
+    computed: {
+        allActive: {
+            set: function (value) {
+                this.products.forEach(function (product) {
+                    product.active = value
+                })
+            }
+        }
+    },
     methods: {
         makeActive: function(item){
             // deactivate all
@@ -99,13 +92,13 @@ new Vue({
             this.show_descriptions= false;
             this.show_metatags= false;
             this.show_rss= false;
-            this.show_load=false;
+            this.show_load=true;
 
             this.breadcrumb = item;
             switch(item){
                 case 'load':
                     this.show_load= true;
-                    this.breadcrumb = 'Load Products';
+                    this.breadcrumb = 'Manage Products';
                     break;
                 case 'names':
                     this.show_names= true;
@@ -120,17 +113,6 @@ new Vue({
         /*
          * Products stuff
          */
-        /*
-        addProduct: function (product_id) {
-            product = new Product();
-            product.setId(product_id);
-            this.products.push(product);
-        },
-        // add array of products
-        addProducts: function (product_array){
-            this.products = this.products.concat(product_array);
-        }
-        */
         addProduct: function () {
             var value = this.newProduct && this.newProduct.trim()
             if (!value) {
@@ -138,46 +120,16 @@ new Vue({
             }
             this.products.push({
                 id: productStorage.uid++,
-                title: value,
-                completed: false
+                active: false,
+                model_code:value,
+                name_scheme:null,
+                names:[]
             })
             this.newProduct = ''
         },
 
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
-        },
-
-        editProduct: function (product) {
-            this.beforeEditCache = product.title
-            this.editedProduct = product
-        },
-
-        doneEdit: function (product) {
-            if (!this.editedProduct) {
-                return
-            }
-            this.editedProduct = null
-            product.title = product.title.trim()
-            if (!product.title) {
-                this.removeProduct(product)
-            }
-        },
-
-        cancelEdit: function (product) {
-            this.editedProduct = null
-            product.title = this.beforeEditCache
-        },
-
-        removeCompleted: function () {
-            this.products = filters.active(this.products)
-        }
-    },
-    directives: {
-        'product-focus': function (el, value) {
-            if (value) {
-                el.focus()
-            }
         }
     }
 })
