@@ -124,6 +124,8 @@ new Vue({
             if (!value) {
                 return
             }
+            // get products from db/api
+
             this.products.push({
                 id: productStorage.uid++,
                 active: false,
@@ -147,7 +149,6 @@ new Vue({
 
             this.products.forEach(function (product) {
                 if(product.active){
-                    console.log('saving rasta ...');
                     scheme = '';
                     if (typeof category == 'object' && category !=null){
                         product.category=category;
