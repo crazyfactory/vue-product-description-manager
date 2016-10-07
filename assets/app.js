@@ -36,10 +36,12 @@ new Vue({
         /*
          * Navigation Behavior
          */
-        breadcrumb:"Manage Products",
+        breadcrumb: 'Product Names & Meta tags',
         show_load: true,
         show_names: true,
         show_descriptions: false,
+        show_preview: false,
+        show_export: false,
         /*
          * create Name Scheme
          */
@@ -90,22 +92,27 @@ new Vue({
             this.show_names= false;
             this.show_descriptions= false;
             this.show_metatags= false;
-            this.show_rss= false;
+            this.show_export= false;
+            this.show_preview= false;
             this.show_load=true;
 
             this.breadcrumb = item;
             switch(item){
-                case 'load':
-                    this.show_load= true;
-                    this.breadcrumb = 'Manage Products';
-                    break;
                 case 'names':
                     this.show_names= true;
-                    this.breadcrumb = 'Configure Product Names';
+                    this.breadcrumb = 'Product Names & Meta tags';
                     break;
                 case 'description':
                     this.show_descriptions= true;
-                    this.breadcrumb = 'Configure Product Descriptions';
+                    this.breadcrumb = 'Product Descriptions';
+                    break;
+                case 'preview':
+                    this.show_preview= true;
+                    this.breadcrumb = 'Preview: Multilingual and custom texts';
+                    break;
+                case 'export':
+                    this.show_export= true;
+                    this.breadcrumb = 'Export Products to shop';
                     break;
             }
         },
@@ -130,8 +137,7 @@ new Vue({
             this.newProduct = ''
         },
         removeProduct: function (product) {
-            
-            this.products.splice(this.products.indexOf(), 1)
+            this.products.splice(this.products.indexOf(product), 1)
         },
         saveNameScheme: function(){
             var scheme = '';

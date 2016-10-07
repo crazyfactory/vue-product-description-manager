@@ -22,15 +22,16 @@
       <img src="https://www.crazy-factory.com/templates/cf2010/img/crazy-factory-logo-big.png" alt="CF logo">
     </p>
     <nav v-bind:class="breadcrumb" v-on:click.prevent>
-      <a href="#" class="load" v-on:click="makeActive('load')">Load Products</a>
       <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
       <a href="#" class="description" v-on:click="makeActive('description')">Product Descriptions</a>
+      <a href="#" class="preview" v-on:click="makeActive('preview')">Preview</a>
+      <a href="#" class="export" v-on:click="makeActive('export')">Export</a>
     </nav>
       <div class="container">
         <h3>{{breadcrumb}}</h3>
-        <div class="load_products" v-on:click.stop v-show="show_load">
-          <!-- Add Products -->
-          <section class="product-management">
+        <!-- Add Products -->
+        <div class="load_products col-xs-12 col-sm-6 col-md-6">
+          <section class="product-management load_products" v-on:click.stop v-show="show_load">
             <header class="header">
               <input class="new-product"
                      autofocus autocomplete="off"
@@ -59,16 +60,17 @@
               </ul>
             </section>
           </section>
-          <!-- Add Products end -->
         </div>
-        <div class="products_name row" v-on:click.stop v-show="show_names">
-          <div class="col-xs-12 col-sm-6 col-md-4">
+        <!-- Add Products end -->
+        <!-- Add Product Names -->
+        <div class="products_name row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_names">
+          <div class="margin-bottom">
             <v-select :value.sync="selected_category" placeholder="Select a Category" :options="category_options"></v-select>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="margin-bottom">
             <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="margin-bottom">
             <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute" :options="attribute_options_2"></v-select>
           </div>
           <div class="row">
@@ -78,10 +80,17 @@
                       @click="saveNameScheme()">Save</button>
             </div>
           </div>
-        <div class="products_description" v-on:click.stop v-show="show_descriptions">
-          Form for configuring Products Descriptions
         </div>
-      </div>
+        <!-- End Product Names  -->
+        <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
+          <h5>Form for configuring Products Descriptions</h5>
+        </div>
+        <div class="products_preview row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_preview">
+          <h5>Show multilingual preview of products</h5>
+        </div>
+        <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
+          <h5>Export to Shop</h5>
+        </div>
   </div>
 </body>
 </html>
