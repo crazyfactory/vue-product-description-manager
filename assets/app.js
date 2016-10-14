@@ -150,13 +150,14 @@ new Vue({
             this.products.forEach(function (product) {
                 if(product.active){
                     scheme = '';
-                    if (typeof category == 'object' && category !=null){
+
+                    if (typeof category == 'object' && category !=null && category.value != '--'){
                         product.category=category;
                     }
-                    if(typeof attr1=='object' && attr1!=null){
+                    if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
                         product.attribute1=attr1;
                     }
-                    if(typeof attr2=='object' && attr2!=null){
+                    if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
                         product.attribute2=attr2;
                     }
                 }

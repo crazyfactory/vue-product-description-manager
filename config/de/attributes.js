@@ -8,36 +8,31 @@ var Attributes_de =
   },
   "content":[
     {
-      "value":"claw_set_crystal",
-      "label":"eingefasstem Kristallstein",
-      "children":[]
+      "value":"claw-set-crystal",
+      "label":"eingefasstem Kristallstein"
     },
     {
       "value":"cone",
       "label":"Cone",
-      "children":[]
     },
     {
       "value":"cones",
       "label":"Cones",
-      "children":[]
     },
     {
-      "value":"anodised_ball",
-      "label":"farbig eloxierter Kugel",
-      "children":[]
+      "value":"anodised-ball",
+      "label":"farbig eloxierter Kugel"
     },
     {
-      "value":"anodised_cone",
-      "label":"farbig eloxiertem Cone",
-      "children":[]
+      "value":"anodised-cone",
+      "label":"farbig eloxiertem Cone"
     },
     {
       "value":"design_crapwaer",
       "label":"Crapwaer Design"
     },
     {
-      "value":"design_sarah_sorceress",
+      "value":"design_sarah-sorceress",
       "label":"Sarah Sorceress Design"
     },
     {
@@ -49,7 +44,7 @@ var Attributes_de =
       "label":"Blumeninlay"
     },
     {
-      "value":"inlay_flower_little",
+      "value":"inlay_flower-little",
       "label":"Blümcheninlay"
     },
     {
@@ -81,7 +76,7 @@ var Attributes_de =
       "label":"Engelinlay"
     },
     {
-      "value":"inlay_flip_flop",
+      "value":"inlay_flip-flop",
       "label":"Flip Flop Inlay"
     },
     {
@@ -101,7 +96,7 @@ var Attributes_de =
       "label":"Herzinlay"
     },
     {
-      "value":"inlay_heart_little",
+      "value":"inlay_heart-little",
       "label":"Herzcheninlay"
     },
     {
@@ -137,7 +132,7 @@ var Attributes_de =
       "label":"Libelleninlay"
     },
     {
-      "value":"inlay_little_baby",
+      "value":"inlay_little-baby",
       "label":"Little Baby Inlay"
     },
     {
@@ -153,7 +148,7 @@ var Attributes_de =
       "label":"Ominlay"
     },
     {
-      "value":"inlay_ace_of_spades",
+      "value":"inlay_ace-of-spades",
       "label":"Piek Ass Inlay"
     },
     {
@@ -177,7 +172,7 @@ var Attributes_de =
       "label":"Schwaneninlay"
     },
     {
-      "value":"inlay_spider_web",
+      "value":"inlay_spider-web",
       "label":"Spinnennetzinlay"
     },
     {
@@ -199,328 +194,322 @@ var Attributes_de =
     {
       "value":"jewelled",
       "label":"Kristallstein",
-      "children":[]
     },
     {
-      "value":"jewelled_disc",
+      "value":"jewelled-disc",
       "label":"Kristallsteinscheibe",
-      "children":[]
     },
     {
       "value": "pendant",
-      "label": "Anhänger",
-      "children": [
-        {
-          "value": "flower",
-          "label": "Blumenanhänger"
-        },
-        {
-          "value": "flower_little",
-          "label": "Blümchenanhänger"
-        },
-        {
-          "value": "cupcake",
-          "label": "Cupcake-Anhänger"
-        },
-        {
-          "value": "cocktail",
-          "label": "Cocktailanhänger"
-        },
-        {
-          "value": "dolphin",
-          "label": "Delfininanhänger"
-        },
-        {
-          "value": "lizard",
-          "label": "Eidechsenanhänger"
-        },
-        {
-          "value": "elephant",
-          "label": "Elefantenanhänger"
-        },
-        {
-          "value": "elf",
-          "label": "Elfenanhänger"
-        },
-        {
-          "value": "angel",
-          "label": "Engelanhänger"
-        },
-        {
-          "value": "flip_flop",
-          "label": "Flip Flop Anhänger"
-        },
-        {
-          "value": "wing",
-          "label": "Flügelanhänger"
-        },
-        {
-          "value": "frog",
-          "label": "Froschanhänger"
-        },
-        {
-          "value": "handcuffs",
-          "label": "Handschellenanhänger"
-        },
-        {
-          "value": "heart",
-          "label": "Herzanhänger"
-        },
-        {
-          "value": "heart_little",
-          "label": "Herzchenanhänger"
-        },
-        {
-          "value": "horseshoe",
-          "label": "Hufeisenanhänger"
-        },
-        {
-          "value": "chain",
-          "label": "Kettenanhänger"
-        },
-        {
-          "value": "stroller",
-          "label": "Kinderwagenanhänger"
-        },
-        {
-          "value": "cherry",
-          "label": "Kirschanhänger"
-        },
-        {
-          "value": "cloverleaf",
-          "label": "Kleeblattanhänger"
-        },
-        {
-          "value": "cross",
-          "label": "Kreuzanhänger"
-        },
-        {
-          "value": "crown",
-          "label": "Kronenanhänger"
-        },
-        {
-          "value": "dragon-fly",
-          "label": "Libellenanhänger"
-        },
-        {
-          "value": "little_baby",
-          "label": "Little Baby Anhänger"
-        },
-        {
-          "value": "moon",
-          "label": "Mondanhänger"
-        },
-        {
-          "value": "octopus",
-          "label": "Oktopusanhänger"
-        },
-        {
-          "value": "om",
-          "label": "Omanhänger"
-        },
-        {
-          "value": "ace_of_spades",
-          "label": "Piek Ass Anhänger"
-        },
-        {
-          "value": "poodle",
-          "label": "Pudelanhänger"
-        },
-        {
-          "value": "lock",
-          "label": "Schlossanhänger"
-        },
-        {
-          "value": "key",
-          "label": "Schlüsselanhänger"
-        },
-        {
-          "value": "butterfly",
-          "label": "Schmetterlingsanhänger"
-        },
-        {
-          "value": "swan",
-          "label": "Schwanenanhänger"
-        },
-        {
-          "value": "spider_web",
-          "label": "Spinnennetzanhänger"
-        },
-        {
-          "value": "star",
-          "label": "Sternenanhänger"
-        },
-        {
-          "value": "tart",
-          "label": "Törtchenanhänger"
-        },
-        {
-          "value": "skull",
-          "label": "Totenschädelanhänger"
-        },
-        {
-          "value": "dice",
-          "label": "Würfelanhänger"
-        }
-      ]
+      "label": "Anhänger"
     },
     {
-      "value": "replacement_ends",
-      "label": "Aufsatz",
-      "children":[
-        {
-          "value":"flower",
-          "label":"Blumenaufsatz"
-        },
-        {
-          "value":"flower_little",
-          "label":"Blümchenaufsatz"
-        },
-        {
-          "value":"cupcake",
-          "label":"Cupcake-Aufsatz"
-        },
-        {
-          "value":"cocktail",
-          "label":"Cocktailaufsatz"
-        },
-        {
-          "value":"dolphin",
-          "label":"Delfininaufsatz"
-        },
-        {
-          "value":"lizard",
-          "label":"Eidechsenaufsatz"
-        },
-        {
-          "value":"elephant",
-          "label":"Elefantenaufsatz"
-        },
-        {
-          "value":"elf",
-          "label":"Elfenaufsatz"
-        },
-        {
-          "value":"angel",
-          "label":"Engelaufsatz"
-        },
-        {
-          "value":"flip_flop",
+      "value": "pendant_flower",
+      "label": "Blumenanhänger"
+    },
+    {
+      "value": "pendant_flower-little",
+      "label": "Blümchenanhänger"
+    },
+    {
+      "value": "pendant_cupcake",
+      "label": "Cupcake-Anhänger"
+    },
+    {
+      "value": "pendant_cocktail",
+      "label": "Cocktailanhänger"
+    },
+    {
+      "value": "pendant_dolphin",
+      "label": "Delfininanhänger"
+    },
+    {
+      "value": "pendant_lizard",
+      "label": "Eidechsenanhänger"
+    },
+    {
+      "value": "pendant_elephant",
+      "label": "Elefantenanhänger"
+    },
+    {
+      "value": "pendant_elf",
+      "label": "Elfenanhänger"
+    },
+    {
+      "value": "pendant_angel",
+      "label": "Engelanhänger"
+    },
+    {
+      "value": "pendant_flip-flop",
+      "label": "Flip Flop Anhänger"
+    },
+    {
+      "value": "pendant_wing",
+      "label": "Flügelanhänger"
+    },
+    {
+      "value": "pendant_frog",
+      "label": "Froschanhänger"
+    },
+    {
+      "value": "pendant_handcuffs",
+      "label": "Handschellenanhänger"
+    },
+    {
+      "value": "pendant_heart",
+      "label": "Herzanhänger"
+    },
+    {
+      "value": "pendant_heart-little",
+      "label": "Herzchenanhänger"
+    },
+    {
+      "value": "pendant_horseshoe",
+      "label": "Hufeisenanhänger"
+    },
+    {
+      "value": "pendant_chain",
+      "label": "Kettenanhänger"
+    },
+    {
+      "value": "pendant_stroller",
+      "label": "Kinderwagenanhänger"
+    },
+    {
+      "value": "pendant_cherry",
+      "label": "Kirschanhänger"
+    },
+    {
+      "value": "pendant_cloverleaf",
+      "label": "Kleeblattanhänger"
+    },
+    {
+      "value": "pendant_cross",
+      "label": "Kreuzanhänger"
+    },
+    {
+      "value": "pendant_crown",
+      "label": "Kronenanhänger"
+    },
+    {
+      "value": "pendant_dragon-fly",
+      "label": "Libellenanhänger"
+    },
+    {
+      "value": "pendant_little-baby",
+      "label": "Little Baby Anhänger"
+    },
+    {
+      "value": "pendant_moon",
+      "label": "Mondanhänger"
+    },
+    {
+      "value": "pendant_octopus",
+      "label": "Oktopusanhänger"
+    },
+    {
+      "value": "pendant_om",
+      "label": "Omanhänger"
+    },
+    {
+      "value": "pendant_ace-of-spades",
+      "label": "Piek Ass Anhänger"
+    },
+    {
+      "value": "pendant_poodle",
+      "label": "Pudelanhänger"
+    },
+    {
+      "value": "pendant_lock",
+      "label": "Schlossanhänger"
+    },
+    {
+      "value": "pendant_key",
+      "label": "Schlüsselanhänger"
+    },
+    {
+      "value": "pendant_butterfly",
+      "label": "Schmetterlingsanhänger"
+    },
+    {
+      "value": "pendant_swan",
+      "label": "Schwanenanhänger"
+    },
+    {
+      "value": "pendant_spider-web",
+      "label": "Spinnennetzanhänger"
+    },
+    {
+      "value": "pendant_star",
+      "label": "Sternenanhänger"
+    },
+    {
+      "value": "pendant_tart",
+      "label": "Törtchenanhänger"
+    },
+    {
+      "value": "pendant_skull",
+      "label": "Totenschädelanhänger"
+    },
+    {
+      "value": "pendant_dice",
+      "label": "Würfelanhänger"
+    },
+    {
+      "value": "replacement-ends",
+      "label": "Aufsatz"
+    },
+    {
+      "value":"replacement-ends_flower",
+      "label":"Blumenaufsatz"
+    },
+    {
+      "value":"replacement-ends_flower-little",
+      "label":"Blümchenaufsatz"
+    },
+    {
+      "value":"replacement-ends_cupcake",
+      "label":"Cupcake-Aufsatz"
+    },
+    {
+      "value":"replacement-ends_cocktail",
+      "label":"Cocktailaufsatz"
+    },
+    {
+      "value":"replacement-ends_dolphin",
+      "label":"Delfininaufsatz"
+    },
+    {
+      "value":"replacement-ends_lizard",
+      "label":"Eidechsenaufsatz"
+    },
+    {
+      "value":"replacement-ends_elephant",
+      "label":"Elefantenaufsatz"
+    },
+    {
+      "value":"replacement-ends_elf",
+      "label":"Elfenaufsatz"
+    },
+    {
+      "value":"replacement-ends_angel",
+      "label":"Engelaufsatz"
+    },
+    {
+      "value":"replacement-ends_flip-flop",
           "label":"Flip Flop Aufsatz"
-        },
-        {
-          "value":"wing",
-          "label":"Flügelaufsatz"
-        },
-        {
-          "value":"frog",
-          "label":"Froschaufsatz"
-        },
-        {
-          "value":"handcuffs",
-          "label":"Handschellenaufsatz"
-        },
-        {
-          "value":"heart",
-          "label":"Herzaufsatz"
-        },
-        {
-          "value":"heart_little",
-          "label":"Herzchenaufsatz"
-        },
-        {
-          "value":"horseshoe",
-          "label":"Hufeisenaufsatz"
-        },
-        {
-          "value":"chain",
-          "label":"Kettenaufsatz"
-        },
-        {
-          "value":"stroller",
-          "label":"Kinderwagenaufsatz"
-        },
-        {
-          "value":"cherry",
-          "label":"Kirschaufsatz"
-        },
-        {
-          "value":"cloverleaf",
-          "label":"Kleeblattaufsatz"
-        },
-        {
-          "value":"cross",
-          "label":"Kreuzaufsatz"
-        },
-        {
-          "value":"crown",
-          "label":"Kronenaufsatz"
-        },
-        {
-          "value":"dragon-fly",
-          "label":"Libellenaufsatz"
-        },
-        {
-          "value":"little_baby",
-          "label":"Little Baby Aufsatz"
-        },
-        {
-          "value":"moon",
-          "label":"Mondaufsatz"
-        },
-        {
-          "value":"octopus",
-          "label":"Oktopusaufsatz"
-        },
-        {
-          "value":"om",
-          "label":"Omaufsatz"
-        },
-        {
-          "value":"ace_of_spades",
-          "label":"Piek Ass Aufsatz"
-        },
-        {
-          "value":"poodle",
-          "label":"Pudelaufsatz"
-        },
-        {
-          "value":"lock",
-          "label":"Schlossaufsatz"
-        },
-        {
-          "value":"key",
-          "label":"Schlüsselaufsatz"
-        },
-        {
-          "value":"butterfly",
-          "label":"Schmetterlingsaufsatz"
-        },
-        {
-          "value":"swan",
-          "label":"Schwanenaufsatz"
-        },
-        {
-          "value":"spider_web",
-          "label":"Spinnennetzaufsatz"
-        },
-        {
-          "value":"star",
-          "label":"Sternenaufsatz"
-        },
-        {
-          "value":"tart",
-          "label":"Törtchenaufsatz"
-        },
-        {
-          "value":"skull",
-          "label":"Totenschädelaufsatz"
-        },
-        {
-          "value":"dice",
-          "label":"Würfelaufsatz"
-        }
-      ]
+    },
+    {
+      "value":"replacement-ends_wing",
+      "label":"Flügelaufsatz"
+    },
+    {
+      "value":"replacement-ends_frog",
+      "label":"Froschaufsatz"
+    },
+    {
+      "value":"replacement-ends_handcuffs",
+      "label":"Handschellenaufsatz"
+    },
+    {
+      "value":"replacement-ends_heart",
+      "label":"Herzaufsatz"
+    },
+    {
+      "value":"replacement-ends_heart-little",
+      "label":"Herzchenaufsatz"
+    },
+    {
+      "value":"replacement-ends_horseshoe",
+      "label":"Hufeisenaufsatz"
+    },
+    {
+      "value":"replacement-ends_chain",
+      "label":"Kettenaufsatz"
+    },
+    {
+      "value":"replacement-ends_stroller",
+      "label":"Kinderwagenaufsatz"
+    },
+    {
+      "value":"replacement-ends_cherry",
+      "label":"Kirschaufsatz"
+    },
+    {
+      "value":"replacement-ends_cloverleaf",
+      "label":"Kleeblattaufsatz"
+    },
+    {
+      "value":"replacement-ends_cross",
+      "label":"Kreuzaufsatz"
+    },
+    {
+      "value":"replacement-ends_crown",
+      "label":"Kronenaufsatz"
+    },
+    {
+      "value":"replacement-ends_dragon-fly",
+      "label":"Libellenaufsatz"
+    },
+    {
+      "value":"replacement-ends_little-baby",
+      "label":"Little Baby Aufsatz"
+    },
+    {
+      "value":"replacement-ends_moon",
+      "label":"Mondaufsatz"
+    },
+    {
+      "value":"replacement-ends_octopus",
+      "label":"Oktopusaufsatz"
+    },
+    {
+      "value":"replacement-ends_om",
+      "label":"Omaufsatz"
+    },
+    {
+      "value":"replacement-ends_ace-of-spades",
+      "label":"Piek Ass Aufsatz"
+    },
+    {
+      "value":"replacement-ends_poodle",
+      "label":"Pudelaufsatz"
+    },
+    {
+      "value":"replacement-ends_lock",
+      "label":"Schlossaufsatz"
+    },
+    {
+      "value":"replacement-ends_key",
+      "label":"Schlüsselaufsatz"
+    },
+    {
+      "value":"replacement-ends_butterfly",
+      "label":"Schmetterlingsaufsatz"
+    },
+    {
+      "value":"replacement-ends_swan",
+      "label":"Schwanenaufsatz"
+    },
+    {
+      "value":"replacement-ends_spider-web",
+      "label":"Spinnennetzaufsatz"
+    },
+    {
+      "value":"replacement-ends_star",
+      "label":"Sternenaufsatz"
+    },
+    {
+      "value":"replacement-ends_tart",
+      "label":"Törtchenaufsatz"
+    },
+    {
+      "value":"replacement-ends_skull",
+      "label":"Totenschädelaufsatz"
+    },
+    {
+      "value":"replacement-ends_dice",
+      "label":"Würfelaufsatz"
     }
   ]
 }
