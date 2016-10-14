@@ -29,19 +29,19 @@ var Categories_de =
       "label":"Schwarzer Barbell"
     },
     {
-      "value":"circular_barbell",
+      "value":"circular-barbell",
       "label":"Circular Barbell"
     },
     {
-      "value":"black_circular_barbell",
+      "value":"black_circular-barbell",
       "label":"Schwarzer Circular Barbell"
     },
     {
-      "value":"dermal_anchor",
+      "value":"dermal-anchor",
       "label":"Dermal Anchor"
     },
     {
-      "value":"black_dermal_anchor",
+      "value":"black_dermal-anchor",
       "label":"Schwarzer Dermal Anchor"
     },
     {
@@ -49,11 +49,11 @@ var Categories_de =
       "label": "Expander"
     },
     {
-      "value":"acrylic_expander",
+      "value":"acrylic-expander",
       "label":"Acrylexpander"
     },
     {
-      "value":"black_acrylic_expander",
+      "value":"black_acrylic-expander",
       "label":"Schwarzer Acrylexpander"
     },
     {
@@ -61,67 +61,67 @@ var Categories_de =
       "label":"Schwarzer Expander"
     },
     {
-      "value":"black_wood_expander",
+      "value":"black_wood-expander",
       "label":"Schwarzer HolzExpander"
     },
     {
-      "value":"wood_expander",
+      "value":"wood-expander",
       "label":"Holzexpander"
     },
     {
-      "value":"ear_cuff",
+      "value":"ear-cuff",
       "label":"Ear Cuff"
     },
     {
-      "value":"black_ear_cuff",
+      "value":"black_ear-cuff",
       "label":"Schwarzer Ear Cuff"
     },
     {
-      "value":"fake_claw",
+      "value":"fake-claw",
       "label": "Fake Claw"
     },
     {
-      "value":"black_fake_claw",
+      "value":"black_fake-claw",
       "label": "Schwarze Fake Claw"
     },
     {
-      "value":"fake_expander",
+      "value":"fake-expander",
       "label": "Fake Expander"
     },
     {
-      "value":"black_fake_expander",
+      "value":"black_fake-expander",
       "label": "Schwarzer Fake Expander"
     },
     {
-      "value":"fake_plug",
+      "value":"fake-plug",
       "label": "Fake Plug"
     },
     {
-      "value":"black_fake_plug",
+      "value":"black_fake-plug",
       "label": "Schwarzer Fake Plug"
     },
     {
-      "value":"fake_septum",
+      "value":"fake-septum",
       "label": "Fake Septum"
     },
     {
-      "value":"black_fake_septum",
+      "value":"black_fake-septum",
       "label": "Schwarzes Fake Septum"
     },
     {
-      "value":"fake_spiral",
+      "value":"fake-spiral",
       "label": "Fake Spirale"
     },
     {
-      "value":"black_fake_spiral",
+      "value":"black_fake-spiral",
       "label": "Schwarze Fake Spirale"
     },
     {
-      "value":"helix_piercing",
+      "value":"helix-piercing",
       "label":"Helix Piercing"
     },
     {
-      "value":"black_helix_piercing",
+      "value":"black_helix-piercing",
       "label":"Schwarzes Helix Piercing"
     },
     {
@@ -133,35 +133,35 @@ var Categories_de =
       "label":"Schwarzes Labret"
     },
     {
-      "value":"nipple_piercing",
+      "value":"nipple-piercing",
       "label":"Brustwarzenpiercing"
     },
     {
-      "value":"black_nipple_piercing",
+      "value":"black_nipple-piercing",
       "label":"Schwarzes Brustwarzenpiercing"
     },
     {
-      "value":"nipple_clicker",
+      "value":"nipple-clicker",
       "label":"Brustwarzenklicker"
     },
     {
-      "value":"black_nipple_clicker",
+      "value":"black_nipple-clicker",
       "label":"Schwarzer Brustwarzenklicker"
     },
     {
-      "value":"nipple_shield",
+      "value":"nipple-shield",
       "label":"Nipple-Schild"
     },
     {
-      "value":"black_nipple_shield",
+      "value":"black_nipple-shield",
       "label":"Schwarzer Nipple-Schild"
     },
     {
-      "value":"nipple_stirrup",
+      "value":"nipple-stirrup",
       "label":"Nipple-Stirrup"
     },
     {
-      "value":"black_nipple_stirrup",
+      "value":"black_nipple-stirrup",
       "label":"Schwarzer Nipple-Stirrup"
     },
     {
@@ -169,11 +169,11 @@ var Categories_de =
       "label":"Plug"
     },
     {
-      "value":"acrylic_plug",
+      "value":"acrylic-plug",
       "label":"Acrylplug"
     },
     {
-      "value":"black_acrylic_plug",
+      "value":"black_acrylic-plug",
       "label":"Schwarzer Acrylplug"
     },
     {
@@ -185,43 +185,43 @@ var Categories_de =
       "label":"Ring"
     },
     {
-      "value":"piercing_ring",
+      "value":"piercing-ring",
       "label":"Piercing Ring"
     },
     {
-      "value":"ball_closure_ring",
+      "value":"ball-closure-ring",
       "label":"Ball Closure Ring"
     },
     {
-      "value":"black_ball_closure_ring",
+      "value":"black_ball-closure-ring",
       "label":"Schwarzer Ball Closure Ring"
     },
     {
-      "value":"black_continuous_ring",
+      "value":"black_continuous-ring",
       "label":"Schwarzer Continuous Ring"
     },
     {
-      "value":"black_piercing_ring",
+      "value":"black_piercing-ring",
       "label":"Schwarzer Piercing Ring"
     },
     {
-      "value":"black_segment_ring",
+      "value":"black_segment-ring",
       "label":"Schwarzer Segment Ring"
     },
     {
-      "value":"continuous_ring",
+      "value":"continuous-ring",
       "label":"Continuous Ring"
     },
     {
-      "value":"nose_ring",
+      "value":"nose-ring",
       "label":"Nasenring"
     },
     {
-      "value":"black_nose_ring",
+      "value":"black_nose-ring",
       "label":"Schwarzer Nasenring"
     },
     {
-      "value":"segment_ring",
+      "value":"segment-ring",
       "label":"Segment Ring"
     },
     {
@@ -245,23 +245,23 @@ var Categories_de =
       "label":"Stecker"
     },
     {
-      "value":"nose_stud",
+      "value":"nose-stud",
       "label":"Nasenstecker"
     },
     {
-      "value":"black_nose_stud",
+      "value":"black_nose-stud",
       "label":"Schwarzer Nasenstecker"
     },
     {
-      "value":"ear_stud",
+      "value":"ear-stud",
       "label":"Ohrstecker"
     },
     {
-      "value":"tragus_piercing",
+      "value":"tragus-piercing",
       "label":"Tragus Piercing"
     },
     {
-      "value":"black_tragus_piercing",
+      "value":"black_tragus-piercing",
       "label":"Schwarzes Tragus Piercing"
     },
     {
@@ -269,11 +269,11 @@ var Categories_de =
       "label": "Tunnel"
     },
     {
-      "value":"acrylic_tunnel",
+      "value":"acrylic-tunnel",
       "label":"Acryltunnel"
     },
     {
-      "value":"black_acrylic_tunnel",
+      "value":"black_acrylic-tunnel",
       "label":"Schwarzer Acryltunnel"
     },
     {
@@ -281,11 +281,11 @@ var Categories_de =
       "label":"Schwarzer Tunnel"
     },
     {
-      "value":"black_steel_tunnel",
+      "value":"black_steel-tunnel",
       "label":"Schwarzer Stahltunnel"
     },
     {
-      "value":"steel_tunnel",
+      "value":"steel-tunnel",
       "label":"Stahltunnel"
     }
   ]
