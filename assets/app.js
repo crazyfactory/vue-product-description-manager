@@ -56,6 +56,9 @@ new Vue({
         selected_attribute_1:"",
         selected_attribute_2:"",
 
+        //dev stuff
+        dumper:'something',
+
         /*
          * Product Management
          */
@@ -125,6 +128,19 @@ new Vue({
                 return
             }
             // get products from db/api
+
+            $.ajax({
+                dataType: "jsonp",
+                url: "http://localhost/crazy-shop/admin/ajax_product_descriptor.php",
+                data: {
+                    product_query: value
+
+                },
+                success: function( result ) {
+                    this.dumper=result;
+                    console.log(result)
+                }
+            });
 
             this.products.push({
                 id: productStorage.uid++,
