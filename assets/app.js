@@ -128,7 +128,7 @@ new Vue({
                 return
             }
             // get products from db/api
-
+            /*
             $.ajax({
                 dataType: "jsonp",
                 url: "http://localhost/crazy-shop/admin/ajax_product_descriptor.php",
@@ -141,6 +141,8 @@ new Vue({
                     console.log(result)
                 }
             });
+
+           */
 
             this.products.push({
                 id: productStorage.uid++,
