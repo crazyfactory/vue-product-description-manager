@@ -4,7 +4,7 @@
 }
 
 body{
-    color: #5e5b64;
+    color: #4d4d4d;
 
 }
 h3{
@@ -13,6 +13,11 @@ h3{
 /*-------------------------
 	The menu
 --------------------------*/
+#app a, #app a:hover{
+    color:#4d4d4d;
+    background:transparent;
+    font-size:12px;
+}
 .app-nav{
     width:100%;
     text-align:center;
@@ -49,17 +54,10 @@ nav a:last-child{
     border-radius:0 2px 2px 0;
 }
 
-nav.home .home,
-nav.projects .projects,
-nav.services .services,
-nav.contact .contact{
-    background-color:#e35885;
-}
-
 p{
     font-size:22px;
     font-weight:bold;
-    color:#7d9098;
+    color:#4d4d4d;
 }
 
 p b{
@@ -140,19 +138,22 @@ input[type="checkbox"] {
 .product-management input::-webkit-input-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #969696;
+    color: #4d4d4d;
+    font-size:14px;
 }
 
 .product-management input::-moz-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #969696;
+    color: #4d4d4d;
+    font-size:14px;
 }
 
 .product-management input::input-placeholder {
     font-style: italic;
     font-weight: 300;
-    color: #969696;
+    color: #4d4d4d;
+    font-size:14px;
 }
 
 .new-product{
