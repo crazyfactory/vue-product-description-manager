@@ -373,6 +373,13 @@ div.actions{
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
 */
+
+.breadcrumb{
+    width:100%;
+    text-align: center;
+    font-style: italic;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
     .product-list li .toggle {

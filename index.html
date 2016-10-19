@@ -18,84 +18,85 @@
 
 </head>
 <body>
-  <div id="app">
+<div id="app">
     <p>
       <img src="https://www.crazy-factory.com/templates/cf2010/img/crazy-factory-logo-big.png" alt="CF logo">
     </p>
-    <div class="app-nav">
-      <nav v-bind:class="breadcrumb" v-on:click.prevent>
-        <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
-        <a href="#" class="description" v-on:click="makeActive('description')">Product Descriptions</a>
-        <a href="#" class="preview" v-on:click="makeActive('preview')">Preview</a>
-        <a href="#" class="export" v-on:click="makeActive('export')">Export</a>
-      </nav>
-    </div>
-      <div class="container">
-        <h3>{{breadcrumb}}</h3>
-        <!-- Add Products -->
-        <div class="load_products col-xs-12 col-sm-6 col-md-6">
-          <section class="product-management load_products" v-on:click.stop v-show="show_load">
-            <header class="header">
-              <input class="new-product"
-                     autofocus autocomplete="off"
-                     placeholder="Enter products model code"
-                     v-model="newProduct"
-                     @keyup.enter="addProduct">
-            </header>
-            <section class="main" v-show="products.length" v-cloak>
-              <input class="toggle-all" type="checkbox" v-model="allActive">
-              <ul class="product-list">
-                <li v-for="product in products"
-                    class="product"
-                    :key="product.id"
-                    :class="{ active: product.active }">
-                  <div class="view">
-                    <input class="toggle" type="checkbox" v-model="product.active">
-                    <label>{{ product.model_code }}</label>
-                      <small>
-                        <span v-if="product.category" class="product_category">{{product.category.label}}</span>
-                        <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>
-                        <span v-if="product.attribute2" class="product_attrbute2"> {{conjunction_2}} {{product.attribute2.label}}</span>
-                      </small>
-                    <button class="destroy" @click="removeProduct(product)"></button>
-                  </div>
-                </li>
-              </ul>
-            </section>
-          </section>
-        </div>
-        <!-- Add Products end -->
-        <!-- Add Product Names -->
-        <div class="products_name row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_names">
-          <div class="margin-bottom">
-            <v-select :value.sync="selected_category" placeholder="Select a Category" :options="category_options"></v-select>
-          </div>
-          <div class="margin-bottom">
-            <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
-          </div>
-          <div class="margin-bottom">
-            <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute" :options="attribute_options_2"></v-select>
-          </div>
-          <div class="row">
-            <div class="actions">
-              <button type="button" class="btn btn-success save_name"
+  <div class="app-nav">
+    <nav v-bind:class="breadcrumb" v-on:click.prevent>
+      <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
+      <a href="#" class="description" v-on:click="makeActive('description')">Product Descriptions</a>
+      <a href="#" class="preview" v-on:click="makeActive('preview')">Preview</a>
+      <a href="#" class="export" v-on:click="makeActive('export')">Export</a>
+    </nav>
+  </div>
 
-                      @click="saveNameScheme()">Save</button>
-            </div>
-          </div>
+  <div class="container">
+    <h3 class="breadcrumb">{{breadcrumb}}</h3>
+    <!-- Add Products -->
+    <div class="load_products col-xs-12 col-sm-6 col-md-6">
+      <section class="product-management load_products" v-on:click.stop v-show="show_load">
+        <header class="header">
+          <input class="new-product"
+                 autofocus autocomplete="off"
+                 placeholder="Enter products model code"
+                 v-model="newProduct"
+                 @keyup.enter="addProduct">
+        </header>
+        <section class="main" v-show="products.length" v-cloak>
+          <input class="toggle-all" type="checkbox" v-model="allActive">
+          <ul class="product-list">
+            <li v-for="product in products"
+                class="product"
+                :key="product.id"
+                :class="{ active: product.active }">
+              <div class="view">
+                <input class="toggle" type="checkbox" v-model="product.active">
+                <label>{{product.model_code}}</label>
+                <small>
+                  <span v-if="product.category" class="product_category">{{product.category.label}}</span>
+                  <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>
+                  <span v-if="product.attribute2" class="product_attrbute2"> {{conjunction_2}} {{product.attribute2.label}}</span>
+                </small>
+                <button class="destroy" @click="removeProduct(product)"></button>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </div>
+    <!-- Add Products end -->
+    <!-- Add Product Names -->
+    <div class="products_name row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_names">
+      <div class="margin-bottom">
+        <v-select :value.sync="selected_category" placeholder="Select a Category" :options="category_options"></v-select>
+      </div>
+      <div class="margin-bottom">
+        <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
+      </div>
+      <div class="margin-bottom">
+        <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute" :options="attribute_options_2"></v-select>
+      </div>
+      <div class="row">
+        <div class="actions">
+          <button type="button" class="btn btn-success save_name"
+
+                  @click="saveNameScheme()">Save</button>
         </div>
-        <!-- End Product Names  -->
-        <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
-          <h5>Form for configuring Products Descriptions</h5>
-        </div>
-        <div class="products_preview row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_preview">
-          <h5>Show multilingual preview of products</h5>
-        </div>
-        <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
-          <h5>Export to Shop</h5>
-        </div>
+      </div>
+    </div>
+    <!-- End Product Names  -->
+    <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
+      <h5>Form for configuring Products Descriptions</h5>
+    </div>
+    <div class="products_preview row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_preview">
+      <h5>Show multilingual preview of products</h5>
+    </div>
+    <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
+      <h5>Export to Shop</h5>
     </div>
   </div>
+</div>
 </body>
 </html>
 <script src="assets/app.js"></script>
