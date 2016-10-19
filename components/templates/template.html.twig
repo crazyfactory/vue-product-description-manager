@@ -9,7 +9,7 @@
     </div>
 
     <div class="container">
-        <h3>{{breadcrumb}}</h3>
+        <h3>[[breadcrumb]]</h3>
         <!-- Add Products -->
         <div class="load_products col-xs-12 col-sm-6 col-md-6">
             <section class="product-management load_products" v-on:click.stop v-show="show_load">
@@ -29,11 +29,11 @@
                             :class="{ active: product.active }">
                             <div class="view">
                                 <input class="toggle" type="checkbox" v-model="product.active">
-                                <label>{{ product.model_code }}</label>
+                                <label>[[product.model_code]]</label>
                                 <small>
-                                    <span v-if="product.category" class="product_category">{{product.category.label}}</span>
-                                    <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>
-                                    <span v-if="product.attribute2" class="product_attrbute2"> {{conjunction_2}} {{product.attribute2.label}}</span>
+                                    <span v-if="product.category" class="product_category">[[product.category.label]]</span>
+                                    <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
+                                    <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
                                 </small>
                                 <button class="destroy" @click="removeProduct(product)"></button>
                             </div>

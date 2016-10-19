@@ -1,3 +1,8 @@
+//teach TWIG some manners
+// prepare twig template ... replace [[ ]] by {{ }}
+$('#app').html( $('#app').html().replace('[[', '{{') );
+$('#app').html( $('#app').html().replace(']]', '}}') );
+
 var CategoriesData=[];
 var AttributeData=[];
 var AttributeConjunction=[];
