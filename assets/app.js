@@ -1,7 +1,15 @@
 //teach TWIG some manners
 // prepare twig template ... replace [[ ]] by {{ }}
-$('#app').html( $('#app').html().replace('[[', '{{') );
-$('#app').html( $('#app').html().replace(']]', '}}') );
+
+if (typeof jQuery === 'undefined') {
+    // jQuery is NOT available
+    console.log('jQuery not found. Please it.');
+} else {
+    // jQuery is available
+    $("#app").html( $('#app').html().replace(/\[\[/g , '{{'));
+    $("#app").html( $('#app').html().replace(/\]\]/g, '}}') );
+}
+
 
 var CategoriesData=[];
 var AttributeData=[];
