@@ -3,12 +3,22 @@
 
 if (typeof jQuery === 'undefined') {
     // jQuery is NOT available
-    console.log('jQuery not found. Please it.');
+    console.log('jQuery not found. Please add it.');
 } else {
     // jQuery is available
     $("#app").html( $('#app').html().replace(/\[\[/g , '{{'));
     $("#app").html( $('#app').html().replace(/\]\]/g, '}}') );
 }
+
+if (typeof api !== 'undefined') {
+    // variable needs to come from a local config and holds the path to the api
+    var hasApi=true;
+    console.log(api);
+}
+else{
+    var hasApi=false;
+}
+
 
 
 var CategoriesData=[];
@@ -69,8 +79,6 @@ new Vue({
         selected_attribute_1:"",
         selected_attribute_2:"",
 
-        //dev stuff
-        dumper:'something',
 
         /*
          * Product Management
@@ -140,22 +148,12 @@ new Vue({
             if (!value) {
                 return
             }
+
             // get products from db/api
-            /*
-            $.ajax({
-                dataType: "jsonp",
-                url: "http://localhost/crazy-shop/admin/ajax_product_descriptor.php",
-                data: {
-                    product_query: value
+            if(hasApi && value){
 
-                },
-                success: function( result ) {
-                    this.dumper=result;
-                    console.log(result)
-                }
-            });
 
-           */
+            }
 
             this.products.push({
                 id: productStorage.uid++,
