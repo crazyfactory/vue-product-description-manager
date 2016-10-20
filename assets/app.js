@@ -13,7 +13,6 @@ if (typeof jQuery === 'undefined') {
 if (typeof api !== 'undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi=true;
-    console.log(api);
 }
 else{
     var hasApi=false;
@@ -150,9 +149,9 @@ new Vue({
             }
 
             // get products from db/api
-            if(hasApi && value){
-
-
+            if(hasApi){
+                api.data = value;
+                api.call();
             }
 
             this.products.push({
