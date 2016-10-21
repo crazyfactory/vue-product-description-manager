@@ -150,6 +150,7 @@ new Vue({
 
             // get products from db/api
             if(hasApi){
+                api.app=this;
                 api.data = value;
                 api.action = 'get_products';
                 api.call();
