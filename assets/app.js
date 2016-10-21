@@ -175,6 +175,8 @@ new Vue({
             }
             else{
                 // validation message
+                console.log('nope ....');
+                console.log(api);
             }
 
 
