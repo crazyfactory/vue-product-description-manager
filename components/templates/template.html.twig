@@ -35,8 +35,12 @@
                                     <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                     <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
                                 </small>
-                                <small class="product_description">
-                                    <span v-if="product.descriptions" class="description"> [[product.descriptions[0]]]</span>
+                                <small class="product_preview" v-on:click.stop v-show="show_preview">
+                                    <div v-if="product.descriptions" class="description">
+                                        <span v-for="description in product.descriptions.en">
+                                            [[description]]
+                                        </span>
+                                    </div>
                                 </small>
                                 <button class="destroy" @click="removeProduct(product)"></button>
                             </div>
