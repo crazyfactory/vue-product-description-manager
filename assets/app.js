@@ -152,10 +152,9 @@ new Vue({
             if(hasApi){
                 api.data = value;
                 api.action = 'get_products';
-                call_result=api.call();
-                console.log(call_result);
+                api.call();
             }
-            if(call_result.success)
+            if(api.result.success)
             {
                 console.log('api call suck-seed!');
                 product = api.data;
