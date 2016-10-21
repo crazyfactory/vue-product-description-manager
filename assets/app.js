@@ -155,11 +155,9 @@ new Vue({
                 api.action = 'get_products';
                 api.call();
             }
-            if(api.result.success)
+            else
             {
-                console.log('api call suck-seed!');
-                product = api.data;
-                console.log(product);
+                console.log('no api ... dry hump');
 
                 this.products.push({
                     id: productStorage.uid++,
@@ -174,13 +172,6 @@ new Vue({
 
                 this.newProduct = '';
             }
-            else{
-                // validation message
-                console.log('nope ....');
-                console.log(api);
-            }
-
-
         },
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
