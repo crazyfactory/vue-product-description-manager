@@ -151,20 +151,34 @@ new Vue({
             // get products from db/api
             if(hasApi){
                 api.data = value;
-                api.call();
+                api.action = 'get_products';
+                call_result=api.call();
+                console.log(call_result);
+            }
+            if(call_result.success)
+            {
+                console.log('api call suck-seed!');
+                product = api.data;
+                console.log(product);
+
+                this.products.push({
+                    id: productStorage.uid++,
+                    active: false,
+                    model_code:value,
+                    name_scheme:null,
+                    names:[],
+                    category:null,
+                    attribute1:null,
+                    attribute2:null
+                });
+
+                this.newProduct = '';
+            }
+            else{
+                // validation message
             }
 
-            this.products.push({
-                id: productStorage.uid++,
-                active: false,
-                model_code:value,
-                name_scheme:null,
-                names:[],
-                category:null,
-                attribute1:null,
-                attribute2:null
-            })
-            this.newProduct = ''
+
         },
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
