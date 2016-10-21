@@ -29,6 +29,7 @@
                             :class="{ active: product.active }">
                             <div class="view">
                                 <input class="toggle" type="checkbox" v-model="product.active">
+                                <button class="destroy" @click="removeProduct(product)"></button>
                                 <label>[[product.modelCode]]</label>
                                 <small class="product_name">
                                     <span v-if="product.category" class="product_category">[[product.category.label]]</span>
@@ -42,7 +43,6 @@
                                         </span>
                                     </div>
                                 </small>
-                                <button class="destroy" @click="removeProduct(product)"></button>
                             </div>
                         </li>
                     </ul>
