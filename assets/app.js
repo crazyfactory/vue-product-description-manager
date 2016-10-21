@@ -162,7 +162,7 @@ new Vue({
                 this.products.push({
                     id: productStorage.uid++,
                     active: false,
-                    model_code:value,
+                    modelCode:value,
                     name_scheme:null,
                     names:[],
                     category:null,

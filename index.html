@@ -52,7 +52,7 @@
                 :class="{ active: product.active }">
               <div class="view">
                 <input class="toggle" type="checkbox" v-model="product.active">
-                <label>{{product.model_code}}</label>
+                <label>{{product.modelCode}}</label>
                 <small>
                   <span v-if="product.category" class="product_category">{{product.category.label}}</span>
                   <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>

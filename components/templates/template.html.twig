@@ -29,11 +29,14 @@
                             :class="{ active: product.active }">
                             <div class="view">
                                 <input class="toggle" type="checkbox" v-model="product.active">
-                                <label>[[product.model_code]]</label>
-                                <small>
+                                <label>[[product.modelCode]]</label>
+                                <small class="product_name">
                                     <span v-if="product.category" class="product_category">[[product.category.label]]</span>
                                     <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                     <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                                </small>
+                                <small class="product_description">
+                                    <span v-if="product.descriptions" class="description"> [[product.descriptions[0]]]</span>
                                 </small>
                                 <button class="destroy" @click="removeProduct(product)"></button>
                             </div>
