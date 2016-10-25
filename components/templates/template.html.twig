@@ -31,18 +31,35 @@
                                 <input class="toggle" type="checkbox" v-model="product.active">
                                 <button class="destroy" @click="removeProduct(product)"></button>
                                 <label>[[product.modelCode]]</label>
-                                <small class="product_name">
+                                <small v-if="show_names" class="indent">
                                     <span v-if="product.category" class="product_category">[[product.category.label]]</span>
                                     <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                     <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
                                 </small>
-                                <small class="product_preview" v-on:click.stop v-show="show_preview">
-                                    <div v-if="product.descriptions" class="description">
-                    <span v-for="description in product.descriptions.en">
-                      [[description]]
-                    </span>
+                                <div class="product_preview" v-on:click.stop v-if="show_preview">
+                                    <div class="indent">
+                                        <h5 class="product_name inline">Product Names:</h5>
+                                        <ul>
+                                            <li class="de">
+                                                <span v-if="product.category" class="product_category">[[product.category.label]]</span>
+                                                <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
+                                                <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </small>
+                                    <div v-if="product.descriptions" class="indent description">
+                                        <h5>Descriptions:</h5>
+                                        <ul>
+                                            <li class="en">
+                                                <span v-for="description in product.descriptions.en">[[description]]</span>
+                                            </li>
+                                            <li class="de">
+                                                <span v-for="description in product.descriptions.de">[[description]]</span>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     </ul>

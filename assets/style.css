@@ -279,7 +279,7 @@ label[for='toggle-all'] {
     transition: color 0.4s;
     font-weight:300;
 }
-.product-list li small{
+.indent{
     margin-left: 60px;
 }
 
