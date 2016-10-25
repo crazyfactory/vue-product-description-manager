@@ -18,14 +18,15 @@ else{
     var hasApi=false;
 }
 
-
-
 var CategoriesData=[];
 var AttributeData=[];
 var AttributeConjunction=[];
+var Descriptions=[];
+
 CategoriesData['de']=Categories_de.content;
 AttributeData['de']=Attributes_de.content;
 AttributeConjunction['de']=Attributes_de.conjunction;
+
 
 //register components
 Vue.component('v-select', VueSelect.VueSelect);
@@ -58,12 +59,13 @@ new Vue({
         /*
          * Navigation Behavior
          */
-        headline: 'Product Names & Meta tags',
+        headline: 'Product Names',
         show_load: true,
         show_names: true,
         show_descriptions: false,
         show_preview: false,
         show_export: false,
+        show_metatags:false,
         isFullScreen:false,
         isSmallScreen:true,
         /*
@@ -126,7 +128,7 @@ new Vue({
             switch(item){
                 case 'names':
                     this.show_names= true;
-                    this.headline = 'Product Names & Meta tags';
+                    this.headline = 'Product Names';
                     break;
                 case 'description':
                     this.show_descriptions= true;
@@ -138,6 +140,9 @@ new Vue({
                     this.isFullScreen=true;
                     this.isSmallScreen=false;
                     break;
+                case 'metatags':
+                    this.show_metatags= true;
+                    this.headline = 'Metatags';
                 case 'export':
                     this.show_export= true;
                     this.headline = 'Export Products to shop';
@@ -163,16 +168,23 @@ new Vue({
             else
             {
                 console.log('no api ... dry hump');
+                // use fake api response from api.js
+                var random_nr = Math.round(Math.random()*Object.keys(Api_response).length);
+                my_product=Api_response[random_nr];
 
                 this.products.push({
                     id: productStorage.uid++,
-                    active: false,
+                    active: true,
                     modelCode:value,
                     name_scheme:null,
                     names:[],
                     category:null,
                     attribute1:null,
-                    attribute2:null
+                    attribute2:null,
+                    descriptions:my_product.descriptions,
+                    db_id:my_product.db_id,
+                    propertyFormula:my_product.propertyFormula,
+                    properties:my_product.properties
                 });
 
                 this.newProduct = '';
