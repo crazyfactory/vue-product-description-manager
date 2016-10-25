@@ -9,9 +9,9 @@
     </div>
 
     <div class="container">
-        <h3 class="breadcrumb">[[breadcrumb]]</h3>
+        <h3 class="headline">[[headline]]</h3>
         <!-- Add Products -->
-        <div class="load_products col-xs-12 col-sm-6 col-md-6">
+        <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
             <section class="product-management load_products" v-on:click.stop v-show="show_load">
                 <header class="header">
                     <input class="new-product"
@@ -38,9 +38,9 @@
                                 </small>
                                 <small class="product_preview" v-on:click.stop v-show="show_preview">
                                     <div v-if="product.descriptions" class="description">
-                                        <span v-for="description in product.descriptions.en">
-                                            [[description]]
-                                        </span>
+                    <span v-for="description in product.descriptions.en">
+                      [[description]]
+                    </span>
                                     </div>
                                 </small>
                             </div>
@@ -65,16 +65,13 @@
                 <div class="actions">
                     <button type="button" class="btn btn-success save_name"
 
-                            @click="saveNameScheme()">Save</button>
+                            @click="saveNameScheme()">Save Names</button>
                 </div>
             </div>
         </div>
         <!-- End Product Names  -->
         <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
             <h5>Form for configuring Products Descriptions</h5>
-        </div>
-        <div class="products_preview row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_preview">
-            <h5>Show multilingual preview of products</h5>
         </div>
         <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
             <h5>Export to Shop</h5>

@@ -19,9 +19,6 @@
 </head>
 <body>
 <div id="app">
-    <p>
-      <img src="https://www.crazy-factory.com/templates/cf2010/img/crazy-factory-logo-big.png" alt="CF logo">
-    </p>
   <div class="app-nav">
     <nav v-bind:class="breadcrumb" v-on:click.prevent>
       <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
@@ -32,9 +29,9 @@
   </div>
 
   <div class="container">
-    <h3 class="breadcrumb">{{breadcrumb}}</h3>
+    <h3 class="headline">[[headline]]</h3>
     <!-- Add Products -->
-    <div class="load_products col-xs-12 col-sm-6 col-md-6">
+    <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
       <section class="product-management load_products" v-on:click.stop v-show="show_load">
         <header class="header">
           <input class="new-product"
@@ -52,13 +49,20 @@
                 :class="{ active: product.active }">
               <div class="view">
                 <input class="toggle" type="checkbox" v-model="product.active">
-                <label>{{product.modelCode}}</label>
-                <small>
-                  <span v-if="product.category" class="product_category">{{product.category.label}}</span>
-                  <span v-if="product.attribute1" class="product_attrbute1"> {{conjunction_1}} {{product.attribute1.label}}</span>
-                  <span v-if="product.attribute2" class="product_attrbute2"> {{conjunction_2}} {{product.attribute2.label}}</span>
-                </small>
                 <button class="destroy" @click="removeProduct(product)"></button>
+                <label>[[product.modelCode]]</label>
+                <small class="product_name">
+                  <span v-if="product.category" class="product_category">[[product.category.label]]</span>
+                  <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
+                  <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                </small>
+                <small class="product_preview" v-on:click.stop v-show="show_preview">
+                  <div v-if="product.descriptions" class="description">
+                    <span v-for="description in product.descriptions.en">
+                      [[description]]
+                    </span>
+                  </div>
+                </small>
               </div>
             </li>
           </ul>
@@ -81,16 +85,13 @@
         <div class="actions">
           <button type="button" class="btn btn-success save_name"
 
-                  @click="saveNameScheme()">Save</button>
+                  @click="saveNameScheme()">Save Names</button>
         </div>
       </div>
     </div>
     <!-- End Product Names  -->
     <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
       <h5>Form for configuring Products Descriptions</h5>
-    </div>
-    <div class="products_preview row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_preview">
-      <h5>Show multilingual preview of products</h5>
     </div>
     <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
       <h5>Export to Shop</h5>

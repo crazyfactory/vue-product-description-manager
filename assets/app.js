@@ -58,12 +58,14 @@ new Vue({
         /*
          * Navigation Behavior
          */
-        breadcrumb: 'Product Names & Meta tags',
+        headline: 'Product Names & Meta tags',
         show_load: true,
         show_names: true,
         show_descriptions: false,
         show_preview: false,
         show_export: false,
+        isFullScreen:false,
+        isSmallScreen:true,
         /*
          * create Name Scheme
          */
@@ -118,24 +120,27 @@ new Vue({
             this.show_export= false;
             this.show_preview= false;
             this.show_load=true;
+            this.isFullScreen=false;
+            this.isSmallScreen=true;
 
-            this.breadcrumb = item;
             switch(item){
                 case 'names':
                     this.show_names= true;
-                    this.breadcrumb = 'Product Names & Meta tags';
+                    this.headline = 'Product Names & Meta tags';
                     break;
                 case 'description':
                     this.show_descriptions= true;
-                    this.breadcrumb = 'Product Descriptions';
+                    this.headline = 'Product Descriptions';
                     break;
                 case 'preview':
                     this.show_preview= true;
-                    this.breadcrumb = 'Preview: Multilingual and custom texts';
+                    this.headline = 'Preview: Multilingual and custom texts';
+                    this.isFullScreen=true;
+                    this.isSmallScreen=false;
                     break;
                 case 'export':
                     this.show_export= true;
-                    this.breadcrumb = 'Export Products to shop';
+                    this.headline = 'Export Products to shop';
                     break;
             }
         },

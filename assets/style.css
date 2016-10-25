@@ -374,7 +374,8 @@ div.actions{
 	Can't use it globally since it destroys checkboxes in Firefox
 */
 
-.breadcrumb{
+.headline{
+    background-color:transparent;
     width:100%;
     text-align: center;
     font-style: italic;
