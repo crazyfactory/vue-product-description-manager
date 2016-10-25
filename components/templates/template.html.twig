@@ -36,11 +36,13 @@
                                     <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                     <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
                                 </small>
+                                <!-- Preview Feature -->
                                 <div class="product_preview" v-on:click.stop v-if="show_preview">
                                     <div class="indent">
-                                        <h5 class="product_name inline">Product Names:</h5>
-                                        <ul>
-                                            <li class="de">
+                                        <h5 class="product_name inline" v-if="product.category">Product Names:</h5>
+                                        <ul class="list-group">
+                                            <li class="de list-group-item " v-if="product.category">
+                                                <span class=" flag-icon flag-icon-de"></span>
                                                 <span v-if="product.category" class="product_category">[[product.category.label]]</span>
                                                 <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                                 <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
@@ -49,17 +51,20 @@
                                     </div>
                                     <div v-if="product.descriptions" class="indent description">
                                         <h5>Descriptions:</h5>
-                                        <ul>
-                                            <li class="en">
+                                        <ul class="list-group">
+                                            <li class="en list-group-item">
+                                                <span class=" flag-icon flag-icon-us"></span>
                                                 <span v-for="description in product.descriptions.en">[[description]]</span>
                                             </li>
-                                            <li class="de">
+                                            <li class="de list-group-item">
+                                                <span class=" flag-icon flag-icon-de"></span>
                                                 <span v-for="description in product.descriptions.de">[[description]]</span>
                                             </li>
                                         </ul>
 
                                     </div>
                                 </div>
+                                <!-- Preview END -->
                             </div>
                         </li>
                     </ul>
