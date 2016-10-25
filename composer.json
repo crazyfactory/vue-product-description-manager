@@ -4,9 +4,14 @@
     {
       "type": "vcs",
       "url": "https://github.com/lipis/flag-icon-css"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/FortAwesome/Font-Awesome"
     }
   ],
   "require": {
-    "components/flag-icon-css":"2.6.0"
+    "components/flag-icon-css":"2.6.0",
+    "fortawesome/font-awesome":"4.7.0"
   }
 }

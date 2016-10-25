@@ -46,6 +46,7 @@
                                                 <span v-if="product.category" class="product_category">[[product.category.label]]</span>
                                                 <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                                 <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                                                <i class="fa fa-pencil fa-pull-right" title="Edit Name" aria-hidden="true"></i>
                                             </li>
                                         </ul>
                                     </div>
@@ -55,6 +56,8 @@
                                             <li class="en list-group-item">
                                                 <span class=" flag-icon flag-icon-us"></span>
                                                 <span v-for="description in product.descriptions.en">[[description]]</span>
+                                                <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true"></i>
                                             </li>
                                             <li class="de list-group-item">
                                                 <span class=" flag-icon flag-icon-de"></span>
