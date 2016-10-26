@@ -361,9 +361,6 @@ html .clear-completed:active {
 input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus{
     outline: none;
 }
-div.actions{
-    margin-top:3.5em;
-}
 
 .margin-bottom{
     margin-bottom:1em;
@@ -379,6 +376,10 @@ div.actions{
     width:100%;
     text-align: center;
     font-style: italic;
+}
+
+i:hover, i:focus{
+    color:green;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
