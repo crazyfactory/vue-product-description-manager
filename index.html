@@ -77,16 +77,20 @@
                     <h5>Descriptions:</h5>
                     <ul class="list-group">
                       <li class="en list-group-item">
-                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true"></i>
+                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" @click="setCustomDescription(product,'en')"></i>
                         <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true"></i>
                         <span class=" flag-icon flag-icon-us"></span>
                         <span>[[product.descriptions.en]]</span>
                       </li>
                       <li class="de list-group-item">
-                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true"></i>
+                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" @click="setCustomDescription(product,'de')"></i>
                         <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true"></i>
                         <span class=" flag-icon flag-icon-de"></span>
                         <span>[[product.descriptions.de]]</span>
+                        <div class="editable">
+                          <textarea v-model="product.descriptions.de" >
+                          </textarea>
+                        </div>
 
                       </li>
                     </ul>

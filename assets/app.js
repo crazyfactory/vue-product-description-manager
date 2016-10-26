@@ -214,7 +214,11 @@ new Vue({
                     }
                 }
             })
+        },
+        setCustomDescription: function(product, language){
+            console.log('set custom description');
+            console.log(product);
+            console.log(language);
         }
-
     }
 })
