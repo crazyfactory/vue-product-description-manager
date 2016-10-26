@@ -221,6 +221,12 @@ new Vue({
         closeEditDescription: function(description){
             description.edit= false;
             description.value= description.value.replace(/\r?\n|\r/g,"")
+        },
+        getGeneratedDescription: function(product, language){
+            console.log('call home');
+            formula=encodeURI(product.propertyFormula);
+            console.log(formula);
+            console.log(language);
         }
     }
 })

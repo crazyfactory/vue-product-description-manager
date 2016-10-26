@@ -79,7 +79,7 @@
                       <li class="en list-group-item">
                         <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.en.edit" @click="closeEditDescription(product.descriptions.en)"></i>
-                        <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true"></i>
+                        <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, 'en')"></i>
                         <span class=" flag-icon flag-icon-us"></span>
                         <span v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)">[[product.descriptions.en.value]]</span>
                         <div class="editable" v-show="product.descriptions.en.edit">
@@ -89,7 +89,7 @@
                       <li class="de list-group-item">
                         <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.de.edit"  @click="closeEditDescription(product.descriptions.de)"></i>
-                        <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true"></i>
+                        <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, 'de')"></i>
                         <span class=" flag-icon flag-icon-de"></span>
                         <span v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)">[[product.descriptions.de.value]]</span>
                         <div class="editable" v-show="product.descriptions.de.edit">
