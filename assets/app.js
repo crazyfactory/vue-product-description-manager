@@ -215,10 +215,12 @@ new Vue({
                 }
             })
         },
-        setCustomDescription: function(product, language){
-            console.log('set custom description');
-            console.log(product);
-            console.log(language);
+        editDescription: function(description){
+            description.edit=true;
+        },
+        closeEditDescription: function(description){
+            description.edit= false;
+            description.value= description.value.replace(/\r?\n|\r/g,"")
         }
     }
 })

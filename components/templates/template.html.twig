@@ -54,19 +54,23 @@
                                         <h5>Descriptions:</h5>
                                         <ul class="list-group">
                                             <li class="en list-group-item">
-                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" @click="setCustomDescription(product,'en')"></i>
+                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)"></i>
+                                                <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.en.edit" @click="closeEditDescription(product.descriptions.en)"></i>
                                                 <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true"></i>
                                                 <span class=" flag-icon flag-icon-us"></span>
-                                                <span>[[product.descriptions.en]]</span>
+                                                <span v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)">[[product.descriptions.en.value]]</span>
+                                                <div class="editable" v-show="product.descriptions.en.edit">
+                                                    <textarea v-model="product.descriptions.en.value" @keyup.enter="closeEditDescription(product.descriptions.en)"></textarea>
+                                                </div>
                                             </li>
                                             <li class="de list-group-item">
-                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" @click="setCustomDescription(product,'de')"></i>
+                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)"></i>
+                                                <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.de.edit"  @click="closeEditDescription(product.descriptions.de)"></i>
                                                 <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true"></i>
                                                 <span class=" flag-icon flag-icon-de"></span>
-                                                <span>[[product.descriptions.de]]</span>
-                                                <div class="editable">
-                          <textarea v-model="product.descriptions.de" >
-                          </textarea>
+                                                <span v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)">[[product.descriptions.de.value]]</span>
+                                                <div class="editable" v-show="product.descriptions.de.edit">
+                                                    <textarea v-model="product.descriptions.de.value" @keyup.enter="closeEditDescription(product.descriptions.de)"></textarea>
                                                 </div>
 
                                             </li>
