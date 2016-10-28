@@ -230,7 +230,7 @@ new Vue({
             if(hasApi){
                 api.app=this;
                 api.data = formula;
-                api.action = 'get_descriptions';
+                api.action = 'generate_description';
                 api.call();
             }
 
