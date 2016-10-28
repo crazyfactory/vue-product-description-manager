@@ -226,7 +226,14 @@ new Vue({
             console.log('call home');
             formula=encodeURI(product.propertyFormula);
             console.log(formula);
-            console.log(language);
+
+            if(hasApi){
+                api.app=this;
+                api.data = formula;
+                api.action = 'get_descriptions';
+                api.call();
+            }
+
         }
     }
 })
