@@ -130,10 +130,6 @@ new Vue({
                     this.show_names= true;
                     this.headline = 'Product Names';
                     break;
-                case 'description':
-                    this.show_descriptions= true;
-                    this.headline = 'Product Descriptions';
-                    break;
                 case 'preview':
                     this.show_preview= true;
                     this.headline = 'Preview: Multilingual and custom texts';
