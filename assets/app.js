@@ -223,13 +223,10 @@ new Vue({
             description.value= description.value.replace(/\r?\n|\r/g,"")
         },
         getGeneratedDescription: function(product, language){
-            console.log('call home');
-            formula=encodeURI(product.propertyFormula);
-            console.log(formula);
-
+            
             if(hasApi){
                 api.app=this;
-                api.data = formula;
+                api.data = product.propertyFormula;
                 api.action = 'generate_description';
                 api.call();
             }
