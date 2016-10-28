@@ -30,7 +30,7 @@ var Api_response =
         "edit":false
       },
       "de": {
-        "value":"In der Materialstärke von 1.6mm auf Lager vorrätig.Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Eine 5mm große Kugel macht das gute Stück erst so richtig perfekt. Du weißt es selbst am besten, ein wunderbares Produkt wie dieses fehlt deiner Sammlung noch!",
+        "value":"Auf Lager in der Materialstärke von 1.6mm. Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Eine 5mm große Kugel macht das gute Stück erst so richtig perfekt. Du weißt es selbst am besten, ein wunderbares Produkt wie dieses fehlt deiner Sammlung noch!",
         "edit": false
       }
     },
@@ -50,7 +50,7 @@ var Api_response =
         "edit": false
       },
       "de": {
-        "value":"In der Materialstärke von 1.6mm auf Lager vorrätig. Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Die Kugelgröße ist 5mm. Du weißt es selbst am besten, ein duftes Produkt wie dieses fehlt deiner Sammlung noch!",
+        "value":"Mit der Materialstärke von 1.6mm einfach ein Kracher. Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Die Kugelgröße ist 5mm. Du weißt es selbst am besten, ein duftes Produkt wie dieses fehlt deiner Sammlung noch!",
         "edit":false
       }
     },

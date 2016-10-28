@@ -219,14 +219,24 @@ new Vue({
             description.value= description.value.replace(/\r?\n|\r/g,"")
         },
         getGeneratedDescription: function(product, language){
-            
+            index=this.products.indexOf(product);
+
             if(hasApi){
                 api.app=this;
+                api.language=language;
                 api.data = product.propertyFormula;
                 api.action = 'generate_description';
+                api.product_index = index;
                 api.call();
             }
-
+            else{
+                console.log('no api ... dry hump');
+                // use fake api response from api.js
+                var random_nr = Math.round(Math.random()*Object.keys(Api_response).length);
+                my_product=Api_response[random_nr];
+                my_description=my_product.descriptions[language];
+                this.products[index].descriptions[language]=my_description;
+            }
         }
     }
 })
