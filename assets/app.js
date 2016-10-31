@@ -1,15 +1,3 @@
-//teach TWIG some manners
-// prepare twig template ... replace [[ ]] by {{ }}
-
-if (typeof jQuery === 'undefined') {
-    // jQuery is NOT available
-    console.log('jQuery not found. Please add it.');
-} else {
-    // jQuery is available
-    $("#app").html( $('#app').html().replace(/\[\[/g , '{{'));
-    $("#app").html( $('#app').html().replace(/\]\]/g, '}}') );
-}
-
 if (typeof api !== 'undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi=true;
@@ -31,6 +19,8 @@ AttributeConjunction['de']=Attributes_de.conjunction;
 //register components
 Vue.component('v-select', VueSelect.VueSelect);
 
+// teach TWIG some manners
+Vue.config.delimiters = ['[[', ']]'];
 /*
  * add products
  */
