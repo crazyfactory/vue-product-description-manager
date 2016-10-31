@@ -30,7 +30,7 @@ var productStorage = {
     fetch: function () {
         var products = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
         products.forEach(function (product, index) {
-            products.id = index
+            products.uid = index
         })
         productStorage.uid = products.length
         return products
@@ -39,9 +39,24 @@ var productStorage = {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
     }
 }
-
-
 // end new products
+
+// message management
+var STORAGE_KEY_MSG = 'crazy-messages'
+var messageStorage = {
+    fetch: function () {
+        var messages = JSON.parse(localStorage.getItem(STORAGE_KEY_MSG) || '[]')
+        messages.forEach(function (message, index) {
+            messages.uid = index
+        })
+        messageStorage.uid = messages.length
+        return messages
+    },
+    save: function (messages) {
+        localStorage.setItem(STORAGE_KEY_MSG, JSON.stringify(messages))
+    }
+}
+// end messages
 
 new Vue({
     el: '#app',
@@ -52,7 +67,6 @@ new Vue({
         headline: 'Product Names',
         show_load: true,
         show_names: true,
-        show_descriptions: false,
         show_preview: false,
         show_export: false,
         show_metatags:false,
@@ -79,6 +93,8 @@ new Vue({
         products:productStorage.fetch(),
         newProduct:'',
 
+        messages:messageStorage.fetch(),
+
         /*
          * Language Management
          */
@@ -92,6 +108,12 @@ new Vue({
                 productStorage.save(products)
             },
             deep: true
+        },
+        messages: {
+            handler: function (messages) {
+                messageStorage.save(messages)
+            },
+            deep: true
         }
     },
     computed: {
@@ -101,13 +123,19 @@ new Vue({
                     product.active = value
                 })
             }
+        },
+        deactivateMessages: {
+            set: function () {
+                this.messages.forEach(function (message) {
+                    message.show = false
+                })
+            }
         }
     },
     methods: {
         makeActive: function(item){
             // deactivate all
             this.show_names= false;
-            this.show_descriptions= false;
             this.show_metatags= false;
             this.show_export= false;
             this.show_preview= false;
@@ -178,6 +206,27 @@ new Vue({
         },
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
+        },
+        addMessage: function(message, type){
+            var today = moment().format('lll');
+            var msg= {
+                id:messageStorage.uid++,
+                message:message,
+                type:type,
+                show:true,
+                date:today
+            };
+            this.messages.unshift(msg);
+
+        },
+        debugMessages: function(){
+            console.log(this.messages);
+        },
+        removeMessage: function (message) {
+            message.show = false
+        },
+        removeMessages: function(){
+            this.messages=[];
         },
         saveNameScheme: function(){
             var scheme = '';

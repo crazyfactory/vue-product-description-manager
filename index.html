@@ -5,9 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <!-- get vue.js -->
+  <!-- use vue-1.0.28.js (not 2.x.x) for vue-select -->
   <script src="./assets/vue-1.0.28.js"></script>
   <!-- get select extension -->
   <script src="./assets/vue-select-1.3.3.js"></script>
+  <script src="./assets/moment.min.js"></script>
+
   <!-- load data -->
   <script src="config/de/attributes.js"></script>
   <script src="config/de/categories.js"></script>
@@ -22,11 +25,21 @@
 <body>
 <div id="app">
   <div class="app-nav">
-    <nav v-bind:class="breadcrumb" v-on:click.prevent>
+    <nav v-bind:class="headline" v-on:click.prevent>
       <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
       <a href="#" class="preview" v-on:click="makeActive('preview')">Preview</a>
       <a href="#" class="export" v-on:click="makeActive('export')">Export</a>
+      <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')">add Message</a>
+      <a href="#" class="export" v-on:click="debugMessages()">debug Messages</a>
+      <a href="#" class="export" v-on:click="removeMessages()">Delete ALL Messages</a>
     </nav>
+  </div>
+  <div class="container messages">
+    <div class="alert alert-[[message.type]]" v-for="message in messages | filterBy true in 'show'">
+      <i class=date">[[message.date]]:</i>
+      <span>[[message.message]]</span>
+      <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="removeMessage(message)" ></i>
+    </div>
   </div>
 
   <div class="container">
@@ -127,9 +140,6 @@
       </div>
     </div>
     <!-- End Product Names  -->
-    <div class="products_description row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_descriptions">
-      <h5>Form for configuring Products Descriptions</h5>
-    </div>
     <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
       <h5>Export to Shop</h5>
     </div>

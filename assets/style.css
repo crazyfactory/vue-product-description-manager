@@ -398,6 +398,14 @@ textarea
     padding: 1em;
 }
 
+.alert{
+    margin-bottom:5px;
+}
+.container.messages{
+    padding-bottom:5px;
+    padding-top:5px;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
     .product-list li .toggle {
