@@ -411,6 +411,11 @@ textarea
 .settings .list-group{
     margin-bottom:0;
 }
+.small,
+.product-list li.small
+{
+    font-size:0.9em;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,

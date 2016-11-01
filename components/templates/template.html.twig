@@ -26,8 +26,8 @@
         <span v-for="language in languages">
           <span class="language" @click="toggle_language(language)">
             &nbsp;&nbsp;&nbsp;&nbsp;
-              <i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true" v-if="!language.status" @click="toggle_language(language)"></i>
-              <i style="color:darkgreen;" class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status" ></i>
+              <i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
+              <i style="color:darkgreen;" class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
               <span class="flag-icon [[language.flag]]" ></span>
           </span>
         </span>
@@ -59,18 +59,21 @@
                                 <input class="toggle" type="checkbox" v-model="product.active">
                                 <i class="destroy fa fa-trash-o fa-2x fa-pull-right" aria-hidden="true" @click="removeProduct(product)"></i>
                                 <label>[[product.modelCode]]</label>
-                                <small v-if="show_names" class="indent">
-                                    <span v-if="product.category" class="product_category">[[product.category.label]]</span>
-                                    <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
-                                    <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
-                                </small>
+                                <ul v-if="show_names" v-show="product.category" class="indent" class="list-group">
+                                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                                        <span class="flag-icon [[language.flag]]" ></span>
+                                        <span v-if="product.category" class="product_category">[[product.category.label]]</span>
+                                        <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
+                                        <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                                    </li>
+                                </ul>
                                 <!-- Preview Feature -->
                                 <div class="product_preview" v-on:click.stop v-if="show_preview">
                                     <div class="indent">
                                         <h5 class="product_name inline" v-if="product.category">Product Names:</h5>
-                                        <ul class="list-group">
-                                            <li class="de list-group-item " v-if="product.category">
-                                                <span class=" flag-icon flag-icon-de"></span>
+                                        <ul class="list-group" v-if="product.category">
+                                            <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                                                <span class="flag-icon [[language.flag]]" ></span>
                                                 <span v-if="product.category" class="product_category">[[product.category.label]]</span>
                                                 <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
                                                 <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
@@ -81,27 +84,18 @@
                                     <div v-if="product.descriptions" class="indent description">
                                         <h5>Descriptions:</h5>
                                         <ul class="list-group">
-                                            <li class="en list-group-item">
-                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)"></i>
-                                                <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.en.edit" @click="closeEditDescription(product.descriptions.en)"></i>
-                                                <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, 'en')"></i>
-                                                <span class=" flag-icon flag-icon-us"></span>
-                                                <span v-show="!product.descriptions.en.edit" @click="editDescription(product.descriptions.en)">[[product.descriptions.en.value]]</span>
-                                                <div class="editable" v-show="product.descriptions.en.edit">
-                                                    <textarea v-model="product.descriptions.en.value" @keyup.enter="closeEditDescription(product.descriptions.en)"></textarea>
+                                            <!-- Language dependent items -->
+                                            <li class="list-group-item" v-for="language in languages" v-show="language.status">
+                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editDescription(product.descriptions[language.id])"></i>
+                                                <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditDescription(product.descriptions[language.id])"></i>
+                                                <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
+                                                <span class="flag-icon [[language.flag]]" ></span>
+                                                <span v-show="!product.descriptions[language.id].edit" @click="editDescription(product.descriptions[language.id])">[[product.descriptions[language.id].value]]</span>
+                                                <div class="editable" v-show="product.descriptions[language.id].edit">
+                                                    <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditDescription(product.descriptions[language.id])"></textarea>
                                                 </div>
                                             </li>
-                                            <li class="de list-group-item">
-                                                <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)"></i>
-                                                <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions.de.edit"  @click="closeEditDescription(product.descriptions.de)"></i>
-                                                <i class="fa fa-refresh fa-pull-right" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, 'de')"></i>
-                                                <span class=" flag-icon flag-icon-de"></span>
-                                                <span v-show="!product.descriptions.de.edit" @click="editDescription(product.descriptions.de)">[[product.descriptions.de.value]]</span>
-                                                <div class="editable" v-show="product.descriptions.de.edit">
-                                                    <textarea v-model="product.descriptions.de.value" @keyup.enter="closeEditDescription(product.descriptions.de)"></textarea>
-                                                </div>
-
-                                            </li>
+                                            <!-- end language dependent items -->
                                         </ul>
 
                                     </div>
