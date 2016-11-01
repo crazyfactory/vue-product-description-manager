@@ -69,8 +69,10 @@ new Vue({
         show_names: true,
         show_preview: false,
         show_export: false,
-        show_metatags:false,
-        show_message:false,
+        show_metatags: false,
+        show_message: false,
+        show_settings: false,
+
         isFullScreen:false,
         isSmallScreen:true,
         /*
@@ -99,7 +101,18 @@ new Vue({
         /*
          * Language Management
          */
-        languages:[],
+        languages:[
+            {
+                id:'de',
+                status:true,
+                flag:'flag-icon-de'
+            },
+            {
+                id:'en',
+                status:true,
+                flag:'flag-icon-us'
+            }
+        ],
         sources:[]
     },
     // watch products change for localStorage persistence
@@ -159,6 +172,7 @@ new Vue({
                 case 'metatags':
                     this.show_metatags= true;
                     this.headline = 'Metatags';
+                    break;
                 case 'export':
                     this.show_export= true;
                     this.headline = 'Export Products to shop';
@@ -169,6 +183,12 @@ new Vue({
                     this.headline = 'Messages';
                     break;
             }
+        },
+        toggle_settings: function(){
+            this.show_settings = !this.show_settings;
+        },
+        toggle_language: function(language){
+            language.status = !language.status;
         },
         /*
          * Products stuff

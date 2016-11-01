@@ -1,10 +1,11 @@
 <div id="app">
     <div class="app-nav">
         <nav v-bind:class="headline" v-on:click.prevent>
-            <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i> </a>
+            <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-search fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-            <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa fa-envelope-open-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
 
         </nav>
     </div>
@@ -14,6 +15,25 @@
             <span>[[message.message]]</span>
             <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
+    </div>
+    <div class="container messages">
+        <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" @click="toggle_settings"></i>
+    </div>
+    <div class="container settings" v-show="show_settings">
+        <ul class="list-group">
+            <li class="list-group-item align-right">
+                <b>Languages:&nbsp;</b>
+        <span v-for="language in languages">
+          <span class="language" @click="toggle_language(language)">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+              <i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true" v-if="!language.status" @click="toggle_language(language)"></i>
+              <i style="color:darkgreen;" class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status" ></i>
+              <span class="flag-icon [[language.flag]]" ></span>
+          </span>
+        </span>
+
+            </li>
+        </ul>
     </div>
 
     <div class="container">
