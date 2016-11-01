@@ -70,6 +70,7 @@ new Vue({
         show_preview: false,
         show_export: false,
         show_metatags:false,
+        show_message:false,
         isFullScreen:false,
         isSmallScreen:true,
         /*
@@ -139,6 +140,7 @@ new Vue({
             this.show_metatags= false;
             this.show_export= false;
             this.show_preview= false;
+            this.show_message=false;
             this.show_load=true;
             this.isFullScreen=false;
             this.isSmallScreen=true;
@@ -160,6 +162,11 @@ new Vue({
                 case 'export':
                     this.show_export= true;
                     this.headline = 'Export Products to shop';
+                    break;
+                case 'message':
+                    this.show_message= true;
+                    this.show_load=false;
+                    this.headline = 'Messages';
                     break;
             }
         },
@@ -222,11 +229,17 @@ new Vue({
         debugMessages: function(){
             console.log(this.messages);
         },
-        removeMessage: function (message) {
+        hideMessage: function (message) {
             message.show = false
+        },
+        removeMessage: function(message){
+            this.messages.splice(this.messages.indexOf(message), 1)
         },
         removeMessages: function(){
             this.messages=[];
+        },
+        alert: function(text) {
+            alert(text);
         },
         saveNameScheme: function(){
             var scheme = '';

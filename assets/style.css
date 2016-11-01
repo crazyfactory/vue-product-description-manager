@@ -32,7 +32,7 @@ nav{
 
 nav a{
     display:inline-block;
-    padding: 18px 30px;
+    padding: 18px 30px 5px;
     color:#fff !important;
     font-weight:bold;
     font-size:16px;
@@ -291,13 +291,10 @@ label[for='toggle-all'] {
 .product-list li .destroy {
     display: none;
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 10px;
     bottom: 0;
-    width: 40px;
-    height: 40px;
     margin: 0;
-    font-size: 30px;
     color: #cc9a9a;
     margin-bottom: 11px;
     transition: color 0.2s ease-out;
@@ -305,10 +302,6 @@ label[for='toggle-all'] {
 
 .product-list li .destroy:hover {
     color: #af5b5e;
-}
-
-.product-list li .destroy:after {
-    content: 'x';
 }
 
 .product-list li:hover .destroy {
@@ -404,6 +397,10 @@ textarea
 .container.messages{
     padding-bottom:5px;
     padding-top:5px;
+}
+.menu-icon{
+    position:relative;
+    top:-10px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {

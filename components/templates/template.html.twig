@@ -1,19 +1,18 @@
 <div id="app">
     <div class="app-nav">
         <nav v-bind:class="headline" v-on:click.prevent>
-            <a href="#" class="name" v-on:click="makeActive('names')">Product Names</a>
-            <a href="#" class="preview" v-on:click="makeActive('preview')">Preview</a>
-            <a href="#" class="export" v-on:click="makeActive('export')">Export</a>
-            <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')">add Message</a>
-            <a href="#" class="export" v-on:click="debugMessages()">debug Messages</a>
-            <a href="#" class="export" v-on:click="removeMessages()">Delete ALL Messages</a>
+            <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i> </a>
+            <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa fa-envelope-open-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+
         </nav>
     </div>
     <div class="container messages">
         <div class="alert alert-[[message.type]]" v-for="message in messages | filterBy true in 'show'">
             <i class=date">[[message.date]]:</i>
             <span>[[message.message]]</span>
-            <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="removeMessage(message)" ></i>
+            <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
     </div>
 
@@ -38,7 +37,7 @@
                             :class="{ active: product.active }">
                             <div class="view">
                                 <input class="toggle" type="checkbox" v-model="product.active">
-                                <button class="destroy" @click="removeProduct(product)"></button>
+                                <i class="destroy fa fa-trash-o fa-2x fa-pull-right" aria-hidden="true" @click="removeProduct(product)"></i>
                                 <label>[[product.modelCode]]</label>
                                 <small v-if="show_names" class="indent">
                                     <span v-if="product.category" class="product_category">[[product.category.label]]</span>
@@ -108,15 +107,41 @@
             </div>
             <div class="row">
                 <div class="actions">
-                    <button type="button" class="btn btn-success save_name"
-
-                            @click="saveNameScheme()">Save Names</button>
+                    <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveNameScheme()"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i> Save changes</button>
                 </div>
             </div>
         </div>
         <!-- End Product Names  -->
+        <!-- Export -->
         <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
-            <h5>Export to Shop</h5>
+            <h5>Export selected products to shop</h5>
+            <button type="button" class="btn btn-success save_name" @click="alert('Not ready yet .... coming soon')"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save to DB</button>
+        </div>
+        <!-- End Export -->
+        <!-- Messages -->
+        <div class="message row col-xs-12 col-sm-12 col-md-12" v-on:click.stop v-show="show_message">
+            <div>
+                <h5>Actions</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add</a>&nbsp;&nbsp;
+                        <a href="#" class="export" v-on:click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL</a>&nbsp;&nbsp;
+                        <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
+                    </li>
+                </ul>
+                <h5>Errors</h5>
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
+                        <div class="alert alert-[[message.type]]" >
+                            <i class=date">[[message.date]]:</i>
+                            <span>[[message.message]]</span>
+                            <i class="fa fa-trash-o fa-pull-right" aria-hidden="true" @click="removeMessage(message)" ></i>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <!-- End Messages -->
         </div>
     </div>
 </div>
