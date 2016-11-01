@@ -124,6 +124,7 @@
                 <h5>Actions</h5>
                 <ul class="list-group">
                     <li class="list-group-item">
+                        <a href="#" class="error_report" v-on:click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
                         <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add</a>&nbsp;&nbsp;
                         <a href="#" class="export" v-on:click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL</a>&nbsp;&nbsp;
                         <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
