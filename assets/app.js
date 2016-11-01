@@ -208,9 +208,10 @@ new Vue({
             }
             else
             {
-                console.log('no api ... dry hump');
+
                 // use fake api response from api.js
-                var random_nr = Math.round(Math.random()*Object.keys(Api_response).length);
+                var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
+                console.log('no api ... dry hump with '+ random_nr);
                 my_product=Api_response[random_nr];
 
                 this.products.push({
@@ -302,9 +303,9 @@ new Vue({
                 api.call();
             }
             else{
-                console.log('no api ... dry hump');
                 // use fake api response from api.js
-                var random_nr = Math.round(Math.random()*Object.keys(Api_response).length);
+                var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
+                console.log('no api ... dry hump with '+ random_nr);
                 my_product=Api_response[random_nr];
                 my_description=my_product.descriptions[language];
                 this.products[index].descriptions[language]=my_description;
