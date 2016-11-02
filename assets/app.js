@@ -11,9 +11,17 @@ var AttributeData=[];
 var AttributeConjunction=[];
 var Descriptions=[];
 
+/*
+ * set language data from static files
+ */
+// german
 CategoriesData['de']=Categories_de.content;
 AttributeData['de']=Attributes_de.content;
 AttributeConjunction['de']=Attributes_de.conjunction;
+// english
+CategoriesData['en']=Categories_en.content;
+AttributeData['en']=Attributes_en.content;
+AttributeConjunction['en']=Attributes_en.conjunction;
 
 
 //register components
@@ -78,17 +86,10 @@ new Vue({
         /*
          * create Name Scheme
          */
-        // load data
-        category_options:CategoriesData['de'],
-        attribute_options_1:AttributeData['de'],
-        attribute_options_2:AttributeData['de'],
-        conjunction_1:AttributeConjunction['de'].with,
-        conjunction_2:AttributeConjunction['de'].and,
         // preview
         selected_category:"",
         selected_attribute_1:"",
         selected_attribute_2:"",
-
 
         /*
          * Product Management
@@ -101,18 +102,20 @@ new Vue({
         /*
          * Language Management
          */
+        editorLanguage:'de',
         languages:[
             {
                 id:'de',
                 status:true,
-                flag:'flag-icon-de'
+                flag:'flag-icon-de',
             },
             {
                 id:'en',
                 status:true,
-                flag:'flag-icon-us'
+                flag:'flag-icon-us',
             }
         ],
+        conjunction:AttributeConjunction,
         sources:[]
     },
     // watch products change for localStorage persistence
@@ -131,6 +134,73 @@ new Vue({
         }
     },
     computed: {
+        category_options: function(){
+            return CategoriesData[this.editorLanguage];
+        },
+        attribute_options_1: function(){
+            return AttributeData[this.editorLanguage];
+        },
+        attribute_options_2: function(){
+            return AttributeData[this.editorLanguage];
+        },
+        localized_category: function(){
+            var localized={};
+            var selected_category = this.selected_category;
+            this.languages.forEach(function (language) {
+                found = false;
+                value = selected_category.value;
+                categories = CategoriesData[language.id];
+                categories.forEach(function(category){
+                    if(value == category.value){
+                        found = true;
+                        localized[language.id]=category.label;
+                    }
+                });
+
+                if(!found){
+                    /*
+                     * TODO: add notification for missing translations
+                     */
+                    //msg="No translated value found for '"+value+"' and language '"+language.id+"'";
+                    //this.addMessage(msg, 'warning');
+                }
+            });
+            return localized;
+        },
+        localized_attribute_1: function(){
+            var localized={};
+            var selected = this.selected_attribute_1;
+            this.languages.forEach(function (language) {
+                found = false;
+                value = selected.value;
+                attributes = AttributeData[language.id];
+                attributes.forEach(function(attribute){
+                    if(value == attribute.value){
+                        found = true;
+                        localized[language.id]=attribute.label;
+                    }
+                });
+
+            });
+            return localized;
+        },
+        localized_attribute_2: function(){
+            var localized={};
+            var selected = this.selected_attribute_2;
+            this.languages.forEach(function (language) {
+                found = false;
+                value = selected.value;
+                attributes = AttributeData[language.id];
+                attributes.forEach(function(attribute){
+                    if(value == attribute.value){
+                        found = true;
+                        localized[language.id]=attribute.label;
+                    }
+                });
+
+            });
+            return localized;
+        },
         allActive: {
             set: function (value) {
                 this.products.forEach(function (product) {
@@ -267,19 +337,29 @@ new Vue({
             var category = this.selected_category;
             var attr1 = this.selected_attribute_1;
             var attr2 = this.selected_attribute_2;
+            var localized_category = this.localized_category;
+            var localized_attribute_1 = this.localized_attribute_1;
+            var localized_attribute_2 = this.localized_attribute_2;
+
 
             this.products.forEach(function (product) {
                 if(product.active){
                     scheme = '';
 
                     if (typeof category == 'object' && category !=null && category.value != '--'){
-                        product.category=category;
+                        product.category={};
+                        product.category.value=category.value;
+                        product.category.label=localized_category;
                     }
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
-                        product.attribute1=attr1;
+                        product.attribute1={};
+                        product.attribute1.value=attr1.value;
+                        product.attribute1.label=localized_attribute_1;
                     }
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
-                        product.attribute2=attr2;
+                        product.attribute2={};
+                        product.attribute2.value=attr2.value;
+                        product.attribute2.label=localized_attribute_2;
                     }
                 }
             })
@@ -310,6 +390,9 @@ new Vue({
                 my_description=my_product.descriptions[language];
                 this.products[index].descriptions[language]=my_description;
             }
+        },
+        set_editor_language: function(language){
+            this.editorLanguage=language.id;
         }
     }
 })

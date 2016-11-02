@@ -4,7 +4,7 @@
   <title>Welcome to the ProductDescriptor</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script> -->
   <!-- get vue.js -->
   <!-- use vue-1.0.28.js (not 2.x.x) for vue-select -->
   <script src="./assets/vue-1.0.28.js"></script>
@@ -15,6 +15,9 @@
   <!-- load data -->
   <script src="config/de/attributes.js"></script>
   <script src="config/de/categories.js"></script>
+  <script src="config/en/attributes.js"></script>
+  <script src="config/en/categories.js"></script>
+
   <script src="config/api.js"></script>
   <!-- get css styles -->
   <link href="./assets/bootstrap-3.3.6.min.css" rel="stylesheet" type="text/css" />
@@ -42,21 +45,36 @@
     </div>
   </div>
   <div class="container messages">
-    <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" @click="toggle_settings"></i>
+    <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" title="Set languages for Editor and Preview features" @click="toggle_settings"></i>
   </div>
   <div class="container settings" v-show="show_settings">
     <ul class="list-group">
       <li class="list-group-item align-right">
-        <b>Languages:&nbsp;</b>
+        <section class="settings language_editor">
+          <span class="icon_label">
+            <i class="fa fa-pencil fa-2x" aria-hidden="true" title="Set Editor language"></i>
+          </span>
+          <span v-for="language in languages">
+          <span class="language" @click="set_editor_language(language)">
+              <i style="color:darkgreen;" class="fa fa-caret-right" aria-hidden="true" v-if="language.id == editorLanguage"></i>
+              <span class="flag-icon [[language.flag]]" ></span>
+            <i style="color:darkgreen;" class="fa fa-caret-left" aria-hidden="true" v-if="language.id == editorLanguage"></i>
+          </span>
+        </span>
+        </section>
+        <span class="settings seperator">|</span>
+        <section class="settings language_preview">
+          <span class="icon_label">
+            <i class="fa fa fa-eye fa-2x" aria-hidden="true" title="Set/ unset languages for the preview feature"></i>
+          </span>
         <span v-for="language in languages">
           <span class="language" @click="toggle_language(language)">
-            &nbsp;&nbsp;&nbsp;&nbsp;
               <i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
               <i style="color:darkgreen;" class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
               <span class="flag-icon [[language.flag]]" ></span>
           </span>
         </span>
-
+        </section>
       </li>
     </ul>
   </div>
@@ -87,9 +105,9 @@
                 <ul v-if="show_names" v-show="product.category" class="indent" class="list-group">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                     <span class="flag-icon [[language.flag]]" ></span>
-                    <span v-if="product.category" class="product_category">[[product.category.label]]</span>
-                    <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
-                    <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                    <span v-if="product.category" class="product_category">[[ product.category.label[language.id] ]]</span>
+                    <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction[language.id].with]] [[product.attribute1.label[language.id] ]]</span>
+                    <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction[language.id].and]] [[product.attribute2.label[language.id] ]]</span>
                   </li>
                 </ul>
                 <!-- Preview Feature -->
@@ -99,9 +117,9 @@
                     <ul class="list-group" v-if="product.category">
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <span class="flag-icon [[language.flag]]" ></span>
-                        <span v-if="product.category" class="product_category">[[product.category.label]]</span>
-                        <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction_1]] [[product.attribute1.label]]</span>
-                        <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction_2]] [[product.attribute2.label]]</span>
+                        <span v-if="product.category" class="product_category">[[ product.category.label[language.id] ]]</span>
+                        <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction[language.id].with]] [[product.attribute1.label[language.id] ]]</span>
+                        <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction[language.id].and]] [[product.attribute2.label[language.id] ]]</span>
                         <i class="fa fa-pencil fa-pull-right" title="Edit Name" aria-hidden="true"></i>
                       </li>
                     </ul>
@@ -110,7 +128,7 @@
                     <h5>Descriptions:</h5>
                     <ul class="list-group">
                       <!-- Language dependent items -->
-                      <li class="list-group-item" v-for="language in languages" v-show="language.status">
+                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editDescription(product.descriptions[language.id])"></i>
                         <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditDescription(product.descriptions[language.id])"></i>
                         <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
