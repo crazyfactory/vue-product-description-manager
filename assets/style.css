@@ -417,6 +417,21 @@ textarea
     font-size:0.9em;
 }
 
+section.settings{
+    display:inline;
+}
+.settings.seperator{
+    display:inline-block;
+    padding-left:15px;
+    margin-right:15px;
+    font-size: 2em;
+    color: #dddddd;
+}
+.settings .icon_label{
+    font-size:0.7em;
+    margin-right:10px;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
     .product-list li .toggle {
