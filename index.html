@@ -81,9 +81,9 @@
 
   <div class="container">
     <h3 class="headline">[[headline]]</h3>
-    <!-- Add Products -->
     <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
       <section class="product-management load_products" v-on:click.stop v-show="show_load">
+        <!-- Add Products -->
         <header class="header">
           <input class="new-product"
                  autofocus autocomplete="off"
@@ -91,8 +91,10 @@
                  v-model="newProduct"
                  @keyup.enter="addProduct">
         </header>
+        <!-- End add products -->
         <section class="main" v-show="products.length" v-cloak>
           <input class="toggle-all" type="checkbox" v-model="allActive">
+          <!-- List products -->
           <ul class="product-list">
             <li v-for="product in products"
                 class="product"
@@ -102,6 +104,7 @@
                 <input class="toggle" type="checkbox" v-model="product.active">
                 <i class="destroy fa fa-trash-o fa-2x fa-pull-right" aria-hidden="true" @click="removeProduct(product)"></i>
                 <label>[[product.modelCode]]</label>
+                <!-- Generic Product Names by language -->
                 <ul v-if="show_names" v-show="product.category" class="indent" class="list-group">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                     <span class="flag-icon [[language.flag]]" ></span>
@@ -110,17 +113,20 @@
                     <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction[language.id].and]] [[product.attribute2.label[language.id] ]]</span>
                   </li>
                 </ul>
+                <!-- Generic Product Names by language -->
                 <!-- Preview Feature -->
                 <div class="product_preview" v-on:click.stop v-if="show_preview">
                   <div class="indent">
                     <h5 class="product_name inline" v-if="product.category">Product Names:</h5>
                     <ul class="list-group" v-if="product.category">
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                        <i class="fa fa-pencil fa-pull-right" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])"></i>
+                        <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                         <span class="flag-icon [[language.flag]]" ></span>
-                        <span v-if="product.category" class="product_category">[[ product.category.label[language.id] ]]</span>
-                        <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction[language.id].with]] [[product.attribute1.label[language.id] ]]</span>
-                        <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction[language.id].and]] [[product.attribute2.label[language.id] ]]</span>
-                        <i class="fa fa-pencil fa-pull-right" title="Edit Name" aria-hidden="true"></i>
+                        <span v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])">[[ product.names[language.id].value ]]</span>
+                        <div class="editable" v-show="product.names[language.id].edit">
+                          <textarea v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -129,13 +135,13 @@
                     <ul class="list-group">
                       <!-- Language dependent items -->
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editDescription(product.descriptions[language.id])"></i>
-                        <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditDescription(product.descriptions[language.id])"></i>
+                        <i class="fa fa-pencil fa-pull-right" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id])"></i>
+                        <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
                         <i class="fa fa-refresh fa-pull-right " title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
                         <span class="flag-icon [[language.flag]]" ></span>
-                        <span v-show="!product.descriptions[language.id].edit" @click="editDescription(product.descriptions[language.id])">[[product.descriptions[language.id].value]]</span>
+                        <span v-show="!product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id])">[[product.descriptions[language.id].value]]</span>
                         <div class="editable" v-show="product.descriptions[language.id].edit">
-                          <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditDescription(product.descriptions[language.id])"></textarea>
+                          <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditMe(product.descriptions[language.id])"></textarea>
                         </div>
                       </li>
                       <!-- end language dependent items -->
@@ -147,6 +153,7 @@
               </div>
             </li>
           </ul>
+          <!-- End List products -->
         </section>
       </section>
     </div>

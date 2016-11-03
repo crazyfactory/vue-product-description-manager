@@ -145,60 +145,65 @@ new Vue({
         },
         localized_category: function(){
             var localized={};
-            var selected_category = this.selected_category;
-            this.languages.forEach(function (language) {
-                found = false;
-                value = selected_category.value;
-                categories = CategoriesData[language.id];
-                categories.forEach(function(category){
-                    if(value == category.value){
-                        found = true;
-                        localized[language.id]=category.label;
+            if(this.selected_category){
+                var selected_category = this.selected_category;
+                this.languages.forEach(function (language) {
+                    found = false;
+                    value = selected_category.value;
+                    categories = CategoriesData[language.id];
+                    categories.forEach(function(category){
+                        if(value == category.value){
+                            found = true;
+                            localized[language.id]=category.label;
+                        }
+                    });
+
+                    if(!found){
+                        /*
+                         * TODO: add notification for missing translations
+                         */
                     }
                 });
 
-                if(!found){
-                    /*
-                     * TODO: add notification for missing translations
-                     */
-                    //msg="No translated value found for '"+value+"' and language '"+language.id+"'";
-                    //this.addMessage(msg, 'warning');
-                }
-            });
+            }
             return localized;
         },
         localized_attribute_1: function(){
             var localized={};
-            var selected = this.selected_attribute_1;
-            this.languages.forEach(function (language) {
-                found = false;
-                value = selected.value;
-                attributes = AttributeData[language.id];
-                attributes.forEach(function(attribute){
-                    if(value == attribute.value){
-                        found = true;
-                        localized[language.id]=attribute.label;
-                    }
-                });
+            if(this.selected_attribute_1){
+                var selected = this.selected_attribute_1;
+                this.languages.forEach(function (language) {
+                    found = false;
+                    value = selected.value;
+                    attributes = AttributeData[language.id];
+                    attributes.forEach(function(attribute){
+                        if(value == attribute.value){
+                            found = true;
+                            localized[language.id]=attribute.label;
+                        }
+                    });
 
-            });
+                });
+            }
             return localized;
         },
         localized_attribute_2: function(){
             var localized={};
-            var selected = this.selected_attribute_2;
-            this.languages.forEach(function (language) {
-                found = false;
-                value = selected.value;
-                attributes = AttributeData[language.id];
-                attributes.forEach(function(attribute){
-                    if(value == attribute.value){
-                        found = true;
-                        localized[language.id]=attribute.label;
-                    }
-                });
+            if(this.selected_attribute_2){
+                var selected = this.selected_attribute_2;
+                this.languages.forEach(function (language) {
+                    found = false;
+                    value = selected.value;
+                    attributes = AttributeData[language.id];
+                    attributes.forEach(function(attribute){
+                        if(value == attribute.value){
+                            found = true;
+                            localized[language.id]=attribute.label;
+                        }
+                    });
 
-            });
+                });
+            }
             return localized;
         },
         allActive: {
@@ -281,7 +286,7 @@ new Vue({
 
                 // use fake api response from api.js
                 var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
-                console.log('no api ... dry hump with '+ random_nr);
+                console.log('no api ... dry hump with api element '+ random_nr);
                 my_product=Api_response[random_nr];
 
                 this.products.push({
@@ -289,7 +294,7 @@ new Vue({
                     active: true,
                     modelCode:value,
                     name_scheme:null,
-                    names:[],
+                    names:{},
                     category:null,
                     attribute1:null,
                     attribute2:null,
@@ -333,18 +338,18 @@ new Vue({
             alert(text);
         },
         saveNameScheme: function(){
-            var scheme = '';
             var category = this.selected_category;
             var attr1 = this.selected_attribute_1;
             var attr2 = this.selected_attribute_2;
             var localized_category = this.localized_category;
             var localized_attribute_1 = this.localized_attribute_1;
             var localized_attribute_2 = this.localized_attribute_2;
+            var languages = this.languages;
+            var conjunction = this.conjunction;
 
 
             this.products.forEach(function (product) {
                 if(product.active){
-                    scheme = '';
 
                     if (typeof category == 'object' && category !=null && category.value != '--'){
                         product.category={};
@@ -361,15 +366,36 @@ new Vue({
                         product.attribute2.value=attr2.value;
                         product.attribute2.label=localized_attribute_2;
                     }
+                    // generate composed product name for each language
+                    product_names={};
+
+                    languages.forEach(function(language){
+                        var my_name='';
+                        if(product.category && product.category.label[language.id]){
+                            my_name = product.category.label[language.id];
+                        };
+                        if(product.attribute1 && product.attribute1.label[language.id]){
+                            my_name = my_name +" "+ conjunction[language.id].with+ " " +product.attribute1.label[language.id];
+                        };
+                        if(product.attribute2 && product.attribute2.label[language.id]){
+                            my_name = my_name + " "+ conjunction[language.id].and+ " " +product.attribute2.label[language.id];
+                        };
+                        product_names[language.id]={
+                            value:my_name,
+                            edit:false
+                        };
+                    });
+                    product.names=product_names;
+
                 }
             })
         },
-        editDescription: function(description){
-            description.edit=true;
+        editMe: function(item){
+            item.edit=true;
         },
-        closeEditDescription: function(description){
-            description.edit= false;
-            description.value= description.value.replace(/\r?\n|\r/g,"")
+        closeEditMe: function(item){
+            item.edit= false;
+            item.value= item.value.replace(/\r?\n|\r/g,"")
         },
         getGeneratedDescription: function(product, language){
             index=this.products.indexOf(product);
@@ -385,7 +411,7 @@ new Vue({
             else{
                 // use fake api response from api.js
                 var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
-                console.log('no api ... dry hump with '+ random_nr);
+                console.log('no api ... dry hump with api element nr.'+ random_nr);
                 my_product=Api_response[random_nr];
                 my_description=my_product.descriptions[language];
                 this.products[index].descriptions[language]=my_description;
