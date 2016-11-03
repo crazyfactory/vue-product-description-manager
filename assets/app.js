@@ -64,7 +64,18 @@ var messageStorage = {
         localStorage.setItem(STORAGE_KEY_MSG, JSON.stringify(messages))
     }
 }
-// end messages
+// settings management
+var STORAGE_KEY_SETTING = 'crazy-settings'
+var settingStorage = {
+    fetch: function () {
+        var settings = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTING) || '{}')
+        return settings
+    },
+    save: function (settings) {
+        localStorage.setItem(STORAGE_KEY_SETTING, JSON.stringify(settings))
+    }
+}
+// end settings
 
 new Vue({
     el: '#app',
@@ -83,26 +94,24 @@ new Vue({
 
         isFullScreen:false,
         isSmallScreen:true,
-        /*
-         * create Name Scheme
-         */
-        // preview
+
+        // Name Scheme
         selected_category:"",
         selected_attribute_1:"",
         selected_attribute_2:"",
+        conjunction:AttributeConjunction,
 
-        /*
-         * Product Management
-         */
+        // Product Management
         products:productStorage.fetch(),
         newProduct:'',
 
+        // message management
         messages:messageStorage.fetch(),
+        // setting management
+        settings:settingStorage.fetch(),
 
-        /*
-         * Language Management
-         */
-        editorLanguage:'de',
+        // Language Management
+
         languages:[
             {
                 id:'de',
@@ -115,8 +124,7 @@ new Vue({
                 flag:'flag-icon-us',
             }
         ],
-        conjunction:AttributeConjunction,
-        sources:[]
+
     },
     // watch products change for localStorage persistence
     watch: {
@@ -131,17 +139,23 @@ new Vue({
                 messageStorage.save(messages)
             },
             deep: true
+        },
+        settings: {
+            handler: function (settings) {
+                settingStorage.save(settings)
+            },
+            deep: true
         }
     },
     computed: {
         category_options: function(){
-            return CategoriesData[this.editorLanguage];
+            return CategoriesData[this.settings.editorLanguage];
         },
         attribute_options_1: function(){
-            return AttributeData[this.editorLanguage];
+            return AttributeData[this.settings.editorLanguage];
         },
         attribute_options_2: function(){
-            return AttributeData[this.editorLanguage];
+            return AttributeData[this.settings.editorLanguage];
         },
         localized_category: function(){
             var localized={};
@@ -219,7 +233,26 @@ new Vue({
                     message.show = false
                 })
             }
+        },
+        editorLanguage:{
+            set: function (language) {
+                settings=this.settings;
+                settings.editorLanguage=language;
+                this.settings = settings;
+            },
+            get: function(){
+                // default fallback = 'de'
+                settings=this.settings;
+
+                if(!settings.editorLanguage){
+                    return 'de';
+                }
+                else{
+                    return settings.editorLanguage;
+                }
+            }
         }
+
     },
     methods: {
         makeActive: function(item){
@@ -371,11 +404,13 @@ new Vue({
 
                     languages.forEach(function(language){
                         var my_name='';
+
                         if(product.category && product.category.label[language.id]){
                             my_name = product.category.label[language.id];
                         };
                         if(product.attribute1 && product.attribute1.label[language.id]){
                             my_name = my_name +" "+ conjunction[language.id].with+ " " +product.attribute1.label[language.id];
+
                         };
                         if(product.attribute2 && product.attribute2.label[language.id]){
                             my_name = my_name + " "+ conjunction[language.id].and+ " " +product.attribute2.label[language.id];
@@ -384,6 +419,7 @@ new Vue({
                             value:my_name,
                             edit:false
                         };
+
                     });
                     product.names=product_names;
 
