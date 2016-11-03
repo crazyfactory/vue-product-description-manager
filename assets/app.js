@@ -6,6 +6,7 @@ else{
     var hasApi=false;
 }
 
+
 var CategoriesData=[];
 var AttributeData=[];
 var AttributeConjunction=[];
@@ -236,20 +237,15 @@ new Vue({
         },
         editorLanguage:{
             set: function (language) {
-                settings=this.settings;
-                settings.editorLanguage=language;
-                this.settings = settings;
+                this.settings.editorLanguage =language;
+
             },
             get: function(){
                 // default fallback = 'de'
-                settings=this.settings;
-
-                if(!settings.editorLanguage){
-                    return 'de';
+                if(!this.settings.editorLanguage){
+                    this.settings.editorLanguage = 'de';
                 }
-                else{
-                    return settings.editorLanguage;
-                }
+                return this.settings.editorLanguage;
             }
         }
 
@@ -355,6 +351,15 @@ new Vue({
             this.messages.unshift(msg);
 
         },
+        addEditorLanguage: function(value){
+            var setting= {
+                editorLanguage:value,
+            };
+            this.settings=setting;
+        },
+        clearSettings: function(){
+            this.settings={};
+        },
         debugMessages: function(){
             console.log(this.messages);
         },
@@ -452,9 +457,6 @@ new Vue({
                 my_description=my_product.descriptions[language];
                 this.products[index].descriptions[language]=my_description;
             }
-        },
-        set_editor_language: function(language){
-            this.editorLanguage=language.id;
         }
     }
 })
