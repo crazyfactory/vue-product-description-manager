@@ -6,287 +6,287 @@ var Categories_en =
   [
     {
       "value":"ball",
-      "label":"ball"
+      "label":"Ball"
     },
     {
       "value":"black_ball",
-      "label":"black ball"
+      "label":"Black ball"
     },
     {
       "value":"banana",
-      "label":"banana"
+      "label":"Banana"
     },
     {
       "value":"black_banana",
-      "label":"black banana"
+      "label":"Black banana"
     },
     {
       "value":"barbell",
-      "label":"barbell"
+      "label":"Barbell"
     },
     {
       "value":"black_barbell",
-      "label":"black barbell"
+      "label":"Black barbell"
     },
     {
       "value":"circular-barbell",
-      "label":"circular barbell"
+      "label":"Circular barbell"
     },
     {
       "value":"black_circular-barbell",
-      "label":"black circular barbell"
+      "label":"Black circular barbell"
     },
     {
       "value":"dermal-anchor",
-      "label":"dermal anchor"
+      "label":"Dermal anchor"
     },
     {
       "value":"black_dermal-anchor",
-      "label":"black_dermal-anchor"
+      "label":"Black dermal anchor"
     },
     {
       "value": "expander",
-      "label": "expander"
+      "label": "Expander"
     },
     {
       "value":"acrylic-expander",
-      "label":"acrylic expander"
+      "label":"Acrylic expander"
     },
     {
       "value":"black_acrylic-expander",
-      "label":"black acrylic expander"
+      "label":"Black acrylic expander"
     },
     {
       "value":"black_expander",
-      "label":"black expander"
+      "label":"Black expander"
     },
     {
       "value":"black_wood-expander",
-      "label":"black wood expander"
+      "label":"Black wood expander"
     },
     {
       "value":"wood-expander",
-      "label":"wood expander"
+      "label":"Wood expander"
     },
     {
       "value":"ear-cuff",
-      "label":"ear cuff"
+      "label":"Ear cuff"
     },
     {
       "value":"black_ear-cuff",
-      "label":"black ear cuff"
+      "label":"Black ear cuff"
     },
     {
       "value":"fake-claw",
-      "label": "fake claw"
+      "label": "Fake claw"
     },
     {
       "value":"black_fake-claw",
-      "label": "black fake claw"
+      "label": "Black fake claw"
     },
     {
       "value":"fake-expander",
-      "label": "fake expander"
+      "label": "Fake expander"
     },
     {
       "value":"black_fake-expander",
-      "label": "black fake expander"
+      "label": "Black fake expander"
     },
     {
       "value":"fake-plug",
-      "label": "fake plug"
+      "label": "Fake plug"
     },
     {
       "value":"black_fake-plug",
-      "label": "black fake plug"
+      "label": "Black fake plug"
     },
     {
       "value":"fake-septum",
-      "label": "fake septum"
+      "label": "Fake septum"
     },
     {
       "value":"black_fake-septum",
-      "label": "black fake septum"
+      "label": "Black fake septum"
     },
     {
       "value":"fake-spiral",
-      "label": "fake spiral"
+      "label": "Fake spiral"
     },
     {
       "value":"black_fake-spiral",
-      "label": "black fake spiral"
+      "label": "Black fake spiral"
     },
     {
       "value":"helix-piercing",
-      "label":"helix piercing"
+      "label":"Helix piercing"
     },
     {
       "value":"black_helix-piercing",
-      "label":"black helix piercing"
+      "label":"Black helix piercing"
     },
     {
       "value":"labret",
-      "label":"labret"
+      "label":"Labret"
     },
     {
       "value":"black_labret",
-      "label":"black labret"
+      "label":"Black labret"
     },
     {
       "value":"nipple-piercing",
-      "label":"nipple piercing"
+      "label":"Nipple piercing"
     },
     {
       "value":"black_nipple-piercing",
-      "label":"black nipple piercing"
+      "label":"Black nipple piercing"
     },
     {
       "value":"nipple-clicker",
-      "label":"nipple clicker"
+      "label":"Nipple clicker"
     },
     {
       "value":"black_nipple-clicker",
-      "label":"black nipple clicker"
+      "label":"Black nipple clicker"
     },
     {
       "value":"nipple-shield",
-      "label":"nipple shield"
+      "label":"Nipple shield"
     },
     {
       "value":"black_nipple-shield",
-      "label":"black nipple shield"
+      "label":"Black nipple shield"
     },
     {
       "value":"nipple-stirrup",
-      "label":"nipple stirrup"
+      "label":"Nipple stirrup"
     },
     {
       "value":"black_nipple-stirrup",
-      "label":"black nipple stirrup"
+      "label":"Black nipple stirrup"
     },
     {
       "value":"plug",
-      "label":"plug"
+      "label":"Plug"
     },
     {
       "value":"acrylic-plug",
-      "label":"acrylic plug"
+      "label":"Acrylic plug"
     },
     {
       "value":"black_acrylic-plug",
-      "label":"black acrylic plug"
+      "label":"Black acrylic plug"
     },
     {
       "value":"black_plug",
-      "label":"black plug"
+      "label":"Black plug"
     },
     {
       "value":"ring",
-      "label":"ring"
+      "label":"Ring"
     },
     {
       "value":"piercing-ring",
-      "label":"piercing Ring"
+      "label":"Piercing Ring"
     },
     {
       "value":"ball-closure-ring",
-      "label":"ball closure ring"
+      "label":"Ball closure ring"
     },
     {
       "value":"black_ball-closure-ring",
-      "label":"black ball closure ring"
+      "label":"Black ball closure ring"
     },
     {
       "value":"black_continuous-ring",
-      "label":"black continuous ring"
+      "label":"Black continuous ring"
     },
     {
       "value":"black_piercing-ring",
-      "label":"black piercing ring"
+      "label":"Black piercing ring"
     },
     {
       "value":"black_segment-ring",
-      "label":"black segment ring"
+      "label":"Black segment ring"
     },
     {
       "value":"continuous-ring",
-      "label":"continuous ring"
+      "label":"Continuous ring"
     },
     {
       "value":"nose-ring",
-      "label":"nose ring"
+      "label":"Nose ring"
     },
     {
       "value":"black_nose-ring",
-      "label":"black nose ring"
+      "label":"Black nose ring"
     },
     {
       "value":"segment-ring",
-      "label":"segment ring"
+      "label":"Segment ring"
     },
     {
       "value": "septum",
-      "label": "septum"
+      "label": "Septum"
     },
     {
       "value":"black_septum",
-      "label":"black septum"
+      "label":"Black septum"
     },
     {
       "value": "spiral",
-      "label": "spiral"
+      "label": "Spiral"
     },
     {
       "value":"black_spiral",
-      "label":"black spiral"
+      "label":"Black spiral"
     },
     {
       "value":"stud",
-      "label":"stud"
+      "label":"Stud"
     },
     {
       "value":"nose-stud",
-      "label":"nose stud"
+      "label":"Nose stud"
     },
     {
       "value":"black_nose-stud",
-      "label":"black nose stud"
+      "label":"Black nose stud"
     },
     {
       "value":"ear-stud",
-      "label":"ear stud"
+      "label":"Ear stud"
     },
     {
       "value":"tragus-piercing",
-      "label":"tragus piercing"
+      "label":"Tragus piercing"
     },
     {
       "value":"black_tragus-piercing",
-      "label":"black tragus piercing"
+      "label":"Black tragus piercing"
     },
     {
       "value": "tunnel",
-      "label": "tunnel"
+      "label": "Tunnel"
     },
     {
       "value":"acrylic-tunnel",
-      "label":"acrylic tunnel"
+      "label":"Acrylic tunnel"
     },
     {
       "value":"black_acrylic-tunnel",
-      "label":"black acrylic tunnel"
+      "label":"Black acrylic tunnel"
     },
     {
       "value":"black_tunnel",
-      "label":"black tunnel"
+      "label":"Black tunnel"
     },
     {
       "value":"black_steel-tunnel",
-      "label":"black steel tunnel"
+      "label":"Black steel tunnel"
     },
     {
       "value":"steel-tunnel",
-      "label":"steel tunnel"
+      "label":"Steel tunnel"
     }
   ]
 }
