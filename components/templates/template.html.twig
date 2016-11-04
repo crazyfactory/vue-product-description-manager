@@ -3,12 +3,13 @@
         <nav v-bind:class="headline" v-on:click.prevent>
             <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
-            <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-            <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-            <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
 
         </nav>
     </div>
+    <!-- show active messages -->
     <div class="container messages">
         <div class="alert alert-[[message.type]]" v-for="message in messages | filterBy true in 'show'">
             <i class=date">[[message.date]]:</i>
@@ -16,9 +17,13 @@
             <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
     </div>
-    <div class="container messages">
+    <!-- end active messages -->
+    <!-- Settings button -->
+    <div class="container">
         <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" title="Set languages for Editor and Preview features" @click="toggle_settings"></i>
     </div>
+    <!-- end settings button -->
+    <!-- settings section -->
     <div class="container settings" v-show="show_settings">
         <ul class="list-group">
             <li class="list-group-item align-right">
@@ -50,8 +55,9 @@
             </li>
         </ul>
     </div>
+    <!-- end settings section -->
     <div class="container">
-        <h3 class="headline">[[headline]]</h3>
+        <h3 class="headline"><span class="[[headline_icon]]"></span> [[headline]]</h3>
         <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
             <section class="product-management load_products" v-on:click.stop v-show="show_load">
                 <!-- Add Products -->
@@ -153,11 +159,27 @@
             </div>
             <div class="row">
                 <div class="actions">
-                    <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveNameScheme()"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i> Save changes</button>
+                    <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Save</button>
                 </div>
             </div>
         </div>
         <!-- End Product Names  -->
+        <!-- Meta Tags -->
+        <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_metatags">
+            <div class="margin-bottom">
+                <h5><i class="fa fa-plus-circle" aria-hidden="true" title="Add meta tag" style="color:darkgreen"></i> Add new Metatag</h5>
+            </div>
+            <div class="margin-bottom">
+                <v-select :value.sync="selected_metatags" placeholder="Select Metatags"
+                          :options="metatag_options" :multiple="true" :taggable="true" :push-tags="true"></v-select>
+            </div>
+            <div class="row">
+                <div class="actions">
+                    <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- End Meta Tag -->
         <!-- Export -->
         <div class="products_export row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_export">
             <h5>Export selected products to shop</h5>

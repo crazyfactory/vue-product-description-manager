@@ -76,7 +76,22 @@ var settingStorage = {
         localStorage.setItem(STORAGE_KEY_SETTING, JSON.stringify(settings))
     }
 }
-// end settings
+
+// metatags management
+var STORAGE_KEY_META = 'crazy-metatags'
+var metatagStorage = {
+    fetch: function () {
+        var metatags = JSON.parse(localStorage.getItem(STORAGE_KEY_META) || '[]')
+        metatags.forEach(function (metatag, index) {
+            metatags.uid = index
+        })
+        metatagStorage.uid = metatags.length
+        return metatags
+    },
+    save: function (metatags) {
+        localStorage.setItem(STORAGE_KEY_META, JSON.stringify(metatags))
+    }
+}
 
 new Vue({
     el: '#app',
@@ -85,6 +100,7 @@ new Vue({
          * Navigation Behavior
          */
         headline: 'Product Names',
+        headline_icon:'fa fa-commenting-o',
         show_load: true,
         show_names: true,
         show_preview: false,
@@ -100,19 +116,21 @@ new Vue({
         selected_category:"",
         selected_attribute_1:"",
         selected_attribute_2:"",
+        selected_metatags:[],
         conjunction:AttributeConjunction,
 
         // Product Management
         products:productStorage.fetch(),
         newProduct:'',
 
+        // metatag management
+        metatags_local:metatagStorage.fetch(),
         // message management
         messages:messageStorage.fetch(),
         // setting management
         settings:settingStorage.fetch(),
 
         // Language Management
-
         languages:[
             {
                 id:'de',
@@ -125,13 +143,61 @@ new Vue({
                 flag:'flag-icon-us',
             }
         ],
-
+        metatags_static:{
+            de:[
+                {
+                    id:'piercing',
+                    label:'Piercing',
+                    alias:[
+                        "Bier-sing",
+                        "Piecing",
+                        "Körperschmuck"
+                    ]
+                },
+                {
+                    id:'mobile-case',
+                    label:'Handyhülle',
+                    alias:[
+                        "Handyhüllen",
+                        "Mobile Hülle",
+                        "Handy Hülle"
+                    ]
+                },
+            ],
+            en:[
+                {
+                    id:'piercing',
+                    label:'Piercing',
+                    alias:[
+                        "beer-sing",
+                        "piecing",
+                        "priecing",
+                        "peecing",
+                        "body jewellry"
+                    ]
+                },
+                {
+                    id:'mobile-case',
+                    label:'Mobile Case',
+                    alias:[
+                        "mobile cases",
+                        "mobilecase"
+                    ]
+                }
+            ]
+        }
     },
     // watch products change for localStorage persistence
     watch: {
         products: {
             handler: function (products) {
                 productStorage.save(products)
+            },
+            deep: true
+        },
+        metatags_local: {
+            handler: function (metatags) {
+                metatagStorage.save(metatags)
             },
             deep: true
         },
@@ -157,6 +223,15 @@ new Vue({
         },
         attribute_options_2: function(){
             return AttributeData[this.settings.editorLanguage];
+        },
+        metatag_options: function(){
+            var local= [];
+            var static = this.metatags_static[this.settings.editorLanguage];
+
+            if(this.metatags_local[this.settings.editorLanguage]){
+                local= this.metatags_local[this.settings.editorLanguage];
+            }
+            return local.concat(static);
         },
         localized_category: function(){
             var localized={};
@@ -261,30 +336,36 @@ new Vue({
             this.show_load=true;
             this.isFullScreen=false;
             this.isSmallScreen=true;
+            this.headline_icon='';
 
             switch(item){
                 case 'names':
                     this.show_names= true;
                     this.headline = 'Product Names';
+                    this.headline_icon = "fa fa-commenting-o";
                     break;
                 case 'preview':
                     this.show_preview= true;
                     this.headline = 'Preview: Multilingual and custom texts';
                     this.isFullScreen=true;
                     this.isSmallScreen=false;
+                    this.headline_icon = "fa fa-eye";
                     break;
                 case 'metatags':
                     this.show_metatags= true;
                     this.headline = 'Metatags';
+                    this.headline_icon = "fa fa-tags";
                     break;
                 case 'export':
                     this.show_export= true;
                     this.headline = 'Export Products to shop';
+                    this.headline_icon = "fa fa-database";
                     break;
                 case 'message':
                     this.show_message= true;
                     this.show_load=false;
                     this.headline = 'Messages';
+                    this.headline_icon = "fa fa-envelope-o";
                     break;
             }
         },
@@ -312,7 +393,6 @@ new Vue({
             }
             else
             {
-
                 // use fake api response from api.js
                 var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
                 console.log('no api ... dry hump with api element '+ random_nr);
@@ -324,6 +404,7 @@ new Vue({
                     modelCode:value,
                     name_scheme:null,
                     names:{},
+                    metatags:{},
                     category:null,
                     attribute1:null,
                     attribute2:null,
@@ -351,6 +432,9 @@ new Vue({
             this.messages.unshift(msg);
 
         },
+        addMetatag: function(){
+
+        },
         addEditorLanguage: function(value){
             var setting= {
                 editorLanguage:value,
@@ -374,6 +458,10 @@ new Vue({
         },
         alert: function(text) {
             alert(text);
+        },
+        saveMetatags: function(){
+          alert('work in progress ... coming soon');
+            console.log(this.selected_metatags);
         },
         saveNameScheme: function(){
             var category = this.selected_category;
