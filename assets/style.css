@@ -431,6 +431,16 @@ section.settings{
     font-size:0.7em;
     margin-right:10px;
 }
+.customized_name_icon{
+    font-size:20px;
+}
+.customized_name{
+    font-style:italic;
+    border-top:1px dotted #ccc;
+    margin:0.5em 0 0.7em;
+    padding-top:0.5em;
+
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,

@@ -422,7 +422,8 @@ new Vue({
                         };
                         product_names[language.id]={
                             value:my_name,
-                            edit:false
+                            original_value:my_name,
+                            edit:false,
                         };
 
                     });
@@ -437,6 +438,10 @@ new Vue({
         closeEditMe: function(item){
             item.edit= false;
             item.value= item.value.replace(/\r?\n|\r/g,"")
+        },
+        removeCustomName:function(item){
+            item.value=item.original_value;
+            item.edit= false;
         },
         getGeneratedDescription: function(product, language){
             index=this.products.indexOf(product);

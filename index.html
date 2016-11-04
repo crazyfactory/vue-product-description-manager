@@ -30,7 +30,7 @@
   <div class="app-nav">
     <nav v-bind:class="headline" v-on:click.prevent>
       <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
-      <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-search fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
+      <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
@@ -78,7 +78,6 @@
       </li>
     </ul>
   </div>
-
   <div class="container">
     <h3 class="headline">[[headline]]</h3>
     <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
@@ -105,12 +104,23 @@
                 <i class="destroy fa fa-trash-o fa-2x fa-pull-right" aria-hidden="true" @click="removeProduct(product)"></i>
                 <label>[[product.modelCode]]</label>
                 <!-- Generic Product Names by language -->
-                <ul v-if="show_names" v-show="product.category" class="indent" class="list-group">
+                <ul v-if="show_names && product.category" class="indent" class="list-group">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                     <span class="flag-icon [[language.flag]]" ></span>
-                    <span v-if="product.category" class="product_category">[[ product.category.label[language.id] ]]</span>
-                    <span v-if="product.attribute1" class="product_attrbute1"> [[conjunction[language.id].with]] [[product.attribute1.label[language.id] ]]</span>
-                    <span v-if="product.attribute2" class="product_attrbute2"> [[conjunction[language.id].and]] [[product.attribute2.label[language.id] ]]</span>
+                    <i class="fa fa-pencil fa-pull-right" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])"></i>
+                    <span>
+                      [[product.names[language.id].original_value ]]
+                    </span>
+                    <div class="customized_name"
+                         v-if="(product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit" >
+                      <i class="fa fa-times-circle-o fa-pull-right" title="Close Editor" aria-hidden="true" v-show="product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
+                      <span v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])" class="fa fa-pencil-square-o fa-pull-left customized_name_icon" title="custom name for '[[language.id]]'"></span>
+                      <span v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])">[[ product.names[language.id].value ]]</span>
+                      <div class="editable" v-show="product.names[language.id].edit">
+                        <textarea v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
+                      </div>
+                      <i class="fa fa-trash-o fa-pull-right" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
+                    </div>
                   </li>
                 </ul>
                 <!-- Generic Product Names by language -->
@@ -125,7 +135,7 @@
                         <span class="flag-icon [[language.flag]]" ></span>
                         <span v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])">[[ product.names[language.id].value ]]</span>
                         <div class="editable" v-show="product.names[language.id].edit">
-                          <textarea v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
+                          <textarea v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                         </div>
                       </li>
                     </ul>
