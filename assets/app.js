@@ -81,11 +81,7 @@ var settingStorage = {
 var STORAGE_KEY_META = 'crazy-metatags'
 var metatagStorage = {
     fetch: function () {
-        var metatags = JSON.parse(localStorage.getItem(STORAGE_KEY_META) || '[]')
-        metatags.forEach(function (metatag, index) {
-            metatags.uid = index
-        })
-        metatagStorage.uid = metatags.length
+        var metatags = JSON.parse(localStorage.getItem(STORAGE_KEY_META) || '[]');
         return metatags
     },
     save: function (metatags) {
@@ -123,8 +119,6 @@ new Vue({
         products:productStorage.fetch(),
         newProduct:'',
 
-        // metatag management
-        metatags_local:metatagStorage.fetch(),
         // message management
         messages:messageStorage.fetch(),
         // setting management
@@ -143,49 +137,51 @@ new Vue({
                 flag:'flag-icon-us',
             }
         ],
-        metatags_static:{
-            de:[
-                {
-                    id:'piercing',
-                    label:'Piercing',
-                    alias:[
+        // metatag management
+        local_metatag_options:metatagStorage.fetch(),
+        static_metatag_options:[
+            {
+                id:'piercing',
+                label:{
+                    de:'Piercing',
+                    en:'Piercing'
+                },
+
+                alias:{
+                    de:[
                         "Bier-sing",
                         "Piecing",
                         "Körperschmuck"
-                    ]
-                },
-                {
-                    id:'mobile-case',
-                    label:'Handyhülle',
-                    alias:[
-                        "Handyhüllen",
-                        "Mobile Hülle",
-                        "Handy Hülle"
-                    ]
-                },
-            ],
-            en:[
-                {
-                    id:'piercing',
-                    label:'Piercing',
-                    alias:[
+                    ],
+                    en:[
                         "beer-sing",
                         "piecing",
                         "priecing",
                         "peecing",
                         "body jewellry"
                     ]
+                }
+            },
+            {
+                id:'mobile-case',
+                label: {
+                    de:'Handyhülle',
+                    en:'Mobile case'
                 },
-                {
-                    id:'mobile-case',
-                    label:'Mobile Case',
-                    alias:[
+                alias: {
+                    de: [
+                        "Handyhüllen",
+                        "Mobile Hülle",
+                        "Handy Hülle"
+                    ],
+                    en: [
                         "mobile cases",
                         "mobilecase"
                     ]
                 }
-            ]
-        }
+            }
+
+        ]
     },
     // watch products change for localStorage persistence
     watch: {
@@ -195,7 +191,7 @@ new Vue({
             },
             deep: true
         },
-        metatags_local: {
+        local_metatag_options: {
             handler: function (metatags) {
                 metatagStorage.save(metatags)
             },
@@ -224,14 +220,17 @@ new Vue({
         attribute_options_2: function(){
             return AttributeData[this.settings.editorLanguage];
         },
-        metatag_options: function(){
-            var local= [];
-            var static = this.metatags_static[this.settings.editorLanguage];
-
-            if(this.metatags_local[this.settings.editorLanguage]){
-                local= this.metatags_local[this.settings.editorLanguage];
+        metatag_options: {
+            get: function(){
+                // concat local and static metatags
+                var local= this.local_metatag_options;
+                var static = this.static_metatag_options;
+                return local.concat(static);
+            },
+            set: function(value){
+                //insert value at the begin of the list
+                this.local_metatag_options.unshift(value);
             }
-            return local.concat(static);
         },
         localized_category: function(){
             var localized={};
@@ -443,6 +442,21 @@ new Vue({
         },
         clearSettings: function(){
             this.settings={};
+        },
+        createMetatagOption: function(value){
+            var metatag ={
+                id:value,
+                label: {
+                    de:value,
+                    en:value
+                },
+                alias: {de: [], en: []}
+            };
+            this.local_metatag_options.unshift(metatag);
+
+        },
+        getOptionLabel: function(item){
+            return item.label[this.settings.editorLanguage];
         },
         debugMessages: function(){
             console.log(this.messages);

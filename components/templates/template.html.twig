@@ -167,11 +167,14 @@
         <!-- Meta Tags -->
         <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_metatags">
             <div class="margin-bottom">
-                <h5><i class="fa fa-plus-circle" aria-hidden="true" title="Add meta tag" style="color:darkgreen"></i> Add new Metatag</h5>
-            </div>
-            <div class="margin-bottom">
                 <v-select :value.sync="selected_metatags" placeholder="Select Metatags"
-                          :options="metatag_options" :multiple="true" :taggable="true" :push-tags="true"></v-select>
+                          :options="metatag_options"
+                          :multiple="true"
+                          :taggable="true"
+                          :push-tags="true"
+                          :create-option="createMetatagOption"
+                          :get-option-label="getOptionLabel">
+                </v-select>
             </div>
             <div class="row">
                 <div class="actions">
