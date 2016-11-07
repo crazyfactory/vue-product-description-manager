@@ -15,12 +15,10 @@ var Descriptions=[];
 /*
  * set language data from static files
  */
-// german
-CategoriesData['de']=Categories_de.content;
+// provide Array CategoryOptions to populate category select (see config/categories.js)
 AttributeData['de']=Attributes_de.content;
 AttributeConjunction['de']=Attributes_de.conjunction;
 // english
-CategoriesData['en']=Categories_en.content;
 AttributeData['en']=Attributes_en.content;
 AttributeConjunction['en']=Attributes_en.conjunction;
 
@@ -141,7 +139,7 @@ new Vue({
         local_metatag_options:metatagStorage.fetch(),
         static_metatag_options:[
             {
-                id:'piercing',
+                value:'piercing',
                 label:{
                     de:'Piercing',
                     en:'Piercing'
@@ -163,7 +161,7 @@ new Vue({
                 }
             },
             {
-                id:'mobile-case',
+                value:'mobile-case',
                 label: {
                     de:'Handyhülle',
                     en:'Mobile case'
@@ -212,7 +210,7 @@ new Vue({
     },
     computed: {
         category_options: function(){
-            return CategoriesData[this.settings.editorLanguage];
+            return CategoryOptions.content;
         },
         attribute_options_1: function(){
             return AttributeData[this.settings.editorLanguage];
@@ -231,31 +229,6 @@ new Vue({
                 //insert value at the begin of the list
                 this.local_metatag_options.unshift(value);
             }
-        },
-        localized_category: function(){
-            var localized={};
-            if(this.selected_category){
-                var selected_category = this.selected_category;
-                this.languages.forEach(function (language) {
-                    found = false;
-                    value = selected_category.value;
-                    categories = CategoriesData[language.id];
-                    categories.forEach(function(category){
-                        if(value == category.value){
-                            found = true;
-                            localized[language.id]=category.label;
-                        }
-                    });
-
-                    if(!found){
-                        /*
-                         * TODO: add notification for missing translations
-                         */
-                    }
-                });
-
-            }
-            return localized;
         },
         localized_attribute_1: function(){
             var localized={};
@@ -481,7 +454,6 @@ new Vue({
             var category = this.selected_category;
             var attr1 = this.selected_attribute_1;
             var attr2 = this.selected_attribute_2;
-            var localized_category = this.localized_category;
             var localized_attribute_1 = this.localized_attribute_1;
             var localized_attribute_2 = this.localized_attribute_2;
             var languages = this.languages;
@@ -494,7 +466,7 @@ new Vue({
                     if (typeof category == 'object' && category !=null && category.value != '--'){
                         product.category={};
                         product.category.value=category.value;
-                        product.category.label=localized_category;
+                        product.category.label=category.label;
                     }
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
                         product.attribute1={};

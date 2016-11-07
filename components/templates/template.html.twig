@@ -149,7 +149,9 @@
         <!-- Add Product Names -->
         <div class="products_name row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_names">
             <div class="margin-bottom">
-                <v-select :value.sync="selected_category" placeholder="Select a Category" :options="category_options"></v-select>
+                <v-select :value.sync="selected_category" placeholder="Select a Category"
+                          :options="category_options"
+                          :get-option-label="getOptionLabel"></v-select>
             </div>
             <div class="margin-bottom">
                 <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
