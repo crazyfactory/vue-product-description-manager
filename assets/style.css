@@ -441,6 +441,13 @@ section.settings{
     padding-top:0.5em;
 
 }
+.dropdown-menu li.highlight{
+    background-color:#5597b4;
+    color:#ffffff;
+}
+#app li.highlight a{
+    color:#ffffff;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
