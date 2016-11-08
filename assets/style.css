@@ -448,6 +448,14 @@ section.settings{
 #app li.highlight a{
     color:#ffffff;
 }
+.alias{
+    margin-left:1em;
+    color:#888;
+    font-size:0.8em;
+}
+.alias i{
+    margin-right:0.5em;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,

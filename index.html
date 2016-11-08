@@ -111,7 +111,7 @@
                 <i class="destroy fa fa-trash-o fa-2x fa-pull-right" aria-hidden="true" @click="removeProduct(product)"></i>
                 <label>[[product.modelCode]]</label>
                 <!-- Generic Product Names by language -->
-                <ul v-if="show_names && product.category" class="indent" class="list-group">
+                <ul v-if="show_names && product.category" class="list-group indent">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                     <span class="flag-icon [[language.flag]]" ></span>
                     <i class="fa fa-pencil fa-pull-right" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])"></i>
@@ -131,6 +131,32 @@
                   </li>
                 </ul>
                 <!-- Generic Product Names by language -->
+
+                <div v-if="show_metatags">
+                  <!-- Meta tag preview -->
+                  <ul  class="indent" v-if="product.metatags.length>0">
+                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                      <ul>
+                        <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                        <li class="list-group-item" v-for="metatag in product.metatags">
+                          <i class="fa fa-trash-o fa-pull-right" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
+                          <i class="fa fa-eye fa-pull-right" aria-hidden="true" title="Hide for this language" @click="alert('hide me');"></i>
+                          <i class="fa fa-pencil fa-pull-right" aria-hidden="true" title="Edit this tag" @click="alert('edit me');"></i>
+                          <span>
+                            <i class="fa fa-tag fa-pull-left"></i>
+                          [[ metatag.label[language.id] ]]
+                            <span class="alias" v-if="metatag.alias[language.id].length > 0">
+                              <i class="fa fa-tags"></i>[[ metatag.alias[language.id] ]]
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+
+                    </li>
+                  </ul>
+                  <!-- Meta tag preview end -->
+                </div>
+
                 <!-- Preview Feature -->
                 <div class="product_preview" v-on:click.stop v-if="show_preview">
                   <div class="indent">

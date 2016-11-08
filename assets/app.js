@@ -135,6 +135,7 @@ new Vue({
         local_metatag_options:metatagStorage.fetch(),
         static_metatag_options:[
             {
+                id:'piercing',
                 value:'piercing',
                 label:{
                     de:'Piercing',
@@ -157,6 +158,7 @@ new Vue({
                 }
             },
             {
+                id:'mobile-case',
                 value:'mobile-case',
                 label: {
                     de:'Handyhülle',
@@ -334,7 +336,7 @@ new Vue({
                     modelCode:value,
                     name_scheme:null,
                     names:{},
-                    metatags:{},
+                    metatags:[],
                     category:null,
                     attribute1:null,
                     attribute2:null,
@@ -362,9 +364,6 @@ new Vue({
             this.messages.unshift(msg);
 
         },
-        addMetatag: function(){
-
-        },
         addEditorLanguage: function(value){
             var setting= {
                 editorLanguage:value,
@@ -378,9 +377,11 @@ new Vue({
             this.local_metatag_options = [];
         },
         createMetatagOption: function(value){
+            // no spaces and all lowercase for id/value
+            normalized_value = value.replace(/ /g,"_").toLowerCase();
             var metatag ={
-                id:value,
-                value:value,
+                id:normalized_value,
+                value:normalized_value,
                 label: {
                     de:value,
                     en:value
@@ -388,7 +389,7 @@ new Vue({
                 alias: {de: [], en: []}
             };
             this.local_metatag_options.unshift(metatag);
-            return metatag
+            return metatag;
         },
         getOptionLabel: function(item){
             if (typeof item === 'object') {
@@ -414,8 +415,27 @@ new Vue({
             alert(text);
         },
         saveMetatags: function(){
-          alert('work in progress ... coming soon');
-            console.log(this.selected_metatags);
+            var selected_metatags=this.selected_metatags;
+            // set metatags to all selected products
+            this.products.forEach(function (product) {
+                if(product.active){
+                    selected_metatags.forEach(function (metatag) {
+                        // add non-existing metatags
+                        if(product.metatags.indexOf(metatag) === -1){
+                            product.metatags.push(metatag);
+                        }
+                    });
+                }
+            });
+        },
+        removeMetatag: function(product, metatag){
+            product.metatags.splice(product.metatags.indexOf(metatag), 1);
+        },
+        hideMetatagLabel: function(product, metatag, language){
+            console.log("Hide this label ...");
+        },
+        editMetatag: function(metatag){
+            console.log("Edit this metatag");
         },
         saveNameScheme: function(){
             var category = this.selected_category;
