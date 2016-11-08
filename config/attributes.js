@@ -1,4 +1,4 @@
-var Attributes_de =
+var AttributeOptions =
 {
   "id":"attributes",
   "conjunction":{
