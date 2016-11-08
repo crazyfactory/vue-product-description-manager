@@ -374,9 +374,13 @@ new Vue({
         clearSettings: function(){
             this.settings={};
         },
+        clearLocalMetatags:function(){
+            this.local_metatag_options = [];
+        },
         createMetatagOption: function(value){
             var metatag ={
                 id:value,
+                value:value,
                 label: {
                     de:value,
                     en:value
@@ -384,10 +388,15 @@ new Vue({
                 alias: {de: [], en: []}
             };
             this.local_metatag_options.unshift(metatag);
-
+            return metatag
         },
         getOptionLabel: function(item){
+            if (typeof item === 'object') {
+                if(item.label) {
                     return item.label[this.settings.editorLanguage];
+                }
+            }
+            return item;
         },
         debugMessages: function(){
             console.log(this.messages);
