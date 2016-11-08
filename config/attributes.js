@@ -561,338 +561,338 @@ var Attributes_de =
     {
       "value": "pendant_lock",
       "label":{
-      	de:"",
-      	en:""
-      }// "Schlossanhänger"
+      	de:"Schlossanhänger",
+      	en:"lock pendant"
+      }
     },
     {
       "value": "pendant_key",
       "label":{
-      	de:"",
-      	en:""
-      }// "Schlüsselanhänger"
+      	de:"Schlüsselanhänger",
+      	en:"key pendant"
+      }
     },
     {
       "value": "pendant_butterfly",
       "label":{
-      	de:"",
-      	en:""
-      }// "Schmetterlingsanhänger"
+      	de:"Schmetterlingsanhänger",
+      	en:"butterfly pendant"
+      }
     },
     {
       "value": "pendant_swan",
       "label":{
-      	de:"",
-      	en:""
-      }// "Schwanenanhänger"
+      	de:"Schwanenanhänger",
+      	en:"swan pendant"
+      }
     },
     {
       "value": "pendant_spider-web",
       "label":{
-      	de:"",
-      	en:""
-      }// "Spinnennetzanhänger"
+      	de:"Spinnennetzanhänger",
+      	en:"spider web pendant"
+      }
     },
     {
       "value": "pendant_star",
       "label":{
-      	de:"",
-      	en:""
-      }// "Sternenanhänger"
+      	de:"Sternenanhänger",
+      	en:"star pendant"
+      }
     },
     {
       "value": "pendant_tart",
       "label":{
-      	de:"",
-      	en:""
-      }// "Törtchenanhänger"
+      	de:"Törtchenanhänger",
+      	en:"tart pendant"
+      }
     },
     {
       "value": "pendant_skull",
       "label":{
-      	de:"",
-      	en:""
-      }// "Totenschädelanhänger"
+      	de:"Totenschädelanhänger",
+      	en:"skull pendant"
+      }
     },
     {
       "value": "pendant_dice",
       "label":{
-      	de:"",
-      	en:""
-      }// "Würfelanhänger"
+      	de:"Würfelanhänger",
+      	en:"dice pendant"
+      }
     },
     {
       "value": "replacement-ends",
       "label":{
-      	de:"",
-      	en:""
-      }// "Aufsatz"
+      	de:"Aufsatz",
+      	en:"replacement ends"
+      }
     },
     {
       "value":"replacement-ends_flower",
       "label":{
-      	de:"",
-      	en:""
-      }//"Blumenaufsatz"
+      	de:"Blumenaufsatz",
+      	en:"flower replacement ends"
+      }
     },
     {
       "value":"replacement-ends_flower-little",
       "label":{
-      	de:"",
-      	en:""
-      }//"Blümchenaufsatz"
+      	de:"Blümchenaufsatz",
+      	en:"little flower replacement ends"
+      }
     },
     {
       "value":"replacement-ends_cupcake",
       "label":{
-      	de:"",
-      	en:""
-      }//"Cupcake-Aufsatz"
+      	de:"Cupcake-Aufsatz",
+      	en:"cupcake replacement ends"
+      }
     },
     {
       "value":"replacement-ends_cocktail",
       "label":{
-      	de:"",
-      	en:""
-      }//"Cocktailaufsatz"
+      	de:"Cocktailaufsatz",
+      	en:"cocktail replacement ends"
+      }
     },
     {
       "value":"replacement-ends_dolphin",
       "label":{
-      	de:"",
-      	en:""
-      }//"Delfininaufsatz"
+      	de:"Delfininaufsatz",
+      	en:"dolphin replacement ends"
+      }
     },
     {
       "value":"replacement-ends_lizard",
       "label":{
-      	de:"",
-      	en:""
-      }//"Eidechsenaufsatz"
+      	de:"Eidechsenaufsatz",
+      	en:"lizard replacement ends"
+      }
     },
     {
       "value":"replacement-ends_elephant",
       "label":{
-      	de:"",
-      	en:""
-      }//"Elefantenaufsatz"
+      	de:"Elefantenaufsatz",
+      	en:"elephant replacement ends"
+      }
     },
     {
       "value":"replacement-ends_elf",
       "label":{
-      	de:"",
-      	en:""
-      }//"Elfenaufsatz"
+      	de:"Elfenaufsatz",
+      	en:"elf replacement ends"
+      }
     },
     {
       "value":"replacement-ends_angel",
       "label":{
-      	de:"",
-      	en:""
-      }//"Engelaufsatz"
+      	de:"Engelaufsatz",
+      	en:"angel replacement ends"
+      }
     },
     {
       "value":"replacement-ends_flip-flop",
           "label":{
-      	de:"",
-      	en:""
-      }//"Flip Flop Aufsatz"
+      	de:"Flip Flop Aufsatz",
+      	en:"flip-flop replacement ends"
+      }
     },
     {
       "value":"replacement-ends_wing",
       "label":{
-      	de:"",
-      	en:""
-      }//"Flügelaufsatz"
+      	de:"wing replacement ends",
+      	en:"Flügelaufsatz"
+      }
     },
     {
       "value":"replacement-ends_frog",
       "label":{
-      	de:"",
-      	en:""
-      }//"Froschaufsatz"
+      	de:"Froschaufsatz",
+      	en:"frop replacement ends"
+      }
     },
     {
       "value":"replacement-ends_handcuffs",
       "label":{
-      	de:"",
-      	en:""
-      }//"Handschellenaufsatz"
+      	de:"Handschellenaufsatz",
+      	en:"handcuff replacement ends"
+      }
     },
     {
       "value":"replacement-ends_heart",
       "label":{
-      	de:"",
-      	en:""
-      }//"Herzaufsatz"
+      	de:"Herzaufsatz",
+      	en:"heart replacement ends"
+      }
     },
     {
       "value":"replacement-ends_heart-little",
       "label":{
-      	de:"",
-      	en:""
-      }//"Herzchenaufsatz"
+      	de:"Herzchenaufsatz",
+      	en:"little hearts replacement ends"
+      }
     },
     {
       "value":"replacement-ends_horseshoe",
       "label":{
-      	de:"",
-      	en:""
-      }//"Hufeisenaufsatz"
+      	de:"Hufeisenaufsatz",
+      	en:"horseshoe replacement ends"
+      }
     },
     {
       "value":"replacement-ends_chain",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kettenaufsatz"
+      	de:"Kettenaufsatz",
+      	en:"chain replacement ends"
+      }
     },
     {
       "value":"replacement-ends_stroller",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kinderwagenaufsatz"
+      	de:"Kinderwagenaufsatz",
+      	en:"stroller replacement ends"
+      }
     },
     {
       "value":"replacement-ends_cherry",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kirschaufsatz"
+      	de:"Kirschaufsatz",
+      	en:"cherry replacement ends"
+      }
     },
     {
       "value":"replacement-ends_cloverleaf",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kleeblattaufsatz"
+      	de:"Kleeblattaufsatz",
+      	en:"cloverleaf replacement ends"
+      }
     },
     {
       "value":"replacement-ends_cross",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kreuzaufsatz"
+      	de:"Kreuzaufsatz",
+      	en:"cross replacement ends"
+      }
     },
     {
       "value":"replacement-ends_crown",
       "label":{
-      	de:"",
-      	en:""
-      }//"Kronenaufsatz"
+      	de:"Kronenaufsatz",
+      	en:"crown replacement ends"
+      }
     },
     {
       "value":"replacement-ends_dragon-fly",
       "label":{
-      	de:"",
-      	en:""
-      }//"Libellenaufsatz"
+      	de:"Libellenaufsatz",
+      	en:"dragon fly replacement ends"
+      }
     },
     {
       "value":"replacement-ends_little-baby",
       "label":{
-      	de:"",
-      	en:""
-      }//"Little Baby Aufsatz"
+      	de:"Little Baby Aufsatz",
+      	en:"little baby replacement ends"
+      }
     },
     {
       "value":"replacement-ends_moon",
       "label":{
-      	de:"",
-      	en:""
-      }//"Mondaufsatz"
+      	de:"Mondaufsatz",
+      	en:"moon replacement ends"
+      }
     },
     {
       "value":"replacement-ends_octopus",
       "label":{
-      	de:"",
-      	en:""
-      }//"Oktopusaufsatz"
+      	de:"Oktopusaufsatz",
+      	en:"octopus replavement ends"
+      }
     },
     {
       "value":"replacement-ends_om",
       "label":{
-      	de:"",
-      	en:""
-      }//"Omaufsatz"
+      	de:"Omaufsatz",
+      	en:"om replacement ends"
+      }
     },
     {
       "value":"replacement-ends_ace-of-spades",
       "label":{
-      	de:"",
-      	en:""
-      }//"Piek Ass Aufsatz"
+      	de:"Piek Ass Aufsatz",
+      	en:"ace of spades replacement ends"
+      }
     },
     {
       "value":"replacement-ends_poodle",
       "label":{
-      	de:"",
-      	en:""
-      }//"Pudelaufsatz"
+      	de:"Pudelaufsatz",
+      	en:"poodle replacement ends"
+      }
     },
     {
       "value":"replacement-ends_lock",
       "label":{
-      	de:"",
-      	en:""
-      }//"Schlossaufsatz"
+      	de:"Schlossaufsatz",
+      	en:"lock replacement ends"
+      }
     },
     {
       "value":"replacement-ends_key",
       "label":{
-      	de:"",
-      	en:""
-      }//"Schlüsselaufsatz"
+      	de:"Schlüsselaufsatz",
+      	en:"key replacement ends"
+      }
     },
     {
       "value":"replacement-ends_butterfly",
       "label":{
-      	de:"",
-      	en:""
-      }//"Schmetterlingsaufsatz"
+      	de:"Schmetterlingsaufsatz",
+      	en:"butterfly replacement ends"
+      }
     },
     {
       "value":"replacement-ends_swan",
       "label":{
-      	de:"",
-      	en:""
-      }//"Schwanenaufsatz"
+      	de:"Schwanenaufsatz",
+      	en:"swan replacement ends"
+      }
     },
     {
       "value":"replacement-ends_spider-web",
       "label":{
-      	de:"",
-      	en:""
-      }//"Spinnennetzaufsatz"
+      	de:"Spinnennetzaufsatz",
+      	en:"spider web replacement ends"
+      }
     },
     {
       "value":"replacement-ends_star",
       "label":{
-      	de:"",
-      	en:""
-      }//"Sternenaufsatz"
+      	de:"Sternenaufsatz",
+      	en:"star replacement ends"
+      }
     },
     {
       "value":"replacement-ends_tart",
       "label":{
-      	de:"",
-      	en:""
-      }//"Törtchenaufsatz"
+      	de:"Törtchenaufsatz",
+      	en:"tart replacement ends"
+      }
     },
     {
       "value":"replacement-ends_skull",
       "label":{
-      	de:"",
-      	en:""
-      }//"Totenschädelaufsatz"
+      	de:"Totenschädelaufsatz",
+      	en:"skull replacement ends"
+      }
     },
     {
       "value":"replacement-ends_dice",
       "label":{
-      	de:"",
-      	en:""
-      }//"Würfelaufsatz"
+      	de:"Würfelaufsatz",
+      	en:"dice replacement ends"
+      }
     }
   ]
 }
