@@ -17,6 +17,7 @@
   <script src="config/en/attributes.js"></script>
 
   <script src="config/categories.js"></script>
+  <script src="config/attributes.js"></script>
 
   <script src="config/api.js"></script>
   <!-- get css styles -->
@@ -182,10 +183,14 @@
                   :get-option-label="getOptionLabel"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute" :options="attribute_options_1"></v-select>
+        <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute"
+                  :options="attribute_options_1"
+                  :get-option-label="getOptionLabel"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute" :options="attribute_options_2"></v-select>
+        <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute"
+                  :options="attribute_options_2"
+                  :get-option-label="getOptionLabel"></v-select>
       </div>
       <div class="row">
         <div class="actions">
@@ -230,6 +235,7 @@
             <a href="#" class="export" v-on:click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
             <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a> &nbsp;&nbsp;
             <a href="#" class="export" v-on:click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear settings</a>&nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatagss</a>&nbsp;&nbsp;
           </li>
         </ul>
         <h5>Errors</h5>

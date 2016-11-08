@@ -7,7 +7,6 @@ else{
 }
 
 
-var CategoriesData=[];
 var AttributeData=[];
 var AttributeConjunction=[];
 var Descriptions=[];
@@ -16,11 +15,8 @@ var Descriptions=[];
  * set language data from static files
  */
 // provide Array CategoryOptions to populate category select (see config/categories.js)
-AttributeData['de']=Attributes_de.content;
-AttributeConjunction['de']=Attributes_de.conjunction;
-// english
-AttributeData['en']=Attributes_en.content;
-AttributeConjunction['en']=Attributes_en.conjunction;
+// provide Array AttributeOptions to populate attribute select (see config/attributes.js)
+
 
 
 //register components
@@ -111,7 +107,7 @@ new Vue({
         selected_attribute_1:"",
         selected_attribute_2:"",
         selected_metatags:[],
-        conjunction:AttributeConjunction,
+        conjunction:AttributeOptions.conjunction,
 
         // Product Management
         products:productStorage.fetch(),
@@ -213,10 +209,10 @@ new Vue({
             return CategoryOptions.content;
         },
         attribute_options_1: function(){
-            return AttributeData[this.settings.editorLanguage];
+            return AttributeOptions.content;
         },
         attribute_options_2: function(){
-            return AttributeData[this.settings.editorLanguage];
+            return AttributeOptions.content;
         },
         metatag_options: {
             get: function(){
@@ -229,44 +225,6 @@ new Vue({
                 //insert value at the begin of the list
                 this.local_metatag_options.unshift(value);
             }
-        },
-        localized_attribute_1: function(){
-            var localized={};
-            if(this.selected_attribute_1){
-                var selected = this.selected_attribute_1;
-                this.languages.forEach(function (language) {
-                    found = false;
-                    value = selected.value;
-                    attributes = AttributeData[language.id];
-                    attributes.forEach(function(attribute){
-                        if(value == attribute.value){
-                            found = true;
-                            localized[language.id]=attribute.label;
-                        }
-                    });
-
-                });
-            }
-            return localized;
-        },
-        localized_attribute_2: function(){
-            var localized={};
-            if(this.selected_attribute_2){
-                var selected = this.selected_attribute_2;
-                this.languages.forEach(function (language) {
-                    found = false;
-                    value = selected.value;
-                    attributes = AttributeData[language.id];
-                    attributes.forEach(function(attribute){
-                        if(value == attribute.value){
-                            found = true;
-                            localized[language.id]=attribute.label;
-                        }
-                    });
-
-                });
-            }
-            return localized;
         },
         allActive: {
             set: function (value) {
@@ -429,7 +387,7 @@ new Vue({
 
         },
         getOptionLabel: function(item){
-            return item.label[this.settings.editorLanguage];
+                    return item.label[this.settings.editorLanguage];
         },
         debugMessages: function(){
             console.log(this.messages);
@@ -454,8 +412,6 @@ new Vue({
             var category = this.selected_category;
             var attr1 = this.selected_attribute_1;
             var attr2 = this.selected_attribute_2;
-            var localized_attribute_1 = this.localized_attribute_1;
-            var localized_attribute_2 = this.localized_attribute_2;
             var languages = this.languages;
             var conjunction = this.conjunction;
 
@@ -471,12 +427,12 @@ new Vue({
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
                         product.attribute1={};
                         product.attribute1.value=attr1.value;
-                        product.attribute1.label=localized_attribute_1;
+                        product.attribute1.label=attr1.label;
                     }
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
                         product.attribute2={};
                         product.attribute2.value=attr2.value;
-                        product.attribute2.label=localized_attribute_2;
+                        product.attribute2.label=attr2.label;
                     }
                     // generate composed product name for each language
                     product_names={};
@@ -488,11 +444,11 @@ new Vue({
                             my_name = product.category.label[language.id];
                         };
                         if(product.attribute1 && product.attribute1.label[language.id]){
-                            my_name = my_name +" "+ conjunction[language.id].with+ " " +product.attribute1.label[language.id];
+                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.attribute1.label[language.id];
 
                         };
                         if(product.attribute2 && product.attribute2.label[language.id]){
-                            my_name = my_name + " "+ conjunction[language.id].and+ " " +product.attribute2.label[language.id];
+                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.attribute2.label[language.id];
                         };
                         product_names[language.id]={
                             value:my_name,
@@ -502,7 +458,6 @@ new Vue({
 
                     });
                     product.names=product_names;
-
                 }
             })
         },
