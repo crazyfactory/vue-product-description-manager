@@ -419,10 +419,15 @@ new Vue({
             // set metatags to all selected products
             this.products.forEach(function (product) {
                 if(product.active){
+                    // generate a metatag_index for each product
+                    if(!product.hasOwnProperty("metatag_index")){
+                        product.metatag_index=[];
+                    }
                     selected_metatags.forEach(function (metatag) {
                         // add non-existing metatags
-                        if(product.metatags.indexOf(metatag) === -1){
+                        if(product.metatag_index.indexOf(metatag.id) === -1){
                             product.metatags.push(metatag);
+                            product.metatag_index.push(metatag.id);
                         }
                     });
                 }
@@ -430,6 +435,10 @@ new Vue({
         },
         removeMetatag: function(product, metatag){
             product.metatags.splice(product.metatags.indexOf(metatag), 1);
+            if(product.hasOwnProperty("metatag_index")){
+                product.metatag_index.splice(product.metatag_index.indexOf(metatag.id), 1);
+            }
+
         },
         hideMetatagLabel: function(product, metatag, language){
             console.log("Hide this label ...");
