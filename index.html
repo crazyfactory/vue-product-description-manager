@@ -34,7 +34,7 @@
       <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-      <a href="#" class="message" v-on:click="makeActive('message')">Messages <i class="fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+      <a href="#" class="message" v-on:click="makeActive('admin')">Admin <i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
 
     </nav>
   </div>
@@ -253,18 +253,18 @@
     <!-- Messages -->
     <div class="message row col-xs-12 col-sm-12 col-md-12" v-on:click.stop v-show="show_message">
       <div>
-        <h5>Actions</h5>
+        <h5>Admin Actions</h5>
         <ul class="list-group">
           <li class="list-group-item">
             <a href="#" class="error_report" v-on:click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
-            <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add</a>&nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
             <a href="#" class="export" v-on:click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-            <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a> &nbsp;&nbsp;
-            <a href="#" class="export" v-on:click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear settings</a>&nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a> &nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
             <a href="#" class="export" v-on:click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatagss</a>&nbsp;&nbsp;
           </li>
         </ul>
-        <h5>Errors</h5>
+        <h5>Error Messages <i class="fa fa-envelope-o" aria-hidden="true"></i></h5>
         <ul class="list-group">
           <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
             <div class="alert alert-[[message.type]]" >

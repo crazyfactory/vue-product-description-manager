@@ -293,11 +293,11 @@ new Vue({
                     this.headline = 'Export Products to shop';
                     this.headline_icon = "fa fa-database";
                     break;
-                case 'message':
+                case 'admin':
                     this.show_message= true;
                     this.show_load=false;
-                    this.headline = 'Messages';
-                    this.headline_icon = "fa fa-envelope-o";
+                    this.headline = 'Admin Panel';
+                    this.headline_icon = "fa fa-user-secret";
                     break;
             }
         },
