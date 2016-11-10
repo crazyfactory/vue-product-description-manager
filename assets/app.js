@@ -96,6 +96,7 @@ new Vue({
         show_preview: false,
         show_export: false,
         show_metatags: false,
+        show_metatags_edit:false,
         show_message: false,
         show_settings: false,
 
@@ -410,6 +411,17 @@ new Vue({
         alert: function(text) {
             alert(text);
         },
+        closeEditMetatags: function(){
+            this.show_metatags_edit=false;
+        },
+        editMetatags: function(){
+            this.show_metatags_edit=true;
+        },
+        editMetatag: function(metatag, language){
+            console.log('Edit my Metatag');
+            console.log(metatag);
+            console.log(language);
+        },
         saveMetatags: function(){
             var selected_metatags=this.selected_metatags;
             // set metatags to all selected products
@@ -438,9 +450,6 @@ new Vue({
         },
         hideMetatagLabel: function(product, metatag, language){
             console.log("Hide this label ...");
-        },
-        editMetatag: function(metatag){
-            console.log("Edit this metatag");
         },
         saveNameScheme: function(){
             var category = this.selected_category;
