@@ -183,11 +183,12 @@ new Vue({
         metatags:{
             get:function(){
 
-                // merge static with local tags
+                // get static metatags from api call or data file
                 my_tags=this.metatags_static;
-                this.metatags_local.forEach(function(metatag){
+                this.metatags_local.forEach(function(metatag) {
                     my_tags[metatag.id]=metatag;
                 });
+
                 return my_tags;
             }
         },
@@ -343,7 +344,9 @@ new Vue({
             this.settings={};
         },
         clearLocalMetatags:function(){
+            this.metatags_static = {};
             this.metatags_local = [];
+            this.metatags = {};
         },
         createMetatagOption: function(value){
             // no spaces and all lowercase for id/value
@@ -365,19 +368,18 @@ new Vue({
                 },
                 alias: {
                     de: {
-                        value:[],
+                        value:"",
                         edit:false,
                         active:true
                     },
                     en: {
-                        value:[],
+                        value:"",
                         edit:false,
                         active:true
                     }
                 }
             };
             this.metatags_local.push(metatag);
-            this.metatags[normalized_value];
             return metatag;
         },
         getOptionLabel: function(item){
@@ -398,6 +400,15 @@ new Vue({
         },
         debugMessages: function(){
             console.log(this.messages);
+        },
+        debugMetatags:function(){
+            console.log("Static (app.metatags_static)");
+            console.log(this.metatags_static);
+            console.log("Local (app.metatags_local)");
+            console.log(this.metatags_local);
+            console.log("ALL Metatags (app.metatags)");
+            console.log(this.metatags);
+            console.log('ferdsch');
         },
         hideMessage: function (message) {
             message.show = false
@@ -505,9 +516,13 @@ new Vue({
             })
         },
         editMe: function(item){
+            console.log('Edit me');
+            console.log(this.metatags);
             item.edit=true;
         },
         closeEditMe: function(item){
+            console.log('Close edit me');
+            console.log(this.metatags);
             item.edit= false;
             item.value= item.value.replace(/\r?\n|\r/g,"")
         },

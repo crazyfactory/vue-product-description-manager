@@ -18,22 +18,12 @@ var MetatagsStatic ={
             },
             alias:{
                 de:{
-                    value:[
-                        "Bier-sing",
-                        "Piecing",
-                        "Körperschmuck"
-                    ],
+                    value:"Bier-sing, Piecing, Körperschmuck",
                     edit:false,
                     active:true
                 },
                 en: {
-                    value: [
-                        "beer-sing",
-                        "piecing",
-                        "priecing",
-                        "peecing",
-                        "body jewellry"
-                    ],
+                    value: "beer-sing,piecing, priecing, peecing, body jewellry",
                     edit: false,
                     active:true
                 }
@@ -57,17 +47,14 @@ var MetatagsStatic ={
             alias: {
                 de: {
                     value:[
-                        "Handyhüllen",
-                        "Mobile Hülle",
-                        "Handy Hülle"
+                        "Handyhüllen, Mobile, Hülle, Handy, Hülle"
                     ],
                     edit:false,
                     active:true
                 },
                 en: {
                     value:[
-                        "mobile cases",
-                        "mobilecase"
+                        "mobile cases, mobilecase"
                     ],
                     edit:false,
                     active:true

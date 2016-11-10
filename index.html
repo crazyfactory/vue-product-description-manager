@@ -248,16 +248,24 @@
             <ul>
               <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-for="metatag in selected_metatags">
-                <span>
-                  <i class="fa fa-tag fa-pull-left"></i> [[ metatag.label[language.id].value ]]
-                </span>
-                <span class="alias" v-if="metatag.alias[language.id].value.length > 0">
-                  <i class="fa fa-tags"></i>[[ metatag.alias[language.id].value ]]
-                </span>
-                <i class="fa fa-pull-right fa-pencil" @click="editMetatag(metatag, language.id)"></i>
+                  <span v-if="!metatags[metatag.id].label[language.id].edit">
+                    <i class="fa fa-tag fa-pull-left"></i>
+                    [[ metatags[metatag.id].label[language.id].value ]]
+                    <span class="alias" v-if="metatags[metatag.id].alias[language.id].value.length > 0">
+                      <i class="fa fa-tags"></i>[[ metatags[metatag.id].alias[language.id].value ]]
+                    </span>
+                     <i class="fa fa-pull-right fa-pencil" @click="editMe(metatags[metatag.id].label[language.id])"></i>
+                  </span>
+                <div v-if="metatags[metatag.id].label[language.id].edit">
+                  <i class="fa fa-pull-right fa-times-circle-o" style="margin-top:-10px;" v-if="metatags[metatag.id].label[language.id].edit" @click="closeEditMe(metatags[metatag.id].label[language.id])"></i>
+                  <h5><i class="fa fa-tag fa-pull-left"></i>Label</h5> <input class="full-width" v-model="metatags[metatag.id].label[language.id].value">
+                </div>
+                <div v-if="metatags[metatag.id].label[language.id].edit">
+                  <h5><i class="fa fa-tags"></i> Aliases</h5>
+                  <input class="full-width" v-model="metatags[metatag.id].alias[language.id].value"l>
+                </div>
               </li>
             </ul>
-
           </li>
         </ul>
         <! End edit metatags -->
@@ -281,7 +289,8 @@
             <a href="#" class="export" v-on:click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
             <a href="#" class="export" v-on:click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a> &nbsp;&nbsp;
             <a href="#" class="export" v-on:click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
-            <a href="#" class="export" v-on:click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatagss</a>&nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
+            <a href="#" class="export" v-on:click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>&nbsp;&nbsp;
           </li>
         </ul>
         <h5>Error Messages <i class="fa fa-envelope-o" aria-hidden="true"></i></h5>
@@ -295,11 +304,12 @@
 
           </li>
         </ul>
+      </div>
+      <!-- End Messages -->
     </div>
-    <!-- End Messages -->
-  </div>
   </div>
 </div>
+
 <script src="assets/app.js"></script>
 </body>
 </html>
