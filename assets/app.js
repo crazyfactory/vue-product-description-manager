@@ -132,52 +132,7 @@ new Vue({
             }
         ],
         // metatag management
-        local_metatag_options:metatagStorage.fetch(),
-        static_metatag_options:[
-            {
-                id:'piercing',
-                value:'piercing',
-                label:{
-                    de:'Piercing',
-                    en:'Piercing'
-                },
-
-                alias:{
-                    de:[
-                        "Bier-sing",
-                        "Piecing",
-                        "Körperschmuck"
-                    ],
-                    en:[
-                        "beer-sing",
-                        "piecing",
-                        "priecing",
-                        "peecing",
-                        "body jewellry"
-                    ]
-                }
-            },
-            {
-                id:'mobile-case',
-                value:'mobile-case',
-                label: {
-                    de:'Handyhülle',
-                    en:'Mobile case'
-                },
-                alias: {
-                    de: [
-                        "Handyhüllen",
-                        "Mobile Hülle",
-                        "Handy Hülle"
-                    ],
-                    en: [
-                        "mobile cases",
-                        "mobilecase"
-                    ]
-                }
-            }
-
-        ]
+        metatags_local:metatagStorage.fetch(),
     },
     // watch products change for localStorage persistence
     watch: {
@@ -187,7 +142,7 @@ new Vue({
             },
             deep: true
         },
-        local_metatag_options: {
+        metatags_local: {
             handler: function (metatags) {
                 metatagStorage.save(metatags)
             },
@@ -216,17 +171,30 @@ new Vue({
         attribute_options_2: function(){
             return AttributeOptions.content;
         },
-        metatag_options: {
-            get: function(){
-                // concat local and static metatags
-                var local= this.local_metatag_options;
-                var static = this.static_metatag_options;
-                return local.concat(static);
-            },
-            set: function(value){
-                //insert value at the begin of the list
-                this.local_metatag_options.unshift(value);
+        metatags_static: function(){
+            if(MetatagsStatic){
+                return MetatagsStatic.content;
             }
+            else{
+                return {}
+            }
+        },
+        metatags:{
+            get:function(){
+
+                // merge static with local tags
+                my_tags=this.metatags_static;
+                this.metatags_local.forEach(function(metatag){
+                    my_tags[metatag.id]=metatag;
+                });
+                return my_tags;
+            }
+        },
+        metatag_index:function(){
+            return Object.keys(this.metatags)
+        },
+        metatag_objects:function(){
+            return Object.values(this.metatags);
         },
         allActive: {
             set: function (value) {
@@ -374,27 +342,55 @@ new Vue({
             this.settings={};
         },
         clearLocalMetatags:function(){
-            this.local_metatag_options = [];
+            this.metatags_local = [];
         },
         createMetatagOption: function(value){
             // no spaces and all lowercase for id/value
             normalized_value = value.replace(/ /g,"_").toLowerCase();
-            var metatag ={
+            var metatag = {
                 id:normalized_value,
                 value:normalized_value,
                 label: {
-                    de:value,
-                    en:value
+                    de:{
+                        value: value,
+                        edit:false,
+                        active:true
+                    },
+                    en:{
+                        value: value,
+                        edit:false,
+                        active:true
+                    }
                 },
-                alias: {de: [], en: []}
+                alias: {
+                    de: {
+                        value:[],
+                        edit:false,
+                        active:true
+                    },
+                    en: {
+                        value:[],
+                        edit:false,
+                        active:true
+                    }
+                }
             };
-            this.local_metatag_options.unshift(metatag);
+            this.metatags_local.push(metatag);
+            this.metatags[normalized_value];
             return metatag;
         },
         getOptionLabel: function(item){
             if (typeof item === 'object') {
                 if(item.label) {
                     return item.label[this.settings.editorLanguage];
+                }
+            }
+            return item;
+        },
+        getOptionLabelValue: function(item){
+            if (typeof item === 'object') {
+                if(item.label) {
+                    return item.label[this.settings.editorLanguage].value;
                 }
             }
             return item;
@@ -426,7 +422,7 @@ new Vue({
                     selected_metatags.forEach(function (metatag) {
                         // add non-existing metatags
                         if(product.metatag_index.indexOf(metatag.id) === -1){
-                            product.metatags.push(metatag);
+                            product.metatags.push(metatag.id);
                             product.metatag_index.push(metatag.id);
                         }
                     });
@@ -491,7 +487,7 @@ new Vue({
                         product_names[language.id]={
                             value:my_name,
                             original_value:my_name,
-                            edit:false,
+                            edit:false
                         };
 
                     });

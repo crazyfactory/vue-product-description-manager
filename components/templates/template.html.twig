@@ -109,17 +109,15 @@
                                         <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                             <ul>
                                                 <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                                                <li class="list-group-item" v-for="metatag in product.metatags">
+                                                <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
                                                     <i class="fa fa-trash-o fa-pull-right" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                                                     <i class="fa fa-eye fa-pull-right" aria-hidden="true" title="Hide for this language" @click="alert('hide me');"></i>
-                                                    <i class="fa fa-pencil fa-pull-right" aria-hidden="true" title="Edit this tag" @click="alert('edit me');"></i>
-                          <span>
-                            <i class="fa fa-tag fa-pull-left"></i>
-                          [[ metatag.label[language.id] ]]
-                            <span class="alias" v-if="metatag.alias[language.id].length > 0">
-                              <i class="fa fa-tags"></i>[[ metatag.alias[language.id] ]]
-                            </span>
+                          <span v-if="metatags[metatag]">
+                              <i class="fa fa-tag fa-pull-left"></i> [[ metatags[metatag].label[language.id].value ]]
                           </span>
+                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
+                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
+                            </span>
                                                 </li>
                                             </ul>
 
@@ -200,12 +198,12 @@
         <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_metatags">
             <div class="margin-bottom">
                 <v-select :value.sync="selected_metatags" placeholder="Select Metatags"
-                          :options="metatag_options"
+                          :options="metatag_objects"
                           :multiple="true"
                           :taggable="true"
                           :push-tags="true"
                           :create-option="createMetatagOption"
-                          :get-option-label="getOptionLabel">
+                          :get-option-label="getOptionLabelValue">
                 </v-select>
             </div>
             <div class="row">
