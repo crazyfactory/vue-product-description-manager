@@ -187,6 +187,27 @@
                     </ul>
 
                   </div>
+                  <div v-if="product.metatags.length>0">
+                    <h5 class="indent">Metatags:</h5>
+                    <!-- Meta tag preview -->
+                    <ul  class="indent" v-if="product.metatags.length>0">
+                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                        <ul>
+                          <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                          <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
+                          <span v-if="metatags[metatag]">
+                              <i class="fa fa-tag fa-pull-left"></i> [[ metatags[metatag].label[language.id].value ]]
+                          </span>
+                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
+                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
+                            </span>
+                          </li>
+                        </ul>
+
+                      </li>
+                    </ul>
+                    <!-- Meta tag preview end -->
+                  </div>
                 </div>
                 <!-- Preview END -->
               </div>
