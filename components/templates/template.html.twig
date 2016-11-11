@@ -2,6 +2,7 @@
     <div class="app-nav">
         <nav v-bind:class="headline" v-on:click.prevent>
             <a href="#" class="name" v-on:click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="name" v-on:click="makeActive('material')">Material <i class="fa fa-industry fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="metatags" v-on:click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="preview" v-on:click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="export" v-on:click="makeActive('export')">Export <i class="fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
@@ -101,8 +102,12 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <!-- Generic Product Names by language -->
-
+                                <!-- End Product Names by language -->
+                                <div class="indent" v-if="show_material">
+                                    <!-- material configuration -->
+                                    <h6><span class="[[headline_icon]]"></span> [[  ]] </h6>
+                                    <!-- end material -->
+                                </div>
                                 <div v-if="show_metatags">
                                     <!-- Meta tag preview -->
                                     <ul  class="indent" v-if="product.metatags.length>0">
@@ -215,6 +220,23 @@
             </div>
         </div>
         <!-- End Product Names  -->
+        <div class="row col-xs-12 col-sm-6 col-md-6" v-if="show_material">
+            <!-- Product Materials -->
+            <div class="margin-bottom">
+                <v-select :value.sync="selected_materials" placeholder="Select Material"
+                          :options="materials"
+                          :multiple="true"
+                          :get-option-label="getOptionLabel">
+                </v-select>
+            </div>
+            <div class="row">
+                <div class="actions">
+                    <button type="button" class="btn btn-success fa-pull-right" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set Material</button>
+                </div>
+            </div>
+
+            <!-- End Product Materials -->
+        </div>
         <!-- Meta Tags -->
         <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" v-on:click.stop v-show="show_metatags">
             <div class="margin-bottom">
@@ -226,6 +248,7 @@
                           :create-option="createMetatagOption"
                           :get-option-label="getOptionLabelValue">
                 </v-select>
+
             </div>
             <div class="row">
                 <div class="actions">

@@ -93,6 +93,7 @@ new Vue({
         headline_icon:'fa fa-commenting-o',
         show_load: true,
         show_names: true,
+        show_material:false,
         show_preview: false,
         show_export: false,
         show_metatags: false,
@@ -107,6 +108,7 @@ new Vue({
         selected_category:"",
         selected_attribute_1:"",
         selected_attribute_2:"",
+        selected_materials:[],
         selected_metatags:[],
         conjunction:AttributeOptions.conjunction,
 
@@ -172,6 +174,14 @@ new Vue({
         attribute_options_2: function(){
             return AttributeOptions.content;
         },
+        materials:function(){
+            if(MaterialStatic){
+                return MaterialStatic.content
+            }
+            else{
+                return [];
+            }
+        },
         metatags_static: function(){
             if(MetatagsStatic){
                 return MetatagsStatic.content;
@@ -232,6 +242,7 @@ new Vue({
             // deactivate all
             this.show_names= false;
             this.show_metatags= false;
+            this.show_material=false,
             this.show_export= false;
             this.show_preview= false;
             this.show_message=false;
@@ -246,9 +257,14 @@ new Vue({
                     this.headline = 'Product Names';
                     this.headline_icon = "fa fa-commenting-o";
                     break;
+                case 'material':
+                    this.show_material= true;
+                    this.headline = 'Material';
+                    this.headline_icon = "fa fa-industry";
+                    break;
                 case 'preview':
                     this.show_preview= true;
-                    this.headline = 'Preview: Multilingual and custom texts';
+                    this.headline = 'Preview: Multilingual & custom texts';
                     this.isFullScreen=true;
                     this.isSmallScreen=false;
                     this.headline_icon = "fa fa-eye";
@@ -306,6 +322,7 @@ new Vue({
                     modelCode:value,
                     name_scheme:null,
                     names:{},
+                    materials:[],
                     metatags:[],
                     category:null,
                     attribute1:null,
@@ -514,6 +531,26 @@ new Vue({
                     product.names=product_names;
                 }
             })
+        },
+        saveMaterials:function(){
+            alert('Coming soon');
+            return;
+            console.log('Save Materials');
+            var selected_materials = this.selected_materials;
+
+            this.products.forEach(function (product) {
+                if(product.active){
+                    if(!product.hasOwnProperty("materials")){
+                        product.materials=[];
+                    }
+                    selected_materials.forEach(function (material) {
+                        if(product.materials.indexOf(materials.id) === -1){
+                            product.materials.push(materials.id);
+                        }
+                    });
+                }
+            });
+
         },
         editMe: function(item){
             console.log('Edit me');
