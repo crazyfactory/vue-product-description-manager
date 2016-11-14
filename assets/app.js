@@ -533,9 +533,6 @@ new Vue({
             })
         },
         saveMaterials:function(){
-            alert('Coming soon');
-            return;
-            console.log('Save Materials');
             var selected_materials = this.selected_materials;
 
             this.products.forEach(function (product) {
@@ -544,22 +541,26 @@ new Vue({
                         product.materials=[];
                     }
                     selected_materials.forEach(function (material) {
-                        if(product.materials.indexOf(materials.id) === -1){
-                            product.materials.push(materials.id);
+                        var unique=true;
+                        product.materials.forEach(function(my_material){
+                            if(my_material.value === material.value){
+                                unique=false;
+                            }
+                        });
+                        if(unique){
+                            product.materials.push(material);
                         }
                     });
                 }
             });
-
+        },
+        deleteMaterials:function(product){
+            product.materials=[];
         },
         editMe: function(item){
-            console.log('Edit me');
-            console.log(this.metatags);
             item.edit=true;
         },
         closeEditMe: function(item){
-            console.log('Close edit me');
-            console.log(this.metatags);
             item.edit= false;
             item.value= item.value.replace(/\r?\n|\r/g,"")
         },
@@ -586,6 +587,9 @@ new Vue({
                 my_description=my_product.descriptions[language];
                 this.products[index].descriptions[language]=my_description;
             }
+        },
+        debugMe: function(me){
+            console.log(me);
         }
     }
 })

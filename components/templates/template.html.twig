@@ -105,7 +105,16 @@
                                 <!-- End Product Names by language -->
                                 <div class="indent" v-if="show_material">
                                     <!-- material configuration -->
-                                    <h6><span class="[[headline_icon]]"></span> [[  ]] </h6>
+                                    <ul class="list-group" v-if="product.materials.length >0">
+                                        <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                                            <span class="flag-icon [[language.flag]]" @click="debugMe(product)"></span>
+                      <span v-for="(index, material) in product.materials">
+                        <span v-if="index > 0"> / </span>
+                        [[ material.label[language.id] ]]
+                      </span>
+                                            <i class="fa fa-pull-right fa-trash-o" @click="deleteMaterials(product);"></i>
+                                        </li>
+                                    </ul>
                                     <!-- end material -->
                                 </div>
                                 <div v-if="show_metatags">
