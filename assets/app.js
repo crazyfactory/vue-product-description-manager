@@ -476,7 +476,29 @@ new Vue({
             });
         },
         removeMetatag: function(product, metatag){
+            // remove metatag from one product
             product.metatags.splice(product.metatags.indexOf(metatag), 1);
+        },
+        deleteMetatags: function(){
+            var selected_metatags=this.selected_metatags;
+            console.log(selected_metatags);
+            var all_products = this.products;
+            var all_metatags = this.metatags_local;
+
+            selected_metatags.forEach(function (metatag) {
+                // remove metatag from all products
+                all_products.forEach(function (product) {
+                    if(product.metatags.indexOf(metatag.value)> -1){
+                        product.metatags.splice(product.metatags.indexOf(metatag.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_metatags.indexOf(metatag)> -1){
+                    all_metatags.splice(all_metatags.indexOf(metatag), 1);
+                }
+            });
+            this.selected_metatags=[];
+            console.log(selected_metatags);
         },
         hideMetatagLabel: function(product, metatag, language){
             console.log("Hide this label ...");

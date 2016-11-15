@@ -252,7 +252,7 @@
       </div>
       <div class="row">
         <div class="actions">
-          <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Save</button>
+          <button type="button" class="btn btn-success save_name fa-pull-right" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
         </div>
       </div>
     </div>
@@ -268,7 +268,7 @@
       </div>
       <div class="row">
         <div class="actions">
-          <button type="button" class="btn btn-success fa-pull-right" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set Material</button>
+          <button type="button" class="btn btn-success fa-pull-right" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
         </div>
       </div>
 
@@ -289,8 +289,9 @@
       </div>
       <div class="row">
         <div class="actions">
-          <button type="button" v-if="!show_metatags_edit" class="btn btn-success save_tags fa-pull-right" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set tags</button>
-          <button type="button" v-if="!show_metatags_edit" class="btn btn-success edit_tags fa-pull-right" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit</button>
+          <button type="button" v-if="!show_metatags_edit" class="btn btn-success save_tags fa-pull-right" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
+          <button type="button" v-if="!show_metatags_edit" class="btn btn-success edit_tags fa-pull-right" @click="deleteMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+          <button type="button" v-if="!show_metatags_edit" class="btn btn-success edit_tags fa-pull-right" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
         </div>
       </div>
       <div class="row" v-if="show_metatags_edit">
