@@ -424,8 +424,6 @@ new Vue({
             console.log(this.messages);
         },
         debugMetatags:function(){
-            console.log("Static (app.metatags_static)");
-            console.log(this.metatags_static);
             console.log("Local (app.metatags_local)");
             console.log(this.metatags_local);
             console.log("ALL Metatags (app.metatags)");
@@ -449,11 +447,6 @@ new Vue({
         },
         editMetatags: function(){
             this.show_metatags_edit=true;
-        },
-        editMetatag: function(metatag, language){
-            console.log('Edit my Metatag');
-            console.log(metatag);
-            console.log(language);
         },
         saveMetatags: function(){
             var selected_metatags=this.selected_metatags;
@@ -481,7 +474,6 @@ new Vue({
         },
         deleteMetatags: function(){
             var selected_metatags=this.selected_metatags;
-            console.log(selected_metatags);
             var all_products = this.products;
             var all_metatags = this.metatags_local;
 
@@ -498,7 +490,6 @@ new Vue({
                 }
             });
             this.selected_metatags=[];
-            console.log(selected_metatags);
         },
         hideMetatagLabel: function(product, metatag, language){
             console.log("Hide this label ...");
