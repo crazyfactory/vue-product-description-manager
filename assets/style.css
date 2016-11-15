@@ -290,6 +290,7 @@ label[for='toggle-all'] {
 }
 
 .product-list li .destroy {
+    font-size:1.5em;
     display: none;
     position: absolute;
     top: 5px;
@@ -299,10 +300,6 @@ label[for='toggle-all'] {
     color: #cc9a9a;
     margin-bottom: 11px;
     transition: color 0.2s ease-out;
-}
-
-.product-list li .destroy:hover {
-    color: #af5b5e;
 }
 
 .product-list li:hover .destroy {
@@ -372,10 +369,6 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus{
     font-style: italic;
 }
 
-i:hover, i:focus{
-    color:green;
-}
-
 textarea
 {
     display: inline-block;
@@ -383,7 +376,6 @@ textarea
     height: 100%;
     vertical-align: top;
     box-sizing: border-box;
-
     border: none;
     resize: none;
     outline: none;
