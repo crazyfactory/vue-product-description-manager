@@ -1,7 +1,7 @@
 var MetatagsStatic ={
     id:'metatags',
-    content:{
-        piercing:{
+    content:[
+        {
             id:'piercing',
             value:'piercing',
             label:{
@@ -29,7 +29,7 @@ var MetatagsStatic ={
                 }
             }
         },
-        mobile_case:{
+        {
             id:'mobile_case',
             value:'mobile_case',
             label: {
@@ -61,5 +61,6 @@ var MetatagsStatic ={
                 }
             }
         }
-    }
+    ]
 };
+

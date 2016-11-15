@@ -75,7 +75,20 @@ var settingStorage = {
 var STORAGE_KEY_META = 'crazy-metatags'
 var metatagStorage = {
     fetch: function () {
+        var meta_static=[];
+
+        if (MetatagsStatic.content){
+            // got stic tags from mock or api
+            meta_static = MetatagsStatic.content;
+        }
+        // get the local tags
         var metatags = JSON.parse(localStorage.getItem(STORAGE_KEY_META) || '[]');
+        // if no local tags are available: include static tags
+        if (metatags.length<1){
+            meta_static.forEach(function(metatag){
+                metatags.push(metatag);
+            })
+        }
         return metatags
     },
     save: function (metatags) {
@@ -134,8 +147,13 @@ new Vue({
                 flag:'flag-icon-us',
             }
         ],
-        // metatag management
+
+        /*
+         * metatag management
+         */
+        // local
         metatags_local:metatagStorage.fetch(),
+
     },
     // watch products change for localStorage persistence
     watch: {
@@ -182,23 +200,12 @@ new Vue({
                 return [];
             }
         },
-        metatags_static: function(){
-            if(MetatagsStatic){
-                return MetatagsStatic.content;
-            }
-            else{
-                return {}
-            }
-        },
         metatags:{
             get:function(){
-
-                // get static metatags from api call or data file
-                my_tags=this.metatags_static;
+                my_tags={};
                 this.metatags_local.forEach(function(metatag) {
                     my_tags[metatag.id]=metatag;
                 });
-
                 return my_tags;
             }
         },
@@ -361,9 +368,7 @@ new Vue({
             this.settings={};
         },
         clearLocalMetatags:function(){
-            this.metatags_static = {};
             this.metatags_local = [];
-            this.metatags = {};
         },
         createMetatagOption: function(value){
             // no spaces and all lowercase for id/value
@@ -455,15 +460,16 @@ new Vue({
             // set metatags to all selected products
             this.products.forEach(function (product) {
                 if(product.active){
-                    // generate a metatag_index for each product
-                    if(!product.hasOwnProperty("metatag_index")){
-                        product.metatag_index=[];
-                    }
                     selected_metatags.forEach(function (metatag) {
-                        // add non-existing metatags
-                        if(product.metatag_index.indexOf(metatag.id) === -1){
-                            product.metatags.push(metatag.id);
-                            product.metatag_index.push(metatag.id);
+                        var unique=true;
+                        meta_value = metatag.value;
+                        product.metatags.forEach(function(product_meta_value){
+                            if(meta_value === product_meta_value){
+                                unique=false;
+                            }
+                        });
+                        if(unique){
+                            product.metatags.push(meta_value);
                         }
                     });
                 }
@@ -471,10 +477,6 @@ new Vue({
         },
         removeMetatag: function(product, metatag){
             product.metatags.splice(product.metatags.indexOf(metatag), 1);
-            if(product.hasOwnProperty("metatag_index")){
-                product.metatag_index.splice(product.metatag_index.indexOf(metatag.id), 1);
-            }
-
         },
         hideMetatagLabel: function(product, metatag, language){
             console.log("Hide this label ...");

@@ -122,12 +122,12 @@
                                     <ul  class="indent" v-if="product.metatags.length>0">
                                         <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                             <ul>
-                                                <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                                                <li><span class="flag-icon [[language.flag]] fa-pull-left" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span></li>
                                                 <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
                                                     <i class="fa fa-trash-o fa-pull-right" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                                                     <i class="fa fa-eye fa-pull-right" aria-hidden="true" title="Hide for this language" @click="alert('hide me');"></i>
                           <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i> [[ metatags[metatag].label[language.id].value ]]
+                              <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
@@ -284,11 +284,11 @@
                   </span>
                                 <div v-if="metatags[metatag.id].label[language.id].edit">
                                     <i class="fa fa-pull-right fa-times-circle-o" style="margin-top:-10px;" v-if="metatags[metatag.id].label[language.id].edit" @click="closeEditMe(metatags[metatag.id].label[language.id])"></i>
-                                    <h5><i class="fa fa-tag fa-pull-left"></i>Label</h5> <input class="full-width" v-model="metatags[metatag.id].label[language.id].value">
+                                    <h5><i class="fa fa-tag fa-pull-left"></i>Label</h5> <input class="full-width" v-model="metatags[metatag.id].label[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
                                 </div>
                                 <div v-if="metatags[metatag.id].label[language.id].edit">
                                     <h5><i class="fa fa-tags"></i> Aliases</h5>
-                                    <input class="full-width" v-model="metatags[metatag.id].alias[language.id].value"l>
+                                    <input class="full-width" v-model="metatags[metatag.id].alias[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
                                 </div>
                             </li>
                         </ul>
