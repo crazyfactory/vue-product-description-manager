@@ -304,13 +304,16 @@ new Vue({
          * Products stuff
          */
         addProduct: function () {
-            var value = this.newProduct && this.newProduct.trim()
+            var value = this.newProduct && this.newProduct.trim();
             if (!value) {
                 return
             }
 
             // get products from db/api
             if(hasApi){
+                // clear product input
+                this.newProduct = '';
+
                 api.app=this;
                 api.data = value;
                 api.action = 'get_products';
@@ -318,28 +321,35 @@ new Vue({
             }
             else
             {
-                // use fake api response from api.js
-                var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
-                console.log('no api ... dry hump with api element '+ random_nr);
-                my_product=Api_response[random_nr];
+                console.log('no api ... dry hump with api element ');
 
-                this.products.push({
-                    id: productStorage.uid++,
-                    active: true,
-                    modelCode:value,
-                    name_scheme:null,
-                    names:{},
-                    materials:[],
-                    metatags:[],
-                    category:null,
-                    attribute1:null,
-                    attribute2:null,
-                    descriptions:my_product.descriptions,
-                    db_id:my_product.db_id,
-                    propertyFormula:my_product.propertyFormula,
-                    properties:my_product.properties
+                var my_products = value.split(" ");
+                var my_product_list = [];
+
+                my_products.forEach(function(my_product_name){
+                    my_product_name=my_product_name.trim();
+                    // use fake api response from api.js
+                    var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
+                    my_product=Api_response[random_nr];
+                    my_product_list.push({
+                        id: productStorage.uid++,
+                        active: true,
+                        modelCode:my_product_name,
+                        name_scheme:null,
+                        names:{},
+                        materials:[],
+                        metatags:['piercing'],
+                        category:null,
+                        attribute1:null,
+                        attribute2:null,
+                        descriptions:my_product.descriptions,
+                        db_id:my_product.db_id,
+                        propertyFormula:my_product.propertyFormula,
+                        properties:my_product.properties
+                    });
                 });
 
+                this.products = this.products.concat(my_product_list);
                 this.newProduct = '';
             }
         },

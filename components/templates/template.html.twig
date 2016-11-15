@@ -87,7 +87,7 @@
                                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                         <span class="flag-icon [[language.flag]]" ></span>
                                         <i class="fa fa-pencil fa-pull-right" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id])"></i>
-                    <span>
+                    <span @click="editMe(product.names[language.id])">
                       [[product.names[language.id].original_value ]]
                     </span>
                                         <div class="customized_name"
