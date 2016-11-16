@@ -113,6 +113,7 @@ new Vue({
         show_metatags_edit:false,
         show_message: false,
         show_settings: false,
+        show_actionbar:false,
 
         isFullScreen:false,
         isSmallScreen:true,
@@ -215,13 +216,6 @@ new Vue({
         metatag_objects:function(){
             return Object.values(this.metatags);
         },
-        allActive: {
-            set: function (value) {
-                this.products.forEach(function (product) {
-                    product.active = value
-                })
-            }
-        },
         deactivateMessages: {
             set: function () {
                 this.messages.forEach(function (message) {
@@ -241,6 +235,24 @@ new Vue({
                 }
                 return this.settings.editorLanguage;
             }
+        },
+        hasHiddenProducts: function(){
+            var bool = false;
+            this.products.forEach(function(product){
+               if(product.hidden){
+                   bool = true;
+               }
+            });
+            return bool;
+        },
+        hasEditableProducts: function(){
+            var bool = false;
+            this.products.forEach(function(product){
+                if(!product.hidden){
+                    bool = true;
+                }
+            });
+            return bool;
         }
 
     },
@@ -294,6 +306,15 @@ new Vue({
                     break;
             }
         },
+        toggle_actionbar: function(){
+            if(this.products.length>0){
+                this.show_actionbar = !this.show_actionbar;
+            }
+            else{
+                this.show_actionbar = false;
+            }
+
+        },
         toggle_settings: function(){
             this.show_settings = !this.show_settings;
         },
@@ -334,6 +355,7 @@ new Vue({
                     my_product_list.push({
                         id: productStorage.uid++,
                         active: true,
+                        hidden:false,
                         modelCode:my_product_name,
                         name_scheme:null,
                         names:{},
@@ -355,6 +377,59 @@ new Vue({
         },
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
+        },
+        hideProduct: function (product) {
+            product.hidden = true;
+            product.active = false;
+        },
+        removeSeletedProducts(){
+            var keep_products=[];
+            this.products.forEach(function(product){
+                if(!product.active){
+                  keep_products.push(product);
+              }
+            });
+            // delete all products
+            this.products = keep_products;
+        },
+        selectAllProducts: function(value){
+            var products = this.products;
+            products.forEach(function(product){
+                if(!product.hidden){
+                    product.active=value;
+                } else{
+                    // product never active when it is hidden
+                    product.active=false;
+                }
+
+            });
+        },
+        hideSelectedProducts: function(){
+            this.products.forEach(function(product){
+                if(product.active) {
+                    // hidden products are not active
+                    product.active = false;
+                    product.hidden = true;
+                }
+            });
+        },
+        showAllProducts: function(){
+            this.products.forEach(function(product){
+                if(product.hidden) {
+                    // hidden products are not active
+                    product.active = true;
+                    product.hidden = false;
+                }else{
+                    product.active = false;
+                }
+
+            });
+        },
+        invertSelectedlProducts: function(){
+            var products = this.products;
+            products.forEach(function(product){
+                product.active=!product.active;
+            });
         },
         addMessage: function(message, type){
             var today = moment().format('lll');

@@ -175,7 +175,8 @@ input[type="checkbox"] {
     font-smoothing: antialiased;
 }
 
-.new-product {
+.new-product,
+.actionbar{
     padding: 16px 16px 16px 60px;
     border: none;
     background: rgba(0, 0, 0, 0.003);
@@ -183,38 +184,25 @@ input[type="checkbox"] {
     font-size:16px;
     font-style:italic;
 }
-
-.main {
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid #e6e6e6;
+/* ActionBar */
+.actionbar{
+        height:54px;
+}
+.actionbar > span{
+    margin-right:1em;
+}
+.actionbar .action{
+    cursor: pointer;
 }
 
-label[for='toggle-all'] {
-    display: none;
-}
-
-.toggle-all {
+.switch_actionbar{
     position: absolute;
-    top: -50px;
-    left: -12px;
-    width: 60px;
-    height: 34px;
-    text-align: center;
-    border: none; /* Mobile Safari */
+    top:12px;
+    left:10px;
+    border:none;
+    color:#ccc;
 }
-
-.toggle-all:before {
-    content: "❯";
-    font-size: 22px;
-    color: #e6e6e6;
-    padding: 10px 27px 10px 27px;
-}
-
-.toggle-all:checked:before {
-    color: green;
-}
-
+/* End ActionBar*/
 .product-list {
     margin: 0;
     padding: 0;
@@ -289,20 +277,17 @@ label[for='toggle-all'] {
     font-weight:400;
 }
 
-.product-list li .destroy {
+.product-list li .product_action {
     font-size:1.5em;
     display: none;
-    position: absolute;
-    top: 5px;
-    right: 10px;
     bottom: 0;
-    margin: 0;
+    margin: 0 5px;
     color: #cc9a9a;
-    margin-bottom: 11px;
     transition: color 0.2s ease-out;
+    cursor: pointer;
 }
 
-.product-list li:hover .destroy {
+.product-list li:hover .product_action {
     display: block;
 }
 
@@ -457,6 +442,10 @@ section.settings{
 }
 .close-edit-metatags{
     margin-top:-10px;
+}
+
+.cursor{
+    cursor: pointer;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
