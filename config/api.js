@@ -3,6 +3,7 @@ var Api_response =
   "0":{
     "db_id": "12345",
     "edit": false,
+    "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en": {
@@ -23,6 +24,7 @@ var Api_response =
   "1":{
     "db_id": "23456",
     "edit": false,
+    "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en": {
@@ -43,6 +45,7 @@ var Api_response =
   "2":{
     "db_id": "34567",
     "edit": false,
+    "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en": {
@@ -63,6 +66,7 @@ var Api_response =
   "3":{
     "db_id": "45678",
     "edit": false,
+    "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en": {
@@ -83,6 +87,7 @@ var Api_response =
   "4":{
     "db_id": "56789",
     "edit": false,
+    "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en": {
