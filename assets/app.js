@@ -271,7 +271,7 @@ new Vue({
                     break;
                 case 'preview':
                     this.show_preview= true;
-                    this.headline = 'Preview: Multilingual & custom texts';
+                    this.headline = 'Preview';
                     this.isFullScreen=true;
                     this.isSmallScreen=false;
                     this.headline_icon = "fa fa-eye";
