@@ -186,13 +186,17 @@ input[type="checkbox"] {
 }
 /* ActionBar */
 .actionbar{
-        height:54px;
+    height:54px;
 }
-.actionbar > span{
+.actionbar > span,
+.actionbar > section span{
     margin-right:1em;
 }
 .actionbar .action{
     cursor: pointer;
+}
+.actionbar section{
+    display:inline;
 }
 
 .switch_actionbar{
