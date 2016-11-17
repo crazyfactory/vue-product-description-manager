@@ -127,7 +127,7 @@
                                             <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
                         <span v-if="index > 0"> / </span>
-                        [[ material.label[language.id] ]]
+                        [[ materials[material.value].label[language.id].value ]]
                       </span>
                                             <i class="fa fa-pull-right fa-trash-o cursor" @click="deleteMaterials(product);"></i>
                                         </li>
@@ -142,7 +142,7 @@
                                                 <li><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span></li>
                                                 <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
                                                     <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
-                                                    <i class="fa fa-eye fa-pull-righ cursort" aria-hidden="true" title="Hide for this language" @click="alert('hide me');"></i>
+                                                    <i class="fa fa-eye fa-pull-right cursor" aria-hidden="true" title="Hide for this language" @click="alert('hide me');"></i>
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
@@ -198,7 +198,7 @@
                                                 <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
                         <span v-if="index > 0"> / </span>
-                        [[ material.label[language.id] ]]
+                        [[ materials[material.value].label[language.id].value ]]
                       </span>
                                                 <i class="fa fa-pull-right fa-trash-o cursor" @click="deleteMaterials(product);"></i>
                                             </li>
@@ -257,7 +257,7 @@
             </div>
             <div class="row">
                 <div class="actions">
-                    <button type="button" class="btn btn-success save_name fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
                 </div>
             </div>
         </div>
@@ -266,15 +266,44 @@
             <!-- Product Materials -->
             <div class="margin-bottom">
                 <v-select :value.sync="selected_materials" placeholder="Select Material"
-                          :options="materials"
+                          :options="material_objects"
                           :multiple="true"
-                          :get-option-label="getOptionLabel">
+                          :taggable="true"
+                          :push-tags="true"
+                          :get-option-label="getOptionLabelValue"
+                          :create-option="createMaterialOption">
                 </v-select>
             </div>
             <div class="row">
-                <div class="actions">
-                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
+                <div class="actions" v-if="!show_materials_edit">
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
                 </div>
+            </div>
+            <div class="row" v-if="show_materials_edit">
+                <!-- Edit Materials -->
+                <i class="indent" v-if="!selected_materials.length > 0">Please select Materials to edit ...</i>
+                <h5 class="indent" v-if="selected_materials.length > 0">Edit Materials  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMaterials()"></i></h5>
+                <ul class="indent metatag-list" v-if="selected_materials.length > 0">
+                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                        <ul>
+                            <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                            <li class="list-group-item" v-for="material in selected_materials">
+                  <span v-if="!materials[material.value].label[language.id].edit">
+                    <i class="fa fa-industry fa-pull-left"></i>
+                    [[ materials[material.value].label[language.id].value ]]
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
+                  </span>
+                                <div v-if="materials[material.value].label[language.id].edit">
+                                    <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
+                                    <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- End edit materials -->
             </div>
 
             <!-- End Product Materials -->
@@ -293,10 +322,10 @@
 
             </div>
             <div class="row">
-                <div class="actions">
-                    <button type="button" v-if="!show_metatags_edit" class="btn btn-success save_tags fa-pull-right cursor" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-                    <button type="button" v-if="!show_metatags_edit" class="btn btn-success edit_tags fa-pull-right cursor" @click="deleteMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
-                    <button type="button" v-if="!show_metatags_edit" class="btn btn-success edit_tags fa-pull-right cursor" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+                <div class="actions" v-if="!show_metatags_edit">
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
                 </div>
             </div>
             <div class="row" v-if="show_metatags_edit">
@@ -335,7 +364,7 @@
         <!-- Export -->
         <div class="products_export row col-xs-12 col-sm-6 col-md-6" @click.stop v-show="show_export">
             <h5>Export selected products to shop</h5>
-            <button type="button" class="btn btn-success save_name cursor" @click="alert('Not ready yet .... coming soon')"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save to DB</button>
+            <button type="button" class="btn btn-success cursor" @click="alert('Not ready yet .... coming soon')"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save to DB</button>
         </div>
         <!-- End Export -->
         <!-- Messages -->
@@ -344,13 +373,25 @@
                 <h5>Admin Actions</h5>
                 <ul class="list-group">
                     <li class="list-group-item">
+                        <h5>Settings</h5>
+                        <a href="#" class="export cursor" @click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
+                    </li>
+                    <li class="list-group-item">
+                        <h5>Messages</h5>
                         <a href="#" class="error_report cursor" @click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
                         <a href="#" class="export cursor" @click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
                         <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a> &nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
+                    </li>
+                    <li class="list-group-item">
+                        <h5>Materials</h5>
+                        <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All</a>
+                    </li>
+                    <li class="list-group-item">
+                        <h5>Metatags</h5>
+                        <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local</a>
                     </li>
                 </ul>
                 <h5>Error Messages <i class="fa fa-envelope-o" aria-hidden="true"></i></h5>

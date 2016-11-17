@@ -95,6 +95,30 @@ var metatagStorage = {
         localStorage.setItem(STORAGE_KEY_META, JSON.stringify(metatags))
     }
 }
+// material management
+var STORAGE_KEY_MATERIAL = 'crazy-material'
+var materialStorage = {
+    fetch: function () {
+        var material_static=[];
+
+        if (MaterialStatic.content){
+            // got statics from mock or api
+            material_static = MaterialStatic.content;
+        }
+        // get the local options
+        var materials = JSON.parse(localStorage.getItem(STORAGE_KEY_MATERIAL) || '[]');
+        // if no local option are available: include statics
+        if (materials.length<1){
+            material_static.forEach(function(material){
+                materials.push(material);
+            })
+        }
+        return materials
+    },
+    save: function (materials) {
+        localStorage.setItem(STORAGE_KEY_MATERIAL, JSON.stringify(materials))
+    }
+}
 
 new Vue({
     el: '#app',
@@ -107,6 +131,7 @@ new Vue({
         show_load: true,
         show_names: true,
         show_material:false,
+        show_materials_edit:false,
         show_preview: false,
         show_export: false,
         show_metatags: false,
@@ -116,7 +141,6 @@ new Vue({
         show_actionbar:false,
 
         isFullScreen:false,
-        isSmallScreen:true,
 
         // Name Scheme
         selected_category:"",
@@ -154,6 +178,7 @@ new Vue({
          */
         // local
         metatags_local:metatagStorage.fetch(),
+        materials_local:materialStorage.fetch(),
 
     },
     // watch products change for localStorage persistence
@@ -161,6 +186,12 @@ new Vue({
         products: {
             handler: function (products) {
                 productStorage.save(products)
+            },
+            deep: true
+        },
+        materials_local: {
+            handler: function (materials) {
+                materialStorage.save(materials)
             },
             deep: true
         },
@@ -184,22 +215,30 @@ new Vue({
         }
     },
     computed: {
-        category_options: function(){
-            return CategoryOptions.content;
-        },
         attribute_options_1: function(){
             return AttributeOptions.content;
         },
         attribute_options_2: function(){
             return AttributeOptions.content;
         },
+        category_options: function(){
+            return CategoryOptions.content;
+        },
+        isSmallScreen:function(){
+            return !this.isFullScreen;
+        },
         materials:function(){
-            if(MaterialStatic){
-                return MaterialStatic.content
-            }
-            else{
-                return [];
-            }
+            my_options={};
+            this.materials_local.forEach(function(item) {
+                my_options[item.value]=item;
+            });
+            return my_options;
+        },
+        material_index:function(){
+            return Object.keys(this.materials)
+        },
+        material_objects:function(){
+            return Object.values(this.materials);
         },
         metatags:{
             get:function(){
@@ -267,7 +306,6 @@ new Vue({
             this.show_message=false;
             this.show_load=true;
             this.isFullScreen=false;
-            this.isSmallScreen=true;
             this.headline_icon='';
 
             switch(item){
@@ -285,7 +323,6 @@ new Vue({
                     this.show_preview= true;
                     this.headline = 'Preview';
                     this.isFullScreen=true;
-                    this.isSmallScreen=false;
                     this.headline_icon = "fa fa-eye";
                     break;
                 case 'metatags':
@@ -489,6 +526,41 @@ new Vue({
             this.metatags_local.push(metatag);
             return metatag;
         },
+        createMaterialOption: function(value){
+            // no spaces and all lowercase for id/value
+            normalized_value = value.replace(/ /g,"_").toLowerCase();
+            var material = {
+                id:normalized_value,
+                value:normalized_value,
+                label: {
+                    de:{
+                        value: value,
+                        edit:false,
+                        active:true
+                    },
+                    en:{
+                        value: value,
+                        edit:false,
+                        active:true
+                    }
+                },
+                alias: {
+                    de: {
+                        value:"",
+                        edit:false,
+                        active:true
+                    },
+                    en: {
+                        value:"",
+                        edit:false,
+                        active:true
+                    }
+                }
+            };
+            this.materials_local.push(material);
+            console.log(this.materials_local);
+            return material;
+        },
         getOptionLabel: function(item){
             if (typeof item === 'object') {
                 if(item.label) {
@@ -515,6 +587,19 @@ new Vue({
             console.log(this.metatags);
             console.log('ferdsch');
         },
+        debugMaterials:function(){
+            console.log("Local (app.materials_local)");
+            console.log(this.materials_local);
+            console.log("ALL Materials (app.materials)");
+            console.log(this.materials);
+            console.log('aus die maus');
+        },
+        clearMaterials:function(){
+            console.log('Clear local materials:');
+            console.log(this.materials_local);
+            this.materials_local=[];
+            this.materials=[];
+        },
         hideMessage: function (message) {
             message.show = false
         },
@@ -526,6 +611,57 @@ new Vue({
         },
         alert: function(text) {
             alert(text);
+        },
+        closeEditMaterials: function(){
+            this.show_materials_edit=false;
+        },
+        editMaterials: function(){
+            console.log('Edit material');
+            console.log(this.show_materials_edit);
+            this.show_materials_edit=true;
+        },
+        saveMaterials: function(){
+            var selected_materials=this.selected_materials;
+            // set materials to all selected products
+            this.products.forEach(function (product) {
+                if(product.active){
+                    selected_materials.forEach(function (item) {
+                        var unique=true;
+                        material_value = item.value;
+                        product.materials.forEach(function(product_value){
+                            if(meta_value === product_value){
+                                unique=false;
+                            }
+                        });
+                        if(unique){
+                            product.materials.push(meta_value);
+                        }
+                    });
+                }
+            });
+        },
+        removeMaterial: function(product, material){
+            // remove material from one product
+            product.materials.splice(product.materials.indexOf(material), 1);
+        },
+        deleteMaterials: function(){
+            var selected_materials=this.selected_materials;
+            var all_products = this.products;
+            var all_materials = this.materials_local;
+
+            selected_materials.forEach(function (item) {
+                // remove item from all products
+                all_products.forEach(function (product) {
+                    if(product.materials.indexOf(item.value)> -1){
+                        product.materials.splice(product.materials.indexOf(item.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_materials.indexOf(item)> -1){
+                    all_materials.splice(all_materials.indexOf(item), 1);
+                }
+            });
+            this.selected_materials=[];
         },
         closeEditMetatags: function(){
             this.show_metatags_edit=false;

@@ -4,71 +4,151 @@ var MaterialStatic ={
         {
             value:"acrylic",
             label:{
-                en:"Acrylic",
-                de:"Acryl"
+                en:{
+                    value:'Acrylic',
+                    edit:false,
+                    active:true
+                },
+                de:{
+                    value:"Acryl",
+                    edit:false,
+                    active:true
+                }
             }
         },
         {
             value:"basalt",
-            label:{
-                en:"Basalt",
-                de:"Basalt"
+            label: {
+                en: {
+                    value: "Basalt",
+                    edit: false,
+                    active: true
+                },
+                de: {
+                    value: "Basalt",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"bioflex",
             label:{
-                en:"Bioflex",
-                de:"Bioflex"
+                en:{
+                    value: "Bioflex",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Bioflex",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"gold-plated-steel",
             label:{
-                en:"Gold Plated Steel",
-                de:"Vergoldeter Chirurgenstahl"
+                en:{
+                    value: "Gold plated steel",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Vergoldeter Chirurgenstahl",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"leather",
             label:{
-                en:"Leather",
-                de:"Leder"
+                en:{
+                    value: "Leather",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Leather",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"nylon",
             label:{
-                en:"Nylon Cord",
-                de:"Nylon"
+                en:{
+                    value: "Nylon Cord",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Nylon",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"plastic",
             label:{
-                en:"Plastic",
-                de:"Kunststoff"
+                en:{
+                    value: "Plastic",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Kunststoff",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"rose-gold-plated-steel",
             label:{
-                en:"Rose Gold Plated Steel",
-                de:"Rosé-Vergoldeter Stahl"
+                en:{
+                    value: "Rose Gold Plated Steel",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Rosé-Vergoldeter Stahl",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"surgical-steel-316l",
             label:{
-                en:"Surgical Steel 316L",
-                de:"Chirurgenstahl 316L"
+                en:{
+                    value: "Surgical Steel 316L",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Chirurgenstahl 316L",
+                    edit: false,
+                    active: true
+                }
             }
         },
         {
             value:"wood",
             label:{
-                en:"Wood",
-                de:"Holz"
+                en:{
+                    value: "Wood",
+                    edit: false,
+                    active: true
+                },
+                de:{
+                    value: "Holz",
+                    edit: false,
+                    active: true
+                }
             }
         }
     ]
