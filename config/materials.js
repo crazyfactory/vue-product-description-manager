@@ -70,7 +70,7 @@ var MaterialStatic ={
                     active: true
                 },
                 de:{
-                    value: "Leather",
+                    value: "Leder",
                     edit: false,
                     active: true
                 }

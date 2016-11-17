@@ -350,7 +350,6 @@ new Vue({
             else{
                 this.show_actionbar = false;
             }
-
         },
         toggle_settings: function(){
             this.show_settings = !this.show_settings;
@@ -558,7 +557,6 @@ new Vue({
                 }
             };
             this.materials_local.push(material);
-            console.log(this.materials_local);
             return material;
         },
         getOptionLabel: function(item){
@@ -616,8 +614,6 @@ new Vue({
             this.show_materials_edit=false;
         },
         editMaterials: function(){
-            console.log('Edit material');
-            console.log(this.show_materials_edit);
             this.show_materials_edit=true;
         },
         saveMaterials: function(){
@@ -629,20 +625,20 @@ new Vue({
                         var unique=true;
                         material_value = item.value;
                         product.materials.forEach(function(product_value){
-                            if(meta_value === product_value){
+                            if(material_value === product_value){
                                 unique=false;
                             }
                         });
                         if(unique){
-                            product.materials.push(meta_value);
+                            product.materials.push(material_value);
                         }
                     });
                 }
             });
         },
-        removeMaterial: function(product, material){
+        removeMaterial: function(product){
             // remove material from one product
-            product.materials.splice(product.materials.indexOf(material), 1);
+            product.materials=[];
         },
         deleteMaterials: function(){
             var selected_materials=this.selected_materials;
@@ -767,31 +763,6 @@ new Vue({
                     product.names=product_names;
                 }
             })
-        },
-        saveMaterials:function(){
-            var selected_materials = this.selected_materials;
-
-            this.products.forEach(function (product) {
-                if(product.active){
-                    if(!product.hasOwnProperty("materials")){
-                        product.materials=[];
-                    }
-                    selected_materials.forEach(function (material) {
-                        var unique=true;
-                        product.materials.forEach(function(my_material){
-                            if(my_material.value === material.value){
-                                unique=false;
-                            }
-                        });
-                        if(unique){
-                            product.materials.push(material);
-                        }
-                    });
-                }
-            });
-        },
-        deleteMaterials:function(product){
-            product.materials=[];
         },
         editMe: function(item){
             item.edit=true;
