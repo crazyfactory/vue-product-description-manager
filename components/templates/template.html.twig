@@ -248,6 +248,7 @@
         <!-- Add Products end -->
         <!-- Add Product Names -->
         <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-show="show_names">
+            <div class="margin-bottom" v-if="show_category_edit && !show_name_scheme_edit"><i class="indent">Please select at least one category or attribute to edit ...</i></div>
             <div class="margin-bottom">
                 <v-select :value.sync="selected_category" placeholder="Select a Category"
                           :options="category_objects"
@@ -275,10 +276,37 @@
                           :create-option="createAttributeOption"></v-select>
             </div>
             <div class="row">
-                <div class="actions">
+                <div class="actions" v-if="!show_category_edit || !show_name_scheme_edit">
                     <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="editCategories()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
                 </div>
             </div>
+            <div class="row" v-if="show_category_edit && show_name_scheme_edit">
+                <!-- Edit Category/ Attributes -->
+                <h5 class="indent">Edit category & attributes  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditCategories()"></i></h5>
+                <!--
+                <ul class="indent metatag-list" v-if="selected_materials.length > 0">
+                  <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                    <ul>
+                      <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                      <li class="list-group-item" v-for="material in selected_materials">
+                          <span v-if="!materials[material.value].label[language.id].edit">
+                            <i class="fa fa-industry fa-pull-left"></i>
+                            [[ materials[material.value].label[language.id].value ]]
+                             <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
+                          </span>
+                        <div v-if="materials[material.value].label[language.id].edit">
+                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
+                          <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <!-- End edit Category/ Attributes -->
+            </div>
+
         </div>
         <!-- End Product Names  -->
         <div class="row col-xs-12 col-sm-6 col-md-6" v-if="show_material">
@@ -338,6 +366,7 @@
                           :create-option="createMetatagOption"
                           :get-option-label="getOptionLabelValue">
                 </v-select>
+
             </div>
             <div class="row">
                 <div class="actions" v-if="!show_metatags_edit">

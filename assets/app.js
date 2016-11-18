@@ -194,6 +194,7 @@ new Vue({
         show_actionbar:false,
         show_export: false,
         show_load: true,
+        show_category_edit:false,
         show_material:false,
         show_materials_edit:false,
         show_metatags: false,
@@ -348,6 +349,15 @@ new Vue({
         },
         metatag_objects:function(){
             return Object.values(this.metatags);
+        },
+        show_name_scheme_edit:function(){
+            if(this.selected_category=='' && this.selected_attribute_1=='' && this.selected_attribute_2==''){
+                // no category or attribute is selected
+                return false
+            }
+            else{
+                return true
+            }
         }
     },
     methods: {
@@ -448,7 +458,7 @@ new Vue({
             this.show_attributes_edit=false;
         },
         closeEditCategories: function(){
-            this.show_categories_edit=false;
+            this.show_category_edit=false;
         },
         closeEditMaterials: function(){
             this.show_materials_edit=false;
@@ -599,7 +609,7 @@ new Vue({
             this.show_attributes_edit=true;
         },
         editCategories: function(){
-            this.show_categories_edit=true;
+            this.show_category_edit=true;
         },
         editMaterials: function(){
             this.show_materials_edit=true;
