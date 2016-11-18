@@ -3,895 +3,1907 @@ var AttributeOptions =
   "id":"attributes",
   "conjunction":{
     "with":{
-      de:"mit",
-      en:"with"
+      de: "mit",
+        edit: false,
+          active: true
+        },
+        en:{
+          value:"with"
     },
     "and":{
-      de:"und",
-      en:"and"
+      de: "und",
+      en: "and"
     }
   },
   "content":[
     {
       "value":"claw-set-crystal",
       "label":{
-      	de:"eingefasstem Kristallstein",
-      	en:"claw set crystal"
+      	de:{
+          value:"eingefasstem Kristallstein",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"claw set crystal",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"cone",
       "label":{
-      	de:"Cone",
-      	en:"cone"
-      },
+      	de:{
+          value:"Cone",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cone",
+          edit: false,
+          active: true
+        },
+      }
     },
     {
       "value":"cones",
       "label":{
-      	de:"Cones",
-      	en:"cones"
-      },
+      	de:{
+          value:"Cones",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cones",
+          edit: false,
+          active: true
+        },
+      }
     },
     {
       "value":"anodised-ball",
       "label":{
-      	de:"farbig eloxierter Kugel",
-      	en:"anodised ball"
+      	de:{
+          value:"farbig eloxierter Kugel",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"anodised ball",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"anodised-cone",
       "label":{
-      	de:"farbig eloxiertem Cone",
-      	en:"anodised cone"
+      	de:{
+          value:"farbig eloxiertem Cone",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"anodised cone",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"design_crapwaer",
       "label":{
-      	de:"Crapwaer Design",
-      	en:"Crapwaer design"
+      	de:{
+          value:"Crapwaer Design",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"Crapwaer design",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"design_sarah-sorceress",
       "label":{
-      	de:"Sarah Sorceress Design",
-      	en:"Sarah Sorceress design"
+      	de:{
+          value:"Sarah Sorceress Design",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"Sarah Sorceress design",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_pendant",
       "label":{
-      	de:"Anhängerinlay",
-      	en:"pendant inlay"
+      	de:{
+          value:"Anhängerinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"pendant inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_flower",
       "label":{
-      	de:"Blumeninlay",
-      	en:"flower inlay"
+      	de:{
+          value:"Blumeninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flower inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_flower-little",
       "label":{
-      	de:"Blümcheninlay",
-      	en:"little flower inlay"
+      	de:{
+          value:"Blümcheninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little flower inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_cupcake",
       "label":{
-      	de:"Cupcake-Inlay",
-      	en:"cupcake inlay"
+      	de:{
+          value:"Cupcake-Inlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cupcake inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_cocktail",
       "label":{
-      	de:"Cocktailinlay",
-      	en:"cocktail inlay"
+      	de:{
+          value:"Cocktailinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cocktail inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_dolphin",
       "label":{
-      	de:"Delfininlay",
-      	en:"dolphin inlay"
+      	de:{
+          value:"Delfininlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dolphin inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_lizard",
       "label":{
-      	de:"Eidechseninlay",
-      	en:"lizard inlay"
+      	de:{
+          value:"Eidechseninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lizard inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_elephant",
       "label":{
-      	de:"Elefanteninlay",
-      	en:"elephant inlay"
+      	de:{
+          value:"Elefanteninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elephant inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_elf",
       "label":{
-      	de:"Elfeninlay",
-      	en:"elf inlay"
+      	de:{
+          value:"Elfeninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elf inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_angel",
       "label":{
-      	de:"Engelinlay",
-      	en:"angel inlay"
+      	de:{
+          value:"Engelinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"angel inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_flip-flop",
       "label":{
-      	de:"Flip Flop Inlay",
-      	en:"flip-flop inlay"
+      	de:{
+          value:"Flip Flop Inlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flip-flop inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_wing",
       "label":{
-      	de:"Flügelinlay",
-      	en:"wing inlay"
+      	de:{
+          value:"Flügelinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"wing inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_frog",
       "label":{
-      	de:"Froschinlay",
-      	en:"frop inlay"
+      	de:{
+          value:"Froschinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"frop inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_handcuffs",
       "label":{
-      	de:"Handschelleninlay",
-      	en:"handcuffs inlay"
+      	de:{
+          value:"Handschelleninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"handcuffs inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_heart",
       "label":{
-      	de:"Herzinlay",
-      	en:"heart inlay"
+      	de:{
+          value:"Herzinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"heart inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_heart-little",
       "label":{
-      	de:"Herzcheninlay",
-      	en:"little hearts inlay"
+      	de:{
+          value:"Herzcheninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little hearts inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_horseshoe",
       "label":{
-      	de:"Hufeiseninlay",
-      	en:"horseshoe inlay"
+      	de:{
+          value:"Hufeiseninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"horseshoe inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_chain",
       "label":{
-      	de:"Ketteninlay",
-      	en:"chain inlay"
+      	de:{
+          value:"Ketteninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"chain inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_stroller",
       "label":{
-      	de:"Kinderwageninlay",
-      	en:"stroller inlay"
+      	de:{
+          value:"Kinderwageninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"stroller inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_cherry",
       "label":{
-      	de:"Kirschinlay",
-      	en:"cherry inlay"
+      	de:{
+          value:"Kirschinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cherry inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_cloverleaf",
       "label":{
-      	de:"Kleeblattinlay",
-      	en:"cloverleaf inlay"
+      	de:{
+          value:"Kleeblattinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cloverleaf inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_cross",
       "label":{
-      	de:"Kreuzinlay",
-      	en:"cross inlay"
+      	de:{
+          value:"Kreuzinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cross inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_crown",
       "label":{
-      	de:"Kroneninlay",
-      	en:"crown inlay"
+      	de:{
+          value:"Kroneninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"crown inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_dragon-fly",
       "label":{
-      	de:"Libelleninlay",
-      	en:"dragon fly inlay"
+      	de:{
+          value:"Libelleninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dragon fly inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_little-baby",
       "label":{
-      	de:"Little Baby Inlay",
-      	en:"little baby inlay"
+      	de:{
+          value:"Little Baby Inlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little baby inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_moon",
       "label":{
-      	de:"Mondinlay",
-      	en:"moon inlay"
+      	de:{
+          value:"Mondinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"moon inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_octopus",
       "label":{
-      	de:"Oktopusinlay",
-      	en:"octopus inlay"
+      	de:{
+          value:"Oktopusinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"octopus inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_om",
       "label":{
-      	de:"Ominlay",
-      	en:"om inlay"
+      	de:{
+          value:"Ominlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"om inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_ace-of-spades",
       "label":{
-      	de:"Piek Ass Inlay",
-      	en:"ace of spades inlay"
+      	de:{
+          value:"Piek Ass Inlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"ace of spades inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_poodle",
       "label":{
-      	de:"Pudelinlay",
-      	en:"poodle inlay"
+      	de:{
+          value:"Pudelinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"poodle inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_lock",
       "label":{
-      	de:"Schlossinlay",
-      	en:"lock inlay"
+      	de:{
+          value:"Schlossinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lock inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_key",
       "label":{
-      	de:"Schlüsselinlay",
-      	en:"lock inlay"
+      	de:{
+          value:"Schlüsselinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lock inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_butterfly",
       "label":{
-      	de:"Schmetterlingsinlay",
-      	en:"butterfly inlay"
+      	de:{
+          value:"Schmetterlingsinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"butterfly inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_swan",
       "label":{
-      	de:"Schwaneninlay",
-      	en:"swan inlay"
+      	de:{
+          value:"Schwaneninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"swan inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_spider-web",
       "label":{
-      	de:"Spinnennetzinlay",
-      	en:"spider web inlay"
+      	de:{
+          value:"Spinnennetzinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"spider web inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_star",
       "label":{
-      	de:"Sterneninlay",
-      	en:"star inlay"
+      	de:{
+          value:"Sterneninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"star inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_tart",
       "label":{
-      	de:"Törtcheninlay",
-      	en:"tart inlay"
+      	de:{
+          value:"Törtcheninlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"tart inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_skull",
       "label":{
-      	de:"Totenschädelinlay",
-      	en:"skull inlay"
+      	de:{
+          value:"Totenschädelinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"skull inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"inlay_dice",
       "label":{
-      	de:"Würfelinlay",
-      	en:"dice inlay"
+      	de:{
+          value:"Würfelinlay",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dice inlay",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"jewelled",
       "label":{
-      	de:"Kristallstein",
-      	en:"jewelled"
+      	de:{
+          value:"Kristallstein",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"jewelled",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"jewelled-disc",
       "label":{
-      	de:"Kristallsteinscheibe",
-      	en:"jewelled disc"
+      	de:{
+          value:"Kristallsteinscheibe",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"jewelled disc",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant",
       "label":{
-      	de:"Anhänger",
-      	en:"pendant"
+      	de:{
+          value:"Anhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_flower",
       "label":{
-      	de:"Blumenanhänger",
-      	en:"flower pendant"
+      	de:{
+          value:"Blumenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flower pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_flower-little",
       "label":{
-      	de:"Blümchenanhänger",
-      	en:"little flowers pendant"
+      	de:{
+          value:"Blümchenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little flowers pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_cupcake",
       "label":{
-      	de:"Cupcake-Anhänger",
-      	en:"cupcake pendant"
+      	de:{
+          value:"Cupcake-Anhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cupcake pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_cocktail",
       "label":{
-      	de:"Cocktailanhänger",
-      	en:"cocktail pendant"
+      	de:{
+          value:"Cocktailanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cocktail pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_dolphin",
       "label":{
-      	de:"Delfininanhänger",
-      	en:"dolphin pendant"
+      	de:{
+          value:"Delfininanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dolphin pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_lizard",
       "label":{
-      	de:"Eidechsenanhänger",
-      	en:"lizard pendant"
+      	de:{
+          value:"Eidechsenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lizard pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_elephant",
       "label":{
-      	de:"Elefantenanhänger",
-      	en:"elephant pendant"
+      	de:{
+          value:"Elefantenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elephant pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_elf",
       "label":{
-      	de:"Elfenanhänger",
-      	en:"elf pendant"
+      	de:{
+          value:"Elfenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elf pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_angel",
       "label":{
-      	de:"Engelanhänger",
-      	en:"angel pendant"
+      	de:{
+          value:"Engelanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"angel pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_flip-flop",
       "label":{
-      	de:"Flip Flop Anhänger",
-      	en:"flip-flop pendant"
+      	de:{
+          value:"Flip Flop Anhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flip-flop pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_wing",
       "label":{
-      	de:"Flügelanhänger",
-      	en:"wing pendant"
+      	de:{
+          value:"Flügelanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"wing pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_frog",
       "label":{
-      	de:"Froschanhänger",
-      	en:"frog pendant"
+      	de:{
+          value:"Froschanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"frog pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_handcuffs",
       "label":{
-      	de:"Handschellenanhänger",
-      	en:"handcuffs pendant"
+      	de:{
+          value:"Handschellenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"handcuffs pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_heart",
       "label":{
-      	de:"Herzanhänger",
-      	en:"heart pendant"
+      	de:{
+          value:"Herzanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"heart pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_heart-little",
       "label":{
-      	de:"Herzchenanhänger",
-      	en:"little hearts pendant"
+      	de:{
+          value:"Herzchenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little hearts pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_horseshoe",
       "label":{
-      	de:"Hufeisenanhänger",
-      	en:"horseshoe pendant"
+      	de:{
+          value:"Hufeisenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"horseshoe pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_chain",
       "label":{
-      	de:"Kettenanhänger",
-      	en:"chain pendant"
+      	de:{
+          value:"Kettenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"chain pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_stroller",
       "label":{
-      	de:"Kinderwagenanhänger",
-      	en:"stroller pendant"
+      	de:{
+          value:"Kinderwagenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"stroller pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_cherry",
       "label":{
-      	de:"Kirschanhänger",
-      	en:"cherry pendant"
+      	de:{
+          value:"Kirschanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cherry pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_cloverleaf",
       "label":{
-      	de:"Kleeblattanhänger",
-      	en:"cloverleaf pendant"
+      	de:{
+          value:"Kleeblattanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cloverleaf pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_cross",
       "label":{
-      	de:"Kreuzanhänger",
-      	en:"cross pendant"
+      	de:{
+          value:"Kreuzanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cross pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_crown",
       "label":{
-      	de:"Kronenanhänger",
-      	en:"crown pendant"
+      	de:{
+          value:"Kronenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"crown pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_dragon-fly",
       "label":{
-      	de:"Libellenanhänger",
-      	en:"dragon fly pendant"
+      	de:{
+          value:"Libellenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dragon fly pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_little-baby",
       "label":{
-      	de:"Little Baby Anhänger",
-      	en:"little baby pendant"
+      	de:{
+          value:"Little Baby Anhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little baby pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_moon",
       "label":{
-      	de:"Mondanhänger",
-      	en:"moon pendant"
+      	de:{
+          value:"Mondanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"moon pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_octopus",
       "label":{
-      	de:"Oktopusanhänger",
-      	en:"octopus pendant"
+      	de:{
+          value:"Oktopusanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"octopus pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_om",
       "label":{
-      	de:"Omanhänger",
-      	en:"om pendant"
+      	de:{
+          value:"Omanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"om pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_ace-of-spades",
       "label":{
-      	de:"Piek Ass Anhänger",
-      	en:"ace of spades pendant"
+      	de:{
+          value:"Piek Ass Anhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"ace of spades pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_poodle",
       "label":{
-      	de: "Pudelanhänger",
-      	en:"poodle pendant"
+      	de:{
+          value:"Pudelanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"poodle pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_lock",
       "label":{
-      	de:"Schlossanhänger",
-      	en:"lock pendant"
+      	de:{
+          value:"Schlossanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lock pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_key",
       "label":{
-      	de:"Schlüsselanhänger",
-      	en:"key pendant"
+      	de:{
+          value:"Schlüsselanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"key pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_butterfly",
       "label":{
-      	de:"Schmetterlingsanhänger",
-      	en:"butterfly pendant"
+      	de:{
+          value:"Schmetterlingsanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"butterfly pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_swan",
       "label":{
-      	de:"Schwanenanhänger",
-      	en:"swan pendant"
+      	de:{
+          value:"Schwanenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"swan pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_spider-web",
       "label":{
-      	de:"Spinnennetzanhänger",
-      	en:"spider web pendant"
+      	de:{
+          value:"Spinnennetzanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"spider web pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_star",
       "label":{
-      	de:"Sternenanhänger",
-      	en:"star pendant"
+      	de:{
+          value:"Sternenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"star pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_tart",
       "label":{
-      	de:"Törtchenanhänger",
-      	en:"tart pendant"
+      	de:{
+          value:"Törtchenanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"tart pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_skull",
       "label":{
-      	de:"Totenschädelanhänger",
-      	en:"skull pendant"
+      	de:{
+          value:"Totenschädelanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"skull pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "pendant_dice",
       "label":{
-      	de:"Würfelanhänger",
-      	en:"dice pendant"
+      	de:{
+          value:"Würfelanhänger",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dice pendant",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "replacement-ends",
       "label":{
-      	de:"Aufsatz",
-      	en:"replacement ends"
+      	de:{
+          value:"Aufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_flower",
       "label":{
-      	de:"Blumenaufsatz",
-      	en:"flower replacement ends"
+      	de:{
+          value:"Blumenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flower replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_flower-little",
       "label":{
-      	de:"Blümchenaufsatz",
-      	en:"little flower replacement ends"
+      	de:{
+          value:"Blümchenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little flower replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_cupcake",
       "label":{
-      	de:"Cupcake-Aufsatz",
-      	en:"cupcake replacement ends"
+      	de:{
+          value:"Cupcake-Aufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cupcake replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_cocktail",
       "label":{
-      	de:"Cocktailaufsatz",
-      	en:"cocktail replacement ends"
+      	de:{
+          value:"Cocktailaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cocktail replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_dolphin",
       "label":{
-      	de:"Delfininaufsatz",
-      	en:"dolphin replacement ends"
+      	de:{
+          value:"Delfininaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dolphin replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_lizard",
       "label":{
-      	de:"Eidechsenaufsatz",
-      	en:"lizard replacement ends"
+      	de:{
+          value:"Eidechsenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lizard replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_elephant",
       "label":{
-      	de:"Elefantenaufsatz",
-      	en:"elephant replacement ends"
+      	de:{
+          value:"Elefantenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elephant replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_elf",
       "label":{
-      	de:"Elfenaufsatz",
-      	en:"elf replacement ends"
+      	de:{
+          value:"Elfenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"elf replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_angel",
       "label":{
-      	de:"Engelaufsatz",
-      	en:"angel replacement ends"
+      	de:{
+          value:"Engelaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"angel replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_flip-flop",
           "label":{
-      	de:"Flip Flop Aufsatz",
-      	en:"flip-flop replacement ends"
+      	de:{
+          value:"Flip Flop Aufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"flip-flop replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_wing",
       "label":{
-      	de:"wing replacement ends",
-      	en:"Flügelaufsatz"
+      	de:{
+          value:"wing replacement ends",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"Flügelaufsatz",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_frog",
       "label":{
-      	de:"Froschaufsatz",
-      	en:"frop replacement ends"
+      	de:{
+          value:"Froschaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"frop replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_handcuffs",
       "label":{
-      	de:"Handschellenaufsatz",
-      	en:"handcuff replacement ends"
+      	de:{
+          value:"Handschellenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"handcuff replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_heart",
       "label":{
-      	de:"Herzaufsatz",
-      	en:"heart replacement ends"
+      	de:{
+          value:"Herzaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"heart replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_heart-little",
       "label":{
-      	de:"Herzchenaufsatz",
-      	en:"little hearts replacement ends"
+      	de:{
+          value:"Herzchenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little hearts replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_horseshoe",
       "label":{
-      	de:"Hufeisenaufsatz",
-      	en:"horseshoe replacement ends"
+      	de:{
+          value:"Hufeisenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"horseshoe replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_chain",
       "label":{
-      	de:"Kettenaufsatz",
-      	en:"chain replacement ends"
+      	de:{
+          value:"Kettenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"chain replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_stroller",
       "label":{
-      	de:"Kinderwagenaufsatz",
-      	en:"stroller replacement ends"
+      	de:{
+          value:"Kinderwagenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"stroller replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_cherry",
       "label":{
-      	de:"Kirschaufsatz",
-      	en:"cherry replacement ends"
+      	de:{
+          value:"Kirschaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cherry replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_cloverleaf",
       "label":{
-      	de:"Kleeblattaufsatz",
-      	en:"cloverleaf replacement ends"
+      	de:{
+          value:"Kleeblattaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cloverleaf replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_cross",
       "label":{
-      	de:"Kreuzaufsatz",
-      	en:"cross replacement ends"
+      	de:{
+          value:"Kreuzaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"cross replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_crown",
       "label":{
-      	de:"Kronenaufsatz",
-      	en:"crown replacement ends"
+      	de:{
+          value:"Kronenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"crown replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_dragon-fly",
       "label":{
-      	de:"Libellenaufsatz",
-      	en:"dragon fly replacement ends"
+      	de:{
+          value:"Libellenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"dragon fly replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_little-baby",
       "label":{
-      	de:"Little Baby Aufsatz",
-      	en:"little baby replacement ends"
+      	de:{
+          value:"Little Baby Aufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"little baby replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_moon",
       "label":{
-      	de:"Mondaufsatz",
-      	en:"moon replacement ends"
+      	de:{
+          value:"Mondaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"moon replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_octopus",
       "label":{
-      	de:"Oktopusaufsatz",
-      	en:"octopus replavement ends"
+      	de:{
+          value:"Oktopusaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"octopus replavement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_om",
       "label":{
-      	de:"Omaufsatz",
-      	en:"om replacement ends"
+      	de:{
+          value:"Omaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"om replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_ace-of-spades",
       "label":{
-      	de:"Piek Ass Aufsatz",
-      	en:"ace of spades replacement ends"
+      	de:{
+          value:"Piek Ass Aufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"ace of spades replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_poodle",
       "label":{
-      	de:"Pudelaufsatz",
-      	en:"poodle replacement ends"
+      	de:{
+          value:"Pudelaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"poodle replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_lock",
       "label":{
-      	de:"Schlossaufsatz",
-      	en:"lock replacement ends"
+      	de:{
+          value:"Schlossaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"lock replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_key",
       "label":{
-      	de:"Schlüsselaufsatz",
-      	en:"key replacement ends"
+      	de:{
+          value:"Schlüsselaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"key replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_butterfly",
       "label":{
-      	de:"Schmetterlingsaufsatz",
-      	en:"butterfly replacement ends"
+      	de:{
+          value:"Schmetterlingsaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"butterfly replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_swan",
       "label":{
-      	de:"Schwanenaufsatz",
-      	en:"swan replacement ends"
+      	de:{
+          value:"Schwanenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"swan replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_spider-web",
       "label":{
-      	de:"Spinnennetzaufsatz",
-      	en:"spider web replacement ends"
+      	de:{
+          value:"Spinnennetzaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"spider web replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_star",
       "label":{
-      	de:"Sternenaufsatz",
-      	en:"star replacement ends"
+      	de:{
+          value:"Sternenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"star replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_tart",
       "label":{
-      	de:"Törtchenaufsatz",
-      	en:"tart replacement ends"
+      	de:{
+          value:"Törtchenaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"tart replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_skull",
       "label":{
-      	de:"Totenschädelaufsatz",
-      	en:"skull replacement ends"
+      	de:{
+          value:"Totenschädelaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en:{
+          value:"skull replacement ends",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"replacement-ends_dice",
       "label":{
-      	de:"Würfelaufsatz",
-      	en:"dice replacement ends"
+      	de:{
+          value:"Würfelaufsatz",
+      	  edit: false,
+          active: true
+        },
+        en: {
+            value: "dice replacement ends",
+            edit: false,
+            active: true
+        }
       }
     }
   ]

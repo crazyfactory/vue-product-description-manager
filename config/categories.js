@@ -6,498 +6,1066 @@ var CategoryOptions =
     {
       "value":"ball",
       "label":{
-        de:"Kugel",
-        en:"Ball"
+        de:{
+          value:"Kugel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Ball",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_ball",
       "label": {
-        de: "Schwarze Kugel",
-        en: "Black ball"
+        de:{
+          value:"Schwarze Kugel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black ball",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"banana",
       "label":{
-          de:"Banane",
-          en: "Banana"
+          de:{
+          value:"Banane",
+            edit: false,
+          active: true
+        },
+        en:{
+          value:"Banana",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_banana",
       "label": {
-        de: "Schwarze Banane",
-        en: "Black banana"
+        de:{
+          value:"Schwarze Banane",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black banana",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"barbell",
       "label":{
-        de:"Barbell",
-        en:"Barbell"
+        de:{
+          value:"Barbell",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Barbell",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_barbell",
       "label":{
-        de:"Schwarzer Barbell",
-        en:"Black barbell"
+        de:{
+          value:"Schwarzer Barbell",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black barbell",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"circular-barbell",
       "label":{
-        de:"Circular Barbell",
-        en:"Circular barbell"
+        de:{
+          value:"Circular Barbell",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Circular barbell",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_circular-barbell",
       "label":{
-        de:"Schwarzer Circular Barbell",
-        en:"Black circular barbell"
+        de:{
+          value:"Schwarzer Circular Barbell",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black circular barbell",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"dermal-anchor",
       "label":{
-        de:"Dermal Anchor",
-        en:"Dermal anchor"
+        de:{
+          value:"Dermal Anchor",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Dermal anchor",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_dermal-anchor",
       "label":{
-        de:"Schwarzer Dermal Anchor",
-        en:"Black dermal anchor"
+        de:{
+          value:"Schwarzer Dermal Anchor",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black dermal anchor",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "expander",
       "label": {
-        de:"Expander",
-        en:"Expander"
+        de:{
+          value:"Expander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"acrylic-expander",
       "label":{
-        de:"Acrylexpander",
-        en:"Acrylic expander"
+        de:{
+          value:"Acrylexpander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Acrylic expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_acrylic-expander",
       "label":{
-        de:"Schwarzer Acrylexpander",
-        en:"Black acrylic expander"
+        de:{
+          value:"Schwarzer Acrylexpander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black acrylic expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_expander",
       "label":{
-        de:"Schwarzer Expander",
-        en:"Black Expander"
+        de:{
+          value:"Schwarzer Expander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black Expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_wood-expander",
       "label":{
-        de:"Schwarzer Holzexpander",
-        en:"Black wood expander"
+        de:{
+          value:"Schwarzer Holzexpander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black wood expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"wood-expander",
       "label":{
-        de:"Holzexpander",
-        en:"Wooden expander"
+        de:{
+          value:"Holzexpander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Wooden expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"ear-cuff",
       "label":{
-        de:"Ear Cuff",
-        en:"Ear cuff"
+        de:{
+          value:"Ear Cuff",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Ear cuff",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_ear-cuff",
       "label":{
-        de:"Schwarzer Ear Cuff",
-        en:"Black ear cuff"
+        de:{
+          value:"Schwarzer Ear Cuff",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black ear cuff",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"fake-claw",
       "label": {
-        de:"Fake Claw",
-        en:"Fake claw"
+        de:{
+          value:"Fake Claw",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Fake claw",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_fake-claw",
       "label": {
-        de:"Schwarze Fake Claw",
-        en:"Black fake claw"
+        de:{
+          value:"Schwarze Fake Claw",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black fake claw",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"fake-expander",
       "label": {
-        de:"Fake Expander",
-        en:"Fake expander"
+        de:{
+          value:"Fake Expander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Fake expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_fake-expander",
       "label": {
-        de:"Schwarzer Fake Expander",
-        en:"Black fake expander"
+        de:{
+          value:"Schwarzer Fake Expander",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black fake expander",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"fake-plug",
       "label": {
-        de:"Fake Plug",
-        en:"Fake plug"
+        de:{
+          value:"Fake Plug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Fake plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_fake-plug",
       "label": {
-        de:"Schwarzer Fake Plug",
-        en:"Black fake plug"
+        de:{
+          value:"Schwarzer Fake Plug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black fake plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"fake-septum",
       "label": {
-        de:"Fake Septum",
-        en:"Fake septum"
+        de:{
+          value:"Fake Septum",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Fake septum",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_fake-septum",
       "label": {
-        de:"Schwarzes Fake Septum",
-        en:"Black fake septum"
+        de:{
+          value:"Schwarzes Fake Septum",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black fake septum",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"fake-spiral",
       "label": {
-        de:"Fake Spirale",
-        en:"Fake spiral"
+        de:{
+          value:"Fake Spirale",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Fake spiral",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_fake-spiral",
       "label": {
-        de:"Schwarze Fake Spirale",
-        en:"Black fake spiral"
+        de:{
+          value:"Schwarze Fake Spirale",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black fake spiral",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"helix-piercing",
       "label":{
-        de:"Helix Piercing",
-        en:"Helix piercing"
+        de:{
+          value:"Helix Piercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Helix piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_helix-piercing",
       "label":{
-        de:"Schwarzes Helix Piercing",
-        en:"Black helix piercing"
+        de:{
+          value:"Schwarzes Helix Piercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black helix piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"labret",
       "label":{
-        de:"Labret",
-        en:"Labret"
+        de:{
+          value:"Labret",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Labret",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_labret",
       "label":{
-        de:"Schwarzes Labret",
-        en:"Black labret"
+        de:{
+          value:"Schwarzes Labret",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black labret",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nipple-piercing",
       "label":{
-        de:"Brustwarzenpiercing",
-        en:"Nipple piercing"
+        de:{
+          value:"Brustwarzenpiercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nipple piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nipple-piercing",
       "label":{
-        de:"Schwarzes Brustwarzenpiercing",
-        en:"Black nipple piercing"
+        de:{
+          value:"Schwarzes Brustwarzenpiercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nipple piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nipple-clicker",
       "label":{
-        de:"Brustwarzenklicker",
-        en:"Nipple clicker"
+        de:{
+          value:"Brustwarzenklicker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nipple clicker",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nipple-clicker",
       "label":{
-        de:"Schwarzer Brustwarzenklicker",
-        en:"Black nipple clicker"
+        de:{
+          value:"Schwarzer Brustwarzenklicker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nipple clicker",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nipple-shield",
       "label":{
-        de:"Nipple-Schild",
-        en:"Nipple shield"
+        de:{
+          value:"Nipple-Schild",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nipple shield",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nipple-shield",
       "label":{
-        de:"Schwarzer Nipple-Schild",
-        en:"Black nipple shield"
+        de:{
+          value:"Schwarzer Nipple-Schild",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nipple shield",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nipple-stirrup",
       "label":{
-        de:"Nipple-Stirrup",
-        en:"Nipple stirrup"
+        de:{
+          value:"Nipple-Stirrup",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nipple stirrup",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nipple-stirrup",
       "label":{
-        de:"Schwarzer Nipple-Stirrup",
-        en:"Black nipple stirrup"
+        de:{
+          value:"Schwarzer Nipple-Stirrup",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nipple stirrup",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"plug",
       "label":{
-        de:"Plug",
-        en:"Plug"
+        de:{
+          value:"Plug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"acrylic-plug",
       "label":{
-        de:"Acrylplug",
-        en:"Acrylic plug"
+        de:{
+          value:"Acrylplug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Acrylic plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_acrylic-plug",
       "label":{
-        de:"Schwarzer Acrylplug",
-        en:"Black acrylic plug"
+        de:{
+          value:"Schwarzer Acrylplug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black acrylic plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_plug",
       "label":{
-        de:"Schwarzer Plug",
-        en:"Black plug"
+        de:{
+          value:"Schwarzer Plug",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black plug",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"ring",
       "label":{
-        de:"Ring",
-        en:"Ring"
+        de:{
+          value:"Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"piercing-ring",
       "label":{
-        de:"Piercing Ring",
-        en:"Piercing ring"
+        de:{
+          value:"Piercing Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Piercing ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"ball-closure-ring",
       "label":{
-        de:"Ball Closure Ring",
-        en:"Ball closure ring"
+        de:{
+          value:"Ball Closure Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Ball closure ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_ball-closure-ring",
       "label":{
-        de:"Schwarzer Ball Closure Ring",
-        en:"Black ball closure ring"
+        de:{
+          value:"Schwarzer Ball Closure Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black ball closure ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_continuous-ring",
       "label":{
-        de:"Schwarzer Continuous Ring",
-        en:"Black continuous ring"
+        de:{
+          value:"Schwarzer Continuous Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black continuous ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_piercing-ring",
       "label":{
-        de:"Schwarzer Piercing Ring",
-        en:"Black piercing ring"
+        de:{
+          value:"Schwarzer Piercing Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black piercing ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_segment-ring",
       "label":{
-        de:"Schwarzer Segment Ring",
-        en:"Black segment ring"
+        de:{
+          value:"Schwarzer Segment Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black segment ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"continuous-ring",
       "label":{
-        de:"Continuous Ring",
-        en:"Continuous ring"
+        de:{
+          value:"Continuous Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Continuous ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nose-ring",
       "label":{
-        de:"Nasenring",
-        en:"Nose ring"
+        de:{
+          value:"Nasenring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nose ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nose-ring",
       "label":{
-        de:"Schwarzer Nasenring",
-        en:"Black nose ring"
+        de:{
+          value:"Schwarzer Nasenring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nose ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"segment-ring",
       "label":{
-        de:"Segment Ring",
-        en:"Segment ring"
+        de:{
+          value:"Segment Ring",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Segment ring",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "septum",
       "label": {
-        de:"Septum",
-        en:"Septum"
+        de:{
+          value:"Septum",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Septum",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_septum",
       "label":{
-        de:"Schwarzes Septum",
-        en:"Black septum"
+        de:{
+          value:"Schwarzes Septum",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black septum",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "spiral",
       "label": {
-        de:"Spirale",
-        en:"Spiral"
+        de:{
+          value:"Spirale",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Spiral",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_spiral",
       "label":{
-        de:"Schwarze Spirale",
-        en:"Black spiral"
+        de:{
+          value:"Schwarze Spirale",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black spiral",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"stud",
       "label":{
-        de:"Stecker",
-        en:"Stud"
+        de:{
+          value:"Stecker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Stud",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"nose-stud",
       "label":{
-        de:"Nasenstecker",
-        en:"Nose stud"
+        de:{
+          value:"Nasenstecker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Nose stud",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_nose-stud",
       "label":{
-        de:"Schwarzer Nasenstecker",
-        en:"Black nose stud"
+        de:{
+          value:"Schwarzer Nasenstecker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black nose stud",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"ear-stud",
       "label":{
-        de:"Ohrstecker",
-        en:"Ear stud"
+        de:{
+          value:"Ohrstecker",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Ear stud",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"tragus-piercing",
       "label":{
-        de:"Tragus Piercing",
-        en:"Tragus piercing"
+        de:{
+          value:"Tragus Piercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Tragus piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_tragus-piercing",
       "label":{
-        de:"Schwarzes Tragus Piercing",
-        en:"Black tragus piercing"
+        de:{
+          value:"Schwarzes Tragus Piercing",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black tragus piercing",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value": "tunnel",
       "label": {
-        de:"Tunnel",
-        en:"Tunnel"
+        de:{
+          value:"Tunnel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Tunnel",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"acrylic-tunnel",
       "label":{
-        de:"Acryltunnel",
-        en:"Acrylic tunnel"
+        de:{
+          value:"Acryltunnel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Acrylic tunnel",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_acrylic-tunnel",
       "label":{
-        de:"Schwarzer Acryltunnel",
-        en:"Black acrylic tunnel"
+        de:{
+          value:"Schwarzer Acryltunnel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black acrylic tunnel",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_tunnel",
       "label":{
-        de:"Schwarzer Tunnel",
-        en:"Black tunnel"
+        de:{
+          value:"Schwarzer Tunnel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black tunnel",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"black_steel-tunnel",
       "label":{
-        de:"Schwarzer Stahltunnel",
-        en:"Black steel tunnel"
+        de:{
+          value:"Schwarzer Stahltunnel",
+          edit: false,
+          active: true
+        },
+        en:{
+          value:"Black steel tunnel",
+          edit: false,
+          active: true
+        },
       }
     },
     {
       "value":"steel-tunnel",
       "label":{
-        de:"Stahltunnel",
-        en:"Steel tunnel"
+        de:{
+          value:"Stahltunnel",
+          edit: false,
+          active: true
+        },
+        en: {
+          value: "Steel tunnel",
+          edit: false,
+          active: true
+        }
       }
     }
   ]
