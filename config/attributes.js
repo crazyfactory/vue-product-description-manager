@@ -3,12 +3,8 @@ var AttributeOptions =
   "id":"attributes",
   "conjunction":{
     "with":{
-      de: "mit",
-        edit: false,
-          active: true
-        },
-        en:{
-          value:"with"
+        de: "mit",
+        en: "with"
     },
     "and":{
       de: "und",

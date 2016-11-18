@@ -254,18 +254,25 @@
                           :taggable="true"
                           :push-tags="true"
                           :get-option-label="getOptionLabelValue"
-                          :create-option="createCategoryOption"
-                          target="categories_local"></v-select>
+                          :create-option="createCategoryOption"></v-select>
             </div>
             <div class="margin-bottom">
                 <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute"
-                          :options="attribute_options_1"
-                          :get-option-label="getOptionLabel"></v-select>
+                          :options="attribute_objects"
+                          :get-option-label="getOptionLabelValue"
+                          :taggable="true"
+                          :push-tags="true"
+                          :get-option-label="getOptionLabelValue"
+                          :create-option="createAttributeOption"></v-select>
             </div>
             <div class="margin-bottom">
                 <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute"
-                          :options="attribute_options_2"
-                          :get-option-label="getOptionLabel"></v-select>
+                          :options="attribute_objects"
+                          :get-option-label="getOptionLabelValue"
+                          :taggable="true"
+                          :push-tags="true"
+                          :get-option-label="getOptionLabelValue"
+                          :create-option="createAttributeOption"></v-select>
             </div>
             <div class="row">
                 <div class="actions">
@@ -331,7 +338,6 @@
                           :create-option="createMetatagOption"
                           :get-option-label="getOptionLabelValue">
                 </v-select>
-
             </div>
             <div class="row">
                 <div class="actions" v-if="!show_metatags_edit">
@@ -398,7 +404,9 @@
                     <li class="list-group-item">
                         <h5>Categories & Attributes</h5>
                         <a href="#" class="export cursor" @click="debugCategories()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Categories</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="clearCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Categories</a>
+                        <a href="#" class="export cursor" @click="clearCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Categories</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="debugAttributes()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Attributes</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="clearAttributes()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Attributes</a>
                     </li>
                     <li class="list-group-item">
                         <h5>Materials</h5>

@@ -263,10 +263,10 @@ new Vue({
             });
             return my_options;
         },
-        attributes_index:function(){
+        attribute_index:function(){
             return Object.keys(this.attributes)
         },
-        attributes_objects:function(){
+        attribute_objects:function(){
             return Object.values(this.attributes);
         },
         categories:function(){
@@ -420,11 +420,20 @@ new Vue({
                 this.newProduct = '';
             }
         },
+        clearAttributes:function(){
+            console.log('Clear local attributes:');
+            console.log(this.attributes_local);
+            this.attributes_local=[];
+            this.attributes=[];
+        },
         clearCategories:function(){
             console.log('Clear local categories:');
             console.log(this.categories_local);
             this.categories_local=[];
             this.categories=[];
+        },
+        clearLocalMetatags:function(){
+            this.metatags_local = [];
         },
         clearMaterials:function(){
             console.log('Clear local materials:');
@@ -432,11 +441,11 @@ new Vue({
             this.materials_local=[];
             this.materials=[];
         },
-        clearLocalMetatags:function(){
-            this.metatags_local = [];
-        },
         clearSettings: function(){
             this.settings={};
+        },
+        closeEditAttributes: function(){
+            this.show_attributes_edit=false;
         },
         closeEditCategories: function(){
             this.show_categories_edit=false;
@@ -471,11 +480,11 @@ new Vue({
             this.materials_local.push(option);
             return option;
         },
-        debugMe: function(me){
-            console.log(me);
-        },
-        debugMessages: function(){
-            console.log(this.messages);
+        debugAttributes:function(){
+            console.log("Local (app.attributes_local)");
+            console.log(this.attributes_local);
+            console.log("ALL Attributes (app.attributes)");
+            console.log(this.attributes);
         },
         debugCategories:function(){
             console.log("Local (app.categories_local)");
@@ -497,6 +506,37 @@ new Vue({
             console.log("ALL Metatags (app.metatags)");
             console.log(this.metatags);
             console.log('ferdsch');
+        },
+        debugMe: function(me){
+            console.log(me);
+        },
+        debugMessages: function(){
+            console.log(this.messages);
+        },
+        deleteAttributes: function(){
+            var selected=[]
+            selected.push(this.selected_attribute_1)
+            selected.push(this.selected_attribute_2)
+            var all_products = this.products
+            var all_items = this.attributes_local
+
+            selected.forEach(function (item) {
+                // remove item from all products
+                all_products.forEach(function (product) {
+                    if(product.attribute1.indexOf(item.value)> -1){
+                        product.attribute1.splice(product.attribute1.indexOf(item.value), 1)
+                    }
+                    if(product.attribute2.indexOf(item.value)> -1){
+                        product.attribute2.splice(product.attribute2.indexOf(item.value), 1)
+                    }
+                })
+                // remove from dropdown
+                if(all_items.indexOf(item)> -1){
+                    all_items.splice(all_items.indexOf(item), 1)
+                }
+            })
+            this.selected_attribute_1=''
+            this.selected_attribute_2=''
         },
         deleteCategories: function(){
             var selected=this.selected_categories;
@@ -554,6 +594,9 @@ new Vue({
                 }
             });
             this.selected_metatags=[];
+        },
+        editAttributes: function(){
+            this.show_attributes_edit=true;
         },
         editCategories: function(){
             this.show_categories_edit=true;
@@ -708,10 +751,6 @@ new Vue({
             };
             return option;
         },
-        removeCategory: function(product){
-            // remove material from one product
-            product.categories=[];
-        },
         removeMaterial: function(product){
             // remove material from one product
             product.materials=[];
@@ -815,11 +854,11 @@ new Vue({
 
                         };
                         if(product.attribute1 && product.attribute1.label[language.id]){
-                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.attribute1.label[language.id];
+                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.attribute1.label[language.id].value;
 
                         };
                         if(product.attribute2 && product.attribute2.label[language.id]){
-                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.attribute2.label[language.id];
+                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.attribute2.label[language.id].value;
                         };
                         product_names[language.id]={
                             value:my_name,
