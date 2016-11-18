@@ -6,24 +6,10 @@ else{
     var hasApi=false;
 }
 
-
 var AttributeData=[];
 var AttributeConjunction=[];
 var Descriptions=[];
 
-/*
- * set language data from static files
- */
-// provide Array CategoryOptions to populate category select (see config/categories.js)
-// provide Array AttributeOptions to populate attribute select (see config/attributes.js)
-
-
-
-//register components
-Vue.component('v-select', VueSelect.VueSelect);
-
-// teach TWIG some manners
-Vue.config.delimiters = ['[[', ']]'];
 /*
  * add products
  */
@@ -143,48 +129,47 @@ var categoryStorage = {
         localStorage.setItem(STORAGE_KEY_CATEGORY, JSON.stringify(category))
     }
 }
+// attribute management
+var STORAGE_KEY_ATTRIBUTE = 'crazy-attribute'
+var attributeStorage = {
+    fetch: function () {
+        var attribute_static=[];
+
+        if (AttributeOptions.content){
+            // got statics from mock or api
+            attribute_static = AttributeOptions.content;
+        }
+        // get the local options
+        var attributes = JSON.parse(localStorage.getItem(STORAGE_KEY_ATTRIBUTE) || '[]');
+        // if no local option are available: include statics
+        if (attributes.length<1){
+            attribute_static.forEach(function(item){
+                attributes.push(item);
+            })
+        }
+        return attributes
+    },
+    save: function (item) {
+        localStorage.setItem(STORAGE_KEY_ATTRIBUTE, JSON.stringify(item))
+    }
+}
+
+// register components
+Vue.component('v-select', VueSelect.VueSelect);
+// use non-standard deliters for twig
+Vue.config.delimiters = ['[[', ']]'];
 
 new Vue({
     el: '#app',
     data: {
-        /*
-         * Navigation Behavior
-         */
+        // attributes local
+        attributes_local:attributeStorage.fetch(),
+        // categories local
+        categories_local:categoryStorage.fetch(),
+        conjunction:AttributeOptions.conjunction,
         headline: 'Product Names',
         headline_icon:'fa fa-commenting-o',
-        show_load: true,
-        show_names: true,
-        show_material:false,
-        show_materials_edit:false,
-        show_preview: false,
-        show_export: false,
-        show_metatags: false,
-        show_metatags_edit:false,
-        show_message: false,
-        show_settings: false,
-        show_actionbar:false,
-
         isFullScreen:false,
-
-        // Name Scheme
-        //selected_categories:[],
-        selected_category:'',
-        selected_attribute_1:"",
-        selected_attribute_2:"",
-        selected_materials:[],
-        selected_metatags:[],
-        conjunction:AttributeOptions.conjunction,
-
-        // Product Management
-        products:productStorage.fetch(),
-        newProduct:'',
-
-        // message management
-        messages:messageStorage.fetch(),
-        // setting management
-        settings:settingStorage.fetch(),
-
-        // Language Management
         languages:[
             {
                 id:'de',
@@ -197,21 +182,39 @@ new Vue({
                 flag:'flag-icon-us',
             }
         ],
-
-        /*
-         * metatag management
-         */
-        // local
-        metatags_local:metatagStorage.fetch(),
+        // materials
         materials_local:materialStorage.fetch(),
-        categories_local:categoryStorage.fetch(),
-
+        // messages local
+        messages:messageStorage.fetch(),
+        // metatags local
+        metatags_local:metatagStorage.fetch(),
+        newProduct:'',
+        // products
+        products:productStorage.fetch(),
+        show_actionbar:false,
+        show_export: false,
+        show_load: true,
+        show_material:false,
+        show_materials_edit:false,
+        show_metatags: false,
+        show_metatags_edit:false,
+        show_message: false,
+        show_names: true,
+        show_preview: false,
+        show_settings: false,
+        selected_attribute_1:"",
+        selected_attribute_2:"",
+        selected_category:'',
+        selected_materials:[],
+        selected_metatags:[],
+        // settings local
+        settings:settingStorage.fetch()
     },
     // watch products change for localStorage persistence
     watch: {
-        products: {
-            handler: function (products) {
-                productStorage.save(products)
+        attributes_local: {
+            handler: function (item) {
+                attributeStorage.save(item)
             },
             deep: true
         },
@@ -227,15 +230,21 @@ new Vue({
             },
             deep: true
         },
+        messages: {
+            handler: function (messages) {
+                messageStorage.save(messages)
+            },
+            deep: true
+        },
         metatags_local: {
             handler: function (metatags) {
                 metatagStorage.save(metatags)
             },
             deep: true
         },
-        messages: {
-            handler: function (messages) {
-                messageStorage.save(messages)
+        products: {
+            handler: function (products) {
+                productStorage.save(products)
             },
             deep: true
         },
@@ -247,11 +256,18 @@ new Vue({
         }
     },
     computed: {
-        attribute_options_1: function(){
-            return AttributeOptions.content;
+        attributes:function(){
+            my_options={};
+            this.attributes_local.forEach(function(item) {
+                my_options[item.value]=item;
+            });
+            return my_options;
         },
-        attribute_options_2: function(){
-            return AttributeOptions.content;
+        attributes_index:function(){
+            return Object.keys(this.attributes)
+        },
+        attributes_objects:function(){
+            return Object.values(this.attributes);
         },
         categories:function(){
             my_options={};
@@ -265,37 +281,6 @@ new Vue({
         },
         category_objects:function(){
             return Object.values(this.categories);
-        },
-        isSmallScreen:function(){
-            return !this.isFullScreen;
-        },
-        materials:function(){
-            my_options={};
-            this.materials_local.forEach(function(item) {
-                my_options[item.value]=item;
-            });
-            return my_options;
-        },
-        material_index:function(){
-            return Object.keys(this.materials)
-        },
-        material_objects:function(){
-            return Object.values(this.materials);
-        },
-        metatags:{
-            get:function(){
-                my_tags={};
-                this.metatags_local.forEach(function(metatag) {
-                    my_tags[metatag.id]=metatag;
-                });
-                return my_tags;
-            }
-        },
-        metatag_index:function(){
-            return Object.keys(this.metatags)
-        },
-        metatag_objects:function(){
-            return Object.values(this.metatags);
         },
         deactivateMessages: {
             set: function () {
@@ -317,15 +302,6 @@ new Vue({
                 return this.settings.editorLanguage;
             }
         },
-        hasHiddenProducts: function(){
-            var bool = false;
-            this.products.forEach(function(product){
-               if(product.hidden){
-                   bool = true;
-               }
-            });
-            return bool;
-        },
         hasEditableProducts: function(){
             var bool = false;
             this.products.forEach(function(product){
@@ -334,74 +310,65 @@ new Vue({
                 }
             });
             return bool;
+        },
+        hasHiddenProducts: function(){
+            var bool = false;
+            this.products.forEach(function(product){
+                if(product.hidden){
+                    bool = true;
+                }
+            });
+            return bool;
+        },
+        isSmallScreen:function(){
+            return !this.isFullScreen;
+        },
+        materials:function(){
+            my_options={};
+            this.materials_local.forEach(function(item) {
+                my_options[item.value]=item;
+            });
+            return my_options;
+        },
+        material_index:function(){
+            return Object.keys(this.materials)
+        },
+        material_objects:function(){
+            return Object.values(this.materials);
+        },
+        metatags:function(){
+            my_tags={};
+            this.metatags_local.forEach(function(metatag) {
+                my_tags[metatag.id]=metatag;
+            });
+            return my_tags;
+        },
+        metatag_index:function(){
+            return Object.keys(this.metatags)
+        },
+        metatag_objects:function(){
+            return Object.values(this.metatags);
         }
-
     },
     methods: {
-        makeActive: function(item){
-            // deactivate all
-            this.show_names= false;
-            this.show_metatags= false;
-            this.show_material=false,
-            this.show_export= false;
-            this.show_preview= false;
-            this.show_message=false;
-            this.show_load=true;
-            this.isFullScreen=false;
-            this.headline_icon='';
+        addEditorLanguage: function(value){
+            var setting= {
+                editorLanguage:value,
+            };
+            this.settings=setting;
+        },
+        addMessage: function(message, type){
+            var today = moment().format('lll');
+            var msg= {
+                id:messageStorage.uid++,
+                message:message,
+                type:type,
+                show:true,
+                date:today
+            };
+            this.messages.unshift(msg);
 
-            switch(item){
-                case 'names':
-                    this.show_names= true;
-                    this.headline = 'Product Names';
-                    this.headline_icon = "fa fa-commenting-o";
-                    break;
-                case 'material':
-                    this.show_material= true;
-                    this.headline = 'Material';
-                    this.headline_icon = "fa fa-industry";
-                    break;
-                case 'preview':
-                    this.show_preview= true;
-                    this.headline = 'Preview';
-                    this.isFullScreen=true;
-                    this.headline_icon = "fa fa-eye";
-                    break;
-                case 'metatags':
-                    this.show_metatags= true;
-                    this.headline = 'Metatags';
-                    this.headline_icon = "fa fa-tags";
-                    break;
-                case 'export':
-                    this.show_export= true;
-                    this.headline = 'Export Products to shop';
-                    this.headline_icon = "fa fa-database";
-                    break;
-                case 'admin':
-                    this.show_message= true;
-                    this.show_load=false;
-                    this.headline = 'Admin Panel';
-                    this.headline_icon = "fa fa-user-secret";
-                    break;
-            }
         },
-        toggle_actionbar: function(){
-            if(this.products.length>0){
-                this.show_actionbar = !this.show_actionbar;
-            }
-            else{
-                this.show_actionbar = false;
-            }
-        },
-        toggle_settings: function(){
-            this.show_settings = !this.show_settings;
-        },
-        toggle_language: function(language){
-            language.status = !language.status;
-        },
-        /*
-         * Products stuff
-         */
         addProduct: function () {
             var value = this.newProduct && this.newProduct.trim();
             if (!value) {
@@ -453,34 +420,198 @@ new Vue({
                 this.newProduct = '';
             }
         },
-        removeProduct: function (product) {
-            this.products.splice(this.products.indexOf(product), 1)
+        clearCategories:function(){
+            console.log('Clear local categories:');
+            console.log(this.categories_local);
+            this.categories_local=[];
+            this.categories=[];
+        },
+        clearMaterials:function(){
+            console.log('Clear local materials:');
+            console.log(this.materials_local);
+            this.materials_local=[];
+            this.materials=[];
+        },
+        clearLocalMetatags:function(){
+            this.metatags_local = [];
+        },
+        clearSettings: function(){
+            this.settings={};
+        },
+        closeEditCategories: function(){
+            this.show_categories_edit=false;
+        },
+        closeEditMaterials: function(){
+            this.show_materials_edit=false;
+        },
+        closeEditMe: function(item){
+            item.edit= false;
+            item.value= item.value.replace(/\r?\n|\r/g,"")
+        },
+        closeEditMetatags: function(){
+            this.show_metatags_edit=false;
+        },
+        createAttributeOption: function(value){
+            var option = this.optionFactory(value);
+            this.attributes_local.push(option);
+            return option;
+        },
+        createCategoryOption: function(value){
+            var option = this.optionFactory(value);
+            this.categories_local.push(option);
+            return option;
+        },
+        createMetatagOption: function(value){
+            var option = this.optionFactory(value);
+            this.metatags_local.push(option);
+            return option;
+        },
+        createMaterialOption: function(value){
+            var option = this.optionFactory(value);
+            this.materials_local.push(option);
+            return option;
+        },
+        debugMe: function(me){
+            console.log(me);
+        },
+        debugMessages: function(){
+            console.log(this.messages);
+        },
+        debugCategories:function(){
+            console.log("Local (app.categories_local)");
+            console.log(this.categories_local);
+            console.log("ALL Categories (app.categories)");
+            console.log(this.categories);
+            console.log('aus die maus');
+        },
+        debugMaterials:function(){
+            console.log("Local (app.materials_local)");
+            console.log(this.materials_local);
+            console.log("ALL Materials (app.materials)");
+            console.log(this.materials);
+            console.log('aus die maus');
+        },
+        debugMetatags:function(){
+            console.log("Local (app.metatags_local)");
+            console.log(this.metatags_local);
+            console.log("ALL Metatags (app.metatags)");
+            console.log(this.metatags);
+            console.log('ferdsch');
+        },
+        deleteCategories: function(){
+            var selected=this.selected_categories;
+            var all_products = this.products;
+            var all_items = this.categories_local;
+
+            selected.forEach(function (item) {
+                // remove item from all products
+                all_products.forEach(function (product) {
+                    if(product.categories.indexOf(item.value)> -1){
+                        product.categories.splice(product.categories.indexOf(item.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_items.indexOf(item)> -1){
+                    all_items.splice(all_items.indexOf(item), 1);
+                }
+            });
+            this.selected_categories=[];
+        },
+        deleteMaterials: function(){
+            var selected_materials=this.selected_materials;
+            var all_products = this.products;
+            var all_materials = this.materials_local;
+
+            selected_materials.forEach(function (item) {
+                // remove item from all products
+                all_products.forEach(function (product) {
+                    if(product.materials.indexOf(item.value)> -1){
+                        product.materials.splice(product.materials.indexOf(item.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_materials.indexOf(item)> -1){
+                    all_materials.splice(all_materials.indexOf(item), 1);
+                }
+            });
+            this.selected_materials=[];
+        },
+        deleteMetatags: function(){
+            var selected_metatags=this.selected_metatags;
+            var all_products = this.products;
+            var all_metatags = this.metatags_local;
+
+            selected_metatags.forEach(function (metatag) {
+                // remove metatag from all products
+                all_products.forEach(function (product) {
+                    if(product.metatags.indexOf(metatag.value)> -1){
+                        product.metatags.splice(product.metatags.indexOf(metatag.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_metatags.indexOf(metatag)> -1){
+                    all_metatags.splice(all_metatags.indexOf(metatag), 1);
+                }
+            });
+            this.selected_metatags=[];
+        },
+        editCategories: function(){
+            this.show_categories_edit=true;
+        },
+        editMaterials: function(){
+            this.show_materials_edit=true;
+        },
+        editMe: function(item){
+            item.edit=true;
+        },
+        editMetatags: function(){
+            this.show_metatags_edit=true;
+        },
+        getGeneratedDescription: function(product, language){
+            index=this.products.indexOf(product);
+
+            if(hasApi){
+                api.app=this;
+                api.language=language;
+                api.data = product.propertyFormula;
+                api.action = 'generate_description';
+                api.product_index = index;
+                api.call();
+            }
+            else{
+                // use fake api response from api.js
+                var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
+                console.log('no api ... dry hump with api element nr.'+ random_nr);
+                my_product=Api_response[random_nr];
+                my_description=my_product.descriptions[language];
+                this.products[index].descriptions[language]=my_description;
+            }
+        },
+        getOptionLabel: function(item){
+            if (typeof item === 'object') {
+                if(item.label) {
+                    return item.label[this.settings.editorLanguage];
+                }
+            }
+            return item;
+        },
+        getOptionLabelValue: function(item){
+            if (typeof item === 'object') {
+                if(item.label) {
+                    return item.label[this.settings.editorLanguage].value;
+                }
+            }
+            return item;
+        },
+        hideMessage: function (message) {
+            message.show = false
+        },
+        hideMetatagLabel: function(product, metatag, language){
+            console.log("Hide this label ...");
         },
         hideProduct: function (product) {
             product.hidden = true;
             product.active = false;
-        },
-        removeSeletedProducts(){
-            var keep_products=[];
-            this.products.forEach(function(product){
-                if(!product.active){
-                  keep_products.push(product);
-              }
-            });
-            // delete all products
-            this.products = keep_products;
-        },
-        selectAllProducts: function(value){
-            var products = this.products;
-            products.forEach(function(product){
-                if(!product.hidden){
-                    product.active=value;
-                } else{
-                    // product never active when it is hidden
-                    product.active=false;
-                }
-
-            });
         },
         hideSelectedProducts: function(){
             this.products.forEach(function(product){
@@ -491,47 +622,58 @@ new Vue({
                 }
             });
         },
-        showAllProducts: function(){
-            this.products.forEach(function(product){
-                if(product.hidden) {
-                    // hidden products are not active
-                    product.active = true;
-                    product.hidden = false;
-                }else{
-                    product.active = false;
-                }
-
-            });
-        },
         invertSelectedlProducts: function(){
             var products = this.products;
             products.forEach(function(product){
                 product.active=!product.active;
             });
         },
-        addMessage: function(message, type){
-            var today = moment().format('lll');
-            var msg= {
-                id:messageStorage.uid++,
-                message:message,
-                type:type,
-                show:true,
-                date:today
-            };
-            this.messages.unshift(msg);
+        makeActive: function(item){
+            // deactivate all
+            this.show_names= false;
+            this.show_metatags= false;
+            this.show_material=false,
+                this.show_export= false;
+            this.show_preview= false;
+            this.show_message=false;
+            this.show_load=true;
+            this.isFullScreen=false;
+            this.headline_icon='';
 
-        },
-        addEditorLanguage: function(value){
-            var setting= {
-                editorLanguage:value,
-            };
-            this.settings=setting;
-        },
-        clearSettings: function(){
-            this.settings={};
-        },
-        clearLocalMetatags:function(){
-            this.metatags_local = [];
+            switch(item){
+                case 'names':
+                    this.show_names= true;
+                    this.headline = 'Product Names';
+                    this.headline_icon = "fa fa-commenting-o";
+                    break;
+                case 'material':
+                    this.show_material= true;
+                    this.headline = 'Material';
+                    this.headline_icon = "fa fa-industry";
+                    break;
+                case 'preview':
+                    this.show_preview= true;
+                    this.headline = 'Preview';
+                    this.isFullScreen=true;
+                    this.headline_icon = "fa fa-eye";
+                    break;
+                case 'metatags':
+                    this.show_metatags= true;
+                    this.headline = 'Metatags';
+                    this.headline_icon = "fa fa-tags";
+                    break;
+                case 'export':
+                    this.show_export= true;
+                    this.headline = 'Export Products to shop';
+                    this.headline_icon = "fa fa-database";
+                    break;
+                case 'admin':
+                    this.show_message= true;
+                    this.show_load=false;
+                    this.headline = 'Admin Panel';
+                    this.headline_icon = "fa fa-user-secret";
+                    break;
+            }
         },
         optionFactory: function(value){
             // no spaces and all lowercase for id/value
@@ -566,75 +708,13 @@ new Vue({
             };
             return option;
         },
-        createCategoryOption: function(value){
-            var option = this.optionFactory(value);
-            this.categories_local.push(option);
-            return option;
+        removeCategory: function(product){
+            // remove material from one product
+            product.categories=[];
         },
-        createMetatagOption: function(value){
-            var option = this.optionFactory(value);
-            this.metatags_local.push(option);
-            return option;
-        },
-        createMaterialOption: function(value){
-            var option = this.optionFactory(value);
-            this.materials_local.push(option);
-            return option;
-        },
-        getOptionLabel: function(item){
-            if (typeof item === 'object') {
-                if(item.label) {
-                    return item.label[this.settings.editorLanguage];
-                }
-            }
-            return item;
-        },
-        getOptionLabelValue: function(item){
-            if (typeof item === 'object') {
-                if(item.label) {
-                    return item.label[this.settings.editorLanguage].value;
-                }
-            }
-            return item;
-        },
-        debugMessages: function(){
-            console.log(this.messages);
-        },
-        debugMetatags:function(){
-            console.log("Local (app.metatags_local)");
-            console.log(this.metatags_local);
-            console.log("ALL Metatags (app.metatags)");
-            console.log(this.metatags);
-            console.log('ferdsch');
-        },
-        debugMaterials:function(){
-            console.log("Local (app.materials_local)");
-            console.log(this.materials_local);
-            console.log("ALL Materials (app.materials)");
-            console.log(this.materials);
-            console.log('aus die maus');
-        },
-        clearMaterials:function(){
-            console.log('Clear local materials:');
-            console.log(this.materials_local);
-            this.materials_local=[];
-            this.materials=[];
-        },
-        debugCategories:function(){
-            console.log("Local (app.categories_local)");
-            console.log(this.categories_local);
-            console.log("ALL Categories (app.categories)");
-            console.log(this.categories);
-            console.log('aus die maus');
-        },
-        clearCategories:function(){
-            console.log('Clear local categories:');
-            console.log(this.categories_local);
-            this.categories_local=[];
-            this.categories=[];
-        },
-        hideMessage: function (message) {
-            message.show = false
+        removeMaterial: function(product){
+            // remove material from one product
+            product.materials=[];
         },
         removeMessage: function(message){
             this.messages.splice(this.messages.indexOf(message), 1)
@@ -642,45 +722,22 @@ new Vue({
         removeMessages: function(){
             this.messages=[];
         },
-        alert: function(text) {
-            alert(text);
+        removeMetatag: function(product, metatag){
+            // remove metatag from one product
+            product.metatags.splice(product.metatags.indexOf(metatag), 1);
         },
-        // categories START
-        closeEditCategories: function(){
-            this.show_categories_edit=false;
+        removeProduct: function (product) {
+            this.products.splice(this.products.indexOf(product), 1)
         },
-        editCategories: function(){
-            this.show_categories_edit=true;
-        },
-        removeCategory: function(product){
-            // remove material from one product
-            product.categories=[];
-        },
-        deleteCategories: function(){
-            var selected=this.selected_categories;
-            var all_products = this.products;
-            var all_items = this.categories_local;
-
-            selected.forEach(function (item) {
-                // remove item from all products
-                all_products.forEach(function (product) {
-                    if(product.categories.indexOf(item.value)> -1){
-                        product.categories.splice(product.categories.indexOf(item.value), 1);
-                    }
-                })
-                // remove from dropdown
-                if(all_items.indexOf(item)> -1){
-                    all_items.splice(all_items.indexOf(item), 1);
+        removeSeletedProducts(){
+            var keep_products=[];
+            this.products.forEach(function(product){
+                if(!product.active){
+                    keep_products.push(product);
                 }
             });
-            this.selected_categories=[];
-        },
-        // categories END
-        closeEditMaterials: function(){
-            this.show_materials_edit=false;
-        },
-        editMaterials: function(){
-            this.show_materials_edit=true;
+            // delete all products
+            this.products = keep_products;
         },
         saveMaterials: function(){
             var selected_materials=this.selected_materials;
@@ -702,35 +759,6 @@ new Vue({
                 }
             });
         },
-        removeMaterial: function(product){
-            // remove material from one product
-            product.materials=[];
-        },
-        deleteMaterials: function(){
-            var selected_materials=this.selected_materials;
-            var all_products = this.products;
-            var all_materials = this.materials_local;
-
-            selected_materials.forEach(function (item) {
-                // remove item from all products
-                all_products.forEach(function (product) {
-                    if(product.materials.indexOf(item.value)> -1){
-                        product.materials.splice(product.materials.indexOf(item.value), 1);
-                    }
-                })
-                // remove from dropdown
-                if(all_materials.indexOf(item)> -1){
-                    all_materials.splice(all_materials.indexOf(item), 1);
-                }
-            });
-            this.selected_materials=[];
-        },
-        closeEditMetatags: function(){
-            this.show_metatags_edit=false;
-        },
-        editMetatags: function(){
-            this.show_metatags_edit=true;
-        },
         saveMetatags: function(){
             var selected_metatags=this.selected_metatags;
             // set metatags to all selected products
@@ -750,32 +778,6 @@ new Vue({
                     });
                 }
             });
-        },
-        removeMetatag: function(product, metatag){
-            // remove metatag from one product
-            product.metatags.splice(product.metatags.indexOf(metatag), 1);
-        },
-        deleteMetatags: function(){
-            var selected_metatags=this.selected_metatags;
-            var all_products = this.products;
-            var all_metatags = this.metatags_local;
-
-            selected_metatags.forEach(function (metatag) {
-                // remove metatag from all products
-                all_products.forEach(function (product) {
-                    if(product.metatags.indexOf(metatag.value)> -1){
-                        product.metatags.splice(product.metatags.indexOf(metatag.value), 1);
-                    }
-                })
-                // remove from dropdown
-                if(all_metatags.indexOf(metatag)> -1){
-                    all_metatags.splice(all_metatags.indexOf(metatag), 1);
-                }
-            });
-            this.selected_metatags=[];
-        },
-        hideMetatagLabel: function(product, metatag, language){
-            console.log("Hide this label ...");
         },
         saveNameScheme: function(){
             var category = this.selected_category;
@@ -830,39 +832,47 @@ new Vue({
                 }
             })
         },
-        editMe: function(item){
-            item.edit=true;
+        selectAllProducts: function(value){
+            var products = this.products;
+            products.forEach(function(product){
+                if(!product.hidden){
+                    product.active=value;
+                } else{
+                    // product never active when it is hidden
+                    product.active=false;
+                }
+
+            });
         },
-        closeEditMe: function(item){
-            item.edit= false;
-            item.value= item.value.replace(/\r?\n|\r/g,"")
+        showAllProducts: function(){
+            this.products.forEach(function(product){
+                if(product.hidden) {
+                    // hidden products are not active
+                    product.active = true;
+                    product.hidden = false;
+                }else{
+                    product.active = false;
+                }
+
+            });
+        },
+        toggle_actionbar: function(){
+            if(this.products.length>0){
+                this.show_actionbar = !this.show_actionbar;
+            }
+            else{
+                this.show_actionbar = false;
+            }
+        },
+        toggle_language: function(language){
+            language.status = !language.status;
+        },
+        toggle_settings: function(){
+            this.show_settings = !this.show_settings;
         },
         removeCustomName:function(item){
             item.value=item.original_value;
             item.edit= false;
-        },
-        getGeneratedDescription: function(product, language){
-            index=this.products.indexOf(product);
-
-            if(hasApi){
-                api.app=this;
-                api.language=language;
-                api.data = product.propertyFormula;
-                api.action = 'generate_description';
-                api.product_index = index;
-                api.call();
-            }
-            else{
-                // use fake api response from api.js
-                var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1));
-                console.log('no api ... dry hump with api element nr.'+ random_nr);
-                my_product=Api_response[random_nr];
-                my_description=my_product.descriptions[language];
-                this.products[index].descriptions[language]=my_description;
-            }
-        },
-        debugMe: function(me){
-            console.log(me);
         }
     }
 })
