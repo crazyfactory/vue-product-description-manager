@@ -278,8 +278,12 @@
     <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-show="show_names">
       <div class="margin-bottom">
         <v-select :value.sync="selected_category" placeholder="Select a Category"
-                  :options="category_options"
-                  :get-option-label="getOptionLabel"></v-select>
+                  :options="category_objects"
+                  :taggable="true"
+                  :push-tags="true"
+                  :get-option-label="getOptionLabelValue"
+                  :create-option="createCategoryOption"
+                  target="categories_local"></v-select>
       </div>
       <div class="margin-bottom">
         <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute"
@@ -418,6 +422,11 @@
             <a href="#" class="export cursor" @click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
             <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
             <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
+          </li>
+          <li class="list-group-item">
+            <h5>Categories & Attributes</h5>
+            <a href="#" class="export cursor" @click="debugCategories()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Categories</a>&nbsp;&nbsp;
+            <a href="#" class="export cursor" @click="clearCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Categories</a>
           </li>
           <li class="list-group-item">
             <h5>Materials</h5>

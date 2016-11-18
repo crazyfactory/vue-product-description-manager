@@ -119,6 +119,30 @@ var materialStorage = {
         localStorage.setItem(STORAGE_KEY_MATERIAL, JSON.stringify(materials))
     }
 }
+// category management
+var STORAGE_KEY_CATEGORY = 'crazy-category'
+var categoryStorage = {
+    fetch: function () {
+        var category_static=[];
+
+        if (CategoryOptions.content){
+            // got statics from mock or api
+            category_static = CategoryOptions.content;
+        }
+        // get the local options
+        var category = JSON.parse(localStorage.getItem(STORAGE_KEY_CATEGORY) || '[]');
+        // if no local option are available: include statics
+        if (category.length<1){
+            category_static.forEach(function(item){
+                category.push(item);
+            })
+        }
+        return category
+    },
+    save: function (category) {
+        localStorage.setItem(STORAGE_KEY_CATEGORY, JSON.stringify(category))
+    }
+}
 
 new Vue({
     el: '#app',
@@ -143,7 +167,8 @@ new Vue({
         isFullScreen:false,
 
         // Name Scheme
-        selected_category:"",
+        //selected_categories:[],
+        selected_category:'',
         selected_attribute_1:"",
         selected_attribute_2:"",
         selected_materials:[],
@@ -179,6 +204,7 @@ new Vue({
         // local
         metatags_local:metatagStorage.fetch(),
         materials_local:materialStorage.fetch(),
+        categories_local:categoryStorage.fetch(),
 
     },
     // watch products change for localStorage persistence
@@ -186,6 +212,12 @@ new Vue({
         products: {
             handler: function (products) {
                 productStorage.save(products)
+            },
+            deep: true
+        },
+        categories_local: {
+            handler: function (item) {
+                categoryStorage.save(item)
             },
             deep: true
         },
@@ -221,8 +253,18 @@ new Vue({
         attribute_options_2: function(){
             return AttributeOptions.content;
         },
-        category_options: function(){
-            return CategoryOptions.content;
+        categories:function(){
+            my_options={};
+            this.categories_local.forEach(function(item) {
+                my_options[item.value]=item;
+            });
+            return my_options;
+        },
+        category_index:function(){
+            return Object.keys(this.categories)
+        },
+        category_objects:function(){
+            return Object.values(this.categories);
         },
         isSmallScreen:function(){
             return !this.isFullScreen;
@@ -491,10 +533,10 @@ new Vue({
         clearLocalMetatags:function(){
             this.metatags_local = [];
         },
-        createMetatagOption: function(value){
+        optionFactory: function(value){
             // no spaces and all lowercase for id/value
             normalized_value = value.replace(/ /g,"_").toLowerCase();
-            var metatag = {
+            var option = {
                 id:normalized_value,
                 value:normalized_value,
                 label: {
@@ -522,42 +564,22 @@ new Vue({
                     }
                 }
             };
-            this.metatags_local.push(metatag);
-            return metatag;
+            return option;
+        },
+        createCategoryOption: function(value){
+            var option = this.optionFactory(value);
+            this.categories_local.push(option);
+            return option;
+        },
+        createMetatagOption: function(value){
+            var option = this.optionFactory(value);
+            this.metatags_local.push(option);
+            return option;
         },
         createMaterialOption: function(value){
-            // no spaces and all lowercase for id/value
-            normalized_value = value.replace(/ /g,"_").toLowerCase();
-            var material = {
-                id:normalized_value,
-                value:normalized_value,
-                label: {
-                    de:{
-                        value: value,
-                        edit:false,
-                        active:true
-                    },
-                    en:{
-                        value: value,
-                        edit:false,
-                        active:true
-                    }
-                },
-                alias: {
-                    de: {
-                        value:"",
-                        edit:false,
-                        active:true
-                    },
-                    en: {
-                        value:"",
-                        edit:false,
-                        active:true
-                    }
-                }
-            };
-            this.materials_local.push(material);
-            return material;
+            var option = this.optionFactory(value);
+            this.materials_local.push(option);
+            return option;
         },
         getOptionLabel: function(item){
             if (typeof item === 'object') {
@@ -598,6 +620,19 @@ new Vue({
             this.materials_local=[];
             this.materials=[];
         },
+        debugCategories:function(){
+            console.log("Local (app.categories_local)");
+            console.log(this.categories_local);
+            console.log("ALL Categories (app.categories)");
+            console.log(this.categories);
+            console.log('aus die maus');
+        },
+        clearCategories:function(){
+            console.log('Clear local categories:');
+            console.log(this.categories_local);
+            this.categories_local=[];
+            this.categories=[];
+        },
         hideMessage: function (message) {
             message.show = false
         },
@@ -610,6 +645,37 @@ new Vue({
         alert: function(text) {
             alert(text);
         },
+        // categories START
+        closeEditCategories: function(){
+            this.show_categories_edit=false;
+        },
+        editCategories: function(){
+            this.show_categories_edit=true;
+        },
+        removeCategory: function(product){
+            // remove material from one product
+            product.categories=[];
+        },
+        deleteCategories: function(){
+            var selected=this.selected_categories;
+            var all_products = this.products;
+            var all_items = this.categories_local;
+
+            selected.forEach(function (item) {
+                // remove item from all products
+                all_products.forEach(function (product) {
+                    if(product.categories.indexOf(item.value)> -1){
+                        product.categories.splice(product.categories.indexOf(item.value), 1);
+                    }
+                })
+                // remove from dropdown
+                if(all_items.indexOf(item)> -1){
+                    all_items.splice(all_items.indexOf(item), 1);
+                }
+            });
+            this.selected_categories=[];
+        },
+        // categories END
         closeEditMaterials: function(){
             this.show_materials_edit=false;
         },
@@ -718,10 +784,8 @@ new Vue({
             var languages = this.languages;
             var conjunction = this.conjunction;
 
-
             this.products.forEach(function (product) {
                 if(product.active){
-
                     if (typeof category == 'object' && category !=null && category.value != '--'){
                         product.category={};
                         product.category.value=category.value;
@@ -744,7 +808,9 @@ new Vue({
                         var my_name='';
 
                         if(product.category && product.category.label[language.id]){
-                            my_name = product.category.label[language.id];
+                            //my_name = product.category.label[language.id];
+                            my_name = product.category.label[language.id].value;
+
                         };
                         if(product.attribute1 && product.attribute1.label[language.id]){
                             my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.attribute1.label[language.id];
