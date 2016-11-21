@@ -285,28 +285,52 @@
             <div class="row" v-if="show_category_edit && show_name_scheme_edit">
                 <!-- Edit Category/ Attributes -->
                 <h5 class="indent">Edit category & attributes  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditCategories()"></i></h5>
-                <!--
-                <ul class="indent metatag-list" v-if="selected_materials.length > 0">
-                  <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                    <ul>
-                      <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                      <li class="list-group-item" v-for="material in selected_materials">
-                          <span v-if="!materials[material.value].label[language.id].edit">
-                            <i class="fa fa-industry fa-pull-left"></i>
-                            [[ materials[material.value].label[language.id].value ]]
-                             <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
-                          </span>
-                        <div v-if="materials[material.value].label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
-                          <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
+
+                <ul class="indent metatag-list" v-if="selected_category || selected_attribute_1 || selected_attribute_2">
+                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                        <ul>
+                            <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+                            <li class="list-group-item" v-if="selected_category">
+                  <span v-if="!selected_category.label[language.id].edit">
+                    <!-- Show Edit Category -->
+                    <i class="fa fa-commenting-o fa-pull-left"></i>
+                    [[ categories[selected_category.value].label[language.id].value ]]
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(categories[selected_category.value].label[language.id])"></i>
+                  </span>
+                                <div v-if="categories[selected_category.value].label[language.id].edit">
+                                    <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="categories[selected_category.value].label[language.id].edit" @click="closeEditMe(categories[selected_category.value].label[language.id])"></i>
+                                    <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="categories[selected_category.value].label[language.id].value" @keyup.enter="closeEditMe(categories[selected_category.value].label[language.id])">
+                                </div>
+                            </li>
+                            <li class="list-group-item" v-if="selected_attribute_1">
+                <span v-if="!selected_attribute_1.label[language.id].edit">
+                    <!-- Show Attribute 1 -->
+                    <i class="fa fa-commenting-o fa-pull-left"></i>
+                    [[ attributes[selected_attribute_1.value].label[language.id].value ]]
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_1.value].label[language.id])"></i>
+                </span>
+                                <div v-if="attributes[selected_attribute_1.value].label[language.id].edit">
+                                    <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="attributes[selected_attribute_1.value].label[language.id].edit" @click="closeEditMe(attributes[selected_attribute_1.value].label[language.id])"></i>
+                                    <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="attributes[selected_attribute_1.value].label[language.id].value" @keyup.enter="closeEditMe(attributes[selected_attribute_1.value].label[language.id])">
+                                </div>
+                            </li>
+                            <li class="list-group-item" v-if="selected_attribute_2">
+                <span v-if="!selected_attribute_2.label[language.id].edit">
+                    <!-- Show Attribute 2 -->
+                    <i class="fa fa-commenting-o fa-pull-left"></i>
+                    [[ attributes[selected_attribute_2.value].label[language.id].value ]]
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_2.value].label[language.id])"></i>
+                </span>
+                                <div v-if="attributes[selected_attribute_2.value].label[language.id].edit">
+                                    <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="attributes[selected_attribute_2.value].label[language.id].edit" @click="closeEditMe(attributes[selected_attribute_2.value].label[language.id])"></i>
+                                    <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="attributes[selected_attribute_2.value].label[language.id].value" @keyup.enter="closeEditMe(attributes[selected_attribute_2.value].label[language.id])">
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- End edit Category/ Attributes -->
             </div>
-
         </div>
         <!-- End Product Names  -->
         <div class="row col-xs-12 col-sm-6 col-md-6" v-if="show_material">
@@ -352,7 +376,6 @@
                 </ul>
                 <!-- End edit materials -->
             </div>
-
             <!-- End Product Materials -->
         </div>
         <!-- Meta Tags -->
@@ -434,18 +457,17 @@
                         <h5>Categories & Attributes</h5>
                         <a href="#" class="export cursor" @click="debugCategories()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Categories</a>&nbsp;&nbsp;
                         <a href="#" class="export cursor" @click="clearCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Categories</a>&nbsp;&nbsp;
+                        <b style="font-size:3em"> | </b>
                         <a href="#" class="export cursor" @click="debugAttributes()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Attributes</a>&nbsp;&nbsp;
                         <a href="#" class="export cursor" @click="clearAttributes()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Attributes</a>
                     </li>
                     <li class="list-group-item">
-                        <h5>Materials</h5>
-                        <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All</a>
-                    </li>
-                    <li class="list-group-item">
-                        <h5>Metatags</h5>
-                        <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>&nbsp;&nbsp;
-                        <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local</a>
+                        <h5>Materials & Metatags</h5>
+                        <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Materials</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b style="font-size:3em"> | </b>
+                        <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
+                        <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>
                     </li>
                 </ul>
                 <h5>Error Messages <i class="fa fa-envelope-o" aria-hidden="true"></i></h5>
