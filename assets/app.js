@@ -180,11 +180,6 @@ new Vue({
                 id:'en-US',
                 status:true,
                 flag:'flag-icon-us',
-            },
-            {
-                id:'en-GB',
-                status:true,
-                flag:'flag-icon-gb',
             }
         ],
         // materials
