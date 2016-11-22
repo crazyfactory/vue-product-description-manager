@@ -415,7 +415,11 @@ new Vue({
                         name_scheme:null,
                         names:{},
                         materials:[],
-                        metatags:['piercing'],
+                        metatags:[],
+                        metatagAttribute1:[],
+                        metatagAttribute2:[],
+                        metatagCategory:[],
+                        metatagMaterial:[],
                         category:null,
                         attribute1:null,
                         attribute2:null,
@@ -429,6 +433,72 @@ new Vue({
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
             }
+        },
+        autotag: function(autotag, translator){
+            if(!autotag){
+                return false
+            }
+            var metatagsGlobal = this.metatags
+            var metatagsNew = []
+            var metatagsProduct = []
+            var languages = this.languages
+
+            if(Array.isArray(autotag)){
+                autotag.forEach(function(mytag){
+                    if(!metatagsGlobal.hasOwnProperty(mytag)){
+                        // metatag doen't exists yet
+                        // get Object and convert it to a metatag
+                        myTwin=translator[mytag]
+                        newTag={
+                            id:mytag,
+                            value:mytag,
+                            label:myTwin.label,
+                            alias:{}
+                        }
+                        languages.forEach(function(language){
+                            alias={
+                                value:[],
+                                edit:false,
+                                active:true
+                            }
+                            newTag.alias[language.id]=alias
+                        })
+                        metatagsNew.push(newTag)
+                    }
+                    // add to products
+                    metatagsProduct.push(mytag)
+                })
+            }
+            else{
+                // single autotag instead of array
+                // check if autotag already exists
+                mytag=autotag.value
+                if(!metatagsGlobal.hasOwnProperty(mytag)){
+                    myTwin=translator[mytag]
+                    newTag={
+                        id:mytag,
+                        value:mytag,
+                        label:myTwin.label,
+                        alias:{}
+                    }
+                    languages.forEach(function(language){
+                        alias={
+                            value:[],
+                            edit:false,
+                            active:true
+                        }
+                        newTag.alias[language.id]=alias
+                    })
+                    metatagsNew.push(newTag)
+                }
+                // add to products
+                metatagsProduct.push(mytag)
+            }
+            // push new tags to app
+            if(metatagsNew.length>0){
+                this.metatags_local=this.metatags_local.concat(metatagsNew)
+            }
+            return metatagsProduct
         },
         clearAttributes:function(){
             console.log('Clear local attributes:')
@@ -762,6 +832,10 @@ new Vue({
             }
             return option
         },
+        removeAutoMetatag: function(product, metatag, target){
+            //target: 'metatagMaterial'
+            product[target].splice(product[target].indexOf(metatag), 1)
+        },
         removeMaterial: function(product){
             // remove material from one product
             product.materials=[]
@@ -791,6 +865,8 @@ new Vue({
         },
         saveMaterials: function(){
             var selected_materials=this.selected_materials
+            autotagFactory=this.autotag
+            materialsGlobal= this.materials
             // set materials to all selected products
             this.products.forEach(function (product) {
                 if(product.active){
@@ -806,6 +882,11 @@ new Vue({
                             product.materials.push(material_value)
                         }
                     })
+                    // autotag all materials, we expect an Array here (from multiselect)
+                    autotag=autotagFactory(product.materials, materialsGlobal)
+                    if(autotag){
+                        product.metatagMaterial=autotag
+                    }
                 }
             })
         },
@@ -836,25 +917,33 @@ new Vue({
             var languages = this.languages
             var conjunction = this.conjunction
             var categories = this.categories
+            var attributes = this.attributes
+            autotagFactory=this.autotag
 
             this.products.forEach(function (product) {
                 if(product.active){
                     if (typeof category == 'object' && category !=null && category.value != '--'){
-                        /*product.category={}
-                        product.category.value=category.value
-                        product.category.label=category.label
-                         */
                         product.category = categories[category.value]
+                        autotagCategory=autotagFactory(product.category, categories)
+                        if(autotagCategory){
+                            product.metatagCategory=autotagCategory
+                        }
                     }
+
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
-                        product.attribute1={}
-                        product.attribute1.value=attr1.value
-                        product.attribute1.label=attr1.label
+                        product.attribute1=attributes[attr1.value]
+                        autotagAttribute1=autotagFactory(product.attribute1, attributes)
+                        if(autotagAttribute1){
+                            product.metatagAttribute1=autotagAttribute1
+                        }
                     }
+
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
-                        product.attribute2={}
-                        product.attribute2.value=attr2.value
-                        product.attribute2.label=attr2.label
+                        product.attribute2=attributes[attr2.value]
+                        autotagAttribute2=autotagFactory(product.attribute2, attributes)
+                        if(autotagAttribute2){
+                            product.metatagAttribute2=autotagAttribute2
+                        }
                     }
                     // generate composed product name for each language
                     product_names={}
