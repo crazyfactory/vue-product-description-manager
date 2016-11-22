@@ -328,7 +328,7 @@
                           <li class="list-group-item" v-for="metatag in product.metatagMaterial" >
                             <!-- Material Metatags -->
                             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagMaterial')"></i>
-                            
+
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
@@ -384,7 +384,7 @@
       </div>
       <div class="margin-bottom">
         <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute"
-                  :options="attribute_objects"
+                  :options="attribute_objects"meta
                   :get-option-label="getOptionLabelValue"
                   :taggable="true"
                   :push-tags="true"
@@ -409,7 +409,7 @@
                   <span v-if="!selected_category.label[language.id].edit">
                     <!-- Show Edit Category -->
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    [[ categories[selected_category.value].label[language.id].value ]]
+                    <span @click="editMe(categories[selected_category.value].label[language.id])">[[ categories[selected_category.value].label[language.id].value ]]</span>
                      <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(categories[selected_category.value].label[language.id])"></i>
                   </span>
                 <div v-if="categories[selected_category.value].label[language.id].edit">
@@ -421,7 +421,7 @@
                 <span v-if="!selected_attribute_1.label[language.id].edit">
                     <!-- Show Attribute 1 -->
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    [[ attributes[selected_attribute_1.value].label[language.id].value ]]
+                    <span @click="editMe(attributes[selected_attribute_1.value].label[language.id])">[[ attributes[selected_attribute_1.value].label[language.id].value ]]</span>
                      <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_1.value].label[language.id])"></i>
                 </span>
                 <div v-if="attributes[selected_attribute_1.value].label[language.id].edit">
@@ -433,7 +433,7 @@
                 <span v-if="!selected_attribute_2.label[language.id].edit">
                     <!-- Show Attribute 2 -->
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    [[ attributes[selected_attribute_2.value].label[language.id].value ]]
+                    <span @click="editMe(attributes[selected_attribute_2.value].label[language.id])">[[ attributes[selected_attribute_2.value].label[language.id].value ]]</span>
                      <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_2.value].label[language.id])"></i>
                 </span>
                 <div v-if="attributes[selected_attribute_2.value].label[language.id].edit">
