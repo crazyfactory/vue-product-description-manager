@@ -6,7 +6,7 @@ var Api_response =
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
-      "en-US": {
+      "en-GB": {
         "value":"We can deliver it in the gauge of 1.6mm. The available length is 38mm. It comes with a ball size of 5mm. This is just a cool product! Order right now!",
         "edit":false
       },
@@ -27,7 +27,7 @@ var Api_response =
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
-      "en-US": {
+      "en-GB": {
         "value":"The available gauge is 1.6mm. Available with the length of 38mm.It comes with a ball size of 5mm. This is just a crazy product! Order right now!",
         "edit":false
       },
@@ -48,7 +48,7 @@ var Api_response =
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
-      "en-US": {
+      "en-GB": {
         "value":"This article is available with the gauge of 1.6mm. Available with the length of 38mm. The 5mm ball is a perfect fit. This is just a wonderful product! Order right now!",
         "edit": false
       },
@@ -69,7 +69,7 @@ var Api_response =
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
-      "en-US": {
+      "en-GB": {
         "value":"The available gauge is 1.6mm. We can deliver it in the length of 38mm.It comes with a ball size of 5mm. This is just a cool product! Order right now!",
         "edit":false
       },
@@ -90,7 +90,7 @@ var Api_response =
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
-      "en-US": {
+      "en-GB": {
         "value":"The available gauge is 1.6mm. Available with the length of 38mm. The 5mm ball is a perfect fit. This is just a awesome product! Order right now!",
         "edit":false
       },

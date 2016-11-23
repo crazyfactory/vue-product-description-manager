@@ -4,11 +4,11 @@ var AttributeOptions =
   "conjunction":{
     "with":{
         "de": "mit",
-        "en-US": "with"
+        "en-GB": "with"
     },
     "and":{
       "de": "und",
-      "en-US": "and"
+      "en-GB": "and"
     }
   },
   "content":[
@@ -20,7 +20,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"claw set crystal",
           "edit": false,
           "active": true
@@ -35,7 +35,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cone",
           "edit": false,
           "active": true
@@ -50,7 +50,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cones",
           "edit": false,
           "active": true
@@ -65,7 +65,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"anodised ball",
           "edit": false,
           "active": true
@@ -80,7 +80,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"anodised cone",
           "edit": false,
           "active": true
@@ -95,7 +95,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"Crapwaer design",
           "edit": false,
           "active": true
@@ -110,7 +110,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"Sarah Sorceress design",
           "edit": false,
           "active": true
@@ -125,7 +125,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"pendant inlay",
           "edit": false,
           "active": true
@@ -140,7 +140,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flower inlay",
           "edit": false,
           "active": true
@@ -155,7 +155,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little flower inlay",
           "edit": false,
           "active": true
@@ -170,7 +170,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cupcake inlay",
           "edit": false,
           "active": true
@@ -185,7 +185,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cocktail inlay",
           "edit": false,
           "active": true
@@ -200,7 +200,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dolphin inlay",
           "edit": false,
           "active": true
@@ -215,7 +215,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lizard inlay",
           "edit": false,
           "active": true
@@ -230,7 +230,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elephant inlay",
           "edit": false,
           "active": true
@@ -245,7 +245,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elf inlay",
           "edit": false,
           "active": true
@@ -260,7 +260,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"angel inlay",
           "edit": false,
           "active": true
@@ -275,7 +275,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flip-flop inlay",
           "edit": false,
           "active": true
@@ -290,7 +290,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"wing inlay",
           "edit": false,
           "active": true
@@ -305,7 +305,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"frop inlay",
           "edit": false,
           "active": true
@@ -320,7 +320,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"handcuffs inlay",
           "edit": false,
           "active": true
@@ -335,7 +335,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"heart inlay",
           "edit": false,
           "active": true
@@ -350,7 +350,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little hearts inlay",
           "edit": false,
           "active": true
@@ -365,7 +365,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"horseshoe inlay",
           "edit": false,
           "active": true
@@ -380,7 +380,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"chain inlay",
           "edit": false,
           "active": true
@@ -395,7 +395,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"stroller inlay",
           "edit": false,
           "active": true
@@ -410,7 +410,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cherry inlay",
           "edit": false,
           "active": true
@@ -425,7 +425,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cloverleaf inlay",
           "edit": false,
           "active": true
@@ -440,7 +440,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cross inlay",
           "edit": false,
           "active": true
@@ -455,7 +455,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"crown inlay",
           "edit": false,
           "active": true
@@ -470,7 +470,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dragon fly inlay",
           "edit": false,
           "active": true
@@ -485,7 +485,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little baby inlay",
           "edit": false,
           "active": true
@@ -500,7 +500,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"moon inlay",
           "edit": false,
           "active": true
@@ -515,7 +515,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"octopus inlay",
           "edit": false,
           "active": true
@@ -530,7 +530,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"om inlay",
           "edit": false,
           "active": true
@@ -545,7 +545,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"ace of spades inlay",
           "edit": false,
           "active": true
@@ -560,7 +560,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"poodle inlay",
           "edit": false,
           "active": true
@@ -575,7 +575,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lock inlay",
           "edit": false,
           "active": true
@@ -590,7 +590,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lock inlay",
           "edit": false,
           "active": true
@@ -605,7 +605,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"butterfly inlay",
           "edit": false,
           "active": true
@@ -620,7 +620,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"swan inlay",
           "edit": false,
           "active": true
@@ -635,7 +635,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"spider web inlay",
           "edit": false,
           "active": true
@@ -650,7 +650,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"star inlay",
           "edit": false,
           "active": true
@@ -665,7 +665,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"tart inlay",
           "edit": false,
           "active": true
@@ -680,7 +680,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"skull inlay",
           "edit": false,
           "active": true
@@ -695,7 +695,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dice inlay",
           "edit": false,
           "active": true
@@ -710,7 +710,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"jewelled",
           "edit": false,
           "active": true
@@ -725,7 +725,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"jewelled disc",
           "edit": false,
           "active": true
@@ -740,7 +740,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"pendant",
           "edit": false,
           "active": true
@@ -755,7 +755,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flower pendant",
           "edit": false,
           "active": true
@@ -770,7 +770,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little flowers pendant",
           "edit": false,
           "active": true
@@ -785,7 +785,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cupcake pendant",
           "edit": false,
           "active": true
@@ -800,7 +800,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cocktail pendant",
           "edit": false,
           "active": true
@@ -815,7 +815,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dolphin pendant",
           "edit": false,
           "active": true
@@ -830,7 +830,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lizard pendant",
           "edit": false,
           "active": true
@@ -845,7 +845,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elephant pendant",
           "edit": false,
           "active": true
@@ -860,7 +860,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elf pendant",
           "edit": false,
           "active": true
@@ -875,7 +875,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"angel pendant",
           "edit": false,
           "active": true
@@ -890,7 +890,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flip-flop pendant",
           "edit": false,
           "active": true
@@ -905,7 +905,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"wing pendant",
           "edit": false,
           "active": true
@@ -920,7 +920,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"frog pendant",
           "edit": false,
           "active": true
@@ -935,7 +935,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"handcuffs pendant",
           "edit": false,
           "active": true
@@ -950,7 +950,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"heart pendant",
           "edit": false,
           "active": true
@@ -965,7 +965,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little hearts pendant",
           "edit": false,
           "active": true
@@ -980,7 +980,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"horseshoe pendant",
           "edit": false,
           "active": true
@@ -995,7 +995,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"chain pendant",
           "edit": false,
           "active": true
@@ -1010,7 +1010,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"stroller pendant",
           "edit": false,
           "active": true
@@ -1025,7 +1025,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cherry pendant",
           "edit": false,
           "active": true
@@ -1040,7 +1040,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cloverleaf pendant",
           "edit": false,
           "active": true
@@ -1055,7 +1055,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cross pendant",
           "edit": false,
           "active": true
@@ -1070,7 +1070,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"crown pendant",
           "edit": false,
           "active": true
@@ -1085,7 +1085,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dragon fly pendant",
           "edit": false,
           "active": true
@@ -1100,7 +1100,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little baby pendant",
           "edit": false,
           "active": true
@@ -1115,7 +1115,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"moon pendant",
           "edit": false,
           "active": true
@@ -1130,7 +1130,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"octopus pendant",
           "edit": false,
           "active": true
@@ -1145,7 +1145,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"om pendant",
           "edit": false,
           "active": true
@@ -1160,7 +1160,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"ace of spades pendant",
           "edit": false,
           "active": true
@@ -1175,7 +1175,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"poodle pendant",
           "edit": false,
           "active": true
@@ -1190,7 +1190,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lock pendant",
           "edit": false,
           "active": true
@@ -1205,7 +1205,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"key pendant",
           "edit": false,
           "active": true
@@ -1220,7 +1220,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"butterfly pendant",
           "edit": false,
           "active": true
@@ -1235,7 +1235,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"swan pendant",
           "edit": false,
           "active": true
@@ -1250,7 +1250,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"spider web pendant",
           "edit": false,
           "active": true
@@ -1265,7 +1265,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"star pendant",
           "edit": false,
           "active": true
@@ -1280,7 +1280,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"tart pendant",
           "edit": false,
           "active": true
@@ -1295,7 +1295,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"skull pendant",
           "edit": false,
           "active": true
@@ -1310,7 +1310,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dice pendant",
           "edit": false,
           "active": true
@@ -1325,7 +1325,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"replacement ends",
           "edit": false,
           "active": true
@@ -1340,7 +1340,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flower replacement ends",
           "edit": false,
           "active": true
@@ -1355,7 +1355,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little flower replacement ends",
           "edit": false,
           "active": true
@@ -1370,7 +1370,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cupcake replacement ends",
           "edit": false,
           "active": true
@@ -1385,7 +1385,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cocktail replacement ends",
           "edit": false,
           "active": true
@@ -1400,7 +1400,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dolphin replacement ends",
           "edit": false,
           "active": true
@@ -1415,7 +1415,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lizard replacement ends",
           "edit": false,
           "active": true
@@ -1430,7 +1430,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elephant replacement ends",
           "edit": false,
           "active": true
@@ -1445,7 +1445,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"elf replacement ends",
           "edit": false,
           "active": true
@@ -1460,7 +1460,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"angel replacement ends",
           "edit": false,
           "active": true
@@ -1475,7 +1475,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"flip-flop replacement ends",
           "edit": false,
           "active": true
@@ -1490,7 +1490,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"Flügelaufsatz",
           "edit": false,
           "active": true
@@ -1505,7 +1505,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"frop replacement ends",
           "edit": false,
           "active": true
@@ -1520,7 +1520,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"handcuff replacement ends",
           "edit": false,
           "active": true
@@ -1535,7 +1535,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"heart replacement ends",
           "edit": false,
           "active": true
@@ -1550,7 +1550,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little hearts replacement ends",
           "edit": false,
           "active": true
@@ -1565,7 +1565,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"horseshoe replacement ends",
           "edit": false,
           "active": true
@@ -1580,7 +1580,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"chain replacement ends",
           "edit": false,
           "active": true
@@ -1595,7 +1595,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"stroller replacement ends",
           "edit": false,
           "active": true
@@ -1610,7 +1610,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cherry replacement ends",
           "edit": false,
           "active": true
@@ -1625,7 +1625,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cloverleaf replacement ends",
           "edit": false,
           "active": true
@@ -1640,7 +1640,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"cross replacement ends",
           "edit": false,
           "active": true
@@ -1655,7 +1655,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"crown replacement ends",
           "edit": false,
           "active": true
@@ -1670,7 +1670,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"dragon fly replacement ends",
           "edit": false,
           "active": true
@@ -1685,7 +1685,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"little baby replacement ends",
           "edit": false,
           "active": true
@@ -1700,7 +1700,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"moon replacement ends",
           "edit": false,
           "active": true
@@ -1715,7 +1715,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"octopus replavement ends",
           "edit": false,
           "active": true
@@ -1730,7 +1730,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"om replacement ends",
           "edit": false,
           "active": true
@@ -1745,7 +1745,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"ace of spades replacement ends",
           "edit": false,
           "active": true
@@ -1760,7 +1760,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"poodle replacement ends",
           "edit": false,
           "active": true
@@ -1775,7 +1775,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"lock replacement ends",
           "edit": false,
           "active": true
@@ -1790,7 +1790,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"key replacement ends",
           "edit": false,
           "active": true
@@ -1805,7 +1805,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"butterfly replacement ends",
           "edit": false,
           "active": true
@@ -1820,7 +1820,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"swan replacement ends",
           "edit": false,
           "active": true
@@ -1835,7 +1835,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"spider web replacement ends",
           "edit": false,
           "active": true
@@ -1850,7 +1850,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"star replacement ends",
           "edit": false,
           "active": true
@@ -1865,7 +1865,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"tart replacement ends",
           "edit": false,
           "active": true
@@ -1880,7 +1880,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US":{
+        "en-GB":{
           "value":"skull replacement ends",
           "edit": false,
           "active": true
@@ -1895,7 +1895,7 @@ var AttributeOptions =
       	  "edit": false,
           "active": true
         },
-        "en-US": {
+        "en-GB": {
             "value": "dice replacement ends",
             "edit": false,
             "active": true

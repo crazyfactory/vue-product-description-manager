@@ -4,7 +4,7 @@ var MaterialStatic ={
         {
             "value":"acrylic",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value":"Acrylic",
                     "edit":false,
                     "active":true
@@ -19,7 +19,7 @@ var MaterialStatic ={
         {
             "value":"basalt",
             "label": {
-                "en-US": {
+                "en-GB": {
                     "value": "Basalt",
                     "edit": false,
                     "active": true
@@ -34,7 +34,7 @@ var MaterialStatic ={
         {
             "value":"bioflex",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Bioflex",
                     "edit": false,
                     "active": true
@@ -49,7 +49,7 @@ var MaterialStatic ={
         {
             "value":"gold-plated-steel",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Gold plated steel",
                     "edit": false,
                     "active": true
@@ -64,7 +64,7 @@ var MaterialStatic ={
         {
             "value":"leather",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Leather",
                     "edit": false,
                     "active": true
@@ -79,7 +79,7 @@ var MaterialStatic ={
         {
             "value":"nylon",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Nylon Cord",
                     "edit": false,
                     "active": true
@@ -94,7 +94,7 @@ var MaterialStatic ={
         {
             "value":"plastic",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Plastic",
                     "edit": false,
                     "active": true
@@ -109,7 +109,7 @@ var MaterialStatic ={
         {
             "value":"rose-gold-plated-steel",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Rose Gold Plated Steel",
                     "edit": false,
                     "active": true
@@ -124,7 +124,7 @@ var MaterialStatic ={
         {
             "value":"surgical-steel-316l",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Surgical Steel 316L",
                     "edit": false,
                     "active": true
@@ -139,7 +139,7 @@ var MaterialStatic ={
         {
             "value":"wood",
             "label":{
-                "en-US":{
+                "en-GB":{
                     "value": "Wood",
                     "edit": false,
                     "active": true

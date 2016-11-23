@@ -177,9 +177,9 @@ new Vue({
                 flag:'flag-icon-de',
             },
             {
-                id:'en-US',
+                id:'en-GB',
                 status:true,
-                flag:'flag-icon-us',
+                flag:'flag-icon-gb',
             }
         ],
         // materials
@@ -298,7 +298,7 @@ new Vue({
             get: function(){
                 // default fallback = 'de'
                 if(!this.settings.editorLanguage){
-                    this.settings.editorLanguage = 'de'
+                    this.settings.editorLanguage = 'en-GB'
                 }
                 return this.settings.editorLanguage
             }

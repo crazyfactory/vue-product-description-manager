@@ -10,7 +10,7 @@ var MetatagsStatic ={
                     "edit":false,
                     "active":true
                 },
-                "en-US":{
+                "en-GB":{
                     "value":"Piercing",
                     "edit":false,
                     "active":true
@@ -22,7 +22,7 @@ var MetatagsStatic ={
                     "edit":false,
                     "active":true
                 },
-                "en-US": {
+                "en-GB": {
                     "value": "beer-sing,piecing, priecing, peecing, body jewellry",
                     "edit": false,
                     "active":true
@@ -38,7 +38,7 @@ var MetatagsStatic ={
                     "edit":false,
                     "active":true
                 },
-                "en-US":{
+                "en-GB":{
                     "value":"Mobile case",
                     "edit":false,
                     "active":true
@@ -52,7 +52,7 @@ var MetatagsStatic ={
                     "edit":false,
                     "active":true
                 },
-                "en-US": {
+                "en-GB": {
                     "value":[
                         "mobile cases, mobilecase"
                     ],
