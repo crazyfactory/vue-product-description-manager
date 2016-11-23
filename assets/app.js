@@ -172,14 +172,14 @@ new Vue({
         isFullScreen:false,
         languages:[
             {
-                id:'de',
-                status:true,
-                flag:'flag-icon-de',
-            },
-            {
                 id:'en-GB',
                 status:true,
                 flag:'flag-icon-gb',
+            },
+            {
+                id:'de',
+                status:true,
+                flag:'flag-icon-de',
             }
         ],
         // materials
@@ -283,6 +283,15 @@ new Vue({
         category_objects:function(){
             return Object.values(this.categories)
         },
+        dirtyProducts: function(){
+            dirty=[]
+            this.products.forEach(function(product){
+                if(product.dirty){
+                    dirty.push(product)
+                }
+            })
+            return dirty
+        },
         deactivateMessages: {
             set: function () {
                 this.messages.forEach(function (message) {
@@ -302,6 +311,15 @@ new Vue({
                 }
                 return this.settings.editorLanguage
             }
+        },
+        hasDirtyProducts: function(){
+            var bool = false
+            this.products.forEach(function(product){
+                if(product.dirty){
+                    bool = true
+                }
+            })
+            return bool
         },
         hasEditableProducts: function(){
             var bool = false
@@ -408,25 +426,26 @@ new Vue({
                     var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1))
                     my_product=Api_response[random_nr]
                     my_product_list.push({
-                        id: productStorage.uid++,
                         active: true,
+                        attribute1:null,
+                        attribute2:null,
+                        category:null,
+                        db_id:my_product.db_id,
+                        dirty:false,
+                        descriptions:my_product.descriptions,
                         hidden:false,
-                        modelCode:my_product_name,
-                        name_scheme:null,
-                        names:{},
+                        id: productStorage.uid++,
                         materials:[],
                         metatags:[],
                         metatagAttribute1:[],
                         metatagAttribute2:[],
                         metatagCategory:[],
                         metatagMaterial:[],
-                        category:null,
-                        attribute1:null,
-                        attribute2:null,
-                        descriptions:my_product.descriptions,
-                        db_id:my_product.db_id,
-                        propertyFormula:my_product.propertyFormula,
-                        properties:my_product.properties
+                        modelCode:my_product_name,
+                        name_scheme:null,
+                        names:{},
+                        properties:my_product.properties,
+                        propertyFormula:my_product.propertyFormula
                     })
                 })
 
@@ -450,10 +469,11 @@ new Vue({
                         // get Object and convert it to a metatag
                         myTwin=translator[mytag]
                         newTag={
+                            alias:{},
+                            dirty:true,
                             id:mytag,
-                            value:mytag,
                             label:myTwin.label,
-                            alias:{}
+                            value:mytag
                         }
                         languages.forEach(function(language){
                             alias={
@@ -476,10 +496,11 @@ new Vue({
                 if(!metatagsGlobal.hasOwnProperty(mytag)){
                     myTwin=translator[mytag]
                     newTag={
+                        alias:{},
+                        dirty:true,
                         id:mytag,
-                        value:mytag,
                         label:myTwin.label,
-                        alias:{}
+                        value:mytag
                     }
                     languages.forEach(function(language){
                         alias={
@@ -572,7 +593,7 @@ new Vue({
             console.log(this.categories_local)
             console.log("ALL Categories (app.categories)")
             console.log(this.categories)
-            console.log('aus die maus')
+
         },
         debugMaterials:function(){
             console.log("Local (app.materials_local)")
@@ -685,11 +706,34 @@ new Vue({
         editMaterials: function(){
             this.show_materials_edit=true
         },
-        editMe: function(item){
+        editMe: function(item, item_parent){
             item.edit=true
+            if(item_parent){
+             item_parent.dirty=true
+            }
         },
         editMetatags: function(){
             this.show_metatags_edit=true
+        },
+        exportAllProducts: function(){
+            dirtyProducts=this.dirtyProducts
+
+            if(!hasApi){
+                productList=[]
+                dirtyProducts.forEach(function(product){
+                    product.dirty=false
+                    productList.push(product.modelCode)
+                })
+                msg = productList.join(", ")+' were succesfully saved'
+                this.addMessage(msg,'success')
+            }
+        },
+        exportProduct: function(product){
+            if(!hasApi){
+                product.dirty=false
+                msg = '"'+product.modelCode+'" was succesfully saved'
+                this.addMessage(msg,'success')
+            }
         },
         getGeneratedDescription: function(product, language){
             index=this.products.indexOf(product)
@@ -752,6 +796,16 @@ new Vue({
                 product.active=!product.active
             })
         },
+        isCustomized: function(product){
+            this.languages.forEach(function(language){
+                // does the product have a customized name in any language?
+              if(product.names[language.id].original_value!=product.names[language.id].value){
+                  return true
+              }
+            })
+            return false
+
+        },
         makeActive: function(item){
             // deactivate all
             this.show_names= false
@@ -788,7 +842,9 @@ new Vue({
                     break
                 case 'export':
                     this.show_export= true
-                    this.headline = 'Export Products to shop'
+                    this.show_load=false
+                    this.headline = 'Save changes'
+                    this.isFullScreen=true
                     this.headline_icon = "fa fa-database"
                     break
                 case 'admin':
@@ -802,34 +858,34 @@ new Vue({
         optionFactory: function(value){
             // no spaces and all lowercase for id/value
             normalized_value = value.replace(/ /g,"_").toLowerCase()
+            var value_copy = "";
+
             var option = {
                 id:normalized_value,
+                dirty:true,
                 value:normalized_value,
-                label: {
-                    de:{
-                        value: value,
-                        edit:false,
-                        active:true
-                    },
-                    en:{
-                        value: value,
-                        edit:false,
-                        active:true
-                    }
-                },
-                alias: {
-                    de: {
-                        value:"",
-                        edit:false,
-                        active:true
-                    },
-                    en: {
-                        value:"",
-                        edit:false,
-                        active:true
-                    }
-                }
+                label: {},
+                alias: {}
             }
+
+            this.languages.forEach(function(language){
+                label={
+                    active:true,
+                    dirty:true,
+                    edit:false,
+                    value:value
+                }
+
+                alias={
+                    active:true,
+                    dirty:true,
+                    edit:false,
+                    value:""
+                }
+
+                option.label[language.id]=label
+                option.alias[language.id]=alias
+            })
             return option
         },
         removeAutoMetatag: function(product, metatag, target){
@@ -880,6 +936,8 @@ new Vue({
                         })
                         if(unique){
                             product.materials.push(material_value)
+                            // mark product as dirty
+                            product.dirty=true
                         }
                     })
                     // autotag all materials, we expect an Array here (from multiselect)
@@ -905,6 +963,8 @@ new Vue({
                         })
                         if(unique){
                             product.metatags.push(meta_value)
+                            // mark product as dirty
+                            product.dirty=true
                         }
                     })
                 }
@@ -925,24 +985,27 @@ new Vue({
                     if (typeof category == 'object' && category !=null && category.value != '--'){
                         product.category = categories[category.value]
                         autotagCategory=autotagFactory(product.category, categories)
-                        if(autotagCategory){
+                        if(autotagCategory && product.metatagCategory[0]!=autotagCategory[0]){
                             product.metatagCategory=autotagCategory
+                            product.dirty=true
                         }
                     }
 
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
                         product.attribute1=attributes[attr1.value]
                         autotagAttribute1=autotagFactory(product.attribute1, attributes)
-                        if(autotagAttribute1){
+                        if(autotagAttribute1 && product.metatagAttribute1[0]!=autotagAttribute1[0]){
                             product.metatagAttribute1=autotagAttribute1
+                            product.dirty=true
                         }
                     }
 
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
                         product.attribute2=attributes[attr2.value]
                         autotagAttribute2=autotagFactory(product.attribute2, attributes)
-                        if(autotagAttribute2){
+                        if(autotagAttribute2 && product.metatagAttribute2[0]!=autotagAttribute2[0]){
                             product.metatagAttribute2=autotagAttribute2
+                            product.dirty=true
                         }
                     }
                     // generate composed product name for each language
@@ -952,7 +1015,6 @@ new Vue({
                         var my_name=''
 
                         if(product.category && product.category.label[language.id]){
-                            //my_name = product.category.label[language.id]
                             my_name = product.category.label[language.id].value
 
                         }
@@ -964,12 +1026,14 @@ new Vue({
                             my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.attribute2.label[language.id].value
                         }
                         product_names[language.id]={
-                            value:my_name,
+                            edit:false,
+                            dirty:true,
                             original_value:my_name,
-                            edit:false
+                            value:my_name
                         }
 
                     })
+
                     product.names=product_names
                 }
             })
@@ -1013,7 +1077,6 @@ new Vue({
             this.show_settings = !this.show_settings
         },
         updateNameSchemes:function(){
-
             // update product names
             var languages = this.languages
             var conjunction = this.conjunction
@@ -1025,28 +1088,32 @@ new Vue({
                 product_names={}
                 languages.forEach(function(language){
                     var my_name=''
+                    var org_name=product.names[language.id].value
                     
                     if(product.category && categories[product.category.value]){
                         categories[product.category.value].label[language.id].edit=false
                         my_name = categories[product.category.value].label[language.id].value
-
                     }
                     if(product.attribute1 && product.attribute1.label[language.id]){
                         attributes[product.attribute1.value].label[language.id].edit=false
                         my_name = my_name +" "+ conjunction.with[language.id]+ " " +attributes[product.attribute1.value].label[language.id].value
-
                     }
                     if(product.attribute2 && product.attribute2.label[language.id]){
                         attributes[product.attribute2.value].label[language.id].edit=false
                         my_name = my_name +" "+ conjunction.and[language.id]+ " " +attributes[product.attribute2.value].label[language.id].value
                     }
                     product_names[language.id]={
-                        value:my_name,
+                        dirty:true,
+                        edit:false,
                         original_value:my_name,
-                        edit:false
+                        value:my_name
+                    }
+                    if(my_name!=org_name){
+                        product.dirty=true
                     }
                 })
                 product.names=product_names
+
             })
         },
         removeCustomName:function(item){
