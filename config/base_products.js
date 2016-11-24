@@ -1,6 +1,6 @@
-var CategoryOptions =
+var BaseProductOptions =
 {
-  "id": "categories",
+  "id": "base_products",
   "content":
   [
     {

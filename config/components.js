@@ -1,6 +1,6 @@
 var ComponentOptions =
 {
-  "id":"attributes",
+  "id":"components",
   "conjunction":{
     "with":{
         "de": "mit",
