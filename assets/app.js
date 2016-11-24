@@ -615,49 +615,79 @@ new Vue({
         debugMessages: function(){
             console.log(this.messages)
         },
-        deleteComponents: function(){
-            var selected=[]
-            selected.push(this.selected_component_1)
-            selected.push(this.selected_component_2)
+        deleteBaseProductsComponents: function(){
+            var selected_base_product=this.selected_base_product
+            var selected_components=[]
+            if(this.selected_component_1){
+                selected_components.push(this.selected_component_1)
+            }
+            if(this.selected_component_2 && this.selected_component_2!=this.selected_component_1) {
+                selected_components.push(this.selected_component_2)
+            }
+            var all_base_products = this.base_products_local
+            var all_components = this.components_local
             var all_products = this.products
-            var all_items = this.components_local
+            var languages = this.languages
+            var conjunction = this.conjunction
 
-            selected.forEach(function (item) {
-                // remove item from all products
-                all_products.forEach(function (product) {
-                    if(product.component1.indexOf(item.value)> -1){
-                        product.component1.splice(product.component1.indexOf(item.value), 1)
+            all_products.forEach(function(product){
+                var changed= false
+                if(product.base_product && selected_base_product && product.base_product.value == selected_base_product.value){
+                    product.base_product=null
+                    changed= true
+                }
+                selected_components.forEach(function(component){
+                    if(product.component1 && product.component1.value == component.value){
+                        product.component1=null
+                        changed= true
                     }
-                    if(product.component2.indexOf(item.value)> -1){
-                        product.component2.splice(product.component2.indexOf(item.value), 1)
+                    if(product.component2 && product.component2.value == component.value){
+                        product.component2=null
+                        changed= true
                     }
                 })
-                // remove from dropdown
-                if(all_items.indexOf(item)> -1){
-                    all_items.splice(all_items.indexOf(item), 1)
-                }
-            })
-            this.selected_component_1=''
-            this.selected_component_2=''
-        },
-        deleteBaseProducts: function(){
-            var selected=this.selected_base_products
-            var all_products = this.products
-            var all_items = this.base_products_local
+                if(changed){
+                    // generate composed product name for each language
+                    product_names={}
 
-            selected.forEach(function (item) {
-                // remove item from all products
-                all_products.forEach(function (product) {
-                    if(product.base_products.indexOf(item.value)> -1){
-                        product.base_products.splice(product.base_products.indexOf(item.value), 1)
-                    }
-                })
-                // remove from dropdown
-                if(all_items.indexOf(item)> -1){
-                    all_items.splice(all_items.indexOf(item), 1)
+                    languages.forEach(function(language){
+                        var my_name=''
+
+                        if(product.base_product && product.base_product.label[language.id]){
+                            my_name = product.base_product.label[language.id].value
+                        }
+                        if(product.component1 && product.component1.label[language.id]){
+                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
+                        }
+                        if(product.component2 && product.component2.label[language.id]){
+                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.component2.label[language.id].value
+                        }
+                        product_names[language.id]={
+                            edit:false,
+                            dirty:true,
+                            original_value:my_name,
+                            value:my_name
+                        }
+
+                    })
+                    product.names=product_names
+                    product.dirty=true
                 }
             })
-            this.selected_base_products=[]
+
+            // remove base products & components dropdown
+            if(all_base_products.indexOf(selected_base_product)> -1){
+                all_base_products.splice(all_base_products.indexOf(selected_base_product), 1)
+            }
+            selected_components.forEach(function(component) {
+                if (all_components.indexOf(component) > -1) {
+                    all_components.splice(all_components.indexOf(component), 1)
+                }
+            })
+            // unset selected base_product/ component_1, component_2
+            this.selected_base_product=null
+            this.selected_component_1=null
+            this.selected_component_2=null
         },
         deleteMaterials: function(){
             var selected_materials=this.selected_materials
@@ -908,6 +938,13 @@ new Vue({
         },
         removeProduct: function (product) {
             this.products.splice(this.products.indexOf(product), 1)
+        },
+        removeProductName: function(product){
+            product.base_product=null
+            product.component1=null
+            product.component2=null
+            product.names=null
+            product.dirty=true
         },
         removeSeletedProducts(){
             var keep_products=[]

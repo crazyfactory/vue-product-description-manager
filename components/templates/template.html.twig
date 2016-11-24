@@ -111,6 +111,7 @@
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                         <span class="flag-icon [[language.flag]]" ></span>
+                                        <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
                                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
                     <span class="cursor" @click="editMe(product.names[language.id], product)">
                       [[product.names[language.id].original_value ]]
@@ -365,7 +366,7 @@
             <div class="row">
                 <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
                     <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteBaseProducts()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+                    <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteBaseProductsComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
                     <button type="button" class="btn btn-success fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
                 </div>
             </div>
