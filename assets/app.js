@@ -6,8 +6,8 @@ else{
     var hasApi=false
 }
 
-var AttributeData=[]
-var AttributeConjunction=[]
+var ComponentData=[]
+var ComponentConjunction=[]
 var Descriptions=[]
 
 /*
@@ -129,28 +129,28 @@ var categoryStorage = {
         localStorage.setItem(STORAGE_KEY_CATEGORY, JSON.stringify(category))
     }
 }
-// attribute management
-var STORAGE_KEY_ATTRIBUTE = 'crazy-attribute'
-var attributeStorage = {
+// component management
+var STORAGE_KEY_COMPONENT = 'crazy-component'
+var componentStorage = {
     fetch: function () {
-        var attribute_static=[]
+        var component_static=[]
 
-        if (AttributeOptions.content){
+        if (ComponentOptions.content){
             // got statics from mock or api
-            attribute_static = AttributeOptions.content
+            component_static = ComponentOptions.content
         }
         // get the local options
-        var attributes = JSON.parse(localStorage.getItem(STORAGE_KEY_ATTRIBUTE) || '[]')
+        var components = JSON.parse(localStorage.getItem(STORAGE_KEY_COMPONENT) || '[]')
         // if no local option are available: include statics
-        if (attributes.length<1){
-            attribute_static.forEach(function(item){
-                attributes.push(item)
+        if (components.length<1){
+            component_static.forEach(function(item){
+                components.push(item)
             })
         }
-        return attributes
+        return components
     },
     save: function (item) {
-        localStorage.setItem(STORAGE_KEY_ATTRIBUTE, JSON.stringify(item))
+        localStorage.setItem(STORAGE_KEY_COMPONENT, JSON.stringify(item))
     }
 }
 
@@ -162,11 +162,11 @@ Vue.config.delimiters = ['[[', ']]']
 new Vue({
     el: '#app',
     data: {
-        // attributes local
-        attributes_local:attributeStorage.fetch(),
+        // components local
+        components_local:componentStorage.fetch(),
         // categories local
         categories_local:categoryStorage.fetch(),
-        conjunction:AttributeOptions.conjunction,
+        conjunction:ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon:'fa fa-commenting-o',
         isFullScreen:false,
@@ -203,8 +203,8 @@ new Vue({
         show_names: true,
         show_preview: false,
         show_settings: false,
-        selected_attribute_1:null,
-        selected_attribute_2:null,
+        selected_component_1:null,
+        selected_component_2:null,
         selected_category:null,
         selected_materials:[],
         selected_metatags:[],
@@ -213,9 +213,9 @@ new Vue({
     },
     // watch products change for localStorage persistence
     watch: {
-        attributes_local: {
+        components_local: {
             handler: function (item) {
-                attributeStorage.save(item)
+                componentStorage.save(item)
             },
             deep: true
         },
@@ -257,18 +257,18 @@ new Vue({
         }
     },
     computed: {
-        attributes:function(){
+        components:function(){
             my_options={}
-            this.attributes_local.forEach(function(item) {
+            this.components_local.forEach(function(item) {
                 my_options[item.value]=item
             })
             return my_options
         },
-        attribute_index:function(){
-            return Object.keys(this.attributes)
+        component_index:function(){
+            return Object.keys(this.components)
         },
-        attribute_objects:function(){
-            return Object.values(this.attributes)
+        component_objects:function(){
+            return Object.values(this.components)
         },
         categories:function(){
             my_options={}
@@ -369,8 +369,8 @@ new Vue({
             return Object.values(this.metatags)
         },
         show_name_scheme_edit:function(){
-            if(!this.selected_category && !this.selected_attribute_1 && !this.selected_attribute_2){
-                // no category or attribute is selected
+            if(!this.selected_category && !this.selected_component_1 && !this.selected_component_2){
+                // no category or component is selected
                 return false
             }
             else{
@@ -427,8 +427,8 @@ new Vue({
                     my_product=Api_response[random_nr]
                     my_product_list.push({
                         active: true,
-                        attribute1:null,
-                        attribute2:null,
+                        component1:null,
+                        component2:null,
                         category:null,
                         db_id:my_product.db_id,
                         dirty:false,
@@ -437,8 +437,8 @@ new Vue({
                         id: productStorage.uid++,
                         materials:[],
                         metatags:[],
-                        metatagAttribute1:[],
-                        metatagAttribute2:[],
+                        metatagComponent1:[],
+                        metatagComponent2:[],
                         metatagCategory:[],
                         metatagMaterial:[],
                         modelCode:my_product_name,
@@ -521,11 +521,11 @@ new Vue({
             }
             return metatagsProduct
         },
-        clearAttributes:function(){
-            console.log('Clear local attributes:')
-            console.log(this.attributes_local)
-            this.attributes_local=[]
-            this.attributes=[]
+        clearComponents:function(){
+            console.log('Clear local components:')
+            console.log(this.components_local)
+            this.components_local=[]
+            this.components=[]
         },
         clearCategories:function(){
             console.log('Clear local categories:')
@@ -545,8 +545,8 @@ new Vue({
         clearSettings: function(){
             this.settings={}
         },
-        closeEditAttributes: function(){
-            this.show_attributes_edit=false
+        closeEditComponents: function(){
+            this.show_components_edit=false
         },
         closeEditCategories: function(){
             this.show_category_edit=false
@@ -562,9 +562,9 @@ new Vue({
         closeEditMetatags: function(){
             this.show_metatags_edit=false
         },
-        createAttributeOption: function(value){
+        createComponentOption: function(value){
             var option = this.optionFactory(value)
-            this.attributes_local.push(option)
+            this.components_local.push(option)
             return option
         },
         createCategoryOption: function(value){
@@ -582,11 +582,11 @@ new Vue({
             this.materials_local.push(option)
             return option
         },
-        debugAttributes:function(){
-            console.log("Local (app.attributes_local)")
-            console.log(this.attributes_local)
-            console.log("ALL Attributes (app.attributes)")
-            console.log(this.attributes)
+        debugComponents:function(){
+            console.log("Local (app.components_local)")
+            console.log(this.components_local)
+            console.log("ALL Components (app.components)")
+            console.log(this.components)
         },
         debugCategories:function(){
             console.log("Local (app.categories_local)")
@@ -615,21 +615,21 @@ new Vue({
         debugMessages: function(){
             console.log(this.messages)
         },
-        deleteAttributes: function(){
+        deleteComponents: function(){
             var selected=[]
-            selected.push(this.selected_attribute_1)
-            selected.push(this.selected_attribute_2)
+            selected.push(this.selected_component_1)
+            selected.push(this.selected_component_2)
             var all_products = this.products
-            var all_items = this.attributes_local
+            var all_items = this.components_local
 
             selected.forEach(function (item) {
                 // remove item from all products
                 all_products.forEach(function (product) {
-                    if(product.attribute1.indexOf(item.value)> -1){
-                        product.attribute1.splice(product.attribute1.indexOf(item.value), 1)
+                    if(product.component1.indexOf(item.value)> -1){
+                        product.component1.splice(product.component1.indexOf(item.value), 1)
                     }
-                    if(product.attribute2.indexOf(item.value)> -1){
-                        product.attribute2.splice(product.attribute2.indexOf(item.value), 1)
+                    if(product.component2.indexOf(item.value)> -1){
+                        product.component2.splice(product.component2.indexOf(item.value), 1)
                     }
                 })
                 // remove from dropdown
@@ -637,8 +637,8 @@ new Vue({
                     all_items.splice(all_items.indexOf(item), 1)
                 }
             })
-            this.selected_attribute_1=''
-            this.selected_attribute_2=''
+            this.selected_component_1=''
+            this.selected_component_2=''
         },
         deleteCategories: function(){
             var selected=this.selected_categories
@@ -697,8 +697,8 @@ new Vue({
             })
             this.selected_metatags=[]
         },
-        editAttributes: function(){
-            this.show_attributes_edit=true
+        editComponents: function(){
+            this.show_components_edit=true
         },
         editCategories: function(){
             this.show_category_edit=true
@@ -972,12 +972,12 @@ new Vue({
         },
         saveNameScheme: function(){
             var category = this.selected_category
-            var attr1 = this.selected_attribute_1
-            var attr2 = this.selected_attribute_2
+            var attr1 = this.selected_component_1
+            var attr2 = this.selected_component_2
             var languages = this.languages
             var conjunction = this.conjunction
             var categories = this.categories
-            var attributes = this.attributes
+            var components = this.components
             autotagFactory=this.autotag
 
             this.products.forEach(function (product) {
@@ -992,19 +992,19 @@ new Vue({
                     }
 
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
-                        product.attribute1=attributes[attr1.value]
-                        autotagAttribute1=autotagFactory(product.attribute1, attributes)
-                        if(autotagAttribute1 && product.metatagAttribute1[0]!=autotagAttribute1[0]){
-                            product.metatagAttribute1=autotagAttribute1
+                        product.component1=components[attr1.value]
+                        autotagComponent1=autotagFactory(product.component1, components)
+                        if(autotagComponent1 && product.metatagComponent1[0]!=autotagComponent1[0]){
+                            product.metatagComponent1=autotagComponent1
                             product.dirty=true
                         }
                     }
 
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
-                        product.attribute2=attributes[attr2.value]
-                        autotagAttribute2=autotagFactory(product.attribute2, attributes)
-                        if(autotagAttribute2 && product.metatagAttribute2[0]!=autotagAttribute2[0]){
-                            product.metatagAttribute2=autotagAttribute2
+                        product.component2=components[attr2.value]
+                        autotagComponent2=autotagFactory(product.component2, components)
+                        if(autotagComponent2 && product.metatagComponent2[0]!=autotagComponent2[0]){
+                            product.metatagComponent2=autotagComponent2
                             product.dirty=true
                         }
                     }
@@ -1018,12 +1018,12 @@ new Vue({
                             my_name = product.category.label[language.id].value
 
                         }
-                        if(product.attribute1 && product.attribute1.label[language.id]){
-                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.attribute1.label[language.id].value
+                        if(product.component1 && product.component1.label[language.id]){
+                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
 
                         }
-                        if(product.attribute2 && product.attribute2.label[language.id]){
-                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.attribute2.label[language.id].value
+                        if(product.component2 && product.component2.label[language.id]){
+                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.component2.label[language.id].value
                         }
                         product_names[language.id]={
                             edit:false,
@@ -1081,7 +1081,7 @@ new Vue({
             var languages = this.languages
             var conjunction = this.conjunction
             var categories = this.categories
-            var attributes = this.attributes
+            var components = this.components
 
             this.products.forEach(function (product) {
                 // generate composed product name for each language
@@ -1094,13 +1094,13 @@ new Vue({
                         categories[product.category.value].label[language.id].edit=false
                         my_name = categories[product.category.value].label[language.id].value
                     }
-                    if(product.attribute1 && product.attribute1.label[language.id]){
-                        attributes[product.attribute1.value].label[language.id].edit=false
-                        my_name = my_name +" "+ conjunction.with[language.id]+ " " +attributes[product.attribute1.value].label[language.id].value
+                    if(product.component1 && product.component1.label[language.id]){
+                        components[product.component1.value].label[language.id].edit=false
+                        my_name = my_name +" "+ conjunction.with[language.id]+ " " +components[product.component1.value].label[language.id].value
                     }
-                    if(product.attribute2 && product.attribute2.label[language.id]){
-                        attributes[product.attribute2.value].label[language.id].edit=false
-                        my_name = my_name +" "+ conjunction.and[language.id]+ " " +attributes[product.attribute2.value].label[language.id].value
+                    if(product.component2 && product.component2.label[language.id]){
+                        components[product.component2.value].label[language.id].edit=false
+                        my_name = my_name +" "+ conjunction.and[language.id]+ " " +components[product.component2.value].label[language.id].value
                     }
                     product_names[language.id]={
                         dirty:true,

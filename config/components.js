@@ -1,4 +1,4 @@
-var AttributeOptions =
+var ComponentOptions =
 {
   "id":"attributes",
   "conjunction":{

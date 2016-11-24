@@ -13,7 +13,7 @@
 
   <!-- load data -->
   <script src="config/categories.js"></script>
-  <script src="config/attributes.js"></script>
+  <script src="config/components.js"></script>
   <script src="config/metatags.js"></script>
   <script src="config/materials.js"></script>
 
@@ -138,7 +138,7 @@
                 <label>[[product.modelCode]] <i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
                 </label>
                 <!-- Generic Product Names by language -->
-                <ul v-if="show_names && (product.category || product.attribute1 || product.attribute2)" class="list-group indent">
+                <ul v-if="show_names && (product.category || product.component1 || product.component2)" class="list-group indent">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                     <span class="flag-icon [[language.flag]]" ></span>
                     <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
@@ -176,7 +176,7 @@
                   <!-- Meta tag preview -->
                   <ul  class="indent"
                        v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagCategory.length>0
-                              || product.metatagAttribute1.length>0 || product.metatagAttribute2.length>0">
+                              || product.metatagComponent1.length>0 || product.metatagComponent2.length>0">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                       <ul>
                         <li><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span></li>
@@ -191,27 +191,27 @@
                             </span>
                           <!-- END Category Metatags -->
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagAttribute1" >
-                          <!-- Attribute1 Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagAttribute1')"></i>
+                        <li class="list-group-item" v-for="metatag in product.metatagComponent1" >
+                          <!-- Component1 Metatags -->
+                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent1')"></i>
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
-                          <!-- END Attribute1 Metatags -->
+                          <!-- END Component1 Metatags -->
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagAttribute2" >
-                          <!-- Attribute2 Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagAttribute2')"></i>
+                        <li class="list-group-item" v-for="metatag in product.metatagComponent2" >
+                          <!-- Component2 Metatags -->
+                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent2')"></i>
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
-                          <!-- END Attribute2 Metatags -->
+                          <!-- END Component2 Metatags -->
                         </li>
                         <li class="list-group-item" v-for="metatag in product.metatagMaterial" >
                           <!-- Material Metatags -->
@@ -304,27 +304,27 @@
                             </span>
                             <!-- END Category Metatags -->
                           </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagAttribute1" >
-                            <!-- Attribute1 Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagAttribute1')"></i>
+                          <li class="list-group-item" v-for="metatag in product.metatagComponent1" >
+                            <!-- Component1 Metatags -->
+                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent1')"></i>
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
-                            <!-- END Attribute1 Metatags -->
+                            <!-- END Component1 Metatags -->
                           </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagAttribute2" >
-                            <!-- Attribute2 Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagAttribute2')"></i>
+                          <li class="list-group-item" v-for="metatag in product.metatagComponent2" >
+                            <!-- Component2 Metatags -->
+                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent2')"></i>
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>[[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
-                            <!-- END Attribute2 Metatags -->
+                            <!-- END Component2 Metatags -->
                           </li>
                           <li class="list-group-item" v-for="metatag in product.metatagMaterial" >
                             <!-- Material Metatags -->
@@ -365,9 +365,9 @@
     <!-- Add Products end -->
     <!-- Add Product Names -->
     <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_names">
-      <div class="margin-bottom" v-if="show_category_edit && !show_name_scheme_edit"><i class="indent">Please select at least one category or attribute to edit ...</i></div>
+      <div class="margin-bottom" v-if="show_category_edit && !show_name_scheme_edit"><i class="indent">Please select at least one category or component to edit ...</i></div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_category" placeholder="Select a Category"
+        <v-select :value.sync="selected_category" placeholder="Select a Base Product"
                   :options="category_objects"
                   :taggable="true"
                   :push-tags="true"
@@ -375,22 +375,22 @@
                   :create-option="createCategoryOption"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_attribute_1" placeholder="Select an attribute"
-                  :options="attribute_objects"
+        <v-select :value.sync="selected_component_1" placeholder="Select an component"
+                  :options="component_objects"
                   :get-option-label="getOptionLabelValue"
                   :taggable="true"
                   :push-tags="true"
                   :get-option-label="getOptionLabelValue"
-                  :create-option="createAttributeOption"></v-select>
+                  :create-option="createComponentOption"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_attribute_2" placeholder="Select an other attribute"
-                  :options="attribute_objects"meta
+        <v-select :value.sync="selected_component_2" placeholder="Select an other component"
+                  :options="component_objects"
                   :get-option-label="getOptionLabelValue"
                   :taggable="true"
                   :push-tags="true"
                   :get-option-label="getOptionLabelValue"
-                  :create-option="createAttributeOption"></v-select>
+                  :create-option="createComponentOption"></v-select>
       </div>
       <div class="row">
         <div class="actions" v-if="!show_category_edit || !show_name_scheme_edit">
@@ -400,9 +400,9 @@
         </div>
       </div>
       <div class="row" v-if="show_category_edit && show_name_scheme_edit">
-        <!-- Edit Category/ Attributes -->
-        <h5 class="indent">Edit category & attributes  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditCategories()"></i></h5>
-        <ul class="indent metatag-list" v-if="selected_category || selected_attribute_1 || selected_attribute_2">
+        <!-- Edit Category/ Components -->
+        <h5 class="indent">Edit Base Product & Components  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditCategories()"></i></h5>
+        <ul class="indent metatag-list" v-if="selected_category || selected_component_1 || selected_component_2">
           <li class="list-group-item small" v-for="language in languages" v-show="language.status">
             <ul>
               <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
@@ -418,34 +418,34 @@
                   <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="categories[selected_category.value].label[language.id].value" @keyup.enter="closeEditMe(categories[selected_category.value].label[language.id])">
                 </div>
               </li>
-              <li class="list-group-item" v-if="selected_attribute_1">
-                <span v-if="!selected_attribute_1.label[language.id].edit">
-                    <!-- Show Attribute 1 -->
+              <li class="list-group-item" v-if="selected_component_1">
+                <span v-if="!selected_component_1.label[language.id].edit">
+                    <!-- Show Component 1 -->
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(attributes[selected_attribute_1.value].label[language.id])">[[ attributes[selected_attribute_1.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_1.value].label[language.id])"></i>
+                    <span @click="editMe(components[selected_component_1.value].label[language.id])">[[ components[selected_component_1.value].label[language.id].value ]]</span>
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selected_component_1.value].label[language.id])"></i>
                 </span>
-                <div v-if="attributes[selected_attribute_1.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="attributes[selected_attribute_1.value].label[language.id].edit" @click="closeEditMe(attributes[selected_attribute_1.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="attributes[selected_attribute_1.value].label[language.id].value" @keyup.enter="closeEditMe(attributes[selected_attribute_1.value].label[language.id])">
+                <div v-if="components[selected_component_1.value].label[language.id].edit">
+                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selected_component_1.value].label[language.id].edit" @click="closeEditMe(components[selected_component_1.value].label[language.id])"></i>
+                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selected_component_1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selected_component_1.value].label[language.id])">
                 </div>
               </li>
-              <li class="list-group-item" v-if="selected_attribute_2">
-                <span v-if="!selected_attribute_2.label[language.id].edit">
-                    <!-- Show Attribute 2 -->
+              <li class="list-group-item" v-if="selected_component_2">
+                <span v-if="!selected_component_2.label[language.id].edit">
+                    <!-- Show Component 2 -->
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(attributes[selected_attribute_2.value].label[language.id])">[[ attributes[selected_attribute_2.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(attributes[selected_attribute_2.value].label[language.id])"></i>
+                    <span @click="editMe(components[selected_component_2.value].label[language.id])">[[ components[selected_component_2.value].label[language.id].value ]]</span>
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selected_component_2.value].label[language.id])"></i>
                 </span>
-                <div v-if="attributes[selected_attribute_2.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="attributes[selected_attribute_2.value].label[language.id].edit" @click="closeEditMe(attributes[selected_attribute_2.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="attributes[selected_attribute_2.value].label[language.id].value" @keyup.enter="closeEditMe(attributes[selected_attribute_2.value].label[language.id])">
+                <div v-if="components[selected_component_2.value].label[language.id].edit">
+                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selected_component_2.value].label[language.id].edit" @click="closeEditMe(components[selected_component_2.value].label[language.id])"></i>
+                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selected_component_2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selected_component_2.value].label[language.id])">
                 </div>
               </li>
             </ul>
           </li>
         </ul>
-        <!-- End edit Category/ Attributes -->
+        <!-- End edit Category/ Components -->
       </div>
 
     </div>
@@ -582,12 +582,12 @@
             <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
           </li>
           <li class="list-group-item">
-            <h5>Categories & Attributes</h5>
+            <h5>Categories & Components</h5>
             <a href="#" class="export cursor" @click="debugCategories()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Categories</a>&nbsp;&nbsp;
             <a href="#" class="export cursor" @click="clearCategories()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Categories</a>&nbsp;&nbsp;
             <b style="font-size:3em"> | </b>
-            <a href="#" class="export cursor" @click="debugAttributes()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Attributes</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="clearAttributes()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Attributes</a>
+            <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
+            <a href="#" class="export cursor" @click="clearComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Components</a>
           </li>
           <li class="list-group-item">
             <h5>Materials & Metatags</h5>
