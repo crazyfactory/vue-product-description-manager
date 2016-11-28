@@ -427,6 +427,10 @@ new Vue({
                     my_product=Api_response[random_nr]
                     my_product_list.push({
                         active: true,
+                        cached_descriptions:my_product.cached_descriptions,
+                        cached_materials:my_product.cached_materials,
+                        cached_metatags:my_product.cached_metatags,
+                        cached_names:my_product.cached_names,
                         component1:null,
                         component2:null,
                         base_product:null,

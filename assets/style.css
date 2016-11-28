@@ -453,6 +453,24 @@ section.settings{
 .cursor{
     cursor: pointer;
 }
+.cached{
+    font-style: italic;
+    font-weight: 200;
+    font-size: 0.9em;
+}
+.override{
+    text-decoration: line-through;
+}
+.cached.metatags{
+    margin-left:1em;
+    position:relative;
+    top:-8px;
+}
+.product-list li.no-bottom-space{
+    padding-bottom:0;
+    border-bottom:0 none transparent;
+}
+
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,

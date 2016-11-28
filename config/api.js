@@ -17,6 +17,30 @@ var Api_response =
         "edit": false
       }
     },
+    "cached_descriptions": {
+      "de": {
+        "value": "Ball-Closure-Ring aus Chirurgenstahl mit glitzernder Kristallsteinkugel. Und zwar in unterschiedlichen Farben und Durchmessern. We love it!"
+      },
+      "en-GB": {
+        "value": "Ball closure ring made of surgical steel with a sparkling crystal. Waiting for you in many different colours and diameters. We love it!"
+      }
+    },
+    "cached_materials": {
+      "de": {
+        "value": "Chirurgenstahl 316L"
+        },
+      "en-GB": {
+        "value": "Surgical Steel 316L"
+      }
+    },
+    "cached_metatags": {
+      "de": {
+        "value": "Kristallstein, Kugel, Verschluss, Ring, Chirurgenstahl 316L, Aufsatz, Steinchen, brilliant, schick, glatt, glänzend"
+      },
+      "en-GB": {
+        "value": "jewelled, ball, closure, ring, surgical steel 316L, attachment, stone, brilliant, fashionable, smooth, shiny"
+      }
+    },
     "properties": [
       "gauge",
       "length",
@@ -24,6 +48,22 @@ var Api_response =
     ]
   },
   "1":{
+    "cached_names": {
+      "de": {
+        "value": "Schwarzer Produktname"
+      },
+      "en-GB": {
+        "value": "Cached product name"
+      }
+    },
+    "cached_materials": {
+      "de": {
+        "value": "Vergoldeter Chirurgenstahl 316L"
+      },
+      "en-GB": {
+        "value": "Golden Surgical Steel 316L"
+      }
+    },
     "db_id": "23456",
     "edit": false,
     "dirty": false,
@@ -70,6 +110,22 @@ var Api_response =
     ]
   },
   "3":{
+    "cached_names": {
+      "de": {
+        "value": "das ist der orginal Titel"
+      },
+      "en-GB": {
+        "value": "this is the original title"
+      }
+    },
+    "cached_materials": {
+      "de": {
+        "value": "Gummi"
+      },
+      "en-GB": {
+        "value": "Rubber"
+      }
+    },
     "db_id": "45678",
     "edit": false,
     "dirty": false,
