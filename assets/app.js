@@ -764,6 +764,11 @@ new Vue({
         },
         exportProduct: function(product){
             if(!hasApi){
+                product.cached_descriptions=product.descriptions
+                product.cached_materialss=product.materials
+                product.cached_metatags=product.metatags
+                product.cached_names=product.names
+
                 product.dirty=false
                 msg = '"'+product.modelCode+'" was succesfully saved'
                 this.addMessage(msg,'success')
@@ -771,6 +776,7 @@ new Vue({
         },
         getGeneratedDescription: function(product, language){
             index=this.products.indexOf(product)
+            product.dirty=true
 
             if(hasApi){
                 api.app=this
