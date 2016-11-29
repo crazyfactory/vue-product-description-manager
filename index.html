@@ -430,8 +430,8 @@
       <div class="row">
         <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
           <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteBaseProductsComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteBaseProductsComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
         </div>
       </div>
       <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
@@ -500,8 +500,8 @@
       <div class="row">
         <div class="actions" v-if="!show_materials_edit">
           <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
         </div>
       </div>
       <div class="row" v-if="show_materials_edit">
@@ -545,8 +545,8 @@
       <div class="row">
         <div class="actions" v-if="!show_metatags_edit">
           <button type="button" class="btn btn-success fa-pull-right cursor" @click="saveMetatags()"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="deleteMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
-          <button type="button" class="btn btn-success fa-pull-right cursor" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-warning fa-pull-right cursor" @click="editMetatags()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
         </div>
       </div>
       <div class="row" v-if="show_metatags_edit">
@@ -594,7 +594,7 @@
               &nbsp;&nbsp;&nbsp;<i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)"></i>
             </li>
             <li class="list-group-item">
-              <button type="button" class="btn btn-success cursor" @click="exportAllProducts"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save All </button>
+              <button type="button" class="btn btn-warning cursor" @click="exportAllProducts"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save All </button>
             </li>
           </ul>
         </li>
