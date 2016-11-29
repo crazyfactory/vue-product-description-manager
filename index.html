@@ -281,10 +281,10 @@
                         <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
                         <span class="flag-icon [[language.flag]]" ></span>
                         <!-- original description -->
-                        <span v-if="product.cached_descriptions && product.cached_descriptions[language.id]" class="cached" v-bind:class="{ 'override': product.cached_descriptions && product.cached_descriptions[language.id].override}">
+                        <span v-if="product.cached_descriptions && product.cached_descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value) }">
                           [[ product.cached_descriptions[language.id].value ]]</span>
                         <!-- end original description -->
-                        <span v-if="!product.cached_descriptions || product.cached_descriptions[language.id].override && !product.descriptions[language.id].edit" class="cursor" @click="editMe(product.descriptions[language.id])">
+                        <span v-if="!product.cached_descriptions || !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value)" class="cursor" @click="editMe(product.descriptions[language.id])">
                           [[product.descriptions[language.id].value]]
                         </span>
                         <div class="editable" v-show="product.descriptions[language.id].edit">

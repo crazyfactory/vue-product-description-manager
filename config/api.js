@@ -8,12 +8,12 @@ var Api_response =
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en-GB": {
-        "value":"We can deliver it in the gauge of 1.6mm. The available length is 38mm. It comes with a ball size of 5mm. This is just a cool product! Order right now!",
+        "value":"Ball closure ring made of surgical steel with a sparkling crystal. Waiting for you in many different colours and diameters. We love it!",
         "edit": false,
         "dirty": false
       },
       "de": {
-        "value": "In der Materialstärke von 1.6mm auf Lager vorrätig. Für dich erhältlich in der Länge von 38mm. Die Kugel dieses Piercings hat eine Größe von 5mm. Du weißt es selbst am besten, ein tolles Produkt wie dieses fehlt deiner Sammlung noch!",
+        "value": "Ball-Closure-Ring aus Chirurgenstahl mit glitzernder Kristallsteinkugel. Und zwar in unterschiedlichen Farben und Durchmessern. We love it!",
         "edit": false
       }
     },
