@@ -415,8 +415,6 @@ new Vue({
             }
             else
             {
-                console.log('no api ... dry hump with api element ')
-
                 var my_products = value.split(" ")
                 var my_product_list = []
 
@@ -638,15 +636,19 @@ new Vue({
                 var changed= false
                 if(product.base_product && selected_base_product && product.base_product.value == selected_base_product.value){
                     product.base_product=null
+                    product.metatagBaseProduct=null
                     changed= true
                 }
+
                 selected_components.forEach(function(component){
                     if(product.component1 && product.component1.value == component.value){
                         product.component1=null
+                        product.metatagComponent1=null
                         changed= true
                     }
                     if(product.component2 && product.component2.value == component.value){
                         product.component2=null
+                        product.metatagComponent2=null
                         changed= true
                     }
                 })
@@ -703,6 +705,7 @@ new Vue({
                 all_products.forEach(function (product) {
                     if(product.materials.indexOf(item.value)> -1){
                         product.materials.splice(product.materials.indexOf(item.value), 1)
+                        product.dirty=true
                     }
                 })
                 // remove from dropdown
@@ -764,11 +767,6 @@ new Vue({
         },
         exportProduct: function(product){
             if(!hasApi){
-                product.cached_descriptions=product.descriptions
-                product.cached_materialss=product.materials
-                product.cached_metatags=product.metatags
-                product.cached_names=product.names
-
                 product.dirty=false
                 msg = '"'+product.modelCode+'" was succesfully saved'
                 this.addMessage(msg,'success')
@@ -789,7 +787,6 @@ new Vue({
             else{
                 // use fake api response from api.js
                 var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1))
-                console.log('no api ... dry hump with api element nr.'+ random_nr)
                 my_product=Api_response[random_nr]
                 my_description=my_product.descriptions[language]
                 this.products[index].descriptions[language]=my_description
@@ -1032,7 +1029,7 @@ new Vue({
                     if (typeof base_product == 'object' && base_product !=null && base_product.value != '--'){
                         product.base_product = base_products[base_product.value]
                         autotagBaseProduct=autotagFactory(product.base_product, base_products)
-                        if(autotagBaseProduct && product.metatagBaseProduct[0]!=autotagBaseProduct[0]){
+                        if(autotagBaseProduct && product.metatagBaseProduct && product.metatagBaseProduct[0]!=autotagBaseProduct[0]){
                             product.metatagBaseProduct=autotagBaseProduct
                             product.dirty=true
                         }
@@ -1041,7 +1038,7 @@ new Vue({
                     if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
                         product.component1=components[attr1.value]
                         autotagComponent1=autotagFactory(product.component1, components)
-                        if(autotagComponent1 && product.metatagComponent1[0]!=autotagComponent1[0]){
+                        if(autotagComponent1 && product.metatagComponent1 && product.metatagComponent1[0]!=autotagComponent1[0]){
                             product.metatagComponent1=autotagComponent1
                             product.dirty=true
                         }
@@ -1050,7 +1047,7 @@ new Vue({
                     if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
                         product.component2=components[attr2.value]
                         autotagComponent2=autotagFactory(product.component2, components)
-                        if(autotagComponent2 && product.metatagComponent2[0]!=autotagComponent2[0]){
+                        if(autotagComponent2 && product.metatagComponent2 && product.metatagComponent2[0]!=autotagComponent2[0]){
                             product.metatagComponent2=autotagComponent2
                             product.dirty=true
                         }
@@ -1059,18 +1056,21 @@ new Vue({
                     product_names={}
 
                     languages.forEach(function(language){
-                        var my_name=''
+                        var my_name=null
 
                         if(product.base_product && product.base_product.label[language.id]){
                             my_name = product.base_product.label[language.id].value
+                            product.dirty=true
 
                         }
                         if(product.component1 && product.component1.label[language.id]){
                             my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
+                            product.dirty=true
 
                         }
                         if(product.component2 && product.component2.label[language.id]){
                             my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.component2.label[language.id].value
+                            product.dirty=true
                         }
                         product_names[language.id]={
                             edit:false,
@@ -1135,11 +1135,15 @@ new Vue({
                 product_names={}
                 languages.forEach(function(language){
                     var my_name=''
-                    var org_name=product.names[language.id].value
-                    
+                    var org_name=''
+                    if(product.names && product.names[language.id] && product.names[language.id].value){
+                        org_name=product.names[language.id].value
+                    }
                     if(product.base_product && base_products[product.base_product.value]){
                         base_products[product.base_product.value].label[language.id].edit=false
-                        my_name = base_products[product.base_product.value].label[language.id].value
+                        if(base_products[product.base_product.value].label[language.id].value){
+                            my_name = base_products[product.base_product.value].label[language.id].value
+                        }
                     }
                     if(product.component1 && product.component1.label[language.id]){
                         components[product.component1.value].label[language.id].edit=false

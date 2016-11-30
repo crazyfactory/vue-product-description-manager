@@ -140,7 +140,7 @@
                 <!-- Generic Product Names by language -->
                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                    <span class="flag-icon [[language.flag]]" ></span>
+                    <span class="flag-icon [[language.flag]]" @click="debugMe(product)"></span>
                     <span v-if="product.base_product || product.component1 || product.component2">
                       <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
                       <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
@@ -159,8 +159,9 @@
                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
                     </span>
-                    <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': product.names[language.id] && !(product.cached_names[language.id].value==product.names[language.id].value)}">
-                      [[product.cached_names[language.id].value ]] <br>
+                    <span class="cached" v-if="product.cached_names"
+                          v-bind:class="{ 'override': ((product.base_product || product.component1 || product.component2) && (product.cached_names[language.id].value != product.names[language.id].value))}">
+                      [[ product.cached_names[language.id].value ]] <br>
                     </span>
                   </li>
                 </ul>
@@ -169,13 +170,13 @@
                   <!-- material configuration -->
                   <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                      <span class="flag-icon [[language.flag]] cursor"></span>
+                      <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
                         <span v-if="index > 0"> / </span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
                       <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
-                      <span v-if="product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
+                      <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials && product.materials.length >0 }">
                         [[ product.cached_materials[language.id].value ]]
                       </span>
                     </li>
@@ -185,17 +186,17 @@
                 <div v-if="show_metatags">
                   <!-- Meta tag preview -->
                   <ul  class="indent"
-                       v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0
-                              || product.metatagComponent1.length>0 || product.metatagComponent2.length>0 || product.cached_metatags">
+                       v-if="(product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0) || (product.metatagBaseProduct && product.metatagBaseProduct.length>0)
+                              || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) || (product.cached_metatags && product.cached_metatags.length>0)">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                       <ul>
                         <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-                          <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0
-                              || product.metatagComponent1.length>0 || product.metatagComponent2.length>0 }">
+                          <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0)
+                              || (product.metatagBaseProduct && product.metatagBaseProduct.length>0) || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) }">
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" >
+                        <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" v-show="product.metatagBaseProduct.length>0">
                           <!-- BaseProduct Metatags -->
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagBaseProduct')"></i>
                           <span v-if="metatags[metatag]">
@@ -306,7 +307,7 @@
                         [[ materials[material].label[language.id].value ]]
                       </span>
                         <i class="fa fa-pull-right fa-trash-o cursor" @click="deleteMaterials(product);"></i>
-                        <span v-if="product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
+                        <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
                         [[ product.cached_materials[language.id].value ]]
                       </span>
                       </li>
