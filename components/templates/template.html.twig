@@ -284,10 +284,10 @@
                                         </ul>
                                         <!-- End Material Preview -->
                                     </div>
-                                    <div v-if="product.metatags.length>0">
+                                    <div v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
                                         <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                                         <!-- Meta tag preview -->
-                                        <ul  class="indent" v-if="product.metatags.length>0">
+                                        <ul  class="indent" v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
                                             <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                                 <ul>
                                                     <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>

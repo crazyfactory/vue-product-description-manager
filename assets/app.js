@@ -189,6 +189,11 @@ new Vue({
         // metatags local
         metatags_local:metatagStorage.fetch(),
         newProduct:'',
+        // Preview filter
+        preview_filter_description:true,
+        preview_filter_material:true,
+        preview_filter_metatag:true,
+        preview_filter_name:true,
         // products
         products:productStorage.fetch(),
         show_actionbar:false,
