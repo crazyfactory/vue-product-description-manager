@@ -876,6 +876,7 @@ new Vue({
                     this.headline = 'Preview'
                     this.isFullScreen=true
                     this.headline_icon = "fa fa-eye"
+                    this.show_actionbar = true
                     break
                 case 'metatags':
                     this.show_metatags= true
@@ -1113,6 +1114,9 @@ new Vue({
                 }
 
             })
+        },
+        switchMe: function(name){
+            this[name]=!this[name]
         },
         toggle_actionbar: function(){
             if(this.products.length>0){

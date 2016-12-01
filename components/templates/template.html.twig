@@ -46,8 +46,8 @@
           </span>
         <span v-for="language in languages">
           <span class="language" @click="toggle_language(language)">
-              <i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
-              <i style="color:darkgreen;" class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
+              <i class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
+              <i class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
               <span class="flag-icon [[language.flag]]" ></span>
           </span>
         </span>
@@ -76,9 +76,9 @@
                             <span title="Nothing to DESELECT" class="action"><i style="color:#ccc;" class="fa fa-circle-o" aria-hidden="true"></i></span>
                         </section>
                         <section v-if="hasEditableProducts">
-                            <span title="SELECT ALL products" class="action cursor" @click="selectAllProducts(true)"><i class="fa fa-check-circle-o" style="color:darkgreen;" aria-hidden="true"></i></span>
+                            <span title="SELECT ALL products" class="action cursor" @click="selectAllProducts(true)"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
                             <span title="INVERT current selection" class="action cursor" @click="invertSelectedlProducts()"><i style="color:gold;" class="fa fa-random" aria-hidden="true"></i></span>
-                            <span title="DESELECT ALL" class="action cursor" @click="selectAllProducts(false)"><i style="color:darkred;" class="fa fa-circle-o" aria-hidden="true"></i></span>
+                            <span title="DESELECT ALL" class="action cursor" @click="selectAllProducts(false)"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
                         </section>
                         <span> | </span>
                         <span class="actions"><i>Actions:</i></span>
@@ -91,6 +91,22 @@
                             <span title="HIDE all selected products" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
                         </section>
                         <span v-if="hasHiddenProducts" title="SHOW all hidden products" class="action cursor" @click="showAllProducts()"><i style="color:darkgreen;" class="fa fa-eye" aria-hidden="true"></i></span>
+                        <section v-if="show_preview">
+                            <span> | </span>
+                            <span><i>Filter:</i></span>
+                <span title="Filter names" class="action cursor" @click="switchMe('preview_filter_name')">
+                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_name, 'fa-circle-o': !preview_filter_name}"  aria-hidden="true"></i> Names
+                </span>
+                <span title="Filter descriptions" class="action cursor" @click="switchMe('preview_filter_description')">
+                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_description, 'fa-circle-o': !preview_filter_description}"  aria-hidden="true"></i> Descriptions
+                </span>
+                <span title="Filter materials" class="action cursor" @click="switchMe('preview_filter_material')">
+                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_material, 'fa-circle-o': !preview_filter_material}"  aria-hidden="true"></i> Materials
+                </span>
+                <span title="Filter metatags" class="action cursor" @click="switchMe('preview_filter_metatag')">
+                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_metatag, 'fa-circle-o': !preview_filter_metatag}"  aria-hidden="true"></i> Metatags
+                </span>
+                        </section>
                     </div>
                 </header>
                 <!-- End add products -->
@@ -157,7 +173,7 @@
                                     <!-- Meta tag preview -->
                                     <ul  class="indent"
                                          v-if="(product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0) || (product.metatagBaseProduct && product.metatagBaseProduct.length>0)
-                              || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) || (product.cached_metatags && product.cached_metatags.length>0)">
+                              || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) || (product.cached_metatags)">
                                         <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                             <ul>
                                                 <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
@@ -226,7 +242,7 @@
                                 </div>
                                 <!-- Preview Feature -->
                                 <div class="product_preview" v-on:click.stop v-if="show_preview">
-                                    <div class="indent">
+                                    <div class="indent" v-if="preview_filter_name">
                                         <h5 class="product_name inline" v-if="product.base_product"><i class="fa fa-commenting-o fa-pull-left" aria-hidden="true" ></i> Names:</h5>
                                         <ul class="list-group" v-if="product.base_product">
                                             <li class="list-group-item small" v-for="language in languages" v-show="language.status">
@@ -243,7 +259,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div v-if="product.descriptions" class="indent description">
+                                    <div v-if="product.descriptions && preview_filter_description" class="indent description">
                                         <h5><i class="fa fa-info-circle fa-pull-left" aria-hidden="true" ></i> Descriptions:</h5>
                                         <ul class="list-group">
                                             <!-- Language dependent items -->
@@ -266,7 +282,7 @@
                                             <!-- end language dependent items -->
                                         </ul>
                                     </div>
-                                    <div v-if="product.materials.length>0" class="indent">
+                                    <div v-if="(product.materials.length>0 || product.cached_materials) && preview_filter_material" class="indent">
                                         <h5><i class="fa fa-industry fa-pull-left" aria-hidden="true"></i> Materials:</h5>
                                         <!-- Material Preview -->
                                         <ul class="list-group">
@@ -276,7 +292,7 @@
                         <span v-if="index > 0"> / </span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
-                                                <i class="fa fa-pull-right fa-trash-o cursor" @click="deleteMaterials(product);"></i>
+                                                <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
                         <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
                         [[ product.cached_materials[language.id].value ]]
                       </span>
@@ -284,7 +300,7 @@
                                         </ul>
                                         <!-- End Material Preview -->
                                     </div>
-                                    <div v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
+                                    <div v-if="preview_filter_metatag && (product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0)">
                                         <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                                         <!-- Meta tag preview -->
                                         <ul  class="indent" v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
@@ -296,9 +312,6 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                                                     </li>
-                                                    <!--
-                                                    <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                                                    -->
                                                     <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" >
                                                         <!-- BaseProduct Metatags -->
                                                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagBaseProduct')"></i>
