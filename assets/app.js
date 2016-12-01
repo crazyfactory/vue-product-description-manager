@@ -776,6 +776,12 @@ new Vue({
                 msg = '"'+product.modelCode+'" was succesfully saved'
                 this.addMessage(msg,'success')
             }
+            else{
+                api.app=this
+                api.data = product
+                api.action = 'save_product'
+                api.call()
+            }
         },
         getGeneratedDescription: function(product, language){
             index=this.products.indexOf(product)
