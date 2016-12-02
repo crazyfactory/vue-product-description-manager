@@ -136,10 +136,10 @@
                       </span>
                       <div class="customized_name"
                            v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
-                          <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
+                          <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                           <span v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
                           <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
-                          <div class="editable" v-show="product.names[language.id].edit">
+                          <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
                               <textarea v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
                           </div>
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
@@ -246,12 +246,12 @@
                                         <h5 class="product_name inline" v-if="product.base_product"><i class="fa fa-commenting-o fa-pull-left" aria-hidden="true" ></i> Names:</h5>
                                         <ul class="list-group" v-if="product.base_product">
                                             <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                                                <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="!product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
-                                                <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
+                                                <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
+                                                <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                                                 <span class="flag-icon [[language.flag]]" ></span>
-                                                <span v-show="!product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
-                                                <div class="editable" v-show="product.names[language.id].edit">
-                                                    <textarea v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
+                                                <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
+                                                <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
+                                                    <textarea v-model="product.names[language.id] && product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                                                 </div>
                         <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': (product.base_product || product.component1 || product.component2)}">
                           [[product.cached_names[language.id].value ]] <br>
@@ -367,7 +367,6 @@
                                                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                                                     </li>
                                                 </ul>
-
                                             </li>
                                         </ul>
                                         <!-- Meta tag preview end -->
