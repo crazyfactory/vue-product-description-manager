@@ -165,12 +165,12 @@
                         [[product.names[language.id].original_value ]]
                       </span>
                       <div class="customized_name"
-                         v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
+                           v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                         <span v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
                         <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                         <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
-                          <textarea v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
+                          <textarea v-if="product.names[language.id]" v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
                         </div>
                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
@@ -281,7 +281,7 @@
                         <span class="flag-icon [[language.flag]]" ></span>
                         <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                         <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
-                          <textarea v-model="product.names[language.id] && product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
+                          <textarea v-if="product.names[language.id]" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                         </div>
                         <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': (product.base_product || product.component1 || product.component2)}">
                           [[product.cached_names[language.id].value ]] <br>
@@ -330,7 +330,12 @@
                     </ul>
                     <!-- End Material Preview -->
                   </div>
-                  <div v-if="preview_filter_metatag && (product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0)">
+                  <div v-if="preview_filter_metatag && (
+                                        (product.metatags && product.metatags.length>0) ||
+                                        (product.metatagMaterial && product.metatagMaterial.length>0) ||
+                                        (product.metatagBaseProduct && product.metatagBaseProduct.length>0) ||
+                                        (product.metatagComponent1 && product.metatagComponent1.length>0) ||
+                                        (product.metatagComponent2 && product.metatagComponent2.length>0))">
                     <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                     <!-- Meta tag preview -->
                     <ul  class="indent" v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
@@ -616,44 +621,44 @@
     </div>
     <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
       <!-- Settings & Messages -->
-        <ul class="list-group">
-          <li class="list-group-item">
-            <h5>BaseProducts & Components & Materials & Metatags</h5>
-            <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="clearBaseProducts()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear BaseProducts</a>&nbsp;&nbsp;
-            <b style="font-size:2em"> | </b>
-            <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="clearComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Components</a>
-            <b style="font-size:2em"> | </b>
-            <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Materials</a>&nbsp;&nbsp;
-            <b style="font-size:2em"> | </b>
-            <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>
-          </li>
-          <li class="list-group-item">
-            <h5>Settings</h5>
-            <a href="#" class="export cursor" @click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
-          </li>
-          <li class="list-group-item">
-            <h5>Messages</h5>
-            <a href="#" class="error_report cursor" @click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-            <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
-          </li>
-        </ul>
-        <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
-            <div class="alert alert-[[message.type]]" >
-              <i class=date">[[message.date]]:</i>
-              <span>[[message.message]]</span>
-              <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-            </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h5>BaseProducts & Components & Materials & Metatags</h5>
+          <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="clearBaseProducts()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear BaseProducts</a>&nbsp;&nbsp;
+          <b style="font-size:2em"> | </b>
+          <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="clearComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Components</a>
+          <b style="font-size:2em"> | </b>
+          <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Materials</a>&nbsp;&nbsp;
+          <b style="font-size:2em"> | </b>
+          <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>
+        </li>
+        <li class="list-group-item">
+          <h5>Settings</h5>
+          <a href="#" class="export cursor" @click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
+        </li>
+        <li class="list-group-item">
+          <h5>Messages</h5>
+          <a href="#" class="error_report cursor" @click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
+        </li>
+      </ul>
+      <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
+          <div class="alert alert-[[message.type]]" >
+            <i class=date">[[message.date]]:</i>
+            <span>[[message.message]]</span>
+            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
+          </div>
 
-          </li>
-        </ul>
+        </li>
+      </ul>
       <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
       <ul class="list-group">
         <li class="list-group-item" v-for="message in messages | filterBy 'success' in 'type'">

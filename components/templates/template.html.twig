@@ -140,7 +140,7 @@
                           <span v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
                           <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                           <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
-                              <textarea v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
+                              <textarea v-if="product.names[language.id]" v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
                           </div>
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
@@ -251,7 +251,7 @@
                                                 <span class="flag-icon [[language.flag]]" ></span>
                                                 <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                                                 <div class="editable" v-show="product.names[language.id] && product.names[language.id].edit">
-                                                    <textarea v-model="product.names[language.id] && product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
+                                                    <textarea v-if="product.names[language.id]" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                                                 </div>
                         <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': (product.base_product || product.component1 || product.component2)}">
                           [[product.cached_names[language.id].value ]] <br>
@@ -300,7 +300,12 @@
                                         </ul>
                                         <!-- End Material Preview -->
                                     </div>
-                                    <div v-if="preview_filter_metatag && (product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0)">
+                                    <div v-if="preview_filter_metatag && (
+                                        (product.metatags && product.metatags.length>0) ||
+                                        (product.metatagMaterial && product.metatagMaterial.length>0) ||
+                                        (product.metatagBaseProduct && product.metatagBaseProduct.length>0) ||
+                                        (product.metatagComponent1 && product.metatagComponent1.length>0) ||
+                                        (product.metatagComponent2 && product.metatagComponent2.length>0))">
                                         <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                                         <!-- Meta tag preview -->
                                         <ul  class="indent" v-if="product.metatags.length>0 || product.metatagMaterial.length>0 || product.metatagBaseProduct.length>0 || product.metatagComponent1.length>0 || product.metatagComponent1.length>0">
