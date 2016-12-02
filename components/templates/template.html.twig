@@ -137,8 +137,8 @@
                       <div class="customized_name"
                            v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
                           <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
-                          <span v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
-                          <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
+                          <span v-if="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
+                          <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                           <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                               <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
                           </div>
