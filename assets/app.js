@@ -771,6 +771,18 @@ new Vue({
             }
         },
         exportProduct: function(product){
+            dict_materials=this.materials
+
+            // localize materials
+            localized_materials=[]
+            this.languages.forEach(function(language){
+                localized_materials[language.id]=[]
+                for (var i = 0; i < product.materials.length; i++) {
+                    localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
+                }
+            })
+            product['localized_materials']=localized_materials
+
             if(!hasApi){
                 product.dirty=false
                 msg = '"'+product.modelCode+'" was succesfully saved'
@@ -1073,7 +1085,6 @@ new Vue({
                         if(product.base_product && product.base_product.label[language.id]){
                             my_name = product.base_product.label[language.id].value
                             product.dirty=true
-
                         }
                         if(product.component1 && product.component1.label[language.id]){
                             my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
