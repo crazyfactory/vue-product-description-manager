@@ -772,20 +772,29 @@ new Vue({
         },
         exportProduct: function(product){
             dict_materials=this.materials
+            dict_metatags=this.metatags
+            my_metatags = product.metatags.concat(product.metatagBaseProduct, product.metatagComponent1,product.metatagComponent2, product.metatagMaterial)
 
             // localize materials
-            localized_materials=[]
+            localized_materials={}
+            localized_metatags={}
             this.languages.forEach(function(language){
                 localized_materials[language.id]=[]
+                localized_metatags[language.id]=[]
                 for (var i = 0; i < product.materials.length; i++) {
                     localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
                 }
+                for (var i = 0; i < my_metatags.length; i++) {
+                    localized_metatags[language.id].push(dict_metatags[my_metatags[i]].label[language.id].value)
+                }
             })
             product['localized_materials']=localized_materials
+            product['localized_metatags']=localized_metatags
 
             if(!hasApi){
                 product.dirty=false
                 msg = '"'+product.modelCode+'" was succesfully saved'
+                console.log(product)
                 this.addMessage(msg,'success')
             }
             else{
