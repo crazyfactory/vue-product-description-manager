@@ -769,6 +769,12 @@ new Vue({
                 msg = productList.join(", ")+' were succesfully saved'
                 this.addMessage(msg,'success')
             }
+            else{
+                me=this
+                dirtyProducts.forEach(function(product){
+                    me.exportProduct(product)
+                })
+            }
         },
         exportProduct: function(product){
             dict_materials=this.materials
