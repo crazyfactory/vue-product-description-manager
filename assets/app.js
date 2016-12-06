@@ -779,6 +779,9 @@ new Vue({
         exportProduct: function(product){
             dict_materials=this.materials
             dict_metatags=this.metatags
+            if(!product.metatags){
+                product.metatags=[]
+            }
             my_metatags = product.metatags.concat(product.metatagBaseProduct, product.metatagComponent1,product.metatagComponent2, product.metatagMaterial)
 
             // localize materials
@@ -793,7 +796,6 @@ new Vue({
                     }
                 }
                 for (var i = 0; i < my_metatags.length; i++) {
-                    console.log(dict_metatags[my_metatags[i]])
                     if(dict_metatags[my_metatags[i]]){
                         localized_metatags[language.id].push(dict_metatags[my_metatags[i]].label[language.id].value)
                     }
