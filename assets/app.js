@@ -782,10 +782,15 @@ new Vue({
                 localized_materials[language.id]=[]
                 localized_metatags[language.id]=[]
                 for (var i = 0; i < product.materials.length; i++) {
-                    localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
+                    if(dict_materials[product.materials[i]]){
+                        localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
+                    }
                 }
                 for (var i = 0; i < my_metatags.length; i++) {
-                    localized_metatags[language.id].push(dict_metatags[my_metatags[i]].label[language.id].value)
+                    console.log(dict_metatags[my_metatags[i]])
+                    if(dict_metatags[my_metatags[i]]){
+                        localized_metatags[language.id].push(dict_metatags[my_metatags[i]].label[language.id].value)
+                    }
                 }
             })
             product['localized_materials']=localized_materials
