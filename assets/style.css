@@ -202,9 +202,8 @@ input[type="checkbox"] {
 .switch_actionbar{
     position: absolute;
     top:12px;
-    left:10px;
-    border:none;
-    color:#ccc;
+    left:0;
+
 }
 /* End ActionBar*/
 /* action buttons */

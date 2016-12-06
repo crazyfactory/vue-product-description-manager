@@ -97,7 +97,7 @@
                  placeholder="Enter products model code"
                  v-model="newProduct"
                  @keyup.enter="addProduct">
-          <i class="fa fa-exchange fa-2x switch_actionbar cursor" aria-hidden="true" @click="toggle_actionbar()"></i>
+          <button class="fa fa-exchange switch_actionbar cursor btn btn-default" title="Switch actionbar" aria-hidden="true" @click="toggle_actionbar()"></button>
           <div class="actionbar" v-if="show_actionbar">
             <span class="action"><i>Select:</i></span>
             <section v-if="!hasEditableProducts">
