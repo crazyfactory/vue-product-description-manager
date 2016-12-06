@@ -35,7 +35,7 @@ var Api_response =
     },
     "cached_metatags": {
       "de": {
-        "value": "Kristallstein, Kugel, Verschluss, Ring, Chirurgenstahl 316L, Aufsatz, Steinchen, brilliant, schick, glatt, glänzend"
+        "value": ""
       },
       "en-GB": {
         "value": "jewelled, ball, closure, ring, surgical steel 316L, attachment, stone, brilliant, fashionable, smooth, shiny"
