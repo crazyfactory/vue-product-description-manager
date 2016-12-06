@@ -1091,16 +1091,16 @@ new Vue({
                     languages.forEach(function(language){
                         var my_name=null
 
-                        if(product.base_product && product.base_product.label[language.id]){
+                        if(product.base_product && product.base_product.label && product.base_product.label[language.id]){
                             my_name = product.base_product.label[language.id].value
                             product.dirty=true
                         }
-                        if(product.component1 && product.component1.label[language.id]){
+                        if(product.component1 && product.component1.label && product.component1.label[language.id]){
                             my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
                             product.dirty=true
 
                         }
-                        if(product.component2 && product.component2.label[language.id]){
+                        if(product.component2 && product.component2.label && product.component2.label[language.id]){
                             my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.component2.label[language.id].value
                             product.dirty=true
                         }

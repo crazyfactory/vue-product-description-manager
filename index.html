@@ -200,7 +200,7 @@
                   <!-- end material -->
                 </div>
                 <div v-if="show_metatags">
-                  <!-- Meta tag preview -->
+                  <!-- Metatag preview -->
                   <ul  class="indent"
                        v-if="(product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0) || (product.metatagBaseProduct && product.metatagBaseProduct.length>0)
                               || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) || (product.cached_metatags)">
@@ -279,7 +279,7 @@
                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                         <span class="flag-icon [[language.flag]]" ></span>
-                        <span v-show="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
+                        <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                         <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                           <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                         </div>
