@@ -158,7 +158,7 @@
                                         <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                             <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
-                        <span v-if="index > 0"> / </span>
+                        <span v-if="index > 0">/</span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
                                             <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
@@ -253,7 +253,7 @@
                                                 <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                                                     <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                                                 </div>
-                        <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': (product.base_product || product.component1 || product.component2)}">
+                        <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
                           [[product.cached_names[language.id].value ]] <br>
                         </span>
                                             </li>
@@ -289,7 +289,7 @@
                                             <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                                                 <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
-                        <span v-if="index > 0"> / </span>
+                        <span v-if="index > 0">/</span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
                                                 <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
@@ -579,15 +579,15 @@
             <h5 v-if="!hasDirtyProducts"><i>Nothing to save</i></h5>
             <ul class="list-group">
                 <li class="list-group-item" v-if="hasDirtyProducts">
-                    <h5>Products</h5>
+                    <h5>Products &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-warning cursor" @click="exportAllProducts"><i class="fa fa-database" aria-hidden="true"></i> Save All </button>
+                    </h5>
                     <ul>
-                        <li class="list-group-item" v-for="product in products | filterBy true in 'dirty'">
+                        <li class="inline_list cursor" v-for="product in products | filterBy true in 'dirty'" @click="exportProduct(product)">
                             [[product.modelCode]]
                             &nbsp;&nbsp;&nbsp;<i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)"></i>
                         </li>
-                        <li class="list-group-item">
-                            <button type="button" class="btn btn-warning cursor" @click="exportAllProducts"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Save All </button>
-                        </li>
+
                     </ul>
                 </li>
             </ul>
