@@ -478,6 +478,13 @@ section.settings{
     color:darkred;
 }
 
+li.inline_list{
+    display:inline;
+    border-right:1px solid black;
+    margin-right:1em;
+    padding-right:1em;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
     .product-list li .toggle {
