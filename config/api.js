@@ -2,43 +2,53 @@ var Api_response =
 {
   "0":{
     "db_id": "12345",
+    "product_image":"https://www.crazy-factory.com/product_images/PR-PFLPPW0764R/PR-PFLPPW0764R-20_S-Piercings-Tunnels-Plugs-Tapers-Double-Flared-Plug.JPG",
+    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Tunnels-Plugs-Tapers/PR-PFLPPW0764R/Double-Flared-Plug",
     "edit": false,
     "dirty": false,
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en-GB": {
-        "value":"Ball closure ring made of surgical steel with a sparkling crystal. Waiting for you in many different colours and diameters. We love it!",
+        "value":"Fresh Double Flared Plug with a cool winter design `Reindeer in Love`",
         "edit": false,
         "dirty": false
       },
       "de": {
-        "value": "Ball-Closure-Ring aus Chirurgenstahl mit glitzernder Kristallsteinkugel. Und zwar in unterschiedlichen Farben und Durchmessern. We love it!",
+        "value": "Klarer Favorit für den Winter: Double Flared Plug mit weihnachtlich-winterlichem Design `Verliebte Rentiere`",
         "edit": false
+      }
+    },
+    "cached_names": {
+      "de": {
+        "value": "Double Flared Plug"
+      },
+      "en-GB": {
+        "value": "Double Flared Plug"
       }
     },
     "cached_descriptions": {
       "de": {
-        "value": "Ball-Closure-Ring aus Chirurgenstahl mit glitzernder Kristallsteinkugel. Und zwar in unterschiedlichen Farben und Durchmessern. We love it!"
+        "value": "Klarer Favorit für den Winter: Double Flared Plug mit weihnachtlich-winterlichem Design `Verliebte Rentiere`"
       },
       "en-GB": {
-        "value": "Ball closure ring made of surgical steel with a sparkling crystal. Waiting for you in many different colours and diameters. We love it!"
+        "value": "Fresh Double Flared Plug with a cool winter design `Reindeer in Love`"
       }
     },
     "cached_materials": {
       "de": {
-        "value": "Chirurgenstahl 316L"
+        "value": "Acryl"
         },
       "en-GB": {
-        "value": "Surgical Steel 316L"
+        "value": "Acrylic"
       }
     },
     "cached_metatags": {
       "de": {
-        "value": ""
+        "value": ["weihnacht"]
       },
       "en-GB": {
-        "value": "jewelled, ball, closure, ring, surgical steel 316L, attachment, stone, brilliant, fashionable, smooth, shiny"
+        "value": ["christmas"]
       }
     },
     "properties": [
@@ -50,33 +60,35 @@ var Api_response =
   "1":{
     "cached_names": {
       "de": {
-        "value": "Schwarzer Produktname"
+        "value": "DOUBLE FLARED TUNNEL"
       },
       "en-GB": {
-        "value": "Cached product name"
+        "value": "DOUBLE FLARED TUNNEL"
       }
     },
     "cached_materials": {
       "de": {
-        "value": "Vergoldeter Chirurgenstahl 316L"
+        "value": "Chirurgenstahl 316L"
       },
       "en-GB": {
-        "value": "Golden Surgical Steel 316L"
+        "value": "Surgical Steel 316L"
       }
     },
     "db_id": "23456",
+    "product_image":"https://www.crazy-factory.com/product_images/CJ-TN024/CJ-TN024-10_S-Piercings-Tunnels-Plugs-Tapers-Double-Flared-Tunnel.JPG",
+    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Tunnels-Plugs-Tapers/CJ-TN024/Double-Flared-Tunnel",
     "edit": false,
     "dirty": false,
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en-GB": {
-        "value":"The available gauge is 1.6mm. Available with the length of 38mm.It comes with a ball size of 5mm. This is just a crazy product! Order right now!",
+        "value":"Surgical steel tunnel with an intricately forged attachment",
         "edit": false,
         "dirty": false
       },
       "de": {
-        "value":"Auf Lager in der Materialstärke von 1.6mm. Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Eine 5mm große Kugel macht das gute Stück erst so richtig perfekt. Du weißt es selbst am besten, ein wunderbares Produkt wie dieses fehlt deiner Sammlung noch!",
+        "value":"Chirurgenstahltunnel mit kunstvollen Aufsatz. Das rockt!",
         "edit": false
       }
     },
@@ -88,57 +100,67 @@ var Api_response =
   },
   "2":{
     "db_id": "34567",
+    "cached_names": {
+      "de": {
+        "value": "BANANE MIT ZWEI KRISTALLSTEINKUGELN UND ANHÄNGER"
+      },
+      "en-GB": {
+        "value": "DOUBLE JEWELLED BANANA WITH CHARM"
+      }
+    },
+    "product_image":"https://www.crazy-factory.com/product_images/SBNDJH-76/SBNDJH-76-161046CR_S-Piercings-Curved-Barbells-Double-Jewelled-Banana-with-Charm.JPG",
+    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Curved-Barbells/SBNDJH-76/Double-Jewelled-Banana-with-Charm",
     "edit": false,
     "dirty": false,
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en-GB": {
-        "value":"This article is available with the gauge of 1.6mm. Available with the length of 38mm. The 5mm ball is a perfect fit. This is just a wonderful product! Order right now!",
+        "value":"",
         "edit": false
       },
       "de": {
-        "value":"Mit der Materialstärke von 1.6mm einfach ein Kracher. Groß oder klein, das entscheidest du allein – verfügbar in der Länge 38mm. Die Kugelgröße ist 5mm. Du weißt es selbst am besten, ein duftes Produkt wie dieses fehlt deiner Sammlung noch!",
+        "value":"",
         "edit": false,
         "dirty": false
       }
     },
     "properties": [
       "gauge",
-      "length",
-      "ball"
+      "length"
     ]
   },
   "3":{
     "cached_names": {
       "de": {
-        "value": "das ist der orginal Titel"
+        "value": "MODISCHE BANANE"
       },
       "en-GB": {
-        "value": "this is the original title"
+        "value": "Fancy Banana"
       }
     },
     "cached_materials": {
       "de": {
-        "value": "Gummi"
+        "value": "Chirurgenstahl 316L"
       },
       "en-GB": {
-        "value": "Rubber"
+        "value": "Surgical Steel 316L"
       }
     },
     "db_id": "45678",
+    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Curved-Barbells/CBNJP9/",
     "edit": false,
     "dirty": false,
     "hidden":false,
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en-GB": {
-        "value":"The available gauge is 1.6mm. We can deliver it in the length of 38mm.It comes with a ball size of 5mm. This is just a cool product! Order right now!",
+        "value":"This fancy Banana is crazy ... crazy factory.",
         "edit": false,
         "dirty": false
       },
       "de": {
-        "value":"Ein Produkt für alle Gelegenheiten - erhältlich in der Materialstärke von 1.6mm. Für dich erhältlich in der Länge von 38mm. Eine 5mm große Kugel macht das gute Stück erst so richtig perfekt. Einfach ein starkes Produkt. Am besten gleich jetzt bestellen.",
+        "value":"Eine tolle Banane mit chic wartet hier auf Dich. Worauf wartest du noch?",
         "edit": false,
         "dirty": false
       }
@@ -151,6 +173,7 @@ var Api_response =
   },
   "4":{
     "db_id": "56789",
+    "product_image":"https://www.crazy-factory.com/product_images/USP/USP6BK_S-Piercings-Tunnels-Plugs-Tapers-Spiral-Stretcher.JPG",
     "edit": false,
     "dirty": false,
     "hidden":false,
@@ -168,9 +191,7 @@ var Api_response =
       }
     },
     "properties": [
-      "gauge",
-      "length",
-      "ball"
+      "gauge"
     ]
   }
 }

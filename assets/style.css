@@ -268,7 +268,6 @@ input[type="checkbox"] {
 }
 
 .product-list li label {
-    white-space: pre;
     padding: 10px 60px 0 15px;
     margin-left: 45px;
     display: block;
@@ -287,14 +286,16 @@ input[type="checkbox"] {
 
 .product-list li .product_action {
     font-size:1.5em;
-    display: none;
     bottom: 0;
     margin: 0 5px;
-    color: #cc9a9a;
     transition: color 0.2s ease-out;
     cursor: pointer;
 }
 
+#app a.product_action {
+    font-size: 16px;
+    text-decoration: none !important;
+}
 .product-list li:hover .product_action {
     display: block;
 }
@@ -483,6 +484,13 @@ li.inline_list{
     border-right:1px solid black;
     margin-right:1em;
     padding-right:1em;
+}
+.product_image a{
+    margin-left:2em;
+   
+}
+label.white-space{
+    white-space:normal;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
