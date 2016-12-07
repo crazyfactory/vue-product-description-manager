@@ -438,6 +438,7 @@ new Vue({
                         component2:null,
                         base_product:null,
                         db_id:my_product.db_id,
+                        detailsLink:my_product.details_link,
                         dirty:false,
                         descriptions:my_product.descriptions,
                         hidden:false,
@@ -449,8 +450,8 @@ new Vue({
                         metatagBaseProduct:[],
                         metatagMaterial:[],
                         modelCode:my_product_name,
-                        name_scheme:null,
                         names:{},
+                        productImage:my_product.product_image,
                         properties:my_product.properties,
                         propertyFormula:my_product.propertyFormula
                     })

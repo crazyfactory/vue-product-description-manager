@@ -42,7 +42,7 @@
   <!-- show active messages -->
   <div class="container messages" v-cloak>
     <div class="alert alert-[[message.type]]" v-for="message in messages | filterBy true in 'show'">
-      <i class=date">[[message.date]]:</i>
+      <i class="date">[[message.date]]:</i>
       <span>[[message.message]]</span>
       <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
     </div>
@@ -149,10 +149,23 @@
                 :class="{ active: product.active }">
               <div class="view">
                 <input class="toggle" type="checkbox" v-model="product.active">
-                <i class="product_action fa fa-trash-o fa-2x fa-pull-right cursor" aria-hidden="true" @click="removeProduct(product)"></i>
-                <i class="product_action fa fa-eye-slash fa-2x fa-pull-right cursor" aria-hidden="true" @click="hideProduct(product)"></i>
-                <label>[[product.modelCode]] <i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
+                <i class="product_action fa fa-trash-o fa-2x fa-pull-right cursor text-danger" aria-hidden="true" @click="removeProduct(product)"></i>
+                <i class="product_action fa fa-eye-slash fa-2x fa-pull-right cursor text-muted" aria-hidden="true" @click="hideProduct(product)"></i>
+                <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink" title="Open new Tab with [[ product.modelCode ]] details page" aria-hidden="true">
+                  <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
+                </a>
+                <label class="white-space">[[product.modelCode]]
+                  <i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
+                  
+                  <span v-if="product.productImage" class="product_image">
+                    <!-- ProductImage -->
+                    <a v-bind:href="product.productImage" target="_blank">
+                      <img v-bind:src="product.productImage" class="img-rounded" width="50">
+                    </a>
+                  </span>
+              
                 </label>
+                
                 <!-- Generic Product Names by language -->
                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
