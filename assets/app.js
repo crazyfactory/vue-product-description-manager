@@ -642,19 +642,19 @@ new Vue({
                 var changed= false
                 if(product.base_product && selected_base_product && product.base_product.value == selected_base_product.value){
                     product.base_product=null
-                    product.metatagBaseProduct=null
+                    product.metatagBaseProduct=[]
                     changed= true
                 }
 
                 selected_components.forEach(function(component){
                     if(product.component1 && product.component1.value == component.value){
                         product.component1=null
-                        product.metatagComponent1=null
+                        product.metatagComponent1=[]
                         changed= true
                     }
                     if(product.component2 && product.component2.value == component.value){
                         product.component2=null
-                        product.metatagComponent2=null
+                        product.metatagComponent2=[]
                         changed= true
                     }
                 })
@@ -999,6 +999,9 @@ new Vue({
             product.component1=null
             product.component2=null
             product.names=null
+            product.metatagBaseProduct=[]
+            product.metatagComponent1=[]
+            product.metatagComponent2=[]
             product.dirty=true
         },
         removeSeletedProducts(){
