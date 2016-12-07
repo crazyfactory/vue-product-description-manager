@@ -971,10 +971,12 @@ new Vue({
         },
         removeAutoMetatag: function(product, metatag, target){
             //target: 'metatagMaterial'
+            product.dirty=true
             product[target].splice(product[target].indexOf(metatag), 1)
         },
         removeMaterial: function(product){
             // remove material from one product
+            product.dirty=true
             product.materials=[]
         },
         removeMessage: function(message){
@@ -985,6 +987,7 @@ new Vue({
         },
         removeMetatag: function(product, metatag){
             // remove metatag from one product
+            product.dirty=true
             product.metatags.splice(product.metatags.indexOf(metatag), 1)
         },
         removeProduct: function (product) {
