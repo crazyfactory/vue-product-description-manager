@@ -587,7 +587,7 @@ new Vue({
             if(hasApi){
                 api.app=this
                 api.data = option
-                api.action = 'create_base_productt'
+                api.action = 'create_base_product'
                 api.call()
             }
             return option
