@@ -21,9 +21,6 @@
   <!-- get css styles -->
   <link href="./assets/bootstrap-3.3.6.min.css" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.7.0/css/flag-icon.min.css" rel="stylesheet" type="text/css" />
-  <!--
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="assets/style.css" />
 </head>
@@ -35,8 +32,8 @@
       <a href="#" class="name" @click="makeActive('material')">Material <i class="fa fa-industry fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="metatags" @click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="preview" @click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-      <a href="#" class="export" @click="makeActive('export')">Save <i class="fa fa-database fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-      <a href="#" class="message" @click="makeActive('admin')">Admin <i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+      <a href="#" class="admin" @click="makeActive('admin')">
+        &nbsp;<i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
     </nav>
   </div>
   <!-- show active messages -->
@@ -657,26 +654,17 @@
       <ul class="list-group">
         <li class="list-group-item">
           <h5>BaseProducts & Components & Materials & Metatags</h5>
+          <a href="#" class="export cursor" @click="clearAll()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All Select boxes ... fresh start </a>
+          <b style="font-size:2em"> | </b>
           <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
-          <a href="#" class="export cursor" @click="clearBaseProducts()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear BaseProducts</a>&nbsp;&nbsp;
-          <b style="font-size:2em"> | </b>
           <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
-          <a href="#" class="export cursor" @click="clearComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Components</a>
-          <b style="font-size:2em"> | </b>
+          
           <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
-          <a href="#" class="export cursor" @click="clearMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear Materials</a>&nbsp;&nbsp;
-          <b style="font-size:2em"> | </b>
-          <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>&nbsp;&nbsp;
-          <a href="#" class="export cursor" @click="clearLocalMetatags()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local Metatags</a>
-        </li>
-        <li class="list-group-item">
-          <h5>Settings</h5>
-          <a href="#" class="export cursor" @click="clearSettings()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear local settings</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
         </li>
         <li class="list-group-item">
           <h5>Messages</h5>
-          <a href="#" class="error_report cursor" @click="alert('A message will be send to the admin with the errors listed below')"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"></i> Share Errors </a>&nbsp;&nbsp;
-          <a href="#" class="export cursor" @click="addMessage('test message dude', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="addMessage('Test message added for demo purpose.', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
           <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
           <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
         </li>
@@ -685,7 +673,7 @@
       <ul class="list-group">
         <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
           <div class="alert alert-[[message.type]]" >
-            <i class=date">[[message.date]]:</i>
+            <i class="date">[[message.date]]:</i>
             <span>[[message.message]]</span>
             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
           </div>
@@ -696,7 +684,7 @@
       <ul class="list-group">
         <li class="list-group-item" v-for="message in messages | filterBy 'success' in 'type'">
           <div class="alert alert-[[message.type]]" >
-            <i class=date">[[message.date]]:</i>
+            <i class="date">[[message.date]]:</i>
             <span>[[message.message]]</span>
             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
           </div>

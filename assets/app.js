@@ -529,26 +529,17 @@ new Vue({
             }
             return metatagsProduct
         },
-        clearComponents:function(){
-            console.log('Clear local components:')
-            console.log(this.components_local)
+        clearAll:function(){
             this.components_local=[]
             this.components=[]
-        },
-        clearBaseProducts:function(){
-            console.log('Clear local base_products:')
-            console.log(this.base_products_local)
             this.base_products_local=[]
             this.base_products=[]
-        },
-        clearLocalMetatags:function(){
             this.metatags_local = []
-        },
-        clearMaterials:function(){
-            console.log('Clear local materials:')
-            console.log(this.materials_local)
             this.materials_local=[]
             this.materials=[]
+            msg="All local settings for Base Prducts, Components, Materials and Metatags are cleared now. Please use your browser reload to restart the App."
+            this.addMessage(msg,'success')
+
         },
         clearSettings: function(){
             this.settings={}

@@ -492,6 +492,9 @@ li.inline_list{
 label.white-space{
     white-space:normal;
 }
+.app-nav a.admin{
+    background-color: #4d4d4d !important;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .toggle-all,
