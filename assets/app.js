@@ -595,12 +595,14 @@ new Vue({
         createMetatagOption: function(value){
             var option = this.optionFactory(value)
             this.metatags_local.push(option)
+            /*
             if(hasApi){
                 api.app=this
                 api.data = option
                 api.action = 'create_metatag'
                 api.call()
             }
+            */
             return option
         },
         createMaterialOption: function(value){
