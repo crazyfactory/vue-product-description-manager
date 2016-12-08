@@ -1,9 +1,9 @@
 var Api_response =
 {
   "0":{
-    "db_id": "12345",
+    "db_id": "124996",
     "product_image":"https://www.crazy-factory.com/product_images/PR-PFLPPW0764R/PR-PFLPPW0764R-20_S-Piercings-Tunnels-Plugs-Tapers-Double-Flared-Plug.JPG",
-    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Tunnels-Plugs-Tapers/PR-PFLPPW0764R/Double-Flared-Plug",
+    "details_link":"https://www.crazy-factory.com/product_info.php?products_id=124996",
     "edit": false,
     "dirty": false,
     "hidden":false,
@@ -74,9 +74,9 @@ var Api_response =
         "value": "Surgical Steel 316L"
       }
     },
-    "db_id": "23456",
+    "db_id": "124836",
     "product_image":"https://www.crazy-factory.com/product_images/CJ-TN024/CJ-TN024-10_S-Piercings-Tunnels-Plugs-Tapers-Double-Flared-Tunnel.JPG",
-    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Tunnels-Plugs-Tapers/CJ-TN024/Double-Flared-Tunnel",
+    "details_link":"https://www.crazy-factory.com/product_info.php?products_id=124836",
     "edit": false,
     "dirty": false,
     "hidden":false,
@@ -99,7 +99,7 @@ var Api_response =
     ]
   },
   "2":{
-    "db_id": "34567",
+    "db_id": "121711",
     "cached_names": {
       "de": {
         "value": "BANANE MIT ZWEI KRISTALLSTEINKUGELN UND ANHÄNGER"
@@ -109,7 +109,7 @@ var Api_response =
       }
     },
     "product_image":"https://www.crazy-factory.com/product_images/SBNDJH-76/SBNDJH-76-161046CR_S-Piercings-Curved-Barbells-Double-Jewelled-Banana-with-Charm.JPG",
-    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Curved-Barbells/SBNDJH-76/Double-Jewelled-Banana-with-Charm",
+    "details_link":"https://www.crazy-factory.com/product_info.php?products_id=121711",
     "edit": false,
     "dirty": false,
     "hidden":false,
@@ -147,8 +147,8 @@ var Api_response =
         "value": "Surgical Steel 316L"
       }
     },
-    "db_id": "45678",
-    "details_link":"https://www.crazy-factory.com/en-GB/p/Piercings/Curved-Barbells/CBNJP9/",
+    "db_id": "115548",
+    "details_link":"https://www.crazy-factory.com/product_info.php?products_id=115548",
     "edit": false,
     "dirty": false,
     "hidden":false,
@@ -172,7 +172,8 @@ var Api_response =
     ]
   },
   "4":{
-    "db_id": "56789",
+    "db_id": "3890",
+    "details_link":"https://www.crazy-factory.com/product_info.php?products_id=3890",
     "product_image":"https://www.crazy-factory.com/product_images/USP/USP6BK_S-Piercings-Tunnels-Plugs-Tapers-Spiral-Stretcher.JPG",
     "edit": false,
     "dirty": false,

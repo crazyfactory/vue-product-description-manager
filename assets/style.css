@@ -293,7 +293,7 @@ input[type="checkbox"] {
 }
 
 #app a.product_action {
-    font-size: 16px;
+    font-size: 12px;
     text-decoration: none !important;
 }
 .product-list li:hover .product_action {
