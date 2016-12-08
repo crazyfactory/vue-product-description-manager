@@ -573,21 +573,45 @@ new Vue({
         createComponentOption: function(value){
             var option = this.optionFactory(value)
             this.components_local.push(option)
+            if(hasApi){
+                api.app=this
+                api.data = option
+                api.action = 'create_component'
+                api.call()
+            }
             return option
         },
         createBaseProductOption: function(value){
             var option = this.optionFactory(value)
             this.base_products_local.push(option)
+            if(hasApi){
+                api.app=this
+                api.data = option
+                api.action = 'create_base_productt'
+                api.call()
+            }
             return option
         },
         createMetatagOption: function(value){
             var option = this.optionFactory(value)
             this.metatags_local.push(option)
+            if(hasApi){
+                api.app=this
+                api.data = option
+                api.action = 'create_metatag'
+                api.call()
+            }
             return option
         },
         createMaterialOption: function(value){
             var option = this.optionFactory(value)
             this.materials_local.push(option)
+            if(hasApi){
+                api.app=this
+                api.data = option
+                api.action = 'create_material'
+                api.call()
+            }
             return option
         },
         debugComponents:function(){
@@ -944,6 +968,7 @@ new Vue({
 
             var option = {
                 id:normalized_value,
+                new:true,
                 dirty:true,
                 value:normalized_value,
                 label: {},
