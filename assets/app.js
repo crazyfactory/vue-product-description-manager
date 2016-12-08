@@ -558,9 +558,27 @@ new Vue({
         },
         closeEditBaseProducts: function(){
             this.show_base_product_edit=false
+            if(hasApi){
+                data={
+                    'base_product':this.selected_base_product,
+                    'component1':this.selected_component_1,
+                    'component2':this.selected_component_2
+                }
+                api.app=this
+                api.data = data
+                api.action = 'update_base_product_component'
+                api.call()
+            }
+
             this.updateNameSchemes()
         },
         closeEditMaterials: function(){
+            if(hasApi){
+                api.app=this
+                api.data = this.selected_materials
+                api.action = 'update_material'
+                api.call()
+            }
             this.show_materials_edit=false
         },
         closeEditMe: function(item){
@@ -568,6 +586,12 @@ new Vue({
             item.value= item.value.replace(/\r?\n|\r/g,"")
         },
         closeEditMetatags: function(){
+            if(hasApi){
+                api.app=this
+                api.data = this.selected_metatags
+                api.action = 'update_metatag'
+                api.call()
+            }
             this.show_metatags_edit=false
         },
         createComponentOption: function(value){
@@ -602,7 +626,7 @@ new Vue({
                 api.action = 'create_metatag'
                 api.call()
             }
-            
+
             return option
         },
         createMaterialOption: function(value){
