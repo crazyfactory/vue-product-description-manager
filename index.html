@@ -637,7 +637,9 @@
       <ul class="list-group">
         <li class="list-group-item" v-if="hasDirtyProducts">
           <h5>Products &nbsp;&nbsp;&nbsp;&nbsp;
+            <!--
             <button type="button" class="btn btn-warning cursor" @click="exportAllProducts"><i class="fa fa-database" aria-hidden="true"></i> Save All </button>
+            -->
           </h5>
           <ul>
             <li class="inline_list cursor" v-for="product in products | filterBy true in 'dirty'" @click="exportProduct(product)">
