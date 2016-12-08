@@ -363,7 +363,7 @@ new Vue({
         metatags:function(){
             my_tags={}
             this.metatags_local.forEach(function(metatag) {
-                my_tags[metatag.id]=metatag
+                my_tags[metatag.value]=metatag
             })
             return my_tags
         },
