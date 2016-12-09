@@ -491,6 +491,13 @@ new Vue({
                             }
                             newTag.alias[language.id]=alias
                         })
+
+                        if(hasApi){
+                            api.app=this
+                            api.data = newTag
+                            api.action = 'create_metatag'
+                            api.call()
+                        }
                         metatagsNew.push(newTag)
                     }
                     // add to products
@@ -518,6 +525,12 @@ new Vue({
                         }
                         newTag.alias[language.id]=alias
                     })
+                    if(hasApi){
+                        api.app=this
+                        api.data = newTag
+                        api.action = 'create_metatag'
+                        api.call()
+                    }
                     metatagsNew.push(newTag)
                 }
                 // add to products
