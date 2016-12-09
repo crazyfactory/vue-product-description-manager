@@ -550,9 +550,9 @@ new Vue({
         closeEditBaseProducts: function(){
             this.show_base_product_edit=false
             if(hasApi){
-                data=[]
-                data['base_product']=this.selected_base_product,
-                data['component']=[this.selected_component_1,this.selected_component_2]
+                data={}
+                data.base_product=this.selected_base_product
+                data.component=[this.selected_component_1,this.selected_component_2]
                 api.app=this
                 api.data = data
                 api.action = 'update_base_product_component'
