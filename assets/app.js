@@ -804,7 +804,7 @@ new Vue({
         editMe: function(item, item_parent){
             item.edit=true
             if(item_parent){
-             item_parent.dirty=true
+                item_parent.dirty=true
             }
         },
         editMetatags: function(){
@@ -858,7 +858,6 @@ new Vue({
             if(!hasApi){
                 product.dirty=false
                 msg = '"'+product.modelCode+'" was succesfully saved'
-                console.log(product)
                 this.addMessage(msg,'success')
             }
             else{
@@ -932,9 +931,9 @@ new Vue({
         isCustomized: function(product){
             this.languages.forEach(function(language){
                 // does the product have a customized name in any language?
-              if(product.names[language.id].original_value!=product.names[language.id].value){
-                  return true
-              }
+                if(product.names[language.id].original_value!=product.names[language.id].value){
+                    return true
+                }
             })
             return false
 
@@ -1235,40 +1234,50 @@ new Vue({
             var conjunction = this.conjunction
             var base_products = this.base_products
             var components = this.components
+            var updated = false
 
             this.products.forEach(function (product) {
                 // generate composed product name for each language
                 product_names={}
+
                 languages.forEach(function(language){
-                    var my_name=''
-                    var org_name=''
-                    if(product.names && product.names[language.id] && product.names[language.id].value){
-                        org_name=product.names[language.id].value
-                    }
-                    if(product.base_product && base_products[product.base_product.value]){
-                        base_products[product.base_product.value].label[language.id].edit=false
-                        if(base_products[product.base_product.value].label[language.id].value){
-                            my_name = base_products[product.base_product.value].label[language.id].value
+                    if(product.names[language.id]){
+                        var my_name=''
+                        var org_name=''
+                        if(product.names && product.names[language.id] && product.names[language.id].value){
+                            org_name=product.names[language.id].value
+                            updated=true
                         }
-                    }
-                    if(product.component1 && product.component1.label[language.id]){
-                        components[product.component1.value].label[language.id].edit=false
-                        my_name = my_name +" "+ conjunction.with[language.id]+ " " +components[product.component1.value].label[language.id].value
-                    }
-                    if(product.component2 && product.component2.label[language.id]){
-                        components[product.component2.value].label[language.id].edit=false
-                        my_name = my_name +" "+ conjunction.and[language.id]+ " " +components[product.component2.value].label[language.id].value
-                    }
-                    product_names[language.id]={
-                        dirty:true,
-                        edit:false,
-                        original_value:my_name,
-                        value:my_name
-                    }
-                    if(my_name!=org_name){
-                        product.dirty=true
+                        if(product.base_product && base_products[product.base_product.value]){
+                            base_products[product.base_product.value].label[language.id].edit=false
+                            if(base_products[product.base_product.value].label[language.id].value){
+                                my_name = base_products[product.base_product.value].label[language.id].value
+                                updated=true
+                            }
+                        }
+                        if(product.component1 && product.component1.label[language.id]){
+                            components[product.component1.value].label[language.id].edit=false
+                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +components[product.component1.value].label[language.id].value
+                            updated=true
+                        }
+                        if(product.component2 && product.component2.label[language.id]){
+                            components[product.component2.value].label[language.id].edit=false
+                            my_name = my_name +" "+ conjunction.and[language.id]+ " " +components[product.component2.value].label[language.id].value
+                            updated=true
+                        }
+                        product_names[language.id]={
+                            dirty:true,
+                            edit:false,
+                            original_value:my_name,
+                            value:my_name
+                        }
+                        if(my_name!=org_name){
+                            product.dirty=true
+                        }
+
                     }
                 })
+
                 product.names=product_names
 
             })
