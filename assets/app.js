@@ -1,9 +1,13 @@
 if (typeof api !== 'undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi=true
+    // how long is a product kept in local storage? (in ms)
+    var validationRange = api.validationRange ? api.validationRange : 86400000
 }
 else{
     var hasApi=false
+    // how long is a product kept in local storage? (in ms)
+    var validationRange=86400000
 }
 
 var ComponentData=[]
@@ -17,11 +21,20 @@ var Descriptions=[]
 var STORAGE_KEY = 'crazy-products'
 var productStorage = {
     fetch: function () {
-        var products = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-        products.forEach(function (product, index) {
-            products.uid = index
+        var now = Date.now()
+        var products_raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+        var products=[]
+        var cleaned_up=false
+
+        products_raw.forEach(function (product, index) {
+            if(product.updated && (now-product.updated)<validationRange){
+                products.push(product)
+            }
+            else cleaned_up=true
         })
         productStorage.uid = products.length
+
+        if(cleaned_up) localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
         return products
     },
     save: function (products) {
@@ -64,7 +77,7 @@ var metatagStorage = {
         var meta_static=[]
 
         if (MetatagsStatic.content){
-            // got stic tags from mock or api
+            // got static tags from mock or api
             meta_static = MetatagsStatic.content
         }
         // get the local tags
@@ -194,7 +207,6 @@ new Vue({
         preview_filter_material:true,
         preview_filter_metatag:true,
         preview_filter_name:true,
-        // products
         products:productStorage.fetch(),
         show_actionbar:false,
         show_export: false,
@@ -453,7 +465,8 @@ new Vue({
                         names:{},
                         productImage:my_product.product_image,
                         properties:my_product.properties,
-                        propertyFormula:my_product.propertyFormula
+                        propertyFormula:my_product.propertyFormula,
+                        updated:Date.now()
                     })
                 })
 
@@ -857,6 +870,7 @@ new Vue({
 
             if(!hasApi){
                 product.dirty=false
+                product.updated=Date.now()
                 msg = '"'+product.modelCode+'" was succesfully saved'
                 this.addMessage(msg,'success')
             }
