@@ -185,15 +185,55 @@ new Vue({
         isFullScreen:false,
         languages:[
             {
+                id:'de',
+                status:true,
+                flag:'flag-icon-de',
+            },
+            {
                 id:'en-GB',
                 status:true,
                 flag:'flag-icon-gb',
             },
             {
-                id:'de',
+                id:'en-US',
                 status:true,
-                flag:'flag-icon-de',
-            }
+                flag:'flag-icon-us',
+            },
+            {
+                id:'es',
+                status:true,
+                flag:'flag-icon-es',
+            },
+            {
+                id:'fr',
+                status:true,
+                flag:'flag-icon-fr',
+            },
+            {
+                id:'it',
+                status:true,
+                flag:'flag-icon-it',
+            },
+            {
+                id:'nl',
+                status:true,
+                flag:'flag-icon-nl',
+            },
+            {
+                id:'pt',
+                status:true,
+                flag:'flag-icon-pt',
+            },
+            {
+                id:'se',
+                status:true,
+                flag:'flag-icon-se',
+            },
+            {
+                id:'ru',
+                status:true,
+                flag:'flag-icon-ru',
+            },
         ],
         // materials
         materials_local:materialStorage.fetch(),
