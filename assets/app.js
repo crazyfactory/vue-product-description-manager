@@ -952,6 +952,9 @@ new Vue({
         getOptionLabelValue: function(item){
             if (typeof item === 'object') {
                 if(item.label) {
+                    if(typeof item.label[this.settings.editorLanguage]==='undefined'){
+                        return item.label['en-GB'].value
+                    }
                     return item.label[this.settings.editorLanguage].value
                 }
             }

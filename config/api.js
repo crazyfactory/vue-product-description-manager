@@ -14,6 +14,11 @@ var Api_response =
         "edit": false,
         "dirty": false
       },
+      "en-US": {
+        "value":"Fresh Double Flared Plug with a cool winter design `Reindeer in Love`",
+        "edit": false,
+        "dirty": false
+      },
       "de": {
         "value": "Klarer Favorit für den Winter: Double Flared Plug mit weihnachtlich-winterlichem Design `Verliebte Rentiere`",
         "edit": false
@@ -25,14 +30,20 @@ var Api_response =
       },
       "en-GB": {
         "value": "Double Flared Plug"
-      }
+      },
+      "en-US": {
+        "value": "Double Flared Plug"
+      },
     },
     "cached_descriptions": {
       "de": {
         "value": "Klarer Favorit für den Winter: Double Flared Plug mit weihnachtlich-winterlichem Design `Verliebte Rentiere`"
       },
       "en-GB": {
-        "value": "Fresh Double Flared Plug with a cool winter design `Reindeer in Love`"
+        "value": "Fresh Double Flared Plug with a cool winter design `Rendeer in Love`"
+      },
+      "en-US": {
+        "value": "Fresh Double Flared Plug with a cool winter design `Rendeer in Love`"
       }
     },
     "cached_materials": {
@@ -40,6 +51,9 @@ var Api_response =
         "value": "Acryl"
         },
       "en-GB": {
+        "value": "Acrylic"
+      },
+      "en-US": {
         "value": "Acrylic"
       }
     },
@@ -49,6 +63,9 @@ var Api_response =
       },
       "en-GB": {
         "value": ["christmas"]
+      },
+      "en-US": {
+        "value": ["xmas"]
       }
     },
     "properties": [
@@ -64,6 +81,9 @@ var Api_response =
       },
       "en-GB": {
         "value": "DOUBLE FLARED TUNNEL"
+      },
+      "en-US": {
+        "value": "DOUBLE FLARED TUNNEL"
       }
     },
     "cached_materials": {
@@ -71,6 +91,9 @@ var Api_response =
         "value": "Chirurgenstahl 316L"
       },
       "en-GB": {
+        "value": "Surgical Steel 316L"
+      },
+      "en-US": {
         "value": "Surgical Steel 316L"
       }
     },
@@ -83,6 +106,11 @@ var Api_response =
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions":{
       "en-GB": {
+        "value":"Surgical steel tunnel with an intricately forged attachment",
+        "edit": false,
+        "dirty": false
+      },
+      "en-US": {
         "value":"Surgical steel tunnel with an intricately forged attachment",
         "edit": false,
         "dirty": false
@@ -106,6 +134,9 @@ var Api_response =
       },
       "en-GB": {
         "value": "DOUBLE JEWELLED BANANA WITH CHARM"
+      },
+      "en-US": {
+        "value": "DOUBLE JEWELLED BANANA WITH CHARM"
       }
     },
     "product_image":"https://www.crazy-factory.com/product_images/SBNDJH-76/SBNDJH-76-161046CR_S-Piercings-Curved-Barbells-Double-Jewelled-Banana-with-Charm.JPG",
@@ -116,6 +147,10 @@ var Api_response =
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en-GB": {
+        "value":"",
+        "edit": false
+      },
+      "en-US": {
         "value":"",
         "edit": false
       },
@@ -137,6 +172,9 @@ var Api_response =
       },
       "en-GB": {
         "value": "Fancy Banana"
+      },
+      "en-US": {
+        "value": "Fancy Banana"
       }
     },
     "cached_materials": {
@@ -145,7 +183,10 @@ var Api_response =
       },
       "en-GB": {
         "value": "Surgical Steel 316L"
-      }
+      },
+    "en-US": {
+      "value": "Surgical Steel 316L"
+    }
     },
     "db_id": "115548",
     "details_link":"https://www.crazy-factory.com/product_info.php?products_id=115548",
@@ -155,6 +196,11 @@ var Api_response =
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en-GB": {
+        "value":"This fancy Banana is crazy ... crazy factory.",
+        "edit": false,
+        "dirty": false
+      },
+      "en-US": {
         "value":"This fancy Banana is crazy ... crazy factory.",
         "edit": false,
         "dirty": false
@@ -181,6 +227,11 @@ var Api_response =
     "propertyFormula": "+[gauge:1.6]\n+[length:38]\n+[ball:5]",
     "descriptions": {
       "en-GB": {
+        "value":"The available gauge is 1.6mm. Available with the length of 38mm. The 5mm ball is a perfect fit. This is just a awesome product! Order right now!",
+        "edit": false,
+        "dirty": false
+      },
+      "en-US": {
         "value":"The available gauge is 1.6mm. Available with the length of 38mm. The 5mm ball is a perfect fit. This is just a awesome product! Order right now!",
         "edit": false,
         "dirty": false
