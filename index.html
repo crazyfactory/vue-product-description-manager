@@ -167,7 +167,7 @@
                       <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
                       <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
                       <span class="cursor" @click="editMe(product.names[language.id], product)"
-                            v-if="product.names[language.id] && !(product.cached_names && product.cached_names[language.id].value==product.names[language.id].value)">
+                            v-if="product.names[language.id] && product.cached_names && product.cached_names[language.id] && !(product.cached_names[language.id].value==product.names[language.id].value)">
                         [[product.names[language.id].original_value ]]
                       </span>
                       <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
@@ -184,11 +184,10 @@
                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
                     </span>
-                    <span class="cached" v-if="product.cached_names"
+                    <span class="cached" v-if="product.cached_names && product.cached_names[language.id]"
                           v-bind:class="{ 'override': ((product.base_product || product.component1 || product.component2) && (product.names[language.id] && product.cached_names[language.id] && product.cached_names[language.id].value != product.names[language.id].value))}">
                       [[ product.cached_names[language.id].value ]] <br>
                     </span>
-
                   </li>
                 </ul>
                 <!-- End Product Names by language -->
@@ -198,7 +197,7 @@
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                       <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
                       <span v-for="(index, material) in product.materials">
-                        <span v-if="index > 0">/</span>
+                        <span v-if="index > 0 && materials[material].label[language.id]">/</span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
                       <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
@@ -299,7 +298,7 @@
                         <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                           <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                         </div>
-                        <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
+                        <span class="cached" v-if="product.cached_names && product.cached_names[language.id]" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
                           [[product.cached_names[language.id].value ]] <br>
                         </span>
                       </li>
@@ -310,22 +309,24 @@
                     <ul class="list-group">
                       <!-- Language dependent items -->
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                        <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
-                        <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
+                        <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-if="product.descriptions[language.id] && !product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
+                        <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-if="product.descriptions[language.id] && product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
                         <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
                         <span class="flag-icon [[language.flag]]" ></span>
                         <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
                           <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                         </a>
                         <!-- original description -->
-                        <span v-if="product.cached_descriptions && product.cached_descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value) }">
+                        <span v-if="product.cached_descriptions && product.cached_descriptions[language.id]" class="cached" v-bind:class="{ 'override': product.descriptions[language.id] && !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value) }">
                           [[ product.cached_descriptions[language.id].value ]]</span>
                         <!-- end original description -->
-                        <span v-if="!product.cached_descriptions || !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value)" class="cursor" @click="editMe(product.descriptions[language.id],product)">
+
+                        <span v-if="!product.cached_descriptions && !(product.descriptions && product.cached_descriptions && product.descriptions[language.id].value == product.cached_descriptions[language.id].value)" class="cursor" @click="editMe(product.descriptions[language.id],product)">
                           [[product.descriptions[language.id].value]]
                         </span>
-                        <div class="editable" v-show="product.descriptions[language.id].edit">
-                          <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditMe(product.descriptions[language.id])"></textarea>
+
+                        <div class="editable" v-if="product.descriptions[language.id] && product.descriptions[language.id].edit">
+                          <textarea v-if="product.descriptions[language.id] && product.descriptions[language.id].value" v-model="product.descriptions[language.id].value" @keyup.enter="closeEditMe(product.descriptions[language.id])"></textarea>
                         </div>
                       </li>
                       <!-- end language dependent items -->
@@ -339,7 +340,7 @@
                         <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
 
                       <span v-for="(index, material) in product.materials">
-                        <span v-if="index > 0">/</span>
+                        <span v-if="(index > 0) && materials[material].label[language.id]">/</span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
                         <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
