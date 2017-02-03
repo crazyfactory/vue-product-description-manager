@@ -1084,6 +1084,12 @@ new Vue({
             })
             return option
         },
+        invisibleMetatags: function(){
+            this.selected_metatags.forEach(function (metatag) {
+                metatag.invisible=!metatag.invisible
+            })
+
+        },
         removeAutoMetatag: function(product, metatag, target){
             //target: 'metatagMaterial'
             product.dirty=true

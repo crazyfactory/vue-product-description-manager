@@ -4,6 +4,7 @@ var MetatagsStatic ={
         {
             "id":"piercing",
             "value":"piercing",
+            "invisible":false,
             "label":{
                 "de":{
                     "value":"Piercing",
@@ -14,7 +15,48 @@ var MetatagsStatic ={
                     "value":"Piercing",
                     "edit":false,
                     "active":true
+                },
+                "en-US":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "es":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "fr":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "it":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "nl":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "pt":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "se":{
+                    "value":"Piercing",
+                    "edit":false,
+                    "active":true
+                },
+                "ru":{
+                    "value":"пронизывающий",
+                    "edit":false,
+                    "active":true
                 }
+
             },
             "alias":{
                 "de":{
@@ -32,6 +74,7 @@ var MetatagsStatic ={
         {
             "id":"mobile_case",
             "value":"mobile_case",
+            "invisible":false,
             "label": {
                 "de":{
                     "value":"Handyhülle",
