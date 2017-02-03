@@ -534,7 +534,8 @@ new Vue({
                             dirty:true,
                             id:mytag,
                             label:myTwin.label,
-                            value:mytag
+                            value:mytag,
+                            invisible:false
                         }
                         languages.forEach(function(language){
                             alias={
@@ -568,7 +569,8 @@ new Vue({
                         dirty:true,
                         id:mytag,
                         label:myTwin.label,
-                        value:mytag
+                        value:mytag,
+                        invisible:false
                     }
                     languages.forEach(function(language){
                         alias={
@@ -963,8 +965,11 @@ new Vue({
         hideMessage: function (message) {
             message.show = false
         },
-        hideMetatagLabel: function(product, metatag, language){
-            console.log("Hide this label ...")
+        hideMetatagLabel: function(product, metatag){
+            console.log("Hide the label of:")
+            console.log(metatag);
+            console.log(product)
+            metatag.invisible=true
         },
         hideProduct: function (product) {
             product.hidden = true
