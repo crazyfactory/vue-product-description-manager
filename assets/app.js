@@ -1089,6 +1089,13 @@ new Vue({
                 metatag.invisible=!metatag.invisible
             })
 
+            if(hasApi){
+                // make it persistent in DB
+                api.app=this
+                api.data = this.selected_metatags
+                api.action = 'hidden_metatags'
+                api.call()
+            }
         },
         removeAutoMetatag: function(product, metatag, target){
             //target: 'metatagMaterial'
