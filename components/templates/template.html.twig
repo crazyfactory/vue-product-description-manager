@@ -298,7 +298,9 @@
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="!product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
-                        <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)"></i>
+
+                        <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)" v-if="languages_autodescription.indexOf(language.id)>-1"></i>
+
                         <span class="flag-icon [[language.flag]]" ></span>
                         <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
                           <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>

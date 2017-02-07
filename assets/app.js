@@ -235,6 +235,7 @@ new Vue({
                 flag:'flag-icon-ru',
             },
         ],
+        languages_autodescription:['de', 'en-GB', 'en-US', 'es'],
         // materials
         materials_local:materialStorage.fetch(),
         // messages local
