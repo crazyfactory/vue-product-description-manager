@@ -927,6 +927,7 @@ new Vue({
             })
             product['localized_materials']=localized_materials
             product['localized_metatags']=localized_metatags
+            product['export_languages']= export_languages
 
             if(!hasApi){
                 product.dirty=false
