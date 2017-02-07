@@ -895,29 +895,31 @@ new Vue({
             localized_materials={}
             localized_metatags={}
             this.languages.forEach(function(language){
-                localized_materials[language.id]=[]
-                localized_metatags[language.id]=[]
-                for (var i = 0; i < product.materials.length; i++){
-                    if(dict_materials[product.materials[i]]){
-                        localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
-                    }
-                }
-                for (var i = 0; i < my_metatags.length; i++){
-                    if(dict_metatags[my_metatags[i]]){
-                        metatag = dict_metatags[my_metatags[i]]
-                        my_label=metatag.label[language.id].value
-                        if(metatag.invisible){
-                            my_label="-"+my_label
+                if(language.status){
+                    localized_materials[language.id]=[]
+                    localized_metatags[language.id]=[]
+                    for (var i = 0; i < product.materials.length; i++){
+                        if(dict_materials[product.materials[i]]){
+                            localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
                         }
-                        localized_metatags[language.id].push(my_label)
-                        // add alias
-                        my_aliases=metatag.alias[language.id].value.split(',')
-                        my_aliases.forEach(function(alias){
-                            alias=alias.trim()
-                            if(alias.length>0){
-                                localized_metatags[language.id].push("-"+alias)
+                    }
+                    for (var i = 0; i < my_metatags.length; i++){
+                        if(dict_metatags[my_metatags[i]]){
+                            metatag = dict_metatags[my_metatags[i]]
+                            my_label=metatag.label[language.id].value
+                            if(metatag.invisible){
+                                my_label="-"+my_label
                             }
-                        })
+                            localized_metatags[language.id].push(my_label)
+                            // add alias
+                            my_aliases=metatag.alias[language.id].value.split(',')
+                            my_aliases.forEach(function(alias){
+                                alias=alias.trim()
+                                if(alias.length>0){
+                                    localized_metatags[language.id].push("-"+alias)
+                                }
+                            })
+                        }
                     }
                 }
             })
