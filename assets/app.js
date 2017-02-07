@@ -900,8 +900,8 @@ new Vue({
                     export_languages.push(language.id)
                     localized_materials[language.id]=[]
                     localized_metatags[language.id]=[]
-                    for (var i = 0; i < product.materials.length; i++){
-                        if(dict_materials[product.materials[i]]){
+                    for (var i = 0; i < product.materials.length; i++) {
+                        if (dict_materials[product.materials[i]] && dict_materials[product.materials[i]].label[language.id]) {
                             localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
                         }
                     }

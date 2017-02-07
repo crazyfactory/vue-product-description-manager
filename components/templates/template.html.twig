@@ -157,7 +157,7 @@
                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
                     </span>
-                    <span class="cached" v-if="product.cached_names"
+                    <span class="cached" v-if="product.cached_names && product.cached_names[language.id]"
                           v-bind:class="{ 'override': ((product.base_product || product.component1 || product.component2) && (product.names[language.id] && product.cached_names[language.id] && product.cached_names[language.id].value != product.names[language.id].value))}">
                       [[ product.cached_names[language.id].value ]] <br>
                     </span>
@@ -285,8 +285,8 @@
                         <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                           <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
                         </div>
-                        <span class="cached" v-if="product.cached_names" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
-                          [[product.cached_names[language.id].value ]] <br>
+                        <span class="cached" v-if="product.cached_names && product.cached_names[language.id]" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
+                         [[product.cached_names[language.id].value ]] <br>
                         </span>
                       </li>
                     </ul>
