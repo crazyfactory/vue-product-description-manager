@@ -903,7 +903,20 @@ new Vue({
                 }
                 for (var i = 0; i < my_metatags.length; i++){
                     if(dict_metatags[my_metatags[i]]){
-                        localized_metatags[language.id].push(dict_metatags[my_metatags[i]].label[language.id].value)
+                        metatag = dict_metatags[my_metatags[i]]
+                        my_label=metatag.label[language.id].value
+                        if(metatag.invisible){
+                            my_label="-"+my_label
+                        }
+                        localized_metatags[language.id].push(my_label)
+                        // add alias
+                        my_aliases=metatag.alias[language.id].value.split(',')
+                        my_aliases.forEach(function(alias){
+                            alias=alias.trim()
+                            if(alias.length>0){
+                                localized_metatags[language.id].push("-"+alias)
+                            }
+                        })
                     }
                 }
             })
@@ -964,12 +977,6 @@ new Vue({
         },
         hideMessage: function (message) {
             message.show = false
-        },
-        hideMetatagLabel: function(product, metatag){
-            console.log("Hide the label of:")
-            console.log(metatag);
-            console.log(product)
-            metatag.invisible=true
         },
         hideProduct: function (product) {
             product.hidden = true
@@ -1131,7 +1138,7 @@ new Vue({
             product.metatagComponent2=[]
             product.dirty=true
         },
-        removeSeletedProducts(){
+        removeSeletedProducts: function(){
             var keep_products=[]
             this.products.forEach(function(product){
                 if(!product.active){
