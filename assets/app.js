@@ -894,8 +894,10 @@ new Vue({
             // localize materials
             localized_materials={}
             localized_metatags={}
+            export_languages=[]
             this.languages.forEach(function(language){
                 if(language.status){
+                    export_languages.push(language.id)
                     localized_materials[language.id]=[]
                     localized_metatags[language.id]=[]
                     for (var i = 0; i < product.materials.length; i++){
