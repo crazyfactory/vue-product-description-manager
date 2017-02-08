@@ -225,7 +225,7 @@ new Vue({
                 flag:'flag-icon-pt',
             },
             {
-                id:'se',
+                id:'sv',
                 status:true,
                 flag:'flag-icon-se',
             },
