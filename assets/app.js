@@ -540,7 +540,7 @@ new Vue({
                         }
                         languages.forEach(function(language){
                             alias={
-                                value:[],
+                                value:"",
                                 edit:false,
                                 active:true
                             }
@@ -575,7 +575,7 @@ new Vue({
                     }
                     languages.forEach(function(language){
                         alias={
-                            value:[],
+                            value:"",
                             edit:false,
                             active:true
                         }
@@ -914,13 +914,20 @@ new Vue({
                             }
                             localized_metatags[language.id].push(my_label)
                             // add alias
-                            my_aliases=metatag.alias[language.id].value.split(',')
-                            my_aliases.forEach(function(alias){
-                                alias=alias.trim()
-                                if(alias.length>0){
-                                    localized_metatags[language.id].push("-"+alias)
-                                }
-                            })
+                            my_aliases=metatag.alias[language.id].value
+                            if(typeof my_aliases=='object'){
+                                my_aliases=""
+                            }
+                            alias_array=my_aliases.split(',')
+
+                            if(alias_array){
+                                alias_array.forEach(function(alias){
+                                    alias=alias.trim()
+                                    if(alias.length>0){
+                                        localized_metatags[language.id].push("-"+alias)
+                                    }
+                                })
+                            }
                         }
                     }
                 }
