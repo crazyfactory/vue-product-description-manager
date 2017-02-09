@@ -1076,12 +1076,14 @@ new Vue({
             var value_copy = "";
 
             var option = {
-                id:normalized_value,
-                new:true,
+                alias: {},
                 dirty:true,
-                value:normalized_value,
+                id:normalized_value,
+                invisible:false,
                 label: {},
-                alias: {}
+                new:true,
+                value:normalized_value,
+
             }
 
             this.languages.forEach(function(language){
