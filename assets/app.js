@@ -1083,7 +1083,6 @@ new Vue({
                 label: {},
                 new:true,
                 value:normalized_value,
-
             }
 
             this.languages.forEach(function(language){
