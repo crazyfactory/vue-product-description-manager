@@ -1107,9 +1107,6 @@ new Vue({
         invisibleMetatags: function(){
             this.selected_metatags.forEach(function (metatag) {
                 metatag.invisible=!metatag.invisible
-                console.log('metatag debug')
-                console.log(metatag)
-                console.log(this.metatags_local)
             })
 
             if(hasApi){
