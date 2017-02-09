@@ -200,7 +200,7 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" v-show="metatags[metatag].label[language.id] && product.metatagBaseProduct.length>0">
+                        <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" v-show="metatags[metatag] && metatags[metatag].label[language.id] && product.metatagBaseProduct.length>0">
                           <!-- BaseProduct Metatags -->
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagBaseProduct')"></i>
                           <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
