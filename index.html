@@ -216,68 +216,13 @@
                 <div v-if="show_metatags">
                   <!-- Metatag preview -->
                   <ul  class="indent"
-                       v-if="(product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0) || (product.metatagBaseProduct && product.metatagBaseProduct.length>0)
-                              || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) || (product.cached_metatags)">
+                       v-if="(product.metatags && product.metatags.length>0) || (product.cached_metatags)">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                       <ul>
                         <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-                          <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0)
-                              || (product.metatagBaseProduct && product.metatagBaseProduct.length>0) || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) }">
+                          <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) }">
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
-                        </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" v-show="metatags[metatag] && metatags[metatag].label[language.id] && product.metatagBaseProduct.length>0">
-                          <!-- BaseProduct Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagBaseProduct')"></i>
-                          <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                              <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>[[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                          <!-- END BaseProduct Metatags -->
-                        </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagComponent1" v-show="metatags[metatag].label[language.id]">
-                          <!-- Component1 Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent1')"></i>
-                          <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                          <!-- END Component1 Metatags -->
-                        </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagComponent2" >
-                          <!-- Component2 Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent2')"></i>
-                          <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                          <!-- END Component2 Metatags -->
-                        </li>
-                        <li class="list-group-item" v-for="metatag in product.metatagMaterial" >
-                          <!-- Material Metatags -->
-                          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagMaterial')"></i>
-                          <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>
-                             <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                             [[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                          <!-- END Material Metatags -->
                         </li>
                         <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
@@ -367,81 +312,18 @@
                     </ul>
                     <!-- End Material Preview -->
                   </div>
-                  <div v-if="preview_filter_metatag && (
-                                        (product.metatags && product.metatags.length>0) ||
-                                        (product.metatagMaterial && product.metatagMaterial.length>0) ||
-                                        (product.metatagBaseProduct && product.metatagBaseProduct.length>0) ||
-                                        (product.metatagComponent1 && product.metatagComponent1.length>0) ||
-                                        (product.metatagComponent2 && product.metatagComponent2.length>0))">
+                  <div v-if="preview_filter_metatag && (product.metatags && product.metatags.length>0)">
                     <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                     <!-- Meta tag preview -->
-                    <ul  class="indent" v-if="(product.metatags && product.metatags.length>0) ||
-                          (product.metatagMaterial && product.metatagMaterial.length>0) ||
-                          (product.metatagBaseProduct && product.metatagBaseProduct.length>0) ||
-                          (product.metatagComponent1 && product.metatagComponent1.length>0) ||
-                          (product.metatagComponent2 && product.metatagComponent2.length>0)">
+                    <ul  class="indent" v-if="(product.metatags && product.metatags.length>0)">
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <ul>
                           <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
 
                           <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
-                                v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) || (product.metatagMaterial && product.metatagMaterial.length>0) ||(product.metatagBaseProduct && product.metatagBaseProduct.length>0)
-                                  || (product.metatagComponent1 && product.metatagComponent1.length>0) || (product.metatagComponent2 && product.metatagComponent2.length>0) }">
+                                v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
-                          </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagBaseProduct" >
-                            <!-- BaseProduct Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagBaseProduct')"></i>
-                          <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                            <!-- END BaseProduct Metatags -->
-                          </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagComponent1" >
-                            <!-- Component1 Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent1')"></i>
-                          <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                            <!-- END Component1 Metatags -->
-                          </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagComponent2" >
-                            <!-- Component2 Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagComponent2')"></i>
-                          <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                            <!-- END Component2 Metatags -->
-                          </li>
-                          <li class="list-group-item" v-for="metatag in product.metatagMaterial" >
-                            <!-- Material Metatags -->
-                            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeAutoMetatag(product, metatag, 'metatagMaterial')"></i>
-
-                          <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                            <!-- END Material Metatags -->
                           </li>
                           <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
                           <span v-if="metatags[metatag]">
