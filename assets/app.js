@@ -397,6 +397,9 @@ new Vue({
             })
             return bool
         },
+        hasProducts: function(){
+            return this.products.length > 0 ? true:false
+        },
         isSmallScreen:function(){
             return !this.isFullScreen
         },
@@ -1199,14 +1202,6 @@ new Vue({
         },
         switchMe: function(name){
             this[name]=!this[name]
-        },
-        toggle_actionbar: function(){
-            if(this.products.length>0){
-                this.show_actionbar = !this.show_actionbar
-            }
-            else{
-                this.show_actionbar = false
-            }
         },
         toggle_language: function(language){
             language.status = !language.status

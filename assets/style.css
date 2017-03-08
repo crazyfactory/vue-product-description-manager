@@ -177,7 +177,7 @@ input[type="checkbox"] {
 
 .new-product,
 .actionbar{
-    padding: 16px 16px 16px 60px;
+    padding: 16px 50px 16px 16px;
     border: none;
     background: rgba(0, 0, 0, 0.003);
     box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
@@ -202,7 +202,7 @@ input[type="checkbox"] {
 .switch_actionbar{
     position: absolute;
     top:12px;
-    left:0;
+    right:0px;
 
 }
 /* End ActionBar*/

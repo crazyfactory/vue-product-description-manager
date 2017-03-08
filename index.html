@@ -89,13 +89,15 @@
       <section class="product-management load_products" @click.stop >
         <!-- Add Products -->
         <header class="header">
-          <input v-if="!show_actionbar" class="new-product"
+          <input class="new-product"
                  autofocus autocomplete="off"
                  placeholder="Enter products model code"
                  v-model="newProduct"
                  @keyup.enter="addProduct">
-          <button class="fa fa-exchange switch_actionbar cursor btn btn-default" title="Switch actionbar" aria-hidden="true" @click="toggle_actionbar()"></button>
-          <div class="actionbar" v-if="show_actionbar">
+
+          <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
+
+          <div class="actionbar" v-if="hasProducts" >
             <span class="action"><i>Select:</i></span>
             <section v-if="!hasEditableProducts">
               <span title="Nothing to SELECT" class="action"><i style="color:#ccc;" class="fa fa-check-circle-o"  aria-hidden="true"></i></span>
