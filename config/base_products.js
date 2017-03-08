@@ -15,6 +15,46 @@ var BaseProductOptions =
           "value":"Ball",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -28,6 +68,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black ball",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -45,6 +125,46 @@ var BaseProductOptions =
           "value":"Banana",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -58,6 +178,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black banana",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -75,6 +235,46 @@ var BaseProductOptions =
           "value":"Barbell",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -88,6 +288,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black barbell",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -105,6 +345,46 @@ var BaseProductOptions =
           "value":"Circular barbell",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -118,6 +398,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black circular barbell",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -135,6 +455,46 @@ var BaseProductOptions =
           "value":"Dermal anchor",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -148,6 +508,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black dermal anchor",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -165,6 +565,46 @@ var BaseProductOptions =
           "value":"Expander",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -178,6 +618,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Acrylic expander",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -195,6 +675,46 @@ var BaseProductOptions =
           "value":"Black acrylic expander",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -208,6 +728,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black Expander",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -225,6 +785,46 @@ var BaseProductOptions =
           "value":"Black wood expander",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -238,6 +838,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Wooden expander",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -255,6 +895,46 @@ var BaseProductOptions =
           "value":"Ear cuff",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -268,6 +948,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black ear cuff",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -285,6 +1005,46 @@ var BaseProductOptions =
           "value":"Fake claw",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -298,6 +1058,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black fake claw",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -315,6 +1115,46 @@ var BaseProductOptions =
           "value":"Fake expander",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -328,6 +1168,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black fake expander",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -345,6 +1225,46 @@ var BaseProductOptions =
           "value":"Fake plug",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -358,6 +1278,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black fake plug",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -375,6 +1335,46 @@ var BaseProductOptions =
           "value":"Fake septum",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -388,6 +1388,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black fake septum",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -405,6 +1445,46 @@ var BaseProductOptions =
           "value":"Fake spiral",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -418,6 +1498,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black fake spiral",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -435,6 +1555,46 @@ var BaseProductOptions =
           "value":"Helix piercing",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -448,6 +1608,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black helix piercing",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -465,6 +1665,46 @@ var BaseProductOptions =
           "value":"Labret",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -478,6 +1718,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black labret",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -495,6 +1775,46 @@ var BaseProductOptions =
           "value":"Nipple piercing",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -508,6 +1828,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black nipple piercing",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -525,6 +1885,46 @@ var BaseProductOptions =
           "value":"Nipple clicker",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -538,6 +1938,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black nipple clicker",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -555,6 +1995,46 @@ var BaseProductOptions =
           "value":"Nipple shield",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -568,6 +2048,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black nipple shield",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -585,6 +2105,46 @@ var BaseProductOptions =
           "value":"Nipple stirrup",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -598,6 +2158,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black nipple stirrup",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -615,6 +2215,46 @@ var BaseProductOptions =
           "value":"Plug",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -628,6 +2268,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Acrylic plug",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -645,6 +2325,46 @@ var BaseProductOptions =
           "value":"Black acrylic plug",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -658,6 +2378,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black plug",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -675,6 +2435,46 @@ var BaseProductOptions =
           "value":"Ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -688,6 +2488,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Piercing ring",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -705,6 +2545,46 @@ var BaseProductOptions =
           "value":"Ball closure ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -718,6 +2598,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black ball closure ring",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -735,6 +2655,46 @@ var BaseProductOptions =
           "value":"Black continuous ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -748,6 +2708,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black piercing ring",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -765,6 +2765,46 @@ var BaseProductOptions =
           "value":"Black segment ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -780,6 +2820,46 @@ var BaseProductOptions =
           "value":"Continuous ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -793,6 +2873,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Nose ring",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -825,6 +2945,46 @@ var BaseProductOptions =
           "value":"Segment ring",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -838,6 +2998,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Septum",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -855,6 +3055,46 @@ var BaseProductOptions =
           "value":"Black septum",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -868,6 +3108,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Spiral",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -885,6 +3165,46 @@ var BaseProductOptions =
           "value":"Black spiral",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -898,6 +3218,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Stud",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -915,6 +3275,46 @@ var BaseProductOptions =
           "value":"Nose stud",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -928,6 +3328,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black nose stud",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -945,6 +3385,46 @@ var BaseProductOptions =
           "value":"Ear stud",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -958,6 +3438,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Tragus piercing",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -975,6 +3495,46 @@ var BaseProductOptions =
           "value":"Black tragus piercing",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -988,6 +3548,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Tunnel",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1005,6 +3605,46 @@ var BaseProductOptions =
           "value":"Acrylic tunnel",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1018,6 +3658,46 @@ var BaseProductOptions =
         },
         "en-GB":{
           "value":"Black acrylic tunnel",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1035,6 +3715,46 @@ var BaseProductOptions =
           "value":"Black tunnel",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1050,6 +3770,46 @@ var BaseProductOptions =
           "value":"Black steel tunnel",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1063,6 +3823,46 @@ var BaseProductOptions =
         },
         "en-GB": {
           "value": "Steel tunnel",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }

@@ -46,7 +46,7 @@ var MetatagsStatic ={
                     "edit":false,
                     "active":true
                 },
-                "se":{
+                "sv":{
                     "value":"Piercing",
                     "edit":false,
                     "active":true
@@ -68,6 +68,46 @@ var MetatagsStatic ={
                     "value": "beer-sing,piecing, priecing, peecing, body jewellry",
                     "edit": false,
                     "active":true
+                },
+                "en-US": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "es": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "fr": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "it": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "nl": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "pt": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "sv": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "ru": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
                 }
             }
         },
@@ -85,7 +125,47 @@ var MetatagsStatic ={
                     "value":"Mobile case",
                     "edit":false,
                     "active":true
-                }
+                },
+                "en-US":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "fr":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "it":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "es":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "nl":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "pt":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "sv":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
+                "ru":{
+                    "value":"Mobile case",
+                    "edit":false,
+                    "active":true
+                },
             },
             "alias": {
                 "de": {
@@ -100,6 +180,46 @@ var MetatagsStatic ={
                         "mobile cases, mobilecase"
                     ],
                     "edit":false,
+                    "active":true
+                },
+                "en-US": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "es": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "fr": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "it": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "nl": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "pt": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "sv": {
+                    "value": "",
+                    "edit": false,
+                    "active":true
+                },
+                "ru": {
+                    "value": "",
+                    "edit": false,
                     "active":true
                 }
             }

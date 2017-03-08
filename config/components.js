@@ -4,11 +4,28 @@ var ComponentOptions =
   "conjunction":{
     "with":{
         "de": "mit",
-        "en-GB": "with"
+        "en-GB": "with",
+        "en-US": "with",
+        "es": "con",
+        "fr": "avec",
+        "it": "con",
+        "nl": "met",
+        "pt": "com",
+        "sv": "med",
+        "ru": "с",
+
     },
     "and":{
       "de": "und",
-      "en-GB": "and"
+      "en-GB": "and",
+      "en-US": "and",
+      "es": "y",
+      "fr": "et",
+      "it": "e",
+      "nl": "en",
+      "pt": "e",
+      "sv": "och",
+      "ru": "и",
     }
   },
   "content":[
@@ -22,6 +39,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"claw set crystal",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -39,6 +96,46 @@ var ComponentOptions =
           "value":"cone",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -52,6 +149,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cones",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -69,6 +206,46 @@ var ComponentOptions =
           "value":"anodised ball",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -82,6 +259,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"anodised cone",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -99,6 +316,46 @@ var ComponentOptions =
           "value":"Crapwaer design",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -112,6 +369,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"Sarah Sorceress design",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -129,6 +426,46 @@ var ComponentOptions =
           "value":"pendant inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -142,6 +479,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"flower inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -159,6 +536,46 @@ var ComponentOptions =
           "value":"little flower inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -172,6 +589,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cupcake inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -189,6 +646,46 @@ var ComponentOptions =
           "value":"cocktail inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -202,6 +699,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"dolphin inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -219,6 +756,46 @@ var ComponentOptions =
           "value":"lizard inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -232,6 +809,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"elephant inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -249,6 +866,46 @@ var ComponentOptions =
           "value":"elf inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -262,6 +919,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"angel inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -279,6 +976,46 @@ var ComponentOptions =
           "value":"flip-flop inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -292,6 +1029,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"wing inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -309,6 +1086,46 @@ var ComponentOptions =
           "value":"frop inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -322,6 +1139,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"handcuffs inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -339,6 +1196,46 @@ var ComponentOptions =
           "value":"heart inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -352,6 +1249,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"little hearts inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -369,6 +1306,46 @@ var ComponentOptions =
           "value":"horseshoe inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -382,6 +1359,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"chain inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -399,6 +1416,46 @@ var ComponentOptions =
           "value":"stroller inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -412,6 +1469,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cherry inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -429,6 +1526,46 @@ var ComponentOptions =
           "value":"cloverleaf inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -442,6 +1579,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cross inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -459,6 +1636,46 @@ var ComponentOptions =
           "value":"crown inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -472,6 +1689,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"dragon fly inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -489,6 +1746,46 @@ var ComponentOptions =
           "value":"little baby inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -502,6 +1799,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"moon inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -519,6 +1856,46 @@ var ComponentOptions =
           "value":"octopus inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -532,6 +1909,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"om inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -549,6 +1966,46 @@ var ComponentOptions =
           "value":"ace of spades inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -562,6 +2019,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"poodle inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -579,6 +2076,46 @@ var ComponentOptions =
           "value":"lock inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -592,6 +2129,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"lock inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -609,6 +2186,46 @@ var ComponentOptions =
           "value":"butterfly inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -622,6 +2239,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"swan inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -639,6 +2296,46 @@ var ComponentOptions =
           "value":"spider web inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -652,6 +2349,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"star inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -669,6 +2406,46 @@ var ComponentOptions =
           "value":"tart inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -682,6 +2459,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"skull inlay",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -699,6 +2516,46 @@ var ComponentOptions =
           "value":"dice inlay",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -712,6 +2569,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"jewelled",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -729,6 +2626,46 @@ var ComponentOptions =
           "value":"jewelled disc",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -742,6 +2679,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -759,6 +2736,46 @@ var ComponentOptions =
           "value":"flower pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -772,6 +2789,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"little flowers pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -789,6 +2846,46 @@ var ComponentOptions =
           "value":"cupcake pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -802,6 +2899,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cocktail pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -819,6 +2956,46 @@ var ComponentOptions =
           "value":"dolphin pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -832,6 +3009,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"lizard pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -849,6 +3066,46 @@ var ComponentOptions =
           "value":"elephant pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -862,6 +3119,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"elf pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -879,6 +3176,46 @@ var ComponentOptions =
           "value":"angel pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -892,6 +3229,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"flip-flop pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -909,6 +3286,46 @@ var ComponentOptions =
           "value":"wing pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -922,6 +3339,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"frog pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -939,6 +3396,46 @@ var ComponentOptions =
           "value":"handcuffs pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -952,6 +3449,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"heart pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -969,6 +3506,46 @@ var ComponentOptions =
           "value":"little hearts pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -982,6 +3559,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"horseshoe pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -999,6 +3616,46 @@ var ComponentOptions =
           "value":"chain pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1012,6 +3669,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"stroller pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1029,6 +3726,46 @@ var ComponentOptions =
           "value":"cherry pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1042,6 +3779,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cloverleaf pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1059,6 +3836,46 @@ var ComponentOptions =
           "value":"cross pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1072,6 +3889,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"crown pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1089,6 +3946,46 @@ var ComponentOptions =
           "value":"dragon fly pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1102,6 +3999,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"little baby pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1119,6 +4056,46 @@ var ComponentOptions =
           "value":"moon pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1132,6 +4109,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"octopus pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1149,6 +4166,46 @@ var ComponentOptions =
           "value":"om pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1162,6 +4219,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"ace of spades pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1179,6 +4276,46 @@ var ComponentOptions =
           "value":"poodle pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1192,6 +4329,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"lock pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1209,6 +4386,46 @@ var ComponentOptions =
           "value":"key pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1222,6 +4439,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"butterfly pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1239,6 +4496,46 @@ var ComponentOptions =
           "value":"swan pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1252,6 +4549,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"spider web pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1269,6 +4606,46 @@ var ComponentOptions =
           "value":"star pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1282,6 +4659,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"tart pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1299,6 +4716,46 @@ var ComponentOptions =
           "value":"skull pendant",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1312,6 +4769,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"dice pendant",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1329,6 +4826,46 @@ var ComponentOptions =
           "value":"replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1342,6 +4879,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"flower replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1359,6 +4936,46 @@ var ComponentOptions =
           "value":"little flower replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1372,6 +4989,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cupcake replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1389,6 +5046,46 @@ var ComponentOptions =
           "value":"cocktail replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1402,6 +5099,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"dolphin replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1419,6 +5156,46 @@ var ComponentOptions =
           "value":"lizard replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1432,6 +5209,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"elephant replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1449,6 +5266,46 @@ var ComponentOptions =
           "value":"elf replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1464,12 +5321,52 @@ var ComponentOptions =
           "value":"angel replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
     {
       "value":"replacement-ends_flip-flop",
-          "label":{
+      "label":{
       	"de":{
           "value":"Flip Flop Aufsatz",
       	  "edit": false,
@@ -1477,6 +5374,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"flip-flop replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1494,6 +5431,46 @@ var ComponentOptions =
           "value":"Flügelaufsatz",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1507,6 +5484,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"frop replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1524,6 +5541,46 @@ var ComponentOptions =
           "value":"handcuff replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1537,6 +5594,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"heart replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1554,6 +5651,46 @@ var ComponentOptions =
           "value":"little hearts replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1567,6 +5704,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"horseshoe replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1584,6 +5761,46 @@ var ComponentOptions =
           "value":"chain replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1597,6 +5814,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"stroller replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1614,6 +5871,46 @@ var ComponentOptions =
           "value":"cherry replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1627,6 +5924,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"cloverleaf replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1644,6 +5981,46 @@ var ComponentOptions =
           "value":"cross replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1657,6 +6034,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"crown replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1674,6 +6091,46 @@ var ComponentOptions =
           "value":"dragon fly replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1687,6 +6144,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"little baby replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1704,6 +6201,46 @@ var ComponentOptions =
           "value":"moon replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1717,6 +6254,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"octopus replavement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1734,6 +6311,46 @@ var ComponentOptions =
           "value":"om replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1747,6 +6364,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"ace of spades replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1764,6 +6421,46 @@ var ComponentOptions =
           "value":"poodle replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1777,6 +6474,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"lock replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1794,6 +6531,46 @@ var ComponentOptions =
           "value":"key replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1807,6 +6584,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"butterfly replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1824,6 +6641,46 @@ var ComponentOptions =
           "value":"swan replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1837,6 +6694,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"spider web replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1854,6 +6751,46 @@ var ComponentOptions =
           "value":"star replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1867,6 +6804,46 @@ var ComponentOptions =
         },
         "en-GB":{
           "value":"tart replacement ends",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
           "edit": false,
           "active": true
         }
@@ -1884,6 +6861,46 @@ var ComponentOptions =
           "value":"skull replacement ends",
           "edit": false,
           "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     },
@@ -1899,6 +6916,46 @@ var ComponentOptions =
             "value": "dice replacement ends",
             "edit": false,
             "active": true
+        },
+        "en-US":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"",
+          "edit": false,
+          "active": true
         }
       }
     }
