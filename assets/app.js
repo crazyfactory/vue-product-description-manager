@@ -460,6 +460,8 @@ new Vue({
             if (!value) {
                 return
             }
+            // reset all selectboxes
+            this.clearSelectBoxes()
 
             // get products from db/api
             if(hasApi){
@@ -525,6 +527,13 @@ new Vue({
         },
         clearSettings: function(){
             this.settings={}
+        },
+        clearSelectBoxes: function(){
+            this.selected_component_1=null
+            this.selected_component_2=null
+            this.selected_base_product=null
+            this.selected_materials=[]
+            this.selected_metatags=[]
         },
         closeEditComponents: function(){
             this.show_components_edit=false
