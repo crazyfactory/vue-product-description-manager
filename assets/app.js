@@ -1026,15 +1026,16 @@ new Vue({
             return option
         },
         invisibleMetatags: function(){
+            console.log('make metatags invisible')
             this.selected_metatags.forEach(function (metatag) {
-                metatag.invisible=!metatag.invisible
+                metatag.invisible=true
             })
 
             if(hasApi){
                 // make it persistent in DB
                 api.app=this
                 api.data = this.selected_metatags
-                api.action = 'hidden_metatags'
+                api.action = 'invisible_metatags'
                 api.call()
             }
         },
@@ -1266,6 +1267,20 @@ new Vue({
         removeCustomName:function(item){
             item.value=item.original_value
             item.edit= false
-        }
+        },
+        visibleMetatags: function(){
+            console.log('make metatags visible again')
+            this.selected_metatags.forEach(function (metatag) {
+                metatag.invisible=false
+            })
+
+            if(hasApi){
+                // make it persistent in DB
+                api.app=this
+                api.data = this.selected_metatags
+                api.action = 'visible_metatags'
+                api.call()
+            }
+        },
     }
 })

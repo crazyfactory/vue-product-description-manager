@@ -506,8 +506,16 @@
         <div class="actions" v-if="!show_metatags_edit">
           <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
           <button v-if="selected_metatags.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMetatags()" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Switch</button>
-          <button v-if="selected_metatags.length > 0"type="button" class="btn btn-warning fa-pull-right cursor" @click="invisibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Switch</button>
+
+          <span v-if="!selected_metatags.length > 0">
+            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile </button>
+            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible </button>
+          </span>
+          <span v-if="selected_metatags.length > 0">
+            <button type="button" class="btn btn-success fa-pull-right cursor" @click="visibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile</button>
+            <button type="button" class="btn btn-warning fa-pull-right cursor" @click="invisibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible</button>
+          </span>
+
           <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="selected_metatags.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMetatags()" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Delete selected metatags"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
