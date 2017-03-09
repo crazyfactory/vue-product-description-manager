@@ -1026,9 +1026,14 @@ new Vue({
             return option
         },
         invisibleMetatags: function(){
-            console.log('make metatags invisible')
+            var all_products = this.products
             this.selected_metatags.forEach(function (metatag) {
                 metatag.invisible=true
+                all_products.forEach(function (product) {
+                    if(product.metatags.indexOf(metatag.value)> -1){
+                        product.dirty=true
+                    }
+                })
             })
 
             if(hasApi){
@@ -1269,11 +1274,15 @@ new Vue({
             item.edit= false
         },
         visibleMetatags: function(){
-            console.log('make metatags visible again')
+            var all_products = this.products;
             this.selected_metatags.forEach(function (metatag) {
                 metatag.invisible=false
+                all_products.forEach(function (product) {
+                    if(product.metatags.indexOf(metatag.value)> -1){
+                        product.dirty=true
+                    }
+                })
             })
-
             if(hasApi){
                 // make it persistent in DB
                 api.app=this
