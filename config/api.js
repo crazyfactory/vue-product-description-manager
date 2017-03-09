@@ -36,9 +36,6 @@ var Api_response =
       "sv": {
         "value": "Kula i kirurgiskt stål för 1.6 mm stavar."
       },
-      "se": {
-        "value": "Kula i kirurgiskt stål för 1.6 mm stavar."
-      }
     },
     "cached_materials": {
       "de": {

@@ -485,6 +485,7 @@ new Vue({
                     my_product_name=my_product_name.trim()
                     // use fake api response from api.js
                     var random_nr = Math.round(Math.random()*(Object.keys(Api_response).length-1))
+                    if(random_nr>0) random_nr=random_nr-1
                     my_product=Api_response[random_nr]
                     my_product_list.push({
                         active: true,
