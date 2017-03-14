@@ -30,6 +30,61 @@ var ComponentOptions =
   },
   "content":[
     {
+      "value":"-",
+      "label":{
+        "de":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "en-GB":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "en-US":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "es":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "fr":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "it":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "nl":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "pt":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "sv":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        },
+        "ru":{
+          "value":"-",
+          "edit": false,
+          "active": true
+        }
+      }
+    },
+    {
       "value":"claw-set-crystal",
       "label":{
       	"de":{
