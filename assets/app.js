@@ -1083,6 +1083,7 @@ new Vue({
         },
         saveMaterials: function(){
             var selected_materials=this.selected_materials
+            var clear_materials=false
             materialsGlobal= this.materials
             // set materials to all selected products
             this.products.forEach(function (product) {
@@ -1090,46 +1091,71 @@ new Vue({
                     selected_materials.forEach(function (item) {
                         var unique=true
                         material_value = item.value
-                        product.materials.forEach(function(product_value){
-                            if(material_value === product_value){
-                                unique=false
+                        if(material_value==="-"){
+                            clear_materials=true
+                        }
+                        if(!clear_materials){
+                            product.materials.forEach(function(product_value){
+                                if(material_value === product_value){
+                                    unique=false
+                                }
+                            })
+                            if(unique){
+                                product.materials.push(material_value)
+                                // mark product as dirty
+                                product.dirty=true
                             }
-                        })
-                        if(unique){
-                            product.materials.push(material_value)
-                            // mark product as dirty
-                            product.dirty=true
                         }
                     })
+                    if(clear_materials){
+                        product.materials=[]
+                        product.dirty=true
+                    }
                 }
             })
+            this.selected_materials=[]
         },
         saveMetatags: function(){
             var selected_metatags=this.selected_metatags
+            var clear_metatags=false
             // set metatags to all selected products
             this.products.forEach(function (product) {
                 if(product.active){
                     selected_metatags.forEach(function (metatag) {
                         var unique=true
                         meta_value = metatag.value
-                        product.metatags.forEach(function(product_meta_value){
-                            if(meta_value === product_meta_value){
-                                unique=false
+                        if(meta_value==="-"){
+                            clear_metatags=true
+                        }
+                        if(!clear_metatags){
+                            product.metatags.forEach(function(product_meta_value){
+                                if(meta_value === product_meta_value){
+                                    unique=false
+                                }
+                            })
+                            if(unique){
+                                product.metatags.push(meta_value)
+                                // mark product as dirty
+                                product.dirty=true
                             }
-                        })
-                        if(unique){
-                            product.metatags.push(meta_value)
-                            // mark product as dirty
-                            product.dirty=true
                         }
                     })
+                    if(clear_metatags){
+                        product.metatags=[]
+                        product.dirty=true
+                    }
                 }
             })
+            this.selected_metatags=[]
+
         },
         saveNameScheme: function(){
             var base_product = this.selected_base_product
+            var clear_base_product = false
             var attr1 = this.selected_component_1
+            var clear_attr1 = false
             var attr2 = this.selected_component_2
+            var clear_attr2 = false
             var languages = this.languages
             var conjunction = this.conjunction
             var base_products = this.base_products
@@ -1137,37 +1163,72 @@ new Vue({
 
             this.products.forEach(function (product) {
                 if(product.active){
-                    if (typeof base_product == 'object' && base_product !=null && base_product.value != '--'){
-                        product.base_product = base_products[base_product.value]
+                    if (typeof base_product == 'object' && base_product !=null){
+                        if(base_product.value ==="-"){
+                            product.base_product = null
+                            clear_base_product = true
+                        }
+                        else{
+                            product.base_product = base_products[base_product.value]
+                        }
                         product.dirty=true
                     }
 
-                    if(typeof attr1=='object' && attr1!=null && attr1.value!='--'){
-                        product.component1=components[attr1.value]
+                    if(typeof attr1=='object' && attr1!=null){
+                        if(attr1.value ==='-'){
+                            product.component1=null
+                            clear_attr1 = true
+                        }
+                        else{
+                            product.component1=components[attr1.value]
+                        }
                         product.dirty=true
                     }
 
-                    if(typeof attr2=='object' && attr2!=null && attr2.value!='--'){
-                        product.component2=components[attr2.value]
+                    if(typeof attr2=='object' && attr2!=null){
+                        if(attr2.value ==='-'){
+                            product.component2=null
+                            clear_attr2=true
+                        }
+                        else{
+                            product.component2=components[attr2.value]
+                        }
                         product.dirty=true
                     }
                     // generate composed product name for each language
                     product_names={}
 
                     languages.forEach(function(language){
-                        var my_name=null
+                        var my_name=''
 
                         if(product.base_product && product.base_product.label && product.base_product.label[language.id]){
-                            my_name = product.base_product.label[language.id].value
+                            if(base_product.value !="-"){
+                                my_name = product.base_product.label[language.id].value
+                            }
+
                             product.dirty=true
                         }
                         if(product.component1 && product.component1.label && product.component1.label[language.id]){
-                            my_name = my_name +" "+ conjunction.with[language.id]+ " " +product.component1.label[language.id].value
+                            if(attr1.value !="-") {
+                                var with_conjunction = ''
+                                if(my_name.length>0){
+                                    with_conjunction= " " + conjunction.with[language.id] + " "
+                                }
+
+                                my_name = my_name + with_conjunction + product.component1.label[language.id].value
+                            }
                             product.dirty=true
 
                         }
                         if(product.component2 && product.component2.label && product.component2.label[language.id]){
-                            my_name = my_name + " "+ conjunction.and[language.id]+ " " +product.component2.label[language.id].value
+                            if(attr2.value !="-") {
+                                var and_conjunction = ''
+                                if(my_name.length>0){
+                                    and_conjunction= " " + conjunction.and[language.id] + " "
+                                }
+
+                                my_name = my_name + and_conjunction + product.component2.label[language.id].value
+                            }
                             product.dirty=true
                         }
                         product_names[language.id]={
@@ -1182,6 +1243,10 @@ new Vue({
                     product.names=product_names
                 }
             })
+
+            this.selected_base_product=null
+            this.selected_component_1=null
+            this.selected_component_2=null
         },
         selectAllProducts: function(value){
             var products = this.products
