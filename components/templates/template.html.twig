@@ -361,8 +361,10 @@
           <button v-if="(selected_base_product || selected_component_1 || selected_component_2)"type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
           <button v-if="!(selected_base_product || selected_component_1 || selected_component_2)" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="(selected_base_product || selected_component_1 || selected_component_2)"type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <!--
           <button v-if="!(selected_base_product || selected_component_1 || selected_component_2)"type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
           <button v-if="(selected_base_product || selected_component_1 || selected_component_2)"type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteBaseProductsComponents()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+          -->
         </div>
       </div>
       <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
@@ -433,8 +435,10 @@
           <button v-if="selected_materials.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
           <button v-if="!selected_materials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="selected_materials.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <!--
           <button v-if="!selected_materials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="deleteMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
           <button v-if="selected_materials.length > 0" type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteMaterials()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+          -->
         </div>
       </div>
       <div class="row" v-if="show_materials_edit">
@@ -491,8 +495,10 @@
 
           <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="selected_metatags.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMetatags()" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <!--
           <button v-if="!selected_metatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Delete selected metatags"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
           <button v-if="selected_metatags.length > 0"type="button" class="btn btn-danger fa-pull-right cursor" @click="deleteMetatags()" title="Delete selected metatags"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete </button>
+          -->
         </div>
       </div>
       <div class="row" v-if="show_metatags_edit">
