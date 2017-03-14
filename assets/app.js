@@ -1202,14 +1202,14 @@ new Vue({
                         var my_name=''
 
                         if(product.base_product && product.base_product.label && product.base_product.label[language.id]){
-                            if(base_product && base_product.value !="-"){
+                            if(product.base_product.label[language.id].value !="-"){
                                 my_name = product.base_product.label[language.id].value
                             }
 
                             product.dirty=true
                         }
                         if(product.component1 && product.component1.label && product.component1.label[language.id]){
-                            if(attr1 && attr1.value !="-") {
+                            if(product.component1.label[language.id].value !="-") {
                                 var with_conjunction = ''
                                 if(my_name.length>0){
                                     with_conjunction= " " + conjunction.with[language.id] + " "
@@ -1221,7 +1221,7 @@ new Vue({
 
                         }
                         if(product.component2 && product.component2.label && product.component2.label[language.id]){
-                            if(attr2 && attr2.value !="-") {
+                            if(product.component2.label[language.id].value !="-") {
                                 var and_conjunction = ''
                                 if(my_name.length>0){
                                     and_conjunction= " " + conjunction.and[language.id] + " "
