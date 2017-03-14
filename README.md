@@ -47,7 +47,11 @@ var api{
 }
 ```
 
-## Versions
-- 0.1.0: Initial release
-- 0.2.0 RC1
+## Changelog
+- 0.3.0 RC3
+    - remove autotagging
+    - improved UX
+    - bugfix: visibility change Metatags now tripggers products dirty status
 - 0.2.1 RC2
+- 0.2.0 RC1
+- 0.1.0: Initial release
