@@ -23,8 +23,17 @@ Add one or many products and create a auto-transatable content by setting:
  
 ### Language
  Supported languages are so far:
- - *en-GB*
  - *de*
+ - *en-GB*
+ - *en_US*
+ - *es*
+ - *fr*
+ - *it*
+ - *pt*
+ - *ru*
+ - *se*
+ - *sv*
+
 
 ## API Integration
 To use this app in its persistent mode (changes will be saved to database) a javascript *api* object needs to be provided in the integration.
