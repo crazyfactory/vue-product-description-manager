@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width">
   <!-- get vue.js -->
   <!-- use vue-1.0.28.js (not 2.x.x) for vue-select -->
-  <script src="./assets/vue-1.0.28.js"></script>
+  <script src="./assets/vue-2.2.6.js"></script>
   <!-- get select extension -->
-  <script src="./assets/vue-select-1.3.3.js"></script>
+  <script src="./assets/vue-select-2.2.0.js"></script>
   <script src="./assets/moment.min.js"></script>
 
   <!-- load data -->
@@ -20,7 +20,7 @@
   <script src="config/api.js"></script>
   <!-- get css styles -->
   <link href="./assets/bootstrap-3.3.6.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.7.0/css/flag-icon.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.css" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="assets/style.css" />
 </head>
@@ -38,7 +38,7 @@
   </div>
   <!-- show active messages -->
   <div class="container messages" v-cloak>
-    <div class="alert alert-[[message.type]]" v-for="message in messages | filterBy true in 'show'">
+    <div v-bind:class="'alert alert-' + message.type" v-for="message in messages_to_show">
       <i class="date">[[message.date]]:</i>
       <span>[[message.message]]</span>
       <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
@@ -61,7 +61,7 @@
           <span v-for="language in languages">
             <span class="language" @click="addEditorLanguage(language.id)">
               <i style="color:darkgreen;" class="fa fa-caret-right" aria-hidden="true" v-if="language.id == editorLanguage"></i>
-              <span class="flag-icon [[language.flag]]" ></span>
+              <span v-bind:class="'flag-icon '+language.flag" ></span>
             <i style="color:darkgreen;" class="fa fa-caret-left" aria-hidden="true" v-if="language.id == editorLanguage"></i>
           </span>
         </span>
@@ -75,7 +75,7 @@
           <span class="language" @click="toggle_language(language)">
               <i class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
               <i class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
-              <span class="flag-icon [[language.flag]]" ></span>
+              <span v-bind:class="'flag-icon '+language.flag" ></span>
           </span>
         </span>
         </section>
@@ -84,7 +84,7 @@
   </div>
   <!-- end settings section -->
   <div class="container">
-    <h3 class="headline"><span class="[[headline_icon]]"></span> [[headline]]</h3>
+    <h3 class="headline"><span v-bind:class="headline_icon" ></span> [[headline]]</h3>
     <div v-if="show_load" v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
       <section class="product-management load_products" @click.stop >
         <!-- Add Products -->
@@ -142,7 +142,7 @@
         <section class="main" v-show="products.length" v-cloak>
           <!-- List products -->
           <ul class="product-list">
-            <li v-for="product in products | filterBy false in 'hidden'"
+            <li v-for="product in products_visible"
                 class="product"
                 :key="product.id"
                 :class="{ active: product.active }">
@@ -151,7 +151,7 @@
                 <i class="product_action fa fa-trash-o fa-2x fa-pull-right cursor text-danger" aria-hidden="true" @click="removeProduct(product)"></i>
                 <i class="product_action fa fa-eye-slash fa-2x fa-pull-right cursor text-muted" aria-hidden="true" @click="hideProduct(product)"></i>
                 <label class="white-space">[[product.modelCode]]
-                  <i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
+                  <i class="fa fa-floppy-o cursor" title="'Save '+ product.modelCode +' to database'" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
                   <span v-if="product.productImage" class="product_image">
                     <!-- ProductImage -->
                     <a v-bind:href="product.productImage" target="_blank">
@@ -162,7 +162,7 @@
                 <!-- Generic Product Names by language -->
                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                   <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                    <span class="flag-icon [[language.flag]]" @click="debugMe(product)"></span>
+                    <span v-bind:class="'flag-icon '+language.flag" @click="debugMe(product)"></span>
 
                     <span v-if="product.base_product || product.component1 || product.component2">
                       <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
@@ -171,18 +171,18 @@
                             v-if="product.names[language.id] && !(product.cached_names && product.cached_names[language.id].value==product.names[language.id].value)">
                         [[product.names[language.id].original_value ]]
                       </span>
-                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
+                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="product.detailsLink +'&lang='+language.id" title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                       </a>
                       <div class="customized_name"
                            v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
-                        <span v-if="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" title="custom name for '[[language.id]]'"></span>
+                        <span v-if="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" v-bind:title="'custom name for '+ language.id"></span>
                         <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
                         <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
                           <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
                         </div>
-                        <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete custom name for '[[language.id]]'" @click="removeCustomName(product.names[language.id])"></i>
+                        <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" v-bind:title="'Delete custom name for '+language.id" @click="removeCustomName(product.names[language.id])"></i>
                       </div>
                     </span>
                     <span class="cached" v-if="product.cached_names && product.cached_names[language.id]"
@@ -197,15 +197,15 @@
                   <!-- material configuration -->
                   <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                      <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
-                      <span v-for="(index, material) in product.materials">
+                      <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
+                      <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0">/</span>
                         <span v-if="materials[material].label[language.id]!== undefined">
                           [[ materials[material].label[language.id].value ]]
                         </span>
                       </span>
                       <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
-                      <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
+                      <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                       </a>
                       <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials && product.materials.length >0 }">
@@ -221,7 +221,7 @@
                        v-if="(product.metatags && product.metatags.length>0) || (product.cached_metatags)">
                     <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                       <ul>
-                        <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
+                        <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
                           <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) }">
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
@@ -250,8 +250,8 @@
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
-                        <span class="flag-icon [[language.flag]]" ></span>
-                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
+                        <span v-bind:class="'flag-icon '+language.flag" ></span>
+                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                           <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                         </a>
                         <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
@@ -274,8 +274,8 @@
 
                         <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)" v-if="languages_autodescription.indexOf(language.id)>-1"></i>
 
-                        <span class="flag-icon [[language.flag]]" ></span>
-                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
+                        <span v-bind:class="'flag-icon '+language.flag" ></span>
+                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                           <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                         </a>
                         <!-- original description -->
@@ -297,9 +297,9 @@
                     <!-- Material Preview -->
                     <ul class="list-group">
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
-                        <span class="flag-icon [[language.flag]] cursor" @click="debugMe(product)"></span>
+                        <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
 
-                      <span v-for="(index, material) in product.materials">
+                      <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0">/</span>
                         [[ materials[material].label[language.id].value ]]
                       </span>
@@ -307,7 +307,7 @@
                         <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
                         [[ product.cached_materials[language.id].value ]]
                       </span>
-                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="[[ product.detailsLink ]]&lang=[[ language.id ]]" title="Inspect product [[ product.modelCode ]] for language [[ language.id ]]" aria-hidden="true">
+                        <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                           <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                         </a>
                       </li>
@@ -320,7 +320,7 @@
                     <ul  class="indent" v-if="(product.metatags && product.metatags.length>0)">
                       <li class="list-group-item small" v-for="language in languages" v-show="language.status">
                         <ul>
-                          <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span class="flag-icon [[language.flag]] fa-pull-left cursor" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
+                          <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
 
                           <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
                                 v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
@@ -357,7 +357,7 @@
     <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_names">
       <div class="margin-bottom" v-if="show_base_product_edit && !show_name_scheme_edit"><i class="indent">Please select at least one base_product or component to edit ...</i></div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_base_product" placeholder="Select a Base Product"
+        <v-select :value="selected_base_product" placeholder="Select a Base Product"
                   :options="base_product_objects"
                   :taggable="true"
                   :push-tags="true"
@@ -365,7 +365,7 @@
                   :create-option="createBaseProductOption"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_component_1" placeholder="Select an component"
+        <v-select :value="selected_component_1" placeholder="Select an component"
                   :options="component_objects"
                   :get-option-label="getOptionLabelValue"
                   :taggable="true"
@@ -374,7 +374,7 @@
                   :create-option="createComponentOption"></v-select>
       </div>
       <div class="margin-bottom">
-        <v-select :value.sync="selected_component_2" placeholder="Select an other component"
+        <v-select :value="selected_component_2" placeholder="Select an other component"
                   :options="component_objects"
                   :get-option-label="getOptionLabelValue"
                   :taggable="true"
@@ -400,7 +400,7 @@
         <ul class="indent metatag-list" v-if="selected_base_product || selected_component_1 || selected_component_2">
           <li class="list-group-item small" v-for="language in languages" v-show="language.status">
             <ul>
-              <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-if="selected_base_product">
                   <span v-if="!selected_base_product.label[language.id].edit">
                     <!-- Show Edit BaseProduct -->
@@ -447,7 +447,7 @@
     <div class="row col-xs-12 col-sm-6 col-md-6" v-if="show_material">
       <!-- Product Materials -->
       <div class="margin-bottom">
-        <v-select :value.sync="selected_materials" placeholder="Select Material"
+        <v-select :value="selected_materials" placeholder="Select Material"
                   :options="material_objects"
                   :multiple="true"
                   :taggable="true"
@@ -475,7 +475,7 @@
         <ul class="indent metatag-list" v-if="selected_materials.length > 0">
           <li class="list-group-item small" v-for="language in languages" v-show="language.status">
             <ul>
-              <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-for="material in selected_materials">
                   <span v-if="!materials[material.value].label[language.id].edit">
                     <i class="fa fa-industry fa-pull-left"></i>
@@ -497,7 +497,7 @@
     <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_metatags">
       <!-- Meta Tags -->
       <div class="margin-bottom">
-        <v-select :value.sync="selected_metatags" placeholder="Select Metatags"
+        <v-select :value="selected_metatags" placeholder="Select Metatags"
                   :options="metatag_objects"
                   :multiple="true"
                   :taggable="true"
@@ -535,7 +535,7 @@
         <ul class="indent metatag-list" v-if="selected_metatags.length > 0">
           <li class="list-group-item small" v-for="language in languages" v-show="language.status">
             <ul>
-              <li><span class="flag-icon [[language.flag]] fa-pull-left" style="margin-top:-8px; margin-left:-12px;"></span></li>
+              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-for="metatag in selected_metatags">
                   <span v-if="!metatags[metatag.id].label[language.id].edit">
                     <i class="fa fa-tag fa-pull-left"></i>
@@ -568,9 +568,9 @@
         <li class="list-group-item" v-if="hasDirtyProducts">
           <h5>Products</h5>
           <ul>
-            <li class="inline_list cursor" v-for="product in products | filterBy true in 'dirty'" @click="exportProduct(product)">
+            <li class="inline_list cursor" v-for="product in products_dirty" @click="exportProduct(product)">
               [[product.modelCode]]
-              &nbsp;&nbsp;&nbsp;<i class="fa fa-floppy-o cursor" title="Save [[ product.modelCode ]] to database" aria-hidden="true" @click="exportProduct(product)"></i>
+              &nbsp;&nbsp;&nbsp;<i class="fa fa-floppy-o cursor" v-bind:title="'Save '+ product.modelCode +' to database'" aria-hidden="true" @click="exportProduct(product)"></i>
             </li>
 
           </ul>
@@ -600,8 +600,8 @@
       </ul>
       <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
       <ul class="list-group">
-        <li class="list-group-item" v-for="message in messages | filterBy 'danger' in 'type'">
-          <div class="alert alert-[[message.type]]" >
+        <li class="list-group-item" v-for="message in messages_danger">
+          <div v-bind:class="'alert alert-' + message.type" >
             <i class="date">[[message.date]]:</i>
             <span>[[message.message]]</span>
             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
@@ -611,8 +611,8 @@
       </ul>
       <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
       <ul class="list-group">
-        <li class="list-group-item" v-for="message in messages | filterBy 'success' in 'type'">
-          <div class="alert alert-[[message.type]]" >
+        <li class="list-group-item" v-for="message in messages_success">
+          <div v-bind:class="'alert alert-' + message.type" >
             <i class="date">[[message.date]]:</i>
             <span>[[message.message]]</span>
             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>

@@ -169,8 +169,6 @@ var componentStorage = {
 
 // register components
 Vue.component('v-select', VueSelect.VueSelect)
-// use non-standard deliters for twig
-Vue.config.delimiters = ['[[', ']]']
 
 new Vue({
     el: '#app',
@@ -269,6 +267,7 @@ new Vue({
         // settings local
         settings:settingStorage.fetch()
     },
+    delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
     watch: {
         components_local: {
@@ -350,13 +349,6 @@ new Vue({
             })
             return dirty
         },
-        deactivateMessages: {
-            set: function () {
-                this.messages.forEach(function (message) {
-                    message.show = false
-                })
-            }
-        },
         editorLanguage:{
             set: function (language) {
                 this.settings.editorLanguage =language
@@ -404,7 +396,7 @@ new Vue({
             return !this.isFullScreen
         },
         materials:function(){
-            my_options={}
+            var my_options={}
             this.materials_local.forEach(function(item) {
                 my_options[item.value]=item
             })
@@ -415,6 +407,33 @@ new Vue({
         },
         material_objects:function(){
             return Object.values(this.materials)
+        },
+        messages_danger: function(){
+            var messages=[]
+            this.messages.forEach(function(message){
+                if(message.type==='danger') {
+                    messages.push(message)
+                }
+            })
+            return messages
+        },
+        messages_success: function(){
+            var messages=[]
+            this.messages.forEach(function(message){
+                if(message.type==='success') {
+                    messages.push(message)
+                }
+            })
+            return messages
+        },
+        messages_to_show: function(){
+            var messages=[]
+            this.messages.forEach(function(message){
+                if(message.show===true) {
+                    messages.push(message)
+                }
+            })
+            return messages
         },
         metatags:function(){
             my_tags={}
@@ -428,6 +447,24 @@ new Vue({
         },
         metatag_objects:function(){
             return Object.values(this.metatags)
+        },
+        products_dirty:function () {
+            var products =[]
+            this.products.forEach(function(product){
+                if(product.dirty===true){
+                    products.push(product)
+                }
+            })
+            return products
+        },
+        products_visible:function () {
+            var products =[]
+            this.products.forEach(function(product){
+                if(product.hidden===false){
+                    products.push(product)
+                }
+            })
+            return products
         },
         show_name_scheme_edit:function(){
             if(!this.selected_base_product && !this.selected_component_1 && !this.selected_component_2){
@@ -623,6 +660,11 @@ new Vue({
                 api.call()
             }
             return option
+        },
+        deactivateMessages: function () {
+            this.messages.forEach(function (message) {
+                message.show = false
+            })
         },
         debugComponents:function(){
             console.log("Local (app.components_local)")
@@ -839,6 +881,7 @@ new Vue({
                             if(typeof my_aliases=='object'){
                                 my_aliases=""
                             }
+
                             alias_array=my_aliases.split(',')
 
                             if(alias_array){
