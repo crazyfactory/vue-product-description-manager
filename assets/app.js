@@ -178,47 +178,14 @@ var baseProductStorage = {
 
         if (BaseProductOptions.content) {
             // got statics from mock or api
-            var base_product_raw = BaseProductOptions.content
-
+            var response = []
+            BaseProductOptions.content.forEach(function(option, index){
+                option['search']=option['label']['en-GB']['value']
+                response.push(option)
+            })
+            return response
         }
-        else{
-            return [
-                {
-                    'value':'-',
-                    'label':'Nothing found'
-                }
-            ]
-        }
-        // get all supported language keys
-        var options = []
-        // loop through the raw data and convert to the requested format
-        for (var i = 0, length_bp = base_product_raw.length; i < length_bp; i++) {
-            option_value = base_product_raw[i]['value']
 
-            for (var lk = 0, length_lang=AppLanguages.length; lk < length_lang; lk++) {
-                language_code = AppLanguages[lk].id
-                if(!options[language_code]){
-                    options[language_code] = []
-                }
-
-                if(base_product_raw[i]['label'][language_code] && base_product_raw[i]['label'][language_code]['value']){
-                    option_label = base_product_raw[i]['label'][language_code]['value']
-                }
-                else {
-                    option_label = base_product_raw[i]['label']['en-GB']['value']
-                }
-
-                option = {
-                    "active": true,
-                    "edit": false,
-                    "label": option_label,
-                    "value": option_value
-                }
-                // push newly created option in our select option list
-                options[language_code].push(option)
-            }
-        }
-        return options
     },
 
 }
@@ -228,36 +195,34 @@ var baseProductStorage = {
 var STORAGE_KEY_COMPONENT = 'crazy-component'
 var componentStorage = {
     fetch: function () {
-        var component_static = []
-
         if (ComponentOptions.content) {
             // got statics from mock or api
-            component_static = ComponentOptions.content
-        }
-        // get the local options
-        var components = JSON.parse(localStorage.getItem(STORAGE_KEY_COMPONENT) || '[]')
-        // if no local option are available: include statics
-        if (components.length < 1) {
-            component_static.forEach(function (item) {
-                components.push(item)
+            var response = []
+            ComponentOptions.content.forEach(function(option, index){
+                option['search']=option['label']['en-GB']['value']
+                response.push(option)
             })
+            return response
         }
-        return components
+
     },
-    save: function (item) {
-        localStorage.setItem(STORAGE_KEY_COMPONENT, JSON.stringify(item))
-    }
 }
 
-// register components
-Vue.component('v-select', VueSelect.VueSelect)
 
 new Vue({
     el: '#app',
+    components: {
+        Multiselect: window.VueMultiselect.default
+    },
     data: {
+        // new multiselect props
+        selectedBaseProduct: [],
+        selectedComponent1:[],
+        selectedComponent2:[],
 
-        base_products_all: baseProductStorage.fetch(),
-        components_local: componentStorage.fetch(),
+        optionsBaseProduct: baseProductStorage.fetch(),
+        optionsComponent: componentStorage.fetch(),
+
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
@@ -289,9 +254,8 @@ new Vue({
         show_names: true,
         show_preview: false,
         show_settings: false,
-        selected_component_1: null,
-        selected_component_2: null,
-        selected_base_product: null,
+
+
         selected_materials: [],
         selected_metatags: [],
         // settings local
@@ -300,12 +264,6 @@ new Vue({
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
     watch: {
-        components_local: {
-            handler: function (item) {
-                componentStorage.save(item)
-            },
-            deep: true
-        },
         materials_local: {
             handler: function (materials) {
                 materialStorage.save(materials)
@@ -338,33 +296,6 @@ new Vue({
         }
     },
     computed: {
-        base_product_options: {
-            get:function () {
-                return this.base_products_all[this.settings.editorLanguage]
-            },
-            set:function(option){
-                base_products_all = this.base_products_all
-                console.log(this.base_products_all)
-                this.languages.forEach(function(language){
-                    base_products_all[language.id].push(option)
-                })
-
-                console.log(this.base_products_all)
-            }
-        },
-        components: function () {
-            my_options = {}
-            this.components_local.forEach(function (item) {
-                my_options[item.value] = item
-            })
-            return my_options
-        },
-        component_index: function () {
-            return Object.keys(this.components)
-        },
-        component_objects: function () {
-            return Object.values(this.components)
-        },
         dirtyProducts: function () {
             dirty = []
             this.products.forEach(function (product) {
@@ -492,7 +423,7 @@ new Vue({
             return products
         },
         show_name_scheme_edit: function () {
-            if (!this.selected_base_product && !this.selected_component_1 && !this.selected_component_2) {
+            if (!this.selectedBaseProduct && !this.selectedComponent1 && !this.selectedComponent2) {
                 // no base_product or component is selected
                 return false
             }
@@ -579,26 +510,13 @@ new Vue({
             }
         },
         clearAll: function () {
-            this.components_local = []
-            this.components = []
-            //this.base_products_local = []
-            this.base_products = []
-            this.metatags_local = []
-            this.materials_local = []
-            this.materials = []
-            msg = "All local settings for Base Prducts, Components, Materials and Metatags are cleared now. Please use your browser reload to restart the App."
-            this.addMessage(msg, 'success')
-
+            console.log('please re-implement')
         },
         clearSettings: function () {
             this.settings = {}
         },
         clearSelectBoxes: function () {
-            this.selected_component_1 = null
-            this.selected_component_2 = null
-            this.selected_base_product = null
-            this.selected_materials = []
-            this.selected_metatags = []
+            console.log('Please re-implement')
         },
         closeEditComponents: function () {
             this.show_components_edit = false
@@ -607,7 +525,7 @@ new Vue({
             this.show_base_product_edit = false
             if (hasApi) {
                 data = {}
-                data.base_product = this.selected_base_product
+                data.base_product = this.selectedBaseProduct
                 data.component = [this.selected_component_1, this.selected_component_2]
                 api.app = this
                 api.data = data
@@ -639,9 +557,24 @@ new Vue({
             }
             this.show_metatags_edit = false
         },
-        createComponentOption: function (value) {
+        createBaseProductOption: function (value) {
+            // create a new option for the BaseProduct Select
             var option = this.optionFactory(value)
-            this.components_local.push(option)
+            this.selectedBaseProduct= option
+            this.optionsBaseProduct.push(option)
+
+            if (hasApi) {
+                api.app = this
+                api.data = option
+                api.action = 'create_base_product'
+                api.call()
+            }
+            return option
+        },
+        createComponent1Option: function (value) {
+            var option = this.optionFactory(value)
+            this.selectedComponent1= option
+            this.optionsBaseProduct.push(option)
             if (hasApi) {
                 api.app = this
                 api.data = option
@@ -650,20 +583,16 @@ new Vue({
             }
             return option
         },
-        createBaseProductOption: function (value) {
-            // create a new option in the BaseProduct select box
+        createComponent2Option: function (value) {
             var option = this.optionFactory(value)
-
-            // computed property with custom setter
-            this.base_product_options = option
-            /*
+            this.selectedComponent2= option
+            this.optionsBaseProduct.push(option)
             if (hasApi) {
                 api.app = this
                 api.data = option
-                api.action = 'create_base_product'
+                api.action = 'create_component'
                 api.call()
             }
-            */
             return option
         },
         createMetatagOption: function (value) {
@@ -690,6 +619,13 @@ new Vue({
             }
             return option
         },
+        customOptionLabel: function(option){
+
+            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
+                return option['label']['en-GB']['value']
+            }
+            return option['label'][this.editorLanguage]['value']
+        },
         deactivateMessages: function () {
             this.messages.forEach(function (message) {
                 message.show = false
@@ -703,8 +639,8 @@ new Vue({
         },
         debugBaseProducts: function () {
             console.log("ALL BaseProducts (app.base_products)")
-            console.log(this.base_products)
-
+            //console.log(this.baseProductOptions)
+            console.log(this.selectedBaseProduct)
         },
         debugMaterials: function () {
             console.log("Local (app.materials_local)")
@@ -727,7 +663,7 @@ new Vue({
             console.log(this.messages)
         },
         deleteBaseProductsComponents: function () {
-            var selected_base_product = this.selected_base_product
+            var selectedBaseProduct = this.selectedBaseProduct
             var selected_components = []
             if (this.selected_component_1) {
                 selected_components.push(this.selected_component_1)
@@ -743,7 +679,7 @@ new Vue({
 
             all_products.forEach(function (product) {
                 var changed = false
-                if (product.base_product && selected_base_product && product.base_product.value == selected_base_product.value) {
+                if (product.base_product && selectedBaseProduct && product.base_product.value == selectedBaseProduct.value) {
                     product.base_product = null
                     changed = true
                 }
@@ -787,8 +723,8 @@ new Vue({
             })
 
             // remove base products & components dropdown
-            if (all_base_products.indexOf(selected_base_product) > -1) {
-                all_base_products.splice(all_base_products.indexOf(selected_base_product), 1)
+            if (all_base_products.indexOf(selectedBaseProduct) > -1) {
+                all_base_products.splice(all_base_products.indexOf(selectedBaseProduct), 1)
             }
             selected_components.forEach(function (component) {
                 if (all_components.indexOf(component) > -1) {
@@ -796,7 +732,7 @@ new Vue({
                 }
             })
             // unset selected base_product/ component_1, component_2
-            this.selected_base_product = null
+            this.selectedBaseProduct = null
             this.selected_component_1 = null
             this.selected_component_2 = null
         },
@@ -959,27 +895,6 @@ new Vue({
                 this.products[index].descriptions[language] = my_description
             }
         },
-        getOptionLabel: function (item) {
-            if (typeof item === 'object') {
-                if (item.label) {
-                    return item.label[this.settings.editorLanguage]
-                }
-            }
-            return item
-        },
-        getOptionLabelValue: function (item) {
-            return 'brainiac'
-
-            if (typeof item === 'object') {
-                if (item.label) {
-                    if (typeof item.label[this.settings.editorLanguage] === 'undefined') {
-                        return item.label['en-GB'].value
-                    }
-                    return item.label[this.settings.editorLanguage].value
-                }
-            }
-            return item
-        },
         hideMessage: function (message) {
             message.show = false
         },
@@ -1066,14 +981,28 @@ new Vue({
             // no spaces and all lowercase for id/value
             normalized_value = value.replace(/ /g, "_").toLowerCase()
 
+            // prepare label structure
+            var label ={}
+            this.languages.forEach(function (language) {
+                // create index for localization
+                label[language.id]=
+                    {
+                        "value":value,
+                        "edit": false,
+                        "active": true
+                    }
+            })
+
+
             var option = {
                 alias: {},
                 dirty: true,
                 id: normalized_value,
                 invisible: false,
-                label: value,
+                label: label,
                 new: true,
-                value: normalized_value,
+                search: value,
+                value: normalized_value
             }
 
             return option
@@ -1202,27 +1131,29 @@ new Vue({
 
         },
         saveNameScheme: function () {
-            var base_product = this.selected_base_product
+            var attr1 = this.selectedComponent1
+            var attr2 = this.selectedComponent2
+            var base_product = this.selectedBaseProduct
+
             var clear_base_product = false
-            var attr1 = this.selected_component_1
             var clear_attr1 = false
-            var attr2 = this.selected_component_2
             var clear_attr2 = false
-            var languages = this.languages
             var conjunction = this.conjunction
-            var base_products = this.base_products
-            var components = this.components
+
+            var languages = this.languages
 
             this.products.forEach(function (product) {
                 if (product.active) {
                     if (typeof base_product == 'object' && base_product != null) {
+
                         if (base_product.value === "-") {
                             product.base_product = null
                             clear_base_product = true
                         }
                         else {
-                            product.base_product = base_products[base_product.value]
+                            product.base_product = base_product
                         }
+
                         product.dirty = true
                     }
 
@@ -1232,7 +1163,7 @@ new Vue({
                             clear_attr1 = true
                         }
                         else {
-                            product.component1 = components[attr1.value]
+                            product.component1 = attr1
                         }
                         product.dirty = true
                     }
@@ -1243,7 +1174,7 @@ new Vue({
                             clear_attr2 = true
                         }
                         else {
-                            product.component2 = components[attr2.value]
+                            product.component2 = attr2
                         }
                         product.dirty = true
                     }
@@ -1254,32 +1185,44 @@ new Vue({
                         var my_name = ''
 
                         if (product.base_product && product.base_product.label && product.base_product.label[language.id]) {
-                            if (product.base_product.label[language.id].value != "-") {
-                                my_name = product.base_product.label[language.id].value
+                            if (product.base_product.label[language.id] != "-") {
+                                my_name = product.base_product.label[language.id]['value']
+                                if(!my_name){
+                                    //fallback if we dont have an translation yet
+                                    my_name = product.base_product.label['en-GB']['value']
+                                }
                             }
-
                             product.dirty = true
                         }
                         if (product.component1 && product.component1.label && product.component1.label[language.id]) {
-                            if (product.component1.label[language.id].value != "-") {
+                            if (product.component1.label[language.id] != "-") {
                                 var with_conjunction = ''
                                 if (my_name.length > 0) {
                                     with_conjunction = " " + conjunction.with[language.id] + " "
                                 }
-
-                                my_name = my_name + with_conjunction + product.component1.label[language.id].value
+                                my_component=product.component1.label[language.id]['value']
+                                if(!my_component){
+                                    // fallback to en-GB
+                                    my_component= product.component1.label['en-GB']['value']
+                                }
+                                my_name = my_name + with_conjunction + my_component
                             }
                             product.dirty = true
 
                         }
                         if (product.component2 && product.component2.label && product.component2.label[language.id]) {
-                            if (product.component2.label[language.id].value != "-") {
+                            if (product.component2.label[language.id] != "-") {
                                 var and_conjunction = ''
                                 if (my_name.length > 0) {
                                     and_conjunction = " " + conjunction.and[language.id] + " "
                                 }
+                                my_component2=product.component2.label[language.id]['value']
+                                if(!my_component2){
+                                    // fallback to en-GB
+                                    my_component2= product.component2.label['en-GB']['value']
+                                }
 
-                                my_name = my_name + and_conjunction + product.component2.label[language.id].value
+                                my_name = my_name + and_conjunction + my_component2
                             }
                             product.dirty = true
                         }
@@ -1289,16 +1232,15 @@ new Vue({
                             original_value: my_name,
                             value: my_name
                         }
-
                     })
 
                     product.names = product_names
                 }
             })
 
-            this.selected_base_product = null
-            this.selected_component_1 = null
-            this.selected_component_2 = null
+            this.selectedBaseProduct = null
+            this.selectedComponent1 = null
+            this.selectedComponent2 = null
         },
         selectAllProducts: function (value) {
             var products = this.products
@@ -1337,8 +1279,8 @@ new Vue({
             // update product names
             var languages = this.languages
             var conjunction = this.conjunction
-            var base_products = this.base_products
-            var components = this.components
+            var base_products = this.optionsBaseProduct
+            var components = this.optionsComponent
             var updated = false
 
             this.products.forEach(function (product) {
