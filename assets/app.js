@@ -1306,12 +1306,12 @@ new Vue({
                                 updated = true
                             }
                         }
-                        if (product.component1 && product.component1.label[language.id]) {
+                        if (product.component1 && product.component1.label && product.component1.label[language.id]) {
                             components[product.component1.value].label[language.id].edit = false
                             my_name = my_name + " " + conjunction.with[language.id] + " " + components[product.component1.value].label[language.id].value
                             updated = true
                         }
-                        if (product.component2 && product.component2.label[language.id]) {
+                        if (product.component2 && product.component2.label && product.component2.label[language.id]) {
                             components[product.component2.value].label[language.id].edit = false
                             my_name = my_name + " " + conjunction.and[language.id] + " " + components[product.component2.value].label[language.id].value
                             updated = true
