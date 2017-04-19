@@ -237,12 +237,6 @@ new Vue({
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
     watch: {
-        materials_local: {
-            handler: function (materials) {
-                materialStorage.save(materials)
-            },
-            deep: true
-        },
         messages: {
             handler: function (messages) {
                 messageStorage.save(messages)
@@ -324,18 +318,12 @@ new Vue({
         isSmallScreen: function () {
             return !this.isFullScreen
         },
-        materials: function () {
-            var my_options = {}
-            this.materials_local.forEach(function (item) {
-                my_options[item.value] = item
+        materials: function(){
+            materials = {}
+            this.optionsMaterial.forEach(function (item) {
+                materials[item.value] = item
             })
-            return my_options
-        },
-        material_index: function () {
-            return Object.keys(this.materials)
-        },
-        material_objects: function () {
-            return Object.values(this.materials)
+            return materials
         },
         messages_danger: function () {
             var messages = []
@@ -365,17 +353,11 @@ new Vue({
             return messages
         },
         metatags: function () {
-            my_tags = {}
-            this.metatags_local.forEach(function (metatag) {
-                my_tags[metatag.value] = metatag
+            metatags = {}
+            this.optionsMetatag.forEach(function (metatag) {
+                metatags[metatag.value] = metatag
             })
-            return my_tags
-        },
-        metatag_index: function () {
-            return Object.keys(this.metatags)
-        },
-        metatag_objects: function () {
-            return Object.values(this.metatags)
+            return metatags
         },
         products_dirty: function () {
             var products = []
@@ -574,7 +556,8 @@ new Vue({
         },
         createMetatagOption: function (value) {
             var option = this.optionFactory(value)
-            this.metatags_local.push(option)
+            this.selectedMetatags.push(option)
+            this.optionsMetatag.push(option)
 
             if (hasApi) {
                 api.app = this
@@ -587,7 +570,9 @@ new Vue({
         },
         createMaterialOption: function (value) {
             var option = this.optionFactory(value)
-            this.materials_local.push(option)
+            this.selectedMaterials.push(option)
+            this.optionsMaterial.push(option)
+
             if (hasApi) {
                 api.app = this
                 api.data = option
