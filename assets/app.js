@@ -185,7 +185,6 @@ var baseProductStorage = {
             })
             return response
         }
-
     },
 
 }
@@ -516,7 +515,11 @@ new Vue({
             this.settings = {}
         },
         clearSelectBoxes: function () {
-            console.log('Please re-implement')
+            this.selectedBaseProduct = null
+            this.selectedComponent1 = null
+            this.selectedComponent2 = null
+            this.selected_materials = []
+            this.selected_metatags = []
         },
         closeEditComponents: function () {
             this.show_components_edit = false
@@ -620,6 +623,7 @@ new Vue({
             return option
         },
         customOptionLabel: function(option){
+            if(!option['label']) return option
 
             if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
                 return option['label']['en-GB']['value']
@@ -1233,7 +1237,6 @@ new Vue({
                             value: my_name
                         }
                     })
-
                     product.names = product_names
                 }
             })
@@ -1241,6 +1244,7 @@ new Vue({
             this.selectedBaseProduct = null
             this.selectedComponent1 = null
             this.selectedComponent2 = null
+
         },
         selectAllProducts: function (value) {
             var products = this.products
