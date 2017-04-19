@@ -1,4 +1,4 @@
-var MetatagsStatic ={
+var MetatagOptions ={
     "id":"metatags",
     "content":[
         {

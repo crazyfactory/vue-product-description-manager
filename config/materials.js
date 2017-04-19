@@ -1,4 +1,4 @@
-var MaterialStatic ={
+var MaterialOptions ={
     "id":"material",
     "content":[
         {

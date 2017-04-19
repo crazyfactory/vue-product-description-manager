@@ -62,10 +62,19 @@ var AppLanguages = [
         flag: 'flag-icon-ru',
     },
 ]
-
-var ComponentData = []
-var ComponentConjunction = []
-var Descriptions = []
+/*
+ * prepares our fetched data for in app use
+ * sets 'en_GB' as default value
+ * introduces search index
+ */
+function storage_helper(data){
+    var response = []
+    data.forEach(function(option, index){
+        option['search']=option['label']['en-GB']['value']
+        response.push(option)
+    })
+    return response
+}
 
 /*
  * add products
@@ -124,89 +133,59 @@ var settingStorage = {
 }
 
 // metatags management
-var STORAGE_KEY_META = 'crazy-metatags'
 var metatagStorage = {
     fetch: function () {
-        var meta_static = []
+        if(MetatagOptions && MetatagOptions.content)
+        {
+            return storage_helper(MetatagOptions.content)
+        }
+        else{
+            return []
+        }
 
-        if (MetatagsStatic.content) {
-            // got static tags from mock or api
-            meta_static = MetatagsStatic.content
-        }
-        // get the local tags
-        var metatags = JSON.parse(localStorage.getItem(STORAGE_KEY_META) || '[]')
-        // if no local tags are available: include static tags
-        if (metatags.length < 1) {
-            meta_static.forEach(function (metatag) {
-                metatags.push(metatag)
-            })
-        }
-        return metatags
     },
-    save: function (metatags) {
-        localStorage.setItem(STORAGE_KEY_META, JSON.stringify(metatags))
-    }
 }
+
 // material management
-var STORAGE_KEY_MATERIAL = 'crazy-material'
 var materialStorage = {
     fetch: function () {
-        var material_static = []
+        if(MaterialOptions && MaterialOptions.content)
+        {
+            return storage_helper(MaterialOptions.content)
+        }
+        else{
+            return []
+        }
 
-        if (MaterialStatic.content) {
-            // got statics from mock or api
-            material_static = MaterialStatic.content
-        }
-        // get the local options
-        var materials = JSON.parse(localStorage.getItem(STORAGE_KEY_MATERIAL) || '[]')
-        // if no local option are available: include statics
-        if (materials.length < 1) {
-            material_static.forEach(function (material) {
-                materials.push(material)
-            })
-        }
-        return materials
     },
-    save: function (materials) {
-        localStorage.setItem(STORAGE_KEY_MATERIAL, JSON.stringify(materials))
-    }
 }
 
 // base_product management
 var baseProductStorage = {
     fetch: function () {
-
-        if (BaseProductOptions.content) {
-            // got statics from mock or api
-            var response = []
-            BaseProductOptions.content.forEach(function(option, index){
-                option['search']=option['label']['en-GB']['value']
-                response.push(option)
-            })
-            return response
+        if(BaseProductOptions && BaseProductOptions.content)
+        {
+            return storage_helper(BaseProductOptions.content)
         }
-    },
-
+        else{
+            return []
+        }
+    }
 }
-
 
 // component management
-var STORAGE_KEY_COMPONENT = 'crazy-component'
 var componentStorage = {
     fetch: function () {
-        if (ComponentOptions.content) {
-            // got statics from mock or api
-            var response = []
-            ComponentOptions.content.forEach(function(option, index){
-                option['search']=option['label']['en-GB']['value']
-                response.push(option)
-            })
-            return response
+        if(ComponentOptions && ComponentOptions.content)
+        {
+            return storage_helper(ComponentOptions.content)
         }
-
+        else
+        {
+            return []
+        }
     },
 }
-
 
 new Vue({
     el: '#app',
@@ -214,13 +193,17 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        // new multiselect props
-        selectedBaseProduct: [],
-        selectedComponent1:[],
-        selectedComponent2:[],
-
         optionsBaseProduct: baseProductStorage.fetch(),
         optionsComponent: componentStorage.fetch(),
+        optionsMaterial: materialStorage.fetch(),
+        optionsMetatag: metatagStorage.fetch(),
+
+        // new multiselect props
+        selectedBaseProduct: null,
+        selectedComponent1: null,
+        selectedComponent2: null,
+        selectedMaterials: [],
+        selectedMetatags: [],
 
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
@@ -228,12 +211,7 @@ new Vue({
         isFullScreen: false,
         languages: AppLanguages,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
-        // materials
-        materials_local: materialStorage.fetch(),
-        // messages local
         messages: messageStorage.fetch(),
-        // metatags local
-        metatags_local: metatagStorage.fetch(),
         newProduct: '',
         // Preview filter
         preview_filter_description: true,
@@ -254,10 +232,6 @@ new Vue({
         show_preview: false,
         show_settings: false,
 
-
-        selected_materials: [],
-        selected_metatags: [],
-        // settings local
         settings: settingStorage.fetch()
     },
     delimiters: ['[[', ']]'],
@@ -518,8 +492,8 @@ new Vue({
             this.selectedBaseProduct = null
             this.selectedComponent1 = null
             this.selectedComponent2 = null
-            this.selected_materials = []
-            this.selected_metatags = []
+            this.selectedMaterials = []
+            this.selectedMetatags = []
         },
         closeEditComponents: function () {
             this.show_components_edit = false
@@ -541,7 +515,7 @@ new Vue({
         closeEditMaterials: function () {
             if (hasApi) {
                 api.app = this
-                api.data = this.selected_materials
+                api.data = this.selectedMaterials
                 api.action = 'update_material'
                 api.call()
             }
@@ -554,7 +528,7 @@ new Vue({
         closeEditMetatags: function () {
             if (hasApi) {
                 api.app = this
-                api.data = this.selected_metatags
+                api.data = this.selectedMetatags
                 api.action = 'update_metatag'
                 api.call()
             }
@@ -741,11 +715,11 @@ new Vue({
             this.selected_component_2 = null
         },
         deleteMaterials: function () {
-            var selected_materials = this.selected_materials
+            var selectedMaterials = this.selectedMaterials
             var all_products = this.products
             var all_materials = this.materials_local
 
-            selected_materials.forEach(function (item) {
+            selectedMaterials.forEach(function (item) {
                 // remove item from all products
                 all_products.forEach(function (product) {
                     if (product.materials.indexOf(item.value) > -1) {
@@ -758,14 +732,14 @@ new Vue({
                     all_materials.splice(all_materials.indexOf(item), 1)
                 }
             })
-            this.selected_materials = []
+            this.selectedMaterials = []
         },
         deleteMetatags: function () {
-            var selected_metatags = this.selected_metatags
+            var selectedMetatags = this.selectedMetatags
             var all_products = this.products
             var all_metatags = this.metatags_local
 
-            selected_metatags.forEach(function (metatag) {
+            selectedMetatags.forEach(function (metatag) {
                 // remove metatag from all products
                 all_products.forEach(function (product) {
                     if (product.metatags.indexOf(metatag.value) > -1) {
@@ -777,7 +751,7 @@ new Vue({
                     all_metatags.splice(all_metatags.indexOf(metatag), 1)
                 }
             })
-            this.selected_metatags = []
+            this.selectedMetatags = []
         },
         editComponents: function () {
             this.show_components_edit = true
@@ -1013,7 +987,7 @@ new Vue({
         },
         invisibleMetatags: function () {
             var all_products = this.products
-            this.selected_metatags.forEach(function (metatag) {
+            this.selectedMetatags.forEach(function (metatag) {
                 metatag.invisible = true
                 all_products.forEach(function (product) {
                     if (product.metatags.indexOf(metatag.value) > -1) {
@@ -1025,7 +999,7 @@ new Vue({
             if (hasApi) {
                 // make it persistent in DB
                 api.app = this
-                api.data = this.selected_metatags
+                api.data = this.selectedMetatags
                 api.action = 'invisible_metatags'
                 api.call()
             }
@@ -1067,13 +1041,13 @@ new Vue({
             this.products = keep_products
         },
         saveMaterials: function () {
-            var selected_materials = this.selected_materials
+            var selectedMaterials = this.selectedMaterials
             var clear_materials = false
             materialsGlobal = this.materials
             // set materials to all selected products
             this.products.forEach(function (product) {
                 if (product.active) {
-                    selected_materials.forEach(function (item) {
+                    selectedMaterials.forEach(function (item) {
                         var unique = true
                         material_value = item.value
                         if (material_value === "-") {
@@ -1098,15 +1072,15 @@ new Vue({
                     }
                 }
             })
-            this.selected_materials = []
+            this.selectedMaterials = []
         },
         saveMetatags: function () {
-            var selected_metatags = this.selected_metatags
+            var selectedMetatags = this.selectedMetatags
             var clear_metatags = false
             // set metatags to all selected products
             this.products.forEach(function (product) {
                 if (product.active) {
-                    selected_metatags.forEach(function (metatag) {
+                    selectedMetatags.forEach(function (metatag) {
                         var unique = true
                         meta_value = metatag.value
                         if (meta_value === "-") {
@@ -1131,7 +1105,7 @@ new Vue({
                     }
                 }
             })
-            this.selected_metatags = []
+            this.selectedMetatags = []
 
         },
         saveNameScheme: function () {
@@ -1336,7 +1310,7 @@ new Vue({
         },
         visibleMetatags: function () {
             var all_products = this.products;
-            this.selected_metatags.forEach(function (metatag) {
+            this.selectedMetatags.forEach(function (metatag) {
                 metatag.invisible = false
                 all_products.forEach(function (product) {
                     if (product.metatags.indexOf(metatag.value) > -1) {
@@ -1347,7 +1321,7 @@ new Vue({
             if (hasApi) {
                 // make it persistent in DB
                 api.app = this
-                api.data = this.selected_metatags
+                api.data = this.selectedMetatags
                 api.action = 'visible_metatags'
                 api.call()
             }
