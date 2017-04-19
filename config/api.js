@@ -793,7 +793,52 @@ var Api_response =
     },
     "details_link": "../product_info.php?products_id=5829",
     "db_id": 5829,
-    "descriptions": [],
+    "descriptions": {
+        "en-GB": {
+            "value": "",
+            "edit": false
+        },
+        "en-US": {
+            "value": "",
+            "edit": false
+        },
+        "de": {
+            "value": "",
+            "edit": false
+        },
+        "es": {
+            "value": "",
+            "edit": false
+        },
+        "fr": {
+            "value": "",
+            "edit": false
+        },
+        "it": {
+            "value": "",
+            "edit": false
+        },
+        "nl": {
+            "value": "",
+            "edit": false
+        },
+        "pt": {
+            "value": "",
+            "edit": false
+        },
+        "se": {
+            "value": "",
+            "edit": false
+        },
+        "sv": {
+            "value": "",
+            "edit": false
+        },
+        "ru": {
+            "value": "",
+            "edit": false
+        }
+    },
     "materials": [],
     "metatags": [],
     "metatag_base_product": [],
