@@ -421,6 +421,7 @@
         <ul class="indent metatag-list" v-if="selectedBaseProduct || selectedComponent1 || selectedComponent2">
           <li class="list-group-item small" v-for="language in languages" v-show="language.status">
             <ul>
+              <!-- edit BaseProduct -->
               <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-if="selectedBaseProduct && selectedBaseProduct.label">
                   <span v-if="!selectedBaseProduct.label[language.id].edit">
@@ -433,32 +434,33 @@
                   <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="selectedBaseProduct.label[language.id].value" @keyup.enter="closeEditMe(selectedBaseProduct.label[language.id])">
                 </div>
               </li>
-              <!--
-              <li class="list-group-item" v-if="selected_component_1">
-                <span v-if="!selected_component_1.label[language.id].edit">
+              <!-- edit Component1 -->
+              <li class="list-group-item" v-if="selectedComponent1">
+                <span v-if="!selectedComponent1.label[language.id].edit">
 
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selected_component_1.value].label[language.id])">[[ components[selected_component_1.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selected_component_1.value].label[language.id])"></i>
+                    <span @click="editMe(components[selectedComponent1.value].label[language.id])">[[ components[selectedComponent1.value].label[language.id].value ]]</span>
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent1.value].label[language.id])"></i>
                 </span>
-                <div v-if="components[selected_component_1.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selected_component_1.value].label[language.id].edit" @click="closeEditMe(components[selected_component_1.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selected_component_1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selected_component_1.value].label[language.id])">
+                <div v-if="components[selectedComponent1.value].label[language.id].edit">
+                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent1.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent1.value].label[language.id])"></i>
+                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent1.value].label[language.id])">
                 </div>
               </li>
-              <li class="list-group-item" v-if="selected_component_2">
-                <span v-if="!selected_component_2.label[language.id].edit">
+              <li class="list-group-item" v-if="selectedComponent2">
+                <span v-if="!selectedComponent2.label[language.id].edit">
 
                     <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selected_component_2.value].label[language.id])">[[ components[selected_component_2.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selected_component_2.value].label[language.id])"></i>
+                    <span @click="editMe(components[selectedComponent2.value].label[language.id])">[[ components[selectedComponent2.value].label[language.id].value ]]</span>
+                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent2.value].label[language.id])"></i>
                 </span>
-                <div v-if="components[selected_component_2.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selected_component_2.value].label[language.id].edit" @click="closeEditMe(components[selected_component_2.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selected_component_2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selected_component_2.value].label[language.id])">
+                <div v-if="components[selectedComponent2.value].label[language.id].edit">
+                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent2.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent2.value].label[language.id])"></i>
+                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent2.value].label[language.id])">
                 </div>
               </li>
-              -->
+
+              
             </ul>
 
           </li>
