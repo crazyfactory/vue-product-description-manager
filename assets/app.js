@@ -580,6 +580,8 @@ new Vue({
         },
         createMetatagOption: function (value) {
             var option = this.optionFactory(value)
+            // add "invisible" property to metatag option
+            option['invisible']=false
             this.selectedMetatags.push(option)
             this.optionsMetatag.push(option)
 
