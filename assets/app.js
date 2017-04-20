@@ -969,7 +969,8 @@ new Vue({
             normalized_value = value.replace(/ /g, "_").toLowerCase()
 
             // prepare label structure
-            var label ={}
+            var label= {}
+            var alias= {}
             this.languages.forEach(function (language) {
                 // create index for localization
                 label[language.id]=
@@ -978,11 +979,18 @@ new Vue({
                         "edit": false,
                         "active": true
                     }
+                alias[language.id]=
+                    {
+                        "value":"",
+                        "edit": false,
+                        "active": true
+                    }
+
             })
 
 
             var option = {
-                alias: {},
+                alias: alias,
                 dirty: true,
                 id: normalized_value,
                 invisible: false,
