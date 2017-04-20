@@ -337,7 +337,7 @@
                           <span v-if="metatags[metatag]">
                               <i class="fa fa-tag fa-pull-left"></i>
                             <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            <!--[[ metatags[metatag].label[language.id].value ]]-->
+                            [[ metatags[metatag].label[language.id].value ]]
                           </span>
                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
