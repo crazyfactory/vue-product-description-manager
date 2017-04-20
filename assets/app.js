@@ -69,8 +69,18 @@ var AppLanguages = [
  */
 function storage_helper(data){
     var response = []
+    var default_value = ''
     data.forEach(function(option, index){
-        option['search']=option['label']['en-GB']['value']
+        default_value=option['label']['en-GB']['value']
+
+        option['search']=default_value
+        for (var language in option.label) {
+            if (option.label.hasOwnProperty(language)) {
+                if(!option.label[language]['value']){
+                    option.label[language]['value']=default_value
+                }
+            }
+        }
         response.push(option)
     })
     return response
@@ -263,6 +273,20 @@ new Vue({
         }
     },
     computed: {
+        baseProducts: function(){
+            stash = {}
+            this.optionsBaseProduct.forEach(function (item) {
+                stash[item.value] = item
+            })
+            return stash
+        },
+        components: function(){
+            stash = {}
+            this.optionsComponent.forEach(function (item) {
+                stash[item.value] = item
+            })
+            return stash
+        },
         dirtyProducts: function () {
             dirty = []
             this.products.forEach(function (product) {
@@ -485,7 +509,7 @@ new Vue({
             if (hasApi) {
                 data = {}
                 data.base_product = this.selectedBaseProduct
-                data.component = [this.selected_component_1, this.selected_component_2]
+                data.component = [this.selectedComponent1, this.selectedComponent2]
                 api.app = this
                 api.data = data
                 api.action = 'update_base_product_component'
@@ -1242,8 +1266,8 @@ new Vue({
             // update product names
             var languages = this.languages
             var conjunction = this.conjunction
-            var base_products = this.optionsBaseProduct
-            var components = this.optionsComponent
+            var base_products = this.baseProducts
+            var components = this.components
             var updated = false
 
             this.products.forEach(function (product) {
