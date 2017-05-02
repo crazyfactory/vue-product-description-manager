@@ -57,6 +57,8 @@ var api{
 ```
 
 ## Changelog
+- 1.1.0: Editor language settings are persistent through sessions
+- 1.0.0 MVP
 - 0.3.0 RC3
     - remove autotagging
     - improved UX
