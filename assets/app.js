@@ -135,6 +135,9 @@ var STORAGE_KEY_SETTING = 'crazy-settings'
 var settingStorage = {
     fetch: function () {
         var settings = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTING) || '{}')
+        if (typeof settings.supportedLanguages == 'undefined'){
+            settings.supportedLanguages=AppLanguages
+        }
         return settings
     },
     save: function (settings) {
@@ -219,7 +222,6 @@ new Vue({
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
-        languages: AppLanguages,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
         newProduct: '',
@@ -307,6 +309,18 @@ new Vue({
                     this.settings.editorLanguage = 'en-GB'
                 }
                 return this.settings.editorLanguage
+            }
+        },
+        supportedLanguages: {
+            set: function (languages) {
+                this.settings.supportedLanguages = languages
+
+            },
+            get: function () {
+                if (!this.settings.supportedLanguages) {
+                    this.settings.supportedLanguages = ['en-GB','de']
+                }
+                return this.settings.supportedLanguages
             }
         },
         hasDirtyProducts: function () {
@@ -413,10 +427,7 @@ new Vue({
     },
     methods: {
         addEditorLanguage: function (value) {
-            var setting = {
-                editorLanguage: value,
-            }
-            this.settings = setting
+            this.settings.editorLanguage = value
         },
         addMessage: function (message, type) {
             var today = moment().format('lll')
@@ -492,7 +503,11 @@ new Vue({
             console.log('please re-implement')
         },
         clearSettings: function () {
+            console.log('BEFORE')
+            console.log(this.settings)
             this.settings = {}
+            console.log('AFTER')
+            console.log(this.settings)
         },
         clearSelectBoxes: function () {
             this.selectedBaseProduct = null
@@ -651,6 +666,9 @@ new Vue({
         debugMessages: function () {
             console.log(this.messages)
         },
+        debugSettings: function () {
+            console.log(this.settings)
+        },
         deleteBaseProductsComponents: function () {
             var selectedBaseProduct = this.selectedBaseProduct
             var selected_components = []
@@ -663,7 +681,7 @@ new Vue({
             var all_base_products = this.base_products_local
             var all_components = this.components_local
             var all_products = this.products
-            var languages = this.languages
+            var languages = this.settings.supportedLanguages
             var conjunction = this.conjunction
 
             all_products.forEach(function (product) {
@@ -809,7 +827,7 @@ new Vue({
             localized_materials = {}
             localized_metatags = {}
             export_languages = []
-            this.languages.forEach(function (language) {
+            this.settings.supportedLanguages.forEach(function (language) {
                 if (language.status) {
                     export_languages.push(language.id)
                     localized_materials[language.id] = []
@@ -907,7 +925,7 @@ new Vue({
             })
         },
         isCustomized: function (product) {
-            this.languages.forEach(function (language) {
+            this.settings.supportedLanguages.forEach(function (language) {
                 // does the product have a customized name in any language?
                 if (product.names[language.id].original_value != product.names[language.id].value) {
                     return true
@@ -973,7 +991,7 @@ new Vue({
             // prepare label structure
             var label= {}
             var alias= {}
-            this.languages.forEach(function (language) {
+            this.settings.supportedLanguages.forEach(function (language) {
                 // create index for localization
                 label[language.id]=
                     {
@@ -1137,7 +1155,7 @@ new Vue({
             var clear_attr2 = false
             var conjunction = this.conjunction
 
-            var languages = this.languages
+            var languages = this.settings.supportedLanguages
 
             this.products.forEach(function (product) {
                 if (product.active) {
@@ -1274,7 +1292,7 @@ new Vue({
         },
         updateNameSchemes: function () {
             // update product names
-            var languages = this.languages
+            var languages = this.settings.supportedLanguages
             var conjunction = this.conjunction
             var base_products = this.baseProducts
             var components = this.components
