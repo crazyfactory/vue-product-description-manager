@@ -31,7 +31,7 @@
           <span class="icon_label">
             <i class="fa fa-pencil fa-2x" aria-hidden="true" title="Set Editor language"></i>
           </span>
-          <span v-for="language in languages">
+          <span v-for="language in settings.supportedLanguages">
             <span class="language" @click="addEditorLanguage(language.id)">
               <i style="color:darkgreen;" class="fa fa-caret-right" aria-hidden="true" v-if="language.id == editorLanguage"></i>
               <span v-bind:class="'flag-icon '+language.flag" ></span>
@@ -44,7 +44,7 @@
           <span class="icon_label">
             <i class="fa fa fa-eye fa-2x" aria-hidden="true" title="Set/ unset languages for the preview feature"></i>
           </span>
-          <span v-for="language in languages">
+          <span v-for="language in settings.supportedLanguages">
           <span class="language" @click="toggle_language(language)">
               <i class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
               <i class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
@@ -134,7 +134,7 @@
                 </label>
                 <!-- Generic Product Names by language -->
                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
-                  <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                  <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                     <span v-bind:class="'flag-icon '+language.flag" @click="debugMe(product)"></span>
 
                     <span v-if="product.base_product || product.component1 || product.component2">
@@ -169,7 +169,7 @@
                 <div class="indent" v-if="show_material">
                   <!-- material configuration -->
                   <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
-                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                    <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                       <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
                       <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0 && materials[material]">/</span>
@@ -192,7 +192,7 @@
                   <!-- Metatag preview -->
                   <ul  class="indent"
                        v-if="(product.metatags && product.metatags.length>0) || (product.cached_metatags)">
-                    <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                    <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                       <ul>
                         <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
                           <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) }">
@@ -222,7 +222,7 @@
                   <div class="indent" v-if="preview_filter_name">
                     <h5 class="product_name inline" v-if="product.base_product"><i class="fa fa-commenting-o fa-pull-left" aria-hidden="true" ></i> Names:</h5>
                     <ul class="list-group" v-if="product.base_product">
-                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                      <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
                         <span v-bind:class="'flag-icon '+language.flag" ></span>
@@ -243,7 +243,7 @@
                     <h5><i class="fa fa-info-circle fa-pull-left" aria-hidden="true" ></i> Descriptions:</h5>
                     <ul class="list-group">
                       <!-- Language dependent items -->
-                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                      <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
 
                         <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="product.descriptions[language.id] && !product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
                         <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id] && product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
@@ -274,7 +274,7 @@
                     <h5><i class="fa fa-industry fa-pull-left" aria-hidden="true"></i> Materials:</h5>
                     <!-- Material Preview -->
                     <ul class="list-group">
-                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                      <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
 
                         <span v-for="(material, index) in product.materials">
@@ -297,7 +297,7 @@
                     <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                     <!-- Meta tag preview -->
                     <ul  class="indent" v-if="product.cached_metatags || (product.metatags && product.metatags.length>0)">
-                      <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+                      <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <ul>
                           <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
 
@@ -397,7 +397,7 @@
         <!-- Edit BaseProduct/ Components -->
         <h5 class="indent">Edit Base Product & Components  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditBaseProducts()"></i></h5>
         <ul class="indent metatag-list" v-if="selectedBaseProduct || selectedComponent1 || selectedComponent2">
-          <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
             <ul>
               <!-- edit BaseProduct -->
               <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
@@ -478,7 +478,7 @@
         <i class="indent" v-if="!selectedMaterials.length > 0">Please select Materials to edit ...</i>
         <h5 class="indent" v-if="selectedMaterials.length > 0">Edit Materials  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMaterials()"></i></h5>
         <ul class="indent metatag-list" v-if="selectedMaterials.length > 0">
-          <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
             <ul>
               <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-for="material in selectedMaterials">
@@ -543,7 +543,7 @@
         <i class="indent" v-if="!selectedMetatags.length > 0">Please select Metatags to edit ...</i>
         <h5 class="indent" v-if="selectedMetatags.length > 0">Edit Metatags  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMetatags()"></i></h5>
         <ul class="indent metatag-list" v-if="selectedMetatags.length > 0">
-          <li class="list-group-item small" v-for="language in languages" v-show="language.status">
+          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
             <ul>
               <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
               <li class="list-group-item" v-for="metatag in selectedMetatags">
@@ -600,6 +600,9 @@
 
           <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
           <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
+          <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
+          <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
+          <a href="#" class="export cursor" @click="debugSettings()">settings</a>
         </li>
         <li class="list-group-item">
           <h5>Messages</h5>
