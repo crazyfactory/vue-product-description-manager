@@ -469,7 +469,7 @@
         <div class="actions" v-if="!show_materials_edit">
           <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
           <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
         </div>
       </div>
