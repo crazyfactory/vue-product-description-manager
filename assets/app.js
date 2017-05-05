@@ -210,6 +210,7 @@ new Vue({
         optionsComponent: componentStorage.fetch(),
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
+        optionsProductFilterIndex: ProductFilterIndex.content,
 
         // new multiselect props
         selectedBaseProduct: null,
@@ -217,6 +218,11 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
+        selectedProductFilterIndex: [],
+
+        //search query to find products by name
+        searchProducts:[],
+        searchProductsOptions:[],
 
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
@@ -461,39 +467,7 @@ new Vue({
             }
             else {
                 var my_products = value.split(" ")
-                var my_product_list = []
-
-                my_products.forEach(function (my_product_name) {
-                    my_product_name = my_product_name.trim()
-                    // use fake api response from api.js
-                    var random_nr = Math.round(Math.random() * (Object.keys(Api_response).length - 1))
-                    if (random_nr > 0) random_nr = random_nr - 1
-                    my_product = Api_response[random_nr]
-                    my_product_list.push({
-                        active: true,
-                        cached_descriptions: my_product.cached_descriptions,
-                        cached_materials: my_product.cached_materials,
-                        cached_metatags: my_product.cached_metatags,
-                        cached_names: my_product.cached_names,
-                        component1: null,
-                        component2: null,
-                        base_product: null,
-                        db_id: my_product.db_id,
-                        detailsLink: my_product.details_link,
-                        dirty: false,
-                        descriptions: my_product.descriptions,
-                        hidden: false,
-                        id: productStorage.uid++,
-                        materials: [],
-                        metatags: [],
-                        modelCode: my_product_name,
-                        names: {},
-                        productImage: my_product.product_image,
-                        properties: my_product.properties,
-                        propertyFormula: my_product.propertyFormula,
-                        updated: Date.now()
-                    })
-                })
+                var my_product_list = this.mockedProducts(my_products);
 
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
@@ -782,6 +756,17 @@ new Vue({
             })
             this.selectedMetatags = []
         },
+        indexOptionLabel: function(option){
+            console.log('index option');
+            console.log(option);
+
+            if(!option['label']) return option
+
+            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
+                return option['label']['en-GB']['value']
+            }
+            return option['label'][this.editorLanguage]['value']
+        },
         editComponents: function () {
             this.show_components_edit = true
         },
@@ -983,6 +968,43 @@ new Vue({
                     this.headline_icon = "fa fa-user-secret"
                     break
             }
+        },
+        mockedProducts: function (products_list){
+            var products = []
+
+            products_list.forEach(function (product_name) {
+                // simulate API response for testing purpose
+                product_name = product_name.trim()
+                // use fake api response from api.js
+                var random_nr = Math.round(Math.random() * (Object.keys(Api_response).length - 1))
+                if (random_nr > 0) random_nr = random_nr - 1
+                product = Api_response[random_nr]
+                products.push({
+                    active: true,
+                    cached_descriptions: product.cached_descriptions,
+                    cached_materials: product.cached_materials,
+                    cached_metatags: product.cached_metatags,
+                    cached_names: product.cached_names,
+                    component1: null,
+                    component2: null,
+                    base_product: null,
+                    db_id: product.db_id,
+                    detailsLink: product.details_link,
+                    dirty: false,
+                    descriptions: product.descriptions,
+                    hidden: false,
+                    id: productStorage.uid++,
+                    materials: [],
+                    metatags: [],
+                    modelCode: product_name,
+                    names: {},
+                    productImage: product.product_image,
+                    properties: product.properties,
+                    propertyFormula: product.propertyFormula,
+                    updated: Date.now()
+                })
+            })
+            return products
         },
         optionFactory: function (value) {
             // no spaces and all lowercase for id/value

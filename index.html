@@ -7,15 +7,14 @@
   <!-- get vue.js -->
   <script src="./assets/vue-2.2.6.js"></script>
   <!-- new select widget -->
-  <script src="https://unpkg.com/vue-multiselect@2.0.0-beta.15"></script>
+  <script src="./assets/vue-multiselect.2.0.0.js"></script>
   <script src="./assets/moment.min.js"></script>
-
   <!-- load data -->
   <script src="config/base_products.js"></script>
   <script src="config/components.js"></script>
   <script src="config/metatags.js"></script>
   <script src="config/materials.js"></script>
-
+  <script src="config/search_index.js"></script>
   <script src="config/api.js"></script>
   <!-- get css styles -->
   <link href="./assets/bootstrap-3.3.6.min.css" rel="stylesheet" type="text/css" />
@@ -89,13 +88,29 @@
       <section class="product-management load_products" @click.stop >
         <!-- Add Products -->
         <header class="header">
-          <input class="new-product"
+          <div class="margin-bottom">
+            <input class="new-product"
                  autofocus autocomplete="off"
                  placeholder="Enter products model code"
                  v-model="newProduct"
                  @keyup.enter="addProduct">
+            <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
+          </div>
 
-          <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
+          <div class="margin-bottom">
+            <multiselect
+                    label="label"
+                    tag-placeholder="Find a product by name"
+                    track-by="value"
+                    v-model="selectedProductFilterIndex"
+                    :allow-empty="true"
+                    :hide-selected="true"
+                    :multiple="true"
+                    :options="optionsProductFilterIndex"
+                    :searchable="true"
+                    :taggable="false"
+            ></multiselect>
+          </div>
 
           <div class="actionbar" v-if="hasProducts" >
             <span class="action"><i>Select:</i></span>
