@@ -71,7 +71,15 @@ function storage_helper(data){
     var response = []
     var default_value = ''
     data.forEach(function(option, index){
+        if(option && option['label'] && option['label']['en-GB'] && option['label']['en-GB']['value'])
+        {
         default_value=option['label']['en-GB']['value']
+        }
+        else{
+            //skip iteration if we dont have default value
+            return
+        }
+
 
         option['search']=default_value
         for (var language in option.label) {
