@@ -99,17 +99,31 @@
 
           <div class="margin-bottom">
             <multiselect
-                    label="label"
-                    tag-placeholder="Find a product by name"
-                    track-by="value"
                     v-model="selectedProductFilterIndex"
-                    :allow-empty="true"
-                    :hide-selected="true"
-                    :multiple="true"
+                    label="label"
+                    track-by="label"
+                    placeholder="Type to search for Product names"
                     :options="optionsProductFilterIndex"
+                    :multiple="false"
                     :searchable="true"
-                    :taggable="false"
-            ></multiselect>
+                    :loading="isLoading"
+                    :internal-search="true"
+                    :clear-on-select="true"
+                    :close-on-select="false"
+                    @select="asyncFind">
+                  <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+            </multiselect>
+          </div>
+
+          <div v-if="selectedProducts && selectedProducts.length>0" class="productFilter">
+            <h3>Results for "[[ selectedProductFilterIndex.label ]]"</h3>
+            <div class="content">
+              [[ selectedProducts ]]
+              <ul class="product-list">
+                <li>My loaded products</li>
+              </ul>
+            </div>
+
           </div>
 
           <div class="actionbar" v-if="hasProducts" >

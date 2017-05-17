@@ -73,7 +73,7 @@ function storage_helper(data){
     data.forEach(function(option, index){
         if(option && option['label'] && option['label']['en-GB'] && option['label']['en-GB']['value'])
         {
-        default_value=option['label']['en-GB']['value']
+            default_value=option['label']['en-GB']['value']
         }
         else{
             //skip iteration if we dont have default value
@@ -226,7 +226,8 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
-        selectedProductFilterIndex: [],
+        selectedProductFilterIndex:null,
+        selectedProducts:[],
 
         //search query to find products by name
         searchProducts:[],
@@ -236,6 +237,7 @@ new Vue({
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
+        isLoading:false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
         newProduct: '',
@@ -479,6 +481,24 @@ new Vue({
 
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
+            }
+        },
+        asyncFind: function(query) {
+           
+            this.isLoading = true
+
+            if (hasApi) {
+                ajax({url: api.link}).then(function (value) {
+                    console.log('promise resolved');
+                    this.isLoading = false
+                    this.searchProducts = value
+                })
+            }
+            else {
+                this.searchProducts = this.mockedProducts([query.label])
+                console.log(this.searchProducts)
+                this.isLoading = false
+
             }
         },
         clearAll: function () {
@@ -980,13 +1000,15 @@ new Vue({
         mockedProducts: function (products_list){
             var products = []
 
-            products_list.forEach(function (product_name) {
-                // simulate API response for testing purpose
-                product_name = product_name.trim()
+            products_list.forEach(function (product_name, override_name) {
                 // use fake api response from api.js
                 var random_nr = Math.round(Math.random() * (Object.keys(Api_response).length - 1))
                 if (random_nr > 0) random_nr = random_nr - 1
                 product = Api_response[random_nr]
+
+                // simulate API response for testing purpose
+                product_model = product_name.trim()
+
                 products.push({
                     active: true,
                     cached_descriptions: product.cached_descriptions,
@@ -1004,7 +1026,7 @@ new Vue({
                     id: productStorage.uid++,
                     materials: [],
                     metatags: [],
-                    modelCode: product_name,
+                    modelCode: product_model,
                     names: {},
                     productImage: product.product_image,
                     properties: product.properties,
@@ -1054,8 +1076,10 @@ new Vue({
         },
         invisibleMetatags: function () {
             var all_products = this.products
+            var all_metatags = this.metatags
             this.selectedMetatags.forEach(function (metatag) {
-                metatag.invisible = true
+
+                all_metatags[metatag.value].invisible = true
                 all_products.forEach(function (product) {
                     if (product.metatags.indexOf(metatag.value) > -1) {
                         product.dirty = true
@@ -1377,8 +1401,10 @@ new Vue({
         },
         visibleMetatags: function () {
             var all_products = this.products;
+            var all_metatags = this.metatags;
             this.selectedMetatags.forEach(function (metatag) {
                 metatag.invisible = false
+                all_metatags[metatag.value].invisible = false
                 all_products.forEach(function (product) {
                     if (product.metatags.indexOf(metatag.value) > -1) {
                         product.dirty = true

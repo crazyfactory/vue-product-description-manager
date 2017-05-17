@@ -62,13 +62,43 @@
       <section class="product-management load_products" @click.stop >
         <!-- Add Products -->
         <header class="header">
-          <input class="new-product"
-                 autofocus autocomplete="off"
-                 placeholder="Enter products model code"
-                 v-model="newProduct"
-                 @keyup.enter="addProduct">
+          <div class="margin-bottom">
+            <input class="new-product"
+                   autofocus autocomplete="off"
+                   placeholder="Enter products model code"
+                   v-model="newProduct"
+                   @keyup.enter="addProduct">
+            <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
+          </div>
 
-          <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
+          <div class="margin-bottom">
+            <multiselect
+                    v-model="selectedProductFilterIndex"
+                    label="label"
+                    track-by="label"
+                    placeholder="Type to search for Product names"
+                    :options="optionsProductFilterIndex"
+                    :multiple="false"
+                    :searchable="true"
+                    :loading="isLoading"
+                    :internal-search="true"
+                    :clear-on-select="true"
+                    :close-on-select="false"
+                    @select="asyncFind">
+              <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+            </multiselect>
+          </div>
+
+          <div v-if="selectedProducts && selectedProducts.length>0" class="productFilter">
+            <h3>Results for "[[ selectedProductFilterIndex.label ]]"</h3>
+            <div class="content">
+              [[ selectedProducts ]]
+              <ul class="product-list">
+                <li>My loaded products</li>
+              </ul>
+            </div>
+
+          </div>
 
           <div class="actionbar" v-if="hasProducts" >
             <span class="action"><i>Select:</i></span>
