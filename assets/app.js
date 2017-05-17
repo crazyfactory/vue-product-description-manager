@@ -536,12 +536,19 @@ new Vue({
 
         },
         closeEditMaterials: function () {
+            var stash = []
+
+            for (index = 0; index < this.selectedMaterials.length; ++index) {
+                stash.push( this.materials[ this.selectedMaterials[index].value ])
+            }
+
             if (hasApi) {
                 api.app = this
-                api.data = this.selectedMaterials
+                api.data = stash
                 api.action = 'update_material'
                 api.call()
             }
+            this.saveMaterials()
             this.show_materials_edit = false
         },
         closeEditMe: function (item) {
@@ -549,14 +556,19 @@ new Vue({
             item.value = item.value.replace(/\r?\n|\r/g, "")
         },
         closeEditMetatags: function () {
-            this.saveMetatags()
-            
+            var stash = []
+
+            for (index = 0; index < this.selectedMetatags.length; ++index) {
+                stash.push( this.metatags[ this.selectedMetatags[index].value ])
+            }
+
             if (hasApi) {
                 api.app = this
-                api.data = this.selectedMetatags
+                api.data = stash
                 api.action = 'update_metatag'
                 api.call()
             }
+            this.saveMetatags()
             this.show_metatags_edit = false
         },
         createBaseProductOption: function (value) {
@@ -787,9 +799,6 @@ new Vue({
             this.selectedMetatags = []
         },
         indexOptionLabel: function(option){
-            console.log('index option');
-            console.log(option);
-
             if(!option['label']) return option
 
             if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
