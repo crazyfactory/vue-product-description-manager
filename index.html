@@ -70,7 +70,7 @@
           <span class="icon_label">
             <i class="fa fa fa-eye fa-2x" aria-hidden="true" title="Set/ unset languages for the preview feature"></i>
           </span>
-        <span v-for="language in settings.supportedLanguages">
+          <span v-for="language in settings.supportedLanguages">
           <span class="language" @click="toggle_language(language)">
               <i class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
               <i class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
@@ -90,13 +90,13 @@
         <header class="header">
           <div class="margin-bottom">
             <input class="new-product"
-                 autofocus autocomplete="off"
-                 placeholder="Enter products model code"
-                 v-model="newProduct"
-                 @keyup.enter="addProduct">
+                   autofocus autocomplete="off"
+                   placeholder="Enter products model code"
+                   v-model="newProduct"
+                   @keyup.enter="addProduct">
             <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
           </div>
-
+          <!--
           <div class="margin-bottom">
             <multiselect
                     v-model="selectedProductFilterIndex"
@@ -111,7 +111,7 @@
                     :clear-on-select="true"
                     :close-on-select="false"
                     @select="asyncFind">
-                  <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+              <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
             </multiselect>
           </div>
 
@@ -125,7 +125,7 @@
             </div>
 
           </div>
-
+          -->
           <div class="actionbar" v-if="hasProducts" >
             <span class="action"><i>Select:</i></span>
             <section v-if="!hasEditableProducts">
@@ -152,16 +152,16 @@
             <section v-if="show_preview">
               <span> | </span>
               <span><i>Filter:</i></span>
-                <span title="Filter names" class="action cursor" @click="switchMe('preview_filter_name')">
+              <span title="Filter names" class="action cursor" @click="switchMe('preview_filter_name')">
                   <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_name, 'fa-circle-o': !preview_filter_name}"  aria-hidden="true"></i> Names
                 </span>
-                <span title="Filter descriptions" class="action cursor" @click="switchMe('preview_filter_description')">
+              <span title="Filter descriptions" class="action cursor" @click="switchMe('preview_filter_description')">
                   <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_description, 'fa-circle-o': !preview_filter_description}"  aria-hidden="true"></i> Descriptions
                 </span>
-                <span title="Filter materials" class="action cursor" @click="switchMe('preview_filter_material')">
+              <span title="Filter materials" class="action cursor" @click="switchMe('preview_filter_material')">
                   <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_material, 'fa-circle-o': !preview_filter_material}"  aria-hidden="true"></i> Materials
                 </span>
-                <span title="Filter metatags" class="action cursor" @click="switchMe('preview_filter_metatag')">
+              <span title="Filter metatags" class="action cursor" @click="switchMe('preview_filter_metatag')">
                   <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_metatag, 'fa-circle-o': !preview_filter_metatag}"  aria-hidden="true"></i> Metatags
                 </span>
             </section>
@@ -263,7 +263,7 @@
                             [[ metatags[metatag].label[language.id].value ]]
                           </span>
 
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
+                          <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
 
@@ -333,7 +333,7 @@
                       <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
 
-                      <span v-for="(material, index) in product.materials">
+                        <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0">/</span>
 
                         <span v-if="materials[material] && materials[material].label">[[ materials[material].label[language.id].value ]]</span>
@@ -357,8 +357,8 @@
                         <ul>
                           <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
 
-                          <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
-                                v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
+                            <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
+                                  v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                           </li>
@@ -368,7 +368,7 @@
                             <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
                             [[ metatags[metatag].label[language.id].value ]]
                           </span>
-                           <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
+                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
                               <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
                             </span>
                             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
@@ -494,7 +494,7 @@
                 </div>
               </li>
 
-              
+
             </ul>
 
           </li>
@@ -657,8 +657,8 @@
           <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
           <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
           <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
-            <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
-            <a href="#" class="export cursor" @click="debugSettings()">settings</a>
+          <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
+          <a href="#" class="export cursor" @click="debugSettings()">settings</a>
         </li>
         <li class="list-group-item">
           <h5>Messages</h5>
