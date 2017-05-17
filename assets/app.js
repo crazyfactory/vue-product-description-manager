@@ -484,7 +484,7 @@ new Vue({
             }
         },
         asyncFind: function(query) {
-           
+
             this.isLoading = true
 
             if (hasApi) {
@@ -549,6 +549,8 @@ new Vue({
             item.value = item.value.replace(/\r?\n|\r/g, "")
         },
         closeEditMetatags: function () {
+            this.saveMetatags()
+            
             if (hasApi) {
                 api.app = this
                 api.data = this.selectedMetatags
