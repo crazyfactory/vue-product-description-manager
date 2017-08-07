@@ -27,65 +27,36 @@ var AppLanguages = [
         flag: 'flag-icon-us',
     },
     {
-        id: 'es',
-        status: true,
-        flag: 'flag-icon-es',
-    },
-    {
-        id: 'fr',
-        status: true,
-        flag: 'flag-icon-fr',
-    },
-    {
-        id: 'it',
-        status: true,
-        flag: 'flag-icon-it',
-    },
-    {
         id: 'nl',
         status: true,
         flag: 'flag-icon-nl',
     },
-    {
-        id: 'pt',
-        status: true,
-        flag: 'flag-icon-pt',
-    },
-    {
-        id: 'sv',
-        status: true,
-        flag: 'flag-icon-se',
-    },
-    {
-        id: 'ru',
-        status: true,
-        flag: 'flag-icon-ru',
-    },
+
 ]
+
 /*
  * prepares our fetched data for in app use
  * sets 'en_GB' as default value
  * introduces search index
  */
-function storage_helper(data){
+function storage_helper(data) {
     var response = []
     var default_value = ''
-    data.forEach(function(option, index){
-        if(option && option['label'] && option['label']['en-GB'] && option['label']['en-GB']['value'])
-        {
-            default_value=option['label']['en-GB']['value']
+    data.forEach(function (option, index) {
+        if (option && option['label'] && option['label']['en-GB'] && option['label']['en-GB']['value']) {
+            default_value = option['label']['en-GB']['value']
         }
-        else{
+        else {
             //skip iteration if we dont have default value
             return
         }
 
 
-        option['search']=default_value
+        option['search'] = default_value
         for (var language in option.label) {
             if (option.label.hasOwnProperty(language)) {
-                if(!option.label[language]['value']){
-                    option.label[language]['value']=default_value
+                if (!option.label[language]['value']) {
+                    option.label[language]['value'] = default_value
                 }
             }
         }
@@ -143,8 +114,8 @@ var STORAGE_KEY_SETTING = 'crazy-settings'
 var settingStorage = {
     fetch: function () {
         var settings = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTING) || '{}')
-        if (typeof settings.supportedLanguages == 'undefined'){
-            settings.supportedLanguages=AppLanguages
+        if (typeof settings.supportedLanguages == 'undefined') {
+            settings.supportedLanguages = AppLanguages
         }
         return settings
     },
@@ -156,25 +127,22 @@ var settingStorage = {
 // metatags management
 var metatagStorage = {
     fetch: function () {
-        if(MetatagOptions && MetatagOptions.content)
-        {
+        if (MetatagOptions && MetatagOptions.content) {
             return storage_helper(MetatagOptions.content)
         }
-        else{
+        else {
             return []
         }
-
     },
 }
 
 // material management
 var materialStorage = {
     fetch: function () {
-        if(MaterialOptions && MaterialOptions.content)
-        {
+        if (MaterialOptions && MaterialOptions.content) {
             return storage_helper(MaterialOptions.content)
         }
-        else{
+        else {
             return []
         }
 
@@ -184,11 +152,10 @@ var materialStorage = {
 // base_product management
 var baseProductStorage = {
     fetch: function () {
-        if(BaseProductOptions && BaseProductOptions.content)
-        {
+        if (BaseProductOptions && BaseProductOptions.content) {
             return storage_helper(BaseProductOptions.content)
         }
-        else{
+        else {
             return []
         }
     }
@@ -197,12 +164,10 @@ var baseProductStorage = {
 // component management
 var componentStorage = {
     fetch: function () {
-        if(ComponentOptions && ComponentOptions.content)
-        {
+        if (ComponentOptions && ComponentOptions.content) {
             return storage_helper(ComponentOptions.content)
         }
-        else
-        {
+        else {
             return []
         }
     },
@@ -211,14 +176,15 @@ var componentStorage = {
 new Vue({
     el: '#app',
     components: {
-        Multiselect: window.VueMultiselect.default
+        Multiselect: window.VueMultiselect.default,
+        VueBootstrapTable: VueBootstrapTable
     },
     data: {
         optionsBaseProduct: baseProductStorage.fetch(),
         optionsComponent: componentStorage.fetch(),
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
-        optionsProductFilterIndex: ProductFilterIndex.content,
+
 
         // new multiselect props
         selectedBaseProduct: null,
@@ -226,18 +192,14 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
-        selectedProductFilterIndex:null,
-        selectedProducts:[],
-
-        //search query to find products by name
-        searchProducts:[],
-        searchProductsOptions:[],
+        selectedProductFilterIndex: null,
+        selectedProducts: [],
 
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
-        isLoading:false,
+        isLoading: false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
         newProduct: '',
@@ -259,6 +221,58 @@ new Vue({
         show_names: true,
         show_preview: false,
         show_settings: false,
+        show_translations: false,
+        show_translation_base_products: false,
+        show_translation_components: false,
+        show_translation_materials: false,
+        show_translation_metatags: false,
+        show_translation_descriptions: false,
+
+        sortKey: 'value',
+        reverse: false,
+        columns: [
+            {
+                title: 'Value',
+                name: 'value',
+                editable: true,
+
+            },
+            {
+                title: 'de',
+                name: "label['de']['value']",
+                renderfunction: function (colname, entry) {
+
+                    if (typeof entry.label['de'] === "undefined") {
+                        return ''
+                    }
+
+                    return entry.label['de']['value']
+                },
+            },
+            {
+                title: 'en-GB',
+                name: "label['en-GB']['value']",
+                renderfunction: function (colname, entry) {
+                    if (typeof entry.label['en-GB'] === "undefined") {
+                        return ''
+                    }
+                    return entry.label['en-GB']['value']
+                }
+
+            },
+            {
+                title: 'en-US',
+                name: "label['en-US']['value']",
+                editable: true,
+                renderfunction: function (colname, entry) {
+                    if (typeof entry.label['en-US'] === "undefined") {
+                        return ''
+                    }
+                    return entry.label['en-US']['value']
+                }
+            }
+
+        ],
 
         settings: settingStorage.fetch()
     },
@@ -291,14 +305,14 @@ new Vue({
         }
     },
     computed: {
-        baseProducts: function(){
+        baseProducts: function () {
             stash = {}
             this.optionsBaseProduct.forEach(function (item) {
                 stash[item.value] = item
             })
             return stash
         },
-        components: function(){
+        components: function () {
             stash = {}
             this.optionsComponent.forEach(function (item) {
                 stash[item.value] = item
@@ -334,7 +348,7 @@ new Vue({
             },
             get: function () {
                 if (!this.settings.supportedLanguages) {
-                    this.settings.supportedLanguages = ['en-GB','de']
+                    this.settings.supportedLanguages = AppLanguages
                 }
                 return this.settings.supportedLanguages
             }
@@ -372,7 +386,7 @@ new Vue({
         isSmallScreen: function () {
             return !this.isFullScreen
         },
-        materials: function(){
+        materials: function () {
             materials = {}
             this.optionsMaterial.forEach(function (item) {
                 materials[item.value] = item
@@ -439,7 +453,33 @@ new Vue({
             else {
                 return true
             }
+        },
+        translationsBaseProducts: function () {
+            if (BaseProductOptions && BaseProductOptions.content) {
+                var response = []
+
+                console.log(BaseProductOptions.content);
+                BaseProductOptions.content.forEach(function (option, index) {
+                    var bp = {}
+                    bp.value = option.value
+                    bp.type = 'base_product'
+
+                    for (var language in option.label) {
+                        if (option.label.hasOwnProperty(language)) {
+                            if (!option.label[language]['value']) {
+                                option.label[language]['value'] = default_value
+                            }
+                        }
+                    }
+                    response.push(option)
+                })
+                return response
+            }
+            else {
+                return []
+            }
         }
+
     },
     methods: {
         addEditorLanguage: function (value) {
@@ -483,7 +523,7 @@ new Vue({
                 this.newProduct = ''
             }
         },
-        asyncFind: function(query) {
+        asyncFind: function (query) {
 
             this.isLoading = true
 
@@ -539,7 +579,7 @@ new Vue({
             var stash = []
 
             for (index = 0; index < this.selectedMaterials.length; ++index) {
-                stash.push( this.materials[ this.selectedMaterials[index].value ])
+                stash.push(this.materials[this.selectedMaterials[index].value])
             }
 
             if (hasApi) {
@@ -559,7 +599,7 @@ new Vue({
             var stash = []
 
             for (index = 0; index < this.selectedMetatags.length; ++index) {
-                stash.push( this.metatags[ this.selectedMetatags[index].value ])
+                stash.push(this.metatags[this.selectedMetatags[index].value])
             }
 
             if (hasApi) {
@@ -574,7 +614,7 @@ new Vue({
         createBaseProductOption: function (value) {
             // create a new option for the BaseProduct Select
             var option = this.optionFactory(value)
-            this.selectedBaseProduct= option
+            this.selectedBaseProduct = option
             this.optionsBaseProduct.push(option)
 
             if (hasApi) {
@@ -587,7 +627,7 @@ new Vue({
         },
         createComponent1Option: function (value) {
             var option = this.optionFactory(value)
-            this.selectedComponent1= option
+            this.selectedComponent1 = option
             this.optionsBaseProduct.push(option)
             if (hasApi) {
                 api.app = this
@@ -599,7 +639,7 @@ new Vue({
         },
         createComponent2Option: function (value) {
             var option = this.optionFactory(value)
-            this.selectedComponent2= option
+            this.selectedComponent2 = option
             this.optionsBaseProduct.push(option)
             if (hasApi) {
                 api.app = this
@@ -612,7 +652,7 @@ new Vue({
         createMetatagOption: function (value) {
             var option = this.optionFactory(value)
             // add "invisible" property to metatag option
-            option['invisible']=false
+            option['invisible'] = false
             this.selectedMetatags.push(option)
             this.optionsMetatag.push(option)
 
@@ -638,10 +678,10 @@ new Vue({
             }
             return option
         },
-        customOptionLabel: function(option){
-            if(!option['label']) return option
+        customOptionLabel: function (option) {
+            if (!option['label']) return option
 
-            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
+            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value'] === "") {
                 return option['label']['en-GB']['value']
             }
             return option['label'][this.editorLanguage]['value']
@@ -650,6 +690,30 @@ new Vue({
             this.messages.forEach(function (message) {
                 message.show = false
             })
+        },
+        deactivateItem: function (type) {
+            console.log('Deactivate ' + type);
+            values = []
+
+            switch (type) {
+                case 'base_product':
+                    if (this.selectedBaseProduct)
+                        values.push(this.selectedBaseProduct)
+                    values.push(this.selectedComponent1)
+                    values.push(this.selectedComponent2)
+                    break
+
+                case 'material':
+                    values.push(this.selectedMaterials)
+                    break
+
+                case 'metatag':
+                    values.push(this.selectedMetatags)
+                    break;
+            }
+
+            console.log(values)
+
         },
         debugComponents: function () {
             console.log("Local (app.components_local)")
@@ -798,10 +862,10 @@ new Vue({
             })
             this.selectedMetatags = []
         },
-        indexOptionLabel: function(option){
-            if(!option['label']) return option
+        indexOptionLabel: function (option) {
+            if (!option['label']) return option
 
-            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value']==="") {
+            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value'] === "") {
                 return option['label']['en-GB']['value']
             }
             return option['label'][this.editorLanguage]['value']
@@ -960,10 +1024,11 @@ new Vue({
         },
         makeActive: function (item) {
             // deactivate all
+            this.show_translations = false
             this.show_names = false
             this.show_metatags = false
-            this.show_material = false,
-                this.show_export = false
+            this.show_material = false
+            this.show_export = false
             this.show_preview = false
             this.show_message = false
             this.show_load = true
@@ -1006,9 +1071,16 @@ new Vue({
                     this.headline = 'Admin Panel'
                     this.headline_icon = "fa fa-user-secret"
                     break
+                case 'translations':
+                    this.show_load = false
+                    this.isFullScreen = true
+                    this.show_translations = true
+                    this.headline = 'Translations'
+                    this.headline_icon = "fa fa-globe"
+                    break
             }
         },
-        mockedProducts: function (products_list){
+        mockedProducts: function (products_list) {
             var products = []
 
             products_list.forEach(function (product_name, override_name) {
@@ -1052,19 +1124,19 @@ new Vue({
             normalized_value = value.replace(/ /g, "_").toLowerCase()
 
             // prepare label structure
-            var label= {}
-            var alias= {}
+            var label = {}
+            var alias = {}
             this.settings.supportedLanguages.forEach(function (language) {
                 // create index for localization
-                label[language.id]=
+                label[language.id] =
                     {
-                        "value":value,
+                        "value": value,
                         "edit": false,
                         "active": true
                     }
-                alias[language.id]=
+                alias[language.id] =
                     {
-                        "value":"",
+                        "value": "",
                         "edit": false,
                         "active": true
                     }
@@ -1267,7 +1339,7 @@ new Vue({
                         if (product.base_product && product.base_product.label && product.base_product.label[language.id]) {
                             if (product.base_product.label[language.id] != "-") {
                                 my_name = product.base_product.label[language.id]['value']
-                                if(!my_name){
+                                if (!my_name) {
                                     //fallback if we dont have an translation yet
                                     my_name = product.base_product.label['en-GB']['value']
                                 }
@@ -1280,10 +1352,10 @@ new Vue({
                                 if (my_name.length > 0) {
                                     with_conjunction = " " + conjunction.with[language.id] + " "
                                 }
-                                my_component=product.component1.label[language.id]['value']
-                                if(!my_component){
+                                my_component = product.component1.label[language.id]['value']
+                                if (!my_component) {
                                     // fallback to en-GB
-                                    my_component= product.component1.label['en-GB']['value']
+                                    my_component = product.component1.label['en-GB']['value']
                                 }
                                 my_name = my_name + with_conjunction + my_component
                             }
@@ -1296,10 +1368,10 @@ new Vue({
                                 if (my_name.length > 0) {
                                     and_conjunction = " " + conjunction.and[language.id] + " "
                                 }
-                                my_component2=product.component2.label[language.id]['value']
-                                if(!my_component2){
+                                my_component2 = product.component2.label[language.id]['value']
+                                if (!my_component2) {
                                     // fallback to en-GB
-                                    my_component2= product.component2.label['en-GB']['value']
+                                    my_component2 = product.component2.label['en-GB']['value']
                                 }
 
                                 my_name = my_name + and_conjunction + my_component2
@@ -1334,6 +1406,12 @@ new Vue({
 
             })
         },
+        sortBy: function (sortKey) {
+            console.log(sortKey);
+            this.reverse = (this.sortKey == sortKey) ? !this.reverse : false;
+
+            this.sortKey = sortKey;
+        },
         showAllProducts: function () {
             this.products.forEach(function (product) {
                 if (product.hidden) {
@@ -1354,6 +1432,33 @@ new Vue({
         },
         toggle_settings: function () {
             this.show_settings = !this.show_settings
+        },
+        toggleTranslationVisibility: function (item) {
+            console.log(item);
+            /*
+             show_translation_base_products: false,
+             show_translation_components: false,
+             show_translation_materials: false,
+             show_translation_metatags: false,
+             show_translation_descriptions: false,
+             */
+            switch (item) {
+                case 'base_products':
+                    this.show_translation_base_products = !this.show_translation_base_products
+                    break
+                case 'components':
+                    this.show_translation_components = !this.show_translation_components
+                    break
+                case 'materials':
+                    this.show_translation_materials = !this.show_translation_materials
+                    break
+                case 'metatags':
+                    this.show_translation_metatags = !this.show_translation_metatags
+                    break
+                case 'descriptions':
+                    this.show_translation_descriptions = !this.show_translation_descriptions
+                    break
+            }
         },
         updateNameSchemes: function () {
             // update product names
@@ -1410,6 +1515,9 @@ new Vue({
             item.value = item.original_value
             item.edit = false
         },
+        renderTableCol: function (arg1, arg2) {
+            console.log('different scope baby');
+        },
         visibleMetatags: function () {
             var all_products = this.products;
             var all_metatags = this.metatags;
@@ -1432,3 +1540,4 @@ new Vue({
         },
     }
 })
+

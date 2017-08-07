@@ -1,10 +1,11 @@
-<div id="app">
+<div id="app" v-bind:class="editorLanguage">
   <div class="app-nav">
     <nav v-bind:class="headline" @click.prevent>
       <a href="#" class="name" @click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="name" @click="makeActive('material')">Material <i class="fa fa-industry fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="metatags" @click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="preview" @click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+      <a href="#" class="translations" @click="makeActive('translations')">Translations <i class="fa fa-globe fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="admin" @click="makeActive('admin')">
         &nbsp;<i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
     </nav>
@@ -57,7 +58,7 @@
   </div>
   <!-- end settings section -->
   <div class="container">
-    <h3 class="headline"><span v-bind:class="headline_icon" ></span> [[headline]]</h3>
+    <h2 class="headline"><span v-bind:class="headline_icon" ></span> [[headline]]</h2>
     <div v-if="show_load" v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
       <section class="product-management load_products" @click.stop >
         <!-- Add Products -->
@@ -70,36 +71,7 @@
                    @keyup.enter="addProduct">
             <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
           </div>
-          <!--
-          <div class="margin-bottom">
-            <multiselect
-                    v-model="selectedProductFilterIndex"
-                    label="label"
-                    track-by="label"
-                    placeholder="Type to search for Product names"
-                    :options="optionsProductFilterIndex"
-                    :multiple="false"
-                    :searchable="true"
-                    :loading="isLoading"
-                    :internal-search="true"
-                    :clear-on-select="true"
-                    :close-on-select="false"
-                    @select="asyncFind">
-              <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
-            </multiselect>
-          </div>
 
-          <div v-if="selectedProducts && selectedProducts.length>0" class="productFilter">
-            <h3>Results for "[[ selectedProductFilterIndex.label ]]"</h3>
-            <div class="content">
-              [[ selectedProducts ]]
-              <ul class="product-list">
-                <li>My loaded products</li>
-              </ul>
-            </div>
-
-          </div>
-          -->
           <div class="actionbar" v-if="hasProducts" >
             <span class="action"><i>Select:</i></span>
             <section v-if="!hasEditableProducts">
@@ -420,6 +392,9 @@
 
           <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
           <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+
+          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
+          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="deactivateItem('base_product')"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
         </div>
       </div>
 
@@ -601,22 +576,59 @@
       </div>
       <!-- End Meta Tag -->
     </div>
-    <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_export">
-      <!-- Export to DB -->
-      <h5 v-if="!hasDirtyProducts"><i>Nothing to save</i></h5>
-      <ul class="list-group">
-        <li class="list-group-item" v-if="hasDirtyProducts">
-          <h5>Products</h5>
-          <ul>
-            <li class="inline_list cursor" v-for="product in products_dirty" @click="exportProduct(product)">
-              [[product.modelCode]]
-              &nbsp;&nbsp;&nbsp;<i class="fa fa-floppy-o cursor" v-bind:title="'Save '+ product.modelCode +' to database'" aria-hidden="true" @click="exportProduct(product)"></i>
-            </li>
-
-          </ul>
-        </li>
-      </ul>
-      <!-- End Export to DB -->
+    <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translations">
+      <!-- Translation stuff -->
+      <div>
+        <h4 class="base_products">
+          <i v-if="!show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+          <i v-if="show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+          Base Products
+        </h4>
+        <p v-if="show_translation_base_products" class="translation_table base_products">
+          <vue-bootstrap-table
+                  :columns="columns"
+                  :values="optionsBaseProduct"
+                  :show-filter="true"
+                  :show-column-picker="false"
+                  :sortable="true"
+                  :paginated="false"
+                  :multi-column-sortable="true"
+                  :filter-case-sensitive="false"
+          ></vue-bootstrap-table>
+        </p>
+      </div>
+      <div>
+        <h4 class="components">
+          <i v-if="!show_translation_components" @click="toggleTranslationVisibility('components')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+          <i v-if="show_translation_components" @click="toggleTranslationVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+          Components
+        </h4>
+        <p v-if="show_translation_components" class="translation_table components"></p>
+      </div>
+      <div>
+        <h4 class="materials">
+          <i v-if="!show_translation_materials" @click="toggleTranslationVisibility('materials')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+          <i v-if="show_translation_materials" @click="toggleTranslationVisibility('materials')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+          Materials
+        </h4>
+        <p v-if="show_translation_materials" class="translation_table materials">table with all existing ressources</p>
+      </div>
+      <div>
+        <h4 class="metatags">
+          <i v-if="!show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+          <i v-if="show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+          Metatags
+        </h4>
+        <p v-if="show_translation_metatags" class="translation_table metatags">table with all existing ressources</p>
+      </div>
+      <div>
+        <h4 class="product_descriptions">
+          <i v-if="!show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+          <i v-if="show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+          Product Descriptions
+        </h4>
+        <p v-if="show_translation_descriptions" class="translation_table product_descriptions">table with all existing ressources</p>
+      </div>
     </div>
     <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
       <!-- Settings & Messages -->

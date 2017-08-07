@@ -7,9 +7,16 @@ body{
     color: #4d4d4d;
 
 }
+
+h1,h2,h3,h4,h5{
+    float:none;
+    clear: both;
+}
+
 h3{
     text-transform: uppercase;
 }
+
 /*-------------------------
 	The menu
 --------------------------*/
@@ -56,7 +63,6 @@ nav a:last-child{
 
 p{
     font-size:22px;
-    font-weight:bold;
     color:#4d4d4d;
 }
 
@@ -509,4 +515,9 @@ label.white-space{
         -webkit-appearance: none;
         appearance: none;
     }
+}
+
+#app .vue-table .arrow:after{
+    content: "";
+    font-family: sans-serif;
 }
