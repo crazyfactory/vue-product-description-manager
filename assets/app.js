@@ -180,7 +180,7 @@ new Vue({
         VueBootstrapTable: VueBootstrapTable
     },
     data: {
-        optionsBaseProduct: baseProductStorage.fetch(),
+        optionsBaseProduct: BaseProductOptions.content,
         optionsComponent: componentStorage.fetch(),
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
