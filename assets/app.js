@@ -678,6 +678,10 @@ new Vue({
             }
             return option
         },
+        customLabel: function (option) {
+            console.log(option);
+            return option[this.editorLanguage];
+        },
         customOptionLabel: function (option) {
             if (!option['label']) return option
 
