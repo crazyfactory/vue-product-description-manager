@@ -339,7 +339,7 @@
       <div class="margin-bottom" v-if="show_base_product_edit && !show_name_scheme_edit"><i class="indent">Please select at least one base_product or component to edit ...</i></div>
       <div class="margin-bottom">
         <multiselect
-                label="de"
+                label="value"
                 track-by="id"
                 v-model="selectedBaseProduct"
                 :allow-empty="false"
@@ -347,6 +347,7 @@
                 :multiple="false"
                 :options="optionsBaseProduct"
                 :searchable="true"
+                :custom-label="customLabel"
         ></multiselect>
       </div>
       <div class="margin-bottom">
