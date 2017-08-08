@@ -200,7 +200,7 @@ new Vue({
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
         isLoading: false,
-        languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
+        languages_autodescription: ['de', 'en-GB', 'en-US', 'nl'],
         messages: messageStorage.fetch(),
         newProduct: '',
         // Preview filter
@@ -334,7 +334,7 @@ new Vue({
 
             },
             get: function () {
-                // default fallback = 'de'
+
                 if (!this.settings.editorLanguage) {
                     this.settings.editorLanguage = 'en-GB'
                 }
@@ -679,7 +679,6 @@ new Vue({
             return option
         },
         customLabel: function (option) {
-            console.log(option);
             return option[this.editorLanguage];
         },
         customOptionLabel: function (option) {
@@ -753,80 +752,6 @@ new Vue({
         debugSettings: function () {
             console.log(this.settings)
         },
-        deleteBaseProductsComponents: function () {
-            var selectedBaseProduct = this.selectedBaseProduct
-            var selected_components = []
-            if (this.selected_component_1) {
-                selected_components.push(this.selected_component_1)
-            }
-            if (this.selected_component_2 && this.selected_component_2 != this.selected_component_1) {
-                selected_components.push(this.selected_component_2)
-            }
-            var all_base_products = this.base_products_local
-            var all_components = this.components_local
-            var all_products = this.products
-            var languages = this.settings.supportedLanguages
-            var conjunction = this.conjunction
-
-            all_products.forEach(function (product) {
-                var changed = false
-                if (product.base_product && selectedBaseProduct && product.base_product.value == selectedBaseProduct.value) {
-                    product.base_product = null
-                    changed = true
-                }
-
-                selected_components.forEach(function (component) {
-                    if (product.component1 && product.component1.value == component.value) {
-                        product.component1 = null
-                        changed = true
-                    }
-                    if (product.component2 && product.component2.value == component.value) {
-                        product.component2 = null
-                        changed = true
-                    }
-                })
-                if (changed) {
-                    // generate composed product name for each language
-                    product_names = {}
-
-                    languages.forEach(function (language) {
-                        var my_name = ''
-
-                        if (product.base_product && product.base_product.label[language.id]) {
-                            my_name = product.base_product.label[language.id].value
-                        }
-                        if (product.component1 && product.component1.label[language.id]) {
-                            my_name = my_name + " " + conjunction.with[language.id] + " " + product.component1.label[language.id].value
-                        }
-                        if (product.component2 && product.component2.label[language.id]) {
-                            my_name = my_name + " " + conjunction.and[language.id] + " " + product.component2.label[language.id].value
-                        }
-                        product_names[language.id] = {
-                            edit: false,
-                            dirty: true,
-                            original_value: my_name,
-                            value: my_name
-                        }
-                    })
-                    product.names = product_names
-                    product.dirty = true
-                }
-            })
-
-            // remove base products & components dropdown
-            if (all_base_products.indexOf(selectedBaseProduct) > -1) {
-                all_base_products.splice(all_base_products.indexOf(selectedBaseProduct), 1)
-            }
-            selected_components.forEach(function (component) {
-                if (all_components.indexOf(component) > -1) {
-                    all_components.splice(all_components.indexOf(component), 1)
-                }
-            })
-            // unset selected base_product/ component_1, component_2
-            this.selectedBaseProduct = null
-            this.selected_component_1 = null
-            this.selected_component_2 = null
-        },
         deleteMaterials: function () {
             var selectedMaterials = this.selectedMaterials
             var all_products = this.products
@@ -876,9 +801,6 @@ new Vue({
         },
         editComponents: function () {
             this.show_components_edit = true
-        },
-        editBaseProducts: function () {
-            this.show_base_product_edit = true
         },
         editMaterials: function () {
             this.show_materials_edit = true
@@ -1438,14 +1360,7 @@ new Vue({
             this.show_settings = !this.show_settings
         },
         toggleTranslationVisibility: function (item) {
-            console.log(item);
-            /*
-             show_translation_base_products: false,
-             show_translation_components: false,
-             show_translation_materials: false,
-             show_translation_metatags: false,
-             show_translation_descriptions: false,
-             */
+
             switch (item) {
                 case 'base_products':
                     this.show_translation_base_products = !this.show_translation_base_products
