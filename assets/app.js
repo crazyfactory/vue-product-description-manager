@@ -186,7 +186,6 @@ new Vue({
         show_actionbar: false,
         show_export: false,
         show_load: true,
-        show_base_product_edit: false,
         show_material: false,
         show_materials_edit: false,
         show_metatags: false,
@@ -446,15 +445,6 @@ new Vue({
             })
             return products
         },
-        show_name_scheme_edit: function () {
-            if (!this.selectedBaseProduct && !this.selectedComponent1 && !this.selectedComponent2) {
-                // no base_product or component is selected
-                return false
-            }
-            else {
-                return true
-            }
-        },
         translationsBaseProducts: function () {
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
@@ -558,23 +548,6 @@ new Vue({
             this.selectedComponent2 = null
             this.selectedMaterials = []
             this.selectedMetatags = []
-        },
-        closeEditComponents: function () {
-            this.show_components_edit = false
-        },
-        closeEditBaseProducts: function () {
-            this.show_base_product_edit = false
-            if (hasApi) {
-                data = {}
-                data.base_product = this.selectedBaseProduct
-                data.component = [this.selectedComponent1, this.selectedComponent2]
-                api.app = this
-                api.data = data
-                api.action = 'update_base_product_component'
-                api.call()
-            }
-            this.updateNameSchemes()
-
         },
         closeEditMaterials: function () {
             var stash = []

@@ -112,6 +112,7 @@
                 </span>
             </section>
           </div>
+          </div>
         </header>
         <!-- End add products -->
         <section class="main" v-show="products.length" v-cloak>
@@ -378,63 +379,10 @@
         ></multiselect>
       </div>
       <div class="row">
-        <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
+        <div class="actions">
           <button v-if="!((selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
           <button v-if="(selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
         </div>
-      </div>
-
-      <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
-        <!-- Edit BaseProduct/ Components -->
-        <h5 class="indent">Edit Base Product & Components  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditBaseProducts()"></i></h5>
-        <ul class="indent metatag-list" v-if="selectedBaseProduct || selectedComponent1 || selectedComponent2">
-          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-            <ul>
-              <!-- edit BaseProduct -->
-              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-              <li class="list-group-item" v-if="selectedBaseProduct && selectedBaseProduct.label">
-                  <span v-if="!selectedBaseProduct.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(selectedBaseProduct.label[language.id])">[[ baseProducts[selectedBaseProduct.value].label[language.id].value ]]</span>
-                    <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(selectedBaseProduct.label[language.id])"></i>
-                  </span>
-                <div v-if="selectedBaseProduct.label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="selectedBaseProduct.label[language.id].edit" @click="closeEditMe(selectedBaseProduct.label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="selectedBaseProduct.label[language.id].value" @keyup.enter="closeEditMe(selectedBaseProduct.label[language.id])">
-                </div>
-              </li>
-              <!-- edit Component1 -->
-
-              <li class="list-group-item" v-if="selectedComponent1">
-                <span v-if="!selectedComponent1.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent1.value].label[language.id])">[[ components[selectedComponent1.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent1.value].label[language.id])"></i>
-                </span>
-                <div v-if="components[selectedComponent1.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent1.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent1.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent1.value].label[language.id])">
-                </div>
-              </li>
-              <li class="list-group-item" v-if="selectedComponent2">
-                <span v-if="!selectedComponent2.label[language.id].edit">
-
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent2.value].label[language.id])">[[ components[selectedComponent2.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent2.value].label[language.id])"></i>
-                </span>
-                <div v-if="components[selectedComponent2.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent2.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent2.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent2.value].label[language.id])">
-                </div>
-              </li>
-
-
-            </ul>
-
-          </li>
-        </ul>
-        <!-- End edit BaseProduct/ Components -->
       </div>
     </div>
     <!-- End Product Names  -->
