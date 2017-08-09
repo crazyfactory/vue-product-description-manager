@@ -149,30 +149,6 @@ var materialStorage = {
     },
 }
 
-// base_product management
-var baseProductStorage = {
-    fetch: function () {
-        if (BaseProductOptions && BaseProductOptions.content) {
-            return storage_helper(BaseProductOptions.content)
-        }
-        else {
-            return []
-        }
-    }
-}
-
-// component management
-var componentStorage = {
-    fetch: function () {
-        if (ComponentOptions && ComponentOptions.content) {
-            return storage_helper(ComponentOptions.content)
-        }
-        else {
-            return []
-        }
-    },
-}
-
 new Vue({
     el: '#app',
     components: {
@@ -181,7 +157,7 @@ new Vue({
     },
     data: {
         optionsBaseProduct: BaseProductOptions.content,
-        optionsComponent: componentStorage.fetch(),
+        optionsComponent:   ComponentOptions.content,
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
 

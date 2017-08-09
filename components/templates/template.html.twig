@@ -339,58 +339,49 @@
       <div class="margin-bottom" v-if="show_base_product_edit && !show_name_scheme_edit"><i class="indent">Please select at least one base_product or component to edit ...</i></div>
       <div class="margin-bottom">
         <multiselect
-                label="value"
+                label="en-GB"
                 track-by="id"
                 v-model="selectedBaseProduct"
                 :allow-empty="false"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsBaseProduct"
                 :searchable="true"
-                :custom-label="customLabel"
+
         ></multiselect>
       </div>
       <div class="margin-bottom">
         <multiselect
-                label="search"
-                tag-placeholder="Add this as a new Component"
-                track-by="value"
+                label="en-GB"
+                track-by="id"
                 v-model="selectedComponent1"
                 :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsComponent"
                 :searchable="true"
-                :taggable="true"
-                @tag="createComponent1Option"
         ></multiselect>
       </div>
       <div class="margin-bottom">
         <multiselect
-                label="search"
-                tag-placeholder="Add this as a new Component"
-                track-by="value"
+                label="en-GB"
+                track-by="id"
                 v-model="selectedComponent2"
                 :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsComponent"
                 :searchable="true"
-                :taggable="true"
-                @tag="createComponent2Option"
         ></multiselect>
       </div>
       <div class="row">
         <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
-          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-
-          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-
-         </div>
+          <button v-if="!((selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
+          <button v-if="(selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
+        </div>
       </div>
 
       <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
