@@ -156,8 +156,6 @@ new Vue({
         VueBootstrapTable: VueBootstrapTable
     },
     data: {
-        optionsBaseProduct: BaseProductOptions.content,
-        optionsComponent:   ComponentOptions.content,
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
 
@@ -281,8 +279,35 @@ new Vue({
         }
     },
     computed: {
+        optionsBaseProduct: function (){
+            stash = []
+            currentLanguage = this.editorLanguage
+
+            BaseProductOptions.content.forEach(function (item) {
+                search = item[currentLanguage]
+                if (item.is_active==1){
+                    item['search']=search
+                    stash.push(item)
+                }
+            })
+            return stash
+        },
+        optionsComponent: function (){
+            stash = []
+            currentLanguage = this.editorLanguage
+
+            ComponentOptions.content.forEach(function (item) {
+                search = item[currentLanguage]
+                if (item.is_active==1){
+                    item['search']=search
+                    stash.push(item)
+                }
+            })
+            return stash
+        },
         baseProducts: function () {
             stash = {}
+
             this.optionsBaseProduct.forEach(function (item) {
                 stash[item.value] = item
             })
