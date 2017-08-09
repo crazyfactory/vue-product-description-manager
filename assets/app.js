@@ -279,8 +279,8 @@ new Vue({
     },
     computed: {
         optionsBaseProduct: function (){
-            stash = []
             currentLanguage = this.editorLanguage
+            stash = []
 
             BaseProductOptions.content.forEach(function (item) {
                 search = item[currentLanguage]
@@ -512,24 +512,6 @@ new Vue({
 
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
-            }
-        },
-        asyncFind: function (query) {
-
-            this.isLoading = true
-
-            if (hasApi) {
-                ajax({url: api.link}).then(function (value) {
-                    console.log('promise resolved');
-                    this.isLoading = false
-                    this.searchProducts = value
-                })
-            }
-            else {
-                this.searchProducts = this.mockedProducts([query.label])
-                console.log(this.searchProducts)
-                this.isLoading = false
-
             }
         },
         clearAll: function () {
@@ -1198,7 +1180,7 @@ new Vue({
                 if (product.active) {
                     if (typeof base_product == 'object' && base_product != null) {
 
-                        if (base_product.value === "-") {
+                        if (base_product.name === "-") {
                             product.base_product = null
                             clear_base_product = true
                         }
@@ -1210,7 +1192,7 @@ new Vue({
                     }
 
                     if (typeof attr1 == 'object' && attr1 != null) {
-                        if (attr1.value === '-') {
+                        if (attr1.name === '-') {
                             product.component1 = null
                             clear_attr1 = true
                         }
@@ -1236,42 +1218,42 @@ new Vue({
                     languages.forEach(function (language) {
                         var my_name = ''
 
-                        if (product.base_product && product.base_product.label && product.base_product.label[language.id]) {
-                            if (product.base_product.label[language.id] != "-") {
-                                my_name = product.base_product.label[language.id]['value']
+                        if (product.base_product && product.base_product[language.id]) {
+                            if (product.base_product.name != "-") {
+                                my_name = product.base_product[language.id]
                                 if (!my_name) {
                                     //fallback if we dont have an translation yet
-                                    my_name = product.base_product.label['en-GB']['value']
+                                    my_name = product.base_product['en-GB']
                                 }
                             }
                             product.dirty = true
                         }
-                        if (product.component1 && product.component1.label && product.component1.label[language.id]) {
-                            if (product.component1.label[language.id] != "-") {
+                        if (product.component1 && product.component1[language.id]) {
+                            if (product.component1.name != "-") {
                                 var with_conjunction = ''
                                 if (my_name.length > 0) {
                                     with_conjunction = " " + conjunction.with[language.id] + " "
                                 }
-                                my_component = product.component1.label[language.id]['value']
+                                my_component = product.component1[language.id]
                                 if (!my_component) {
                                     // fallback to en-GB
-                                    my_component = product.component1.label['en-GB']['value']
+                                    my_component = product.component1['en-GB']
                                 }
                                 my_name = my_name + with_conjunction + my_component
                             }
                             product.dirty = true
 
                         }
-                        if (product.component2 && product.component2.label && product.component2.label[language.id]) {
-                            if (product.component2.label[language.id] != "-") {
+                        if (product.component2 && product.component2[language.id]) {
+                            if (product.component2.name != "-") {
                                 var and_conjunction = ''
                                 if (my_name.length > 0) {
                                     and_conjunction = " " + conjunction.and[language.id] + " "
                                 }
-                                my_component2 = product.component2.label[language.id]['value']
+                                my_component2 = product.component2[language.id]
                                 if (!my_component2) {
                                     // fallback to en-GB
-                                    my_component2 = product.component2.label['en-GB']['value']
+                                    my_component2 = product.component2['en-GB']
                                 }
 
                                 my_name = my_name + and_conjunction + my_component2
