@@ -331,10 +331,10 @@ new Vue({
         editorLanguage: {
             set: function (language) {
                 this.settings.editorLanguage = language
+                settingStorage.save(this.settings)
 
             },
             get: function () {
-
                 if (!this.settings.editorLanguage) {
                     this.settings.editorLanguage = 'en-GB'
                 }
@@ -483,7 +483,7 @@ new Vue({
     },
     methods: {
         addEditorLanguage: function (value) {
-            this.settings.editorLanguage = value
+            this.editorLanguage = value
         },
         addMessage: function (message, type) {
             var today = moment().format('lll')
@@ -1459,4 +1459,3 @@ new Vue({
         },
     }
 })
-
