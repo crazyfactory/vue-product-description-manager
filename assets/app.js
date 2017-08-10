@@ -152,8 +152,7 @@ var materialStorage = {
 new Vue({
     el: '#app',
     components: {
-        Multiselect: window.VueMultiselect.default,
-        VueBootstrapTable: VueBootstrapTable
+        Multiselect: window.VueMultiselect.default
     },
     data: {
         optionsMaterial: materialStorage.fetch(),
