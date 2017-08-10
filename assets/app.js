@@ -157,8 +157,6 @@ new Vue({
     data: {
         optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
-
-
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -266,12 +264,6 @@ new Vue({
         products: {
             handler: function (products) {
                 productStorage.save(products)
-            },
-            deep: true
-        },
-        settings: {
-            handler: function (settings) {
-                settingStorage.save(settings)
             },
             deep: true
         }
@@ -512,9 +504,6 @@ new Vue({
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
             }
-        },
-        clearAll: function () {
-            console.log('please re-implement')
         },
         clearSettings: function () {
             console.log('BEFORE')
@@ -1172,7 +1161,6 @@ new Vue({
             var clear_attr1 = false
             var clear_attr2 = false
             var conjunction = this.conjunction
-
             var languages = this.settings.supportedLanguages
 
             this.products.forEach(function (product) {
@@ -1269,10 +1257,6 @@ new Vue({
                     product.names = product_names
                 }
             })
-
-            this.selectedBaseProduct = null
-            this.selectedComponent1 = null
-            this.selectedComponent2 = null
 
         },
         selectAllProducts: function (value) {

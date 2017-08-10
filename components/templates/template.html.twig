@@ -146,7 +146,7 @@
                             v-if="product.names[language.id] && !(product.cached_names && product.cached_names[language.id].value==product.names[language.id].value)">
                         [[product.names[language.id].original_value ]]
                       </span>
-                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="product.detailsLink +'&lang='+language.id" title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
+                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                       </a>
                       <div class="customized_name"
@@ -346,7 +346,9 @@
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsBaseProduct"
+                :reset-after="true"
                 :searchable="true"
+                @input="saveNameScheme"
 
         ></multiselect>
       </div>
@@ -360,7 +362,9 @@
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsComponent"
+                :reset-after="true"
                 :searchable="true"
+                @input="saveNameScheme"
         ></multiselect>
       </div>
       <div class="margin-bottom">
@@ -374,13 +378,9 @@
                 :multiple="false"
                 :options="optionsComponent"
                 :searchable="true"
+                :reset-after="true"
+                @input="saveNameScheme"
         ></multiselect>
-      </div>
-      <div class="row">
-        <div class="actions">
-          <button v-if="!((selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="(selectedBaseProduct)|| (selectedComponent1) || (selectedComponent2)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-        </div>
       </div>
     </div>
     <!-- End Product Names  -->
