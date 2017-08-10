@@ -155,7 +155,6 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        optionsMaterial: materialStorage.fetch(),
         optionsMetatag: metatagStorage.fetch(),
         // new multiselect props
         selectedBaseProduct: null,
@@ -287,6 +286,19 @@ new Vue({
             currentLanguage = this.editorLanguage
 
             ComponentOptions.content.forEach(function (item) {
+                search = item[currentLanguage]
+                if (item.is_active==1){
+                    item['search']=search
+                    stash.push(item)
+                }
+            })
+            return stash
+        },
+        optionsMaterial: function (){
+            stash = []
+            currentLanguage = this.editorLanguage
+
+            MaterialOptions.content.forEach(function (item) {
                 search = item[currentLanguage]
                 if (item.is_active==1){
                     item['search']=search
@@ -555,44 +567,6 @@ new Vue({
             this.saveMetatags()
             this.show_metatags_edit = false
         },
-        createBaseProductOption: function (value) {
-            // create a new option for the BaseProduct Select
-            var option = this.optionFactory(value)
-            this.selectedBaseProduct = option
-            this.optionsBaseProduct.push(option)
-
-            if (hasApi) {
-                api.app = this
-                api.data = option
-                api.action = 'create_base_product'
-                api.call()
-            }
-            return option
-        },
-        createComponent1Option: function (value) {
-            var option = this.optionFactory(value)
-            this.selectedComponent1 = option
-            this.optionsBaseProduct.push(option)
-            if (hasApi) {
-                api.app = this
-                api.data = option
-                api.action = 'create_component'
-                api.call()
-            }
-            return option
-        },
-        createComponent2Option: function (value) {
-            var option = this.optionFactory(value)
-            this.selectedComponent2 = option
-            this.optionsBaseProduct.push(option)
-            if (hasApi) {
-                api.app = this
-                api.data = option
-                api.action = 'create_component'
-                api.call()
-            }
-            return option
-        },
         createMetatagOption: function (value) {
             var option = this.optionFactory(value)
             // add "invisible" property to metatag option
@@ -607,19 +581,6 @@ new Vue({
                 api.call()
             }
 
-            return option
-        },
-        createMaterialOption: function (value) {
-            var option = this.optionFactory(value)
-            this.selectedMaterials.push(option)
-            this.optionsMaterial.push(option)
-
-            if (hasApi) {
-                api.app = this
-                api.data = option
-                api.action = 'create_material'
-                api.call()
-            }
             return option
         },
         customLabel: function (option) {

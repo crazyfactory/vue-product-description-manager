@@ -389,17 +389,15 @@
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new Material"
-                track-by="value"
+                track-by="id"
                 v-model="selectedMaterials"
                 :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="true"
                 :options="optionsMaterial"
                 :searchable="true"
-                :taggable="true"
-                @tag="createMaterialOption"
+                @input="saveMaterials"
         ></multiselect>
       </div>
       <div class="row">
