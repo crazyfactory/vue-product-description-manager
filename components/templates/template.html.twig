@@ -91,8 +91,8 @@
               <span title="Nothing to HIDE" class="action"><i style="color:#ccc;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
             </section>
             <section v-if="hasEditableProducts">
-              <span title="DELETE all selected products" class="action cursor" @click="removeSeletedProducts()"><i style="color:darkred;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
-              <span title="HIDE all selected products" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
+              <span title="Discard changes and remove from view" class="action cursor" @click="removeSeletedProducts()"><i style="color:darkred;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
+              <span title="HIDE selected products from view" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
             </section>
             <span v-if="hasHiddenProducts" title="SHOW all hidden products" class="action cursor" @click="showAllProducts()"><i style="color:darkgreen;" class="fa fa-eye" aria-hidden="true"></i></span>
             <section v-if="show_preview">
@@ -174,9 +174,9 @@
                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                       <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
                       <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0 && materials[material]">/</span>
-                        <span v-if="materials[material] && materials[material]['label'][language.id]!== undefined">
-                         [[ materials[material]['label'][language.id]['value'] ]]
+                        <span v-if="index > 0 && material">/</span>
+                        <span v-if="material[language.id] && material[language.id]!== undefined">
+                         [[ material[language.id] ]]
                         </span>
                       </span>
                       <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
@@ -399,40 +399,6 @@
                 :searchable="true"
                 @input="saveMaterials"
         ></multiselect>
-      </div>
-      <div class="row">
-        <div class="actions" v-if="!show_materials_edit">
-          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-          <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-        </div>
-      </div>
-      <div class="row" v-if="show_materials_edit">
-        <!-- Edit Materials -->
-        <i class="indent" v-if="!selectedMaterials.length > 0">Please select Materials to edit ...</i>
-        <h5 class="indent" v-if="selectedMaterials.length > 0">Edit Materials  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMaterials()"></i></h5>
-        <ul class="indent metatag-list" v-if="selectedMaterials.length > 0">
-          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-            <ul>
-              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-              <li class="list-group-item" v-for="material in selectedMaterials">
-                  <span v-if="!materials[material.value].label[language.id].edit">
-                    <i class="fa fa-industry fa-pull-left"></i>
-                    [[ materials[material.value].label[language.id].value ]]
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
-                  </span>
-
-                <div v-if="materials[material.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
-                  <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
-                </div>
-
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <!-- End edit materials -->
       </div>
       <!-- End Product Materials -->
     </div>
