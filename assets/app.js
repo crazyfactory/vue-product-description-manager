@@ -531,22 +531,7 @@ new Vue({
             this.selectedMaterials = []
             this.selectedMetatags = []
         },
-        closeEditMaterials: function () {
-            var stash = []
 
-            for (index = 0; index < this.selectedMaterials.length; ++index) {
-                stash.push(this.materials[this.selectedMaterials[index].value])
-            }
-
-            if (hasApi) {
-                api.app = this
-                api.data = stash
-                api.action = 'update_material'
-                api.call()
-            }
-            this.saveMaterials()
-            this.show_materials_edit = false
-        },
         closeEditMe: function (item) {
             item.edit = false
             item.value = item.value.replace(/\r?\n|\r/g, "")
@@ -1048,24 +1033,25 @@ new Vue({
         saveMaterials: function () {
             var selectedMaterials = this.selectedMaterials
             var clear_materials = false
-            materialsGlobal = this.materials
+
             // set materials to all selected products
             this.products.forEach(function (product) {
                 if (product.active) {
+
                     selectedMaterials.forEach(function (item) {
                         var unique = true
-                        material_value = item.value
+                        material_value = item.name
                         if (material_value === "-") {
                             clear_materials = true
                         }
                         if (!clear_materials) {
                             product.materials.forEach(function (product_value) {
-                                if (material_value === product_value) {
+                                if (material_value === product_value.name) {
                                     unique = false
                                 }
                             })
                             if (unique) {
-                                product.materials.push(material_value)
+                                product.materials.push(item)
                                 // mark product as dirty
                                 product.dirty = true
                             }
