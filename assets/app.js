@@ -155,7 +155,6 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        optionsMetatag: metatagStorage.fetch(),
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -180,14 +179,12 @@ new Vue({
         preview_filter_name: true,
         products: productStorage.fetch(),
         remove_mode_material: false,
-        remove_mode_metatg: false,
+        remove_mode_metatag: false,
         show_actionbar: false,
         show_export: false,
         show_load: true,
         show_material: false,
-        show_materials_edit: false,
         show_metatags: false,
-        show_metatags_edit: false,
         show_message: false,
         show_names: true,
         show_preview: false,
@@ -301,6 +298,19 @@ new Vue({
             currentLanguage = this.editorLanguage
 
             MaterialOptions.content.forEach(function (item) {
+                search = item[currentLanguage]
+                if (item.is_active==1){
+                    item['search']=search
+                    stash.push(item)
+                }
+            })
+            return stash
+        },
+        optionsMetatag: function (){
+            stash = []
+            currentLanguage = this.editorLanguage
+
+            MetatagOptions.content.forEach(function (item) {
                 search = item[currentLanguage]
                 if (item.is_active==1){
                     item['search']=search
@@ -538,38 +548,6 @@ new Vue({
             item.edit = false
             item.value = item.value.replace(/\r?\n|\r/g, "")
         },
-        closeEditMetatags: function () {
-            var stash = []
-
-            for (index = 0; index < this.selectedMetatags.length; ++index) {
-                stash.push(this.metatags[this.selectedMetatags[index].value])
-            }
-
-            if (hasApi) {
-                api.app = this
-                api.data = stash
-                api.action = 'update_metatag'
-                api.call()
-            }
-            this.saveMetatags()
-            this.show_metatags_edit = false
-        },
-        createMetatagOption: function (value) {
-            var option = this.optionFactory(value)
-            // add "invisible" property to metatag option
-            option['invisible'] = false
-            this.selectedMetatags.push(option)
-            this.optionsMetatag.push(option)
-
-            if (hasApi) {
-                api.app = this
-                api.data = option
-                api.action = 'create_metatag'
-                api.call()
-            }
-
-            return option
-        },
         customLabel: function (option) {
             return option[this.editorLanguage];
         },
@@ -644,45 +622,6 @@ new Vue({
         debugSettings: function () {
             console.log(this.settings)
         },
-        deleteMaterials: function () {
-            var selectedMaterials = this.selectedMaterials
-            var all_products = this.products
-            var all_materials = this.materials_local
-
-            selectedMaterials.forEach(function (item) {
-                // remove item from all products
-                all_products.forEach(function (product) {
-                    if (product.materials.indexOf(item.value) > -1) {
-                        product.materials.splice(product.materials.indexOf(item.value), 1)
-                        product.dirty = true
-                    }
-                })
-                // remove from dropdown
-                if (all_materials.indexOf(item) > -1) {
-                    all_materials.splice(all_materials.indexOf(item), 1)
-                }
-            })
-            this.selectedMaterials = []
-        },
-        deleteMetatags: function () {
-            var selectedMetatags = this.selectedMetatags
-            var all_products = this.products
-            var all_metatags = this.metatags_local
-
-            selectedMetatags.forEach(function (metatag) {
-                // remove metatag from all products
-                all_products.forEach(function (product) {
-                    if (product.metatags.indexOf(metatag.value) > -1) {
-                        product.metatags.splice(product.metatags.indexOf(metatag.value), 1)
-                    }
-                })
-                // remove from dropdown
-                if (all_metatags.indexOf(metatag) > -1) {
-                    all_metatags.splice(all_metatags.indexOf(metatag), 1)
-                }
-            })
-            this.selectedMetatags = []
-        },
         indexOptionLabel: function (option) {
             if (!option['label']) return option
 
@@ -691,21 +630,13 @@ new Vue({
             }
             return option['label'][this.editorLanguage]['value']
         },
-        editComponents: function () {
-            this.show_components_edit = true
-        },
-        editMaterials: function () {
-            this.show_materials_edit = true
-        },
         editMe: function (item, item_parent) {
             item.edit = true
             if (item_parent) {
                 item_parent.dirty = true
             }
         },
-        editMetatags: function () {
-            this.show_metatags_edit = true
-        },
+
         exportAllProducts: function () {
             dirtyProducts = this.dirtyProducts
 
@@ -738,10 +669,10 @@ new Vue({
                     export_languages.push(language.id)
                     localized_materials[language.id] = []
                     localized_metatags[language.id] = []
+
                     for (var i = 0; i < product.materials.length; i++) {
-                        if (dict_materials[product.materials[i]] && dict_materials[product.materials[i]].label[language.id]) {
-                            localized_materials[language.id].push(dict_materials[product.materials[i]].label[language.id].value)
-                        }
+                        localized_materials[language.id].push(product.materials[i][language.id])
+
                     }
                     for (var i = 0; i < product.metatags.length; i++) {
                         if (dict_metatags[product.metatags[i]]) {
@@ -1078,24 +1009,33 @@ new Vue({
         saveMetatags: function () {
             var selectedMetatags = this.selectedMetatags
             var clear_metatags = false
+            var remove_metatag = this.remove_mode_metatag
+
             // set metatags to all selected products
             this.products.forEach(function (product) {
                 if (product.active) {
                     selectedMetatags.forEach(function (metatag) {
                         var unique = true
-                        meta_value = metatag.value
+                        meta_value = metatag.name
                         if (meta_value === "-") {
                             clear_metatags = true
                         }
-                        if (!clear_metatags) {
+                        if (!clear_metatags && !remove_metatag) {
                             product.metatags.forEach(function (product_meta_value) {
                                 if (meta_value === product_meta_value) {
                                     unique = false
                                 }
                             })
                             if (unique) {
-                                product.metatags.push(meta_value)
+                                product.metatags.push(metatag)
                                 // mark product as dirty
+                                product.dirty = true
+                            }
+                        }
+                        if(remove_metatag){
+                            var index = product.metatags.findIndex(i => i.name === item.name)
+                            if (index > -1) {
+                                product.metatags.splice(index, 1)
                                 product.dirty = true
                             }
                         }
@@ -1251,6 +1191,9 @@ new Vue({
         },
         switchRemoveMaterial: function(){
             this.remove_mode_material = !this.remove_mode_material
+        },
+        switchRemoveMetatag: function(){
+            this.remove_mode_metatag = !this.remove_mode_metatag
         },
         toggle_language: function (language) {
             language.status = !language.status
