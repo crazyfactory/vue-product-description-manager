@@ -179,6 +179,8 @@ new Vue({
         preview_filter_metatag: true,
         preview_filter_name: true,
         products: productStorage.fetch(),
+        remove_mode_material: false,
+        remove_mode_metatg: false,
         show_actionbar: false,
         show_export: false,
         show_load: true,
@@ -1033,6 +1035,7 @@ new Vue({
         saveMaterials: function () {
             var selectedMaterials = this.selectedMaterials
             var clear_materials = false
+            var remove_material = this.remove_mode_material
 
             // set materials to all selected products
             this.products.forEach(function (product) {
@@ -1044,7 +1047,7 @@ new Vue({
                         if (material_value === "-") {
                             clear_materials = true
                         }
-                        if (!clear_materials) {
+                        if (!clear_materials && !remove_material) {
                             product.materials.forEach(function (product_value) {
                                 if (material_value === product_value.name) {
                                     unique = false
@@ -1054,6 +1057,12 @@ new Vue({
                                 product.materials.push(item)
                                 // mark product as dirty
                                 product.dirty = true
+                            }
+                        }
+                        if(remove_material){
+                            var index = product.materials.findIndex(i => i.name === item.name)
+                            if (index > -1) {
+                                product.materials.splice(index, 1)
                             }
                         }
                     })
@@ -1238,6 +1247,9 @@ new Vue({
         },
         switchMe: function (name) {
             this[name] = !this[name]
+        },
+        switchRemoveMaterial: function(){
+            this.remove_mode_material = !this.remove_mode_material
         },
         toggle_language: function (language) {
             language.status = !language.status

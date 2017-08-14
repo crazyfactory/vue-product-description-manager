@@ -399,6 +399,21 @@
                 :searchable="true"
                 @input="saveMaterials"
         ></multiselect>
+        <div class="switch active" v-if="remove_mode_material" @click="switchRemoveMaterial">
+          <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
+        </div>
+        <div class="switch" v-if="!remove_mode_material" @click="switchRemoveMaterial">
+          <i class="fa fa-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
+        </div>
+        <div class="info-box">
+          <h5><i class="fa fa-info" aria-hidden="true"></i> &nbsp; Info</h5>
+          <ul>
+            <li>Select one material from the dropdown to add it to all active products</li>
+            <li>Select <b>-</b> to remove all materials from the active products</li>
+            <li>Click "Remove selected" to remove single materials</li>
+          </ul>
+        </div>
+
       </div>
       <!-- End Product Materials -->
     </div>

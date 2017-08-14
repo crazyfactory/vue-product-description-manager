@@ -346,6 +346,29 @@ html .clear-completed:active {
 .info a:hover {
     text-decoration: underline;
 }
+
+.info-box {
+    margin: 20px auto 0;
+    color: #888;
+
+}
+
+.info-box ul{
+    list-style-type: square;
+    list-style-position: inside;
+}
+.switch {
+    margin: 30px auto 0;
+}
+
+.switch b{
+    color:darkred;
+}
+
+.switch.active b{
+    color:darkgreen;
+}
+
 input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus{
     outline: none;
 }
@@ -490,7 +513,7 @@ li.inline_list{
 }
 .product_image a{
     margin-left:2em;
-   
+
 }
 label.white-space{
     white-space:normal;
