@@ -1063,6 +1063,7 @@ new Vue({
                             var index = product.materials.findIndex(i => i.name === item.name)
                             if (index > -1) {
                                 product.materials.splice(index, 1)
+                                product.dirty = true
                             }
                         }
                     })
