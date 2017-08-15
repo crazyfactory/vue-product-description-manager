@@ -675,29 +675,30 @@ new Vue({
 
                     }
                     for (var i = 0; i < product.metatags.length; i++) {
-                        if (dict_metatags[product.metatags[i]]) {
-                            metatag = dict_metatags[product.metatags[i]]
-                            my_label = metatag.label[language.id].value
-                            if (metatag.invisible) {
-                                my_label = "-" + my_label
-                            }
-                            localized_metatags[language.id].push(my_label)
-                            // add alias
-                            my_aliases = metatag.alias[language.id].value
-                            if (typeof my_aliases == 'object') {
-                                my_aliases = ""
-                            }
+                        //localized_metatags[language.id].push(product.metatags[i][language.id])
 
+                        metatag = product.metatags[i]
+                        my_label = metatag[language.id]
+                        if (metatag.invisible) {
+                            my_label = "-" + my_label
+                        }
+                        localized_metatags[language.id].push(my_label)
+
+                        // add alias
+                        my_aliases = metatag['alias_'+language.id]
+                        console.log(my_aliases)
+                        if(my_aliases){
                             alias_array = my_aliases.split(',')
+                        }
 
-                            if (alias_array) {
-                                alias_array.forEach(function (alias) {
-                                    alias = alias.trim()
-                                    if (alias.length > 0) {
-                                        localized_metatags[language.id].push("-" + alias)
-                                    }
-                                })
-                            }
+                        if (alias_array) {
+                            alias_array.forEach(function (alias) {
+                                alias = "-" + alias.trim()
+
+                                if (alias.length > 1 && localized_metatags[language.id].indexOf(alias)< 0) {
+                                    localized_metatags[language.id].push(alias)
+                                }
+                            })
                         }
                     }
                 }

@@ -201,17 +201,15 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
+                        <li class="list-group-item" v-for="metatag in product.metatags">
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                           <span v-if="product.metatags ">
                               <i class="fa fa-tag fa-pull-left"></i>
-                            [[ product.metatags ]]
+                            [[ metatag[language.id] ]]
                           </span>
-
-                          <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-
+                          <span class="alias" v-if='metatag && metatag["alias_" +language.id]'>
+                              <i class="fa fa-tags"></i>[[  metatag["alias_" +language.id] ]]
+                          </span>
                         </li>
                       </ul>
                     </li>
@@ -281,7 +279,7 @@
                         <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0">/</span>
 
-                        <span v-if="materials[material] && materials[material].label">[[ materials[material].label[language.id].value ]]</span>
+                        <span v-if="material[language.id]">[[ material[language.id] ]]</span>
                       </span>
                         <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
                         <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
@@ -294,6 +292,7 @@
                     </ul>
                     <!-- End Material Preview -->
                   </div>
+
                   <div v-if="preview_filter_metatag && (product.cached_metatags || (product.metatags && product.metatags.length>0))">
                     <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                     <!-- Meta tag preview -->
@@ -307,22 +306,23 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                           </li>
-                          <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
-                          <span v-if="metatags[metatag]">
+                          <li class="list-group-item" v-for="metatag in product.metatags">
+                          <span v-if="metatag">
                               <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
+                            <span v-if="metatag.invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
+                            [[ metatag[language.id] ]]
                           </span>
-                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
+                            <span class="alias" v-if='metatag && metatag["alias_" +language.id]'>
+                              <i class="fa fa-tags"></i>[[  metatag["alias_" +language.id] ]]
                             </span>
                             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                           </li>
                         </ul>
                       </li>
                     </ul>
-                    <!-- Meta tag preview end -->
+                    <!-- Meta tag preview end-->
                   </div>
+
                 </div>
                 <!-- Preview END -->
               </div>
