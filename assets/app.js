@@ -504,7 +504,7 @@ new Vue({
 
         },
         addProduct: function () {
-            var value = this.newProduct && this.newProduct.trim()
+            var value = this.validateNewProducts()
             if (!value) {
                 return
             }
@@ -1279,6 +1279,35 @@ new Vue({
         },
         renderTableCol: function (arg1, arg2) {
             console.log('different scope baby');
+        },
+        validateNewProducts: function (){
+
+            // get all modelCodes into a list
+            modelCodes=[]
+            this.products.forEach(function(product){
+                if(modelCodes.indexOf(product.modelCode)<0){
+                    modelCodes.push(product.modelCode)
+                }
+            })
+
+            // have a look at the request productCodes
+            newProductQuery= this.newProduct.trim()
+            newProductList= newProductQuery.split(" ")
+            response= []
+
+            newProductList.forEach(function (query_name){
+                product_name = query_name.toUpperCase()
+
+                if(modelCodes.indexOf(product_name)<0){
+                    response.push(product_name)
+                }
+            })
+            if(response.length<1){
+                this.addMessage("No valid Product codes given", "danger")
+                this.newProduct=''
+                return false
+            }
+            else return response.join(" ")
         },
         visibleMetatags: function () {
             var all_products = this.products;
