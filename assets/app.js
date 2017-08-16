@@ -124,30 +124,7 @@ var settingStorage = {
     }
 }
 
-// metatags management
-var metatagStorage = {
-    fetch: function () {
-        if (MetatagOptions && MetatagOptions.content) {
-            return storage_helper(MetatagOptions.content)
-        }
-        else {
-            return []
-        }
-    },
-}
 
-// material management
-var materialStorage = {
-    fetch: function () {
-        if (MaterialOptions && MaterialOptions.content) {
-            return storage_helper(MaterialOptions.content)
-        }
-        else {
-            return []
-        }
-
-    },
-}
 
 new Vue({
     el: '#app',
@@ -169,7 +146,7 @@ new Vue({
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
         isLoading: false,
-        languages_autodescription: ['de', 'en-GB', 'en-US', 'nl'],
+        languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
         newProduct: '',
         // Preview filter
@@ -202,10 +179,10 @@ new Vue({
             {
                 title: 'Value',
                 name: 'value',
-                editable: true,
+            editable: true,
 
-            },
-            {
+                    },
+                    {
                 title: 'de',
                 name: "label['de']['value']",
                 renderfunction: function (colname, entry) {
@@ -215,9 +192,9 @@ new Vue({
                     }
 
                     return entry.label['de']['value']
-                },
-            },
-            {
+                    },
+                    },
+                    {
                 title: 'en-GB',
                 name: "label['en-GB']['value']",
                 renderfunction: function (colname, entry) {
@@ -227,8 +204,8 @@ new Vue({
                     return entry.label['en-GB']['value']
                 }
 
-            },
-            {
+                    },
+                    {
                 title: 'en-US',
                 name: "label['en-US']['value']",
                 editable: true,
@@ -237,8 +214,8 @@ new Vue({
                         return ''
                     }
                     return entry.label['en-US']['value']
-                }
             }
+        }
 
         ],
 
@@ -250,12 +227,6 @@ new Vue({
         messages: {
             handler: function (messages) {
                 messageStorage.save(messages)
-            },
-            deep: true
-        },
-        metatags_local: {
-            handler: function (metatags) {
-                metatagStorage.save(metatags)
             },
             deep: true
         },
@@ -686,7 +657,7 @@ new Vue({
 
                         // add alias
                         my_aliases = metatag['alias_'+language.id]
-                        console.log(my_aliases)
+
                         if(my_aliases){
                             alias_array = my_aliases.split(',')
                         }
@@ -1302,6 +1273,7 @@ new Vue({
                     response.push(product_name)
                 }
             })
+
             if(response.length<1){
                 this.addMessage("No valid Product codes given", "danger")
                 this.newProduct=''
