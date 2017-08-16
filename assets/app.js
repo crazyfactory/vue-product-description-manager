@@ -125,6 +125,9 @@ var settingStorage = {
 }
 
 
+Vue.component('translations-table', {
+    template: '<h3>Rasta</h3>'
+})
 
 new Vue({
     el: '#app',
@@ -173,53 +176,106 @@ new Vue({
         show_translation_metatags: false,
         show_translation_descriptions: false,
 
-        sortKey: 'value',
-        reverse: false,
-        columns: [
-            {
-                title: 'Value',
-                name: 'value',
+        settings: settingStorage.fetch(),
+        table: {
             editable: true,
-
+            threshold:50,
+            columns: {
+                default:[
+                    {
+                        id: "de",
+                        icon: "flag-icon-de",
+                        label: "de",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
                     },
                     {
-                title: 'de',
-                name: "label['de']['value']",
-                renderfunction: function (colname, entry) {
-
-                    if (typeof entry.label['de'] === "undefined") {
-                        return ''
-                    }
-
-                    return entry.label['de']['value']
-                    },
+                        id: "en-GB",
+                        icon: "flag-icon-gb",
+                        label: "en-GB",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
                     },
                     {
-                title: 'en-GB',
-                name: "label['en-GB']['value']",
-                renderfunction: function (colname, entry) {
-                    if (typeof entry.label['en-GB'] === "undefined") {
-                        return ''
-                    }
-                    return entry.label['en-GB']['value']
-                }
-
+                        id: "en-US",
+                        icon: "flag-icon-us",
+                        label: "en-US",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
                     },
                     {
-                title: 'en-US',
-                name: "label['en-US']['value']",
-                editable: true,
-                renderfunction: function (colname, entry) {
-                    if (typeof entry.label['en-US'] === "undefined") {
-                        return ''
+                        id: "es",
+                        icon: "flag-icon-es",
+                        label: "es",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "fr",
+                        icon: "flag-icon-fr",
+                        label: "fr",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "it",
+                        icon: "flag-icon-it",
+                        label: "it",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "nl",
+                        icon: "flag-icon-nl",
+                        label: "nl",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "pt",
+                        icon: "flag-icon-pt",
+                        label: "pt",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "ru",
+                        icon: "flag-icon-ru",
+                        label: "ru",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
+                    },
+                    {
+                        id: "sv",
+                        icon: "flag-icon-se",
+                        label: "sv",
+                        width: null,
+                        sortable: true,
+                        groupable: true,
+                        aggregators: []
                     }
-                    return entry.label['en-US']['value']
+
+                ]
             }
         }
-
-        ],
-
-        settings: settingStorage.fetch()
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -434,21 +490,10 @@ new Vue({
         translationsBaseProducts: function () {
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
-
-                console.log(BaseProductOptions.content);
                 BaseProductOptions.content.forEach(function (option, index) {
-                    var bp = {}
-                    bp.value = option.value
-                    bp.type = 'base_product'
-
-                    for (var language in option.label) {
-                        if (option.label.hasOwnProperty(language)) {
-                            if (!option.label[language]['value']) {
-                                option.label[language]['value'] = default_value
-                            }
-                        }
+                    if(option.name !== '-'){
+                        response.push(option);
                     }
-                    response.push(option)
                 })
                 return response
             }

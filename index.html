@@ -10,6 +10,11 @@
   <script src="./assets/vue-multiselect.2.0.0.js"></script>
   <script src="./assets/vue-bootstrap-table.min.js"></script>
   <script src="./assets/moment.min.js"></script>
+  <!-- data table components translation management -->
+  <script src="./assets/date_fns.min.js"></script>
+  <script src="./assets/datatable.components.bundle.js"></script>
+  <script src="./assets/intro.min.js"></script>
+  
   <!-- load data -->
   <script src="config/base_products.js"></script>
   <script src="config/components.js"></script>
@@ -21,6 +26,9 @@
   <link href="./assets/bootstrap-3.3.6.min.css" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.css" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
   <link rel="stylesheet" type="text/css" href="assets/style.css" />
   <link rel="stylesheet" type="text/css" href="assets/vue-multiselect.min.css" />
 </head>
@@ -118,8 +126,8 @@
               <span title="Nothing to HIDE" class="action"><i style="color:#ccc;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
             </section>
             <section v-if="hasEditableProducts">
-              <span title="DELETE all selected products" class="action cursor" @click="removeSeletedProducts()"><i style="color:darkred;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
-              <span title="HIDE all selected products" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
+              <span title="Discard changes and remove from view" class="action cursor" @click="removeSeletedProducts()"><i style="color:darkred;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
+              <span title="HIDE selected products from view" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
             </section>
             <span v-if="hasHiddenProducts" title="SHOW all hidden products" class="action cursor" @click="showAllProducts()"><i style="color:darkgreen;" class="fa fa-eye" aria-hidden="true"></i></span>
             <section v-if="show_preview">
@@ -173,7 +181,7 @@
                             v-if="product.names[language.id] && !(product.cached_names && product.cached_names[language.id].value==product.names[language.id].value)">
                         [[product.names[language.id].original_value ]]
                       </span>
-                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="product.detailsLink +'&lang='+language.id" title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
+                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                       </a>
                       <div class="customized_name"
@@ -201,9 +209,9 @@
                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                       <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
                       <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0 && materials[material]">/</span>
-                        <span v-if="materials[material] && materials[material]['label'][language.id]!== undefined">
-                         [[ materials[material]['label'][language.id]['value'] ]]
+                        <span v-if="index > 0 && material">/</span>
+                        <span v-if="material[language.id] && material[language.id]!== undefined">
+                         [[ material[language.id] ]]
                         </span>
                       </span>
                       <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
@@ -228,18 +236,15 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                         </li>
-                        <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
+                        <li class="list-group-item" v-for="metatag in product.metatags">
                           <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
-                          <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
+                          <span v-if="product.metatags ">
                               <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
+                            [[ metatag[language.id] ]]
                           </span>
-
-                          <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-
+                          <span class="alias" v-if='metatag && metatag["alias_" +language.id]'>
+                              <i class="fa fa-tags"></i>[[  metatag["alias_" +language.id] ]]
+                          </span>
                         </li>
                       </ul>
                     </li>
@@ -309,7 +314,7 @@
                         <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0">/</span>
 
-                        <span v-if="materials[material] && materials[material].label">[[ materials[material].label[language.id].value ]]</span>
+                        <span v-if="material[language.id]">[[ material[language.id] ]]</span>
                       </span>
                         <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
                         <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
@@ -322,6 +327,7 @@
                     </ul>
                     <!-- End Material Preview -->
                   </div>
+
                   <div v-if="preview_filter_metatag && (product.cached_metatags || (product.metatags && product.metatags.length>0))">
                     <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
                     <!-- Meta tag preview -->
@@ -335,22 +341,23 @@
                             [[ product.cached_metatags[language.id].value ]]
                           </span>
                           </li>
-                          <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
-                          <span v-if="metatags[metatag]">
+                          <li class="list-group-item" v-for="metatag in product.metatags">
+                          <span v-if="metatag">
                               <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
+                            <span v-if="metatag.invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
+                            [[ metatag[language.id] ]]
                           </span>
-                            <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
+                            <span class="alias" v-if='metatag && metatag["alias_" +language.id]'>
+                              <i class="fa fa-tags"></i>[[  metatag["alias_" +language.id] ]]
                             </span>
                             <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                           </li>
                         </ul>
                       </li>
                     </ul>
-                    <!-- Meta tag preview end -->
+                    <!-- Meta tag preview end-->
                   </div>
+
                 </div>
                 <!-- Preview END -->
               </div>
@@ -363,119 +370,51 @@
     <!-- Add Products end -->
     <!-- Add Product Names -->
     <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_names">
-      <div class="margin-bottom" v-if="show_base_product_edit && !show_name_scheme_edit"><i class="indent">Please select at least one base_product or component to edit ...</i></div>
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new BaseProduct"
-                track-by="value"
+                track-by="id"
                 v-model="selectedBaseProduct"
                 :allow-empty="false"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsBaseProduct"
+                :reset-after="true"
                 :searchable="true"
-                :taggable="true"
-                @tag="createBaseProductOption"
+                @input="saveNameScheme"
+
         ></multiselect>
       </div>
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new Component"
-                track-by="value"
+                track-by="id"
                 v-model="selectedComponent1"
                 :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsComponent"
+                :reset-after="true"
                 :searchable="true"
-                :taggable="true"
-                @tag="createComponent1Option"
+                @input="saveNameScheme"
         ></multiselect>
       </div>
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new Component"
-                track-by="value"
+                track-by="id"
                 v-model="selectedComponent2"
                 :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="false"
                 :options="optionsComponent"
                 :searchable="true"
-                :taggable="true"
-                @tag="createComponent2Option"
+                :reset-after="true"
+                @input="saveNameScheme"
         ></multiselect>
-      </div>
-      <div class="row">
-        <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
-          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-
-          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-
-          <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
-          <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="deactivateItem('base_product')"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
-        </div>
-      </div>
-
-      <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
-        <!-- Edit BaseProduct/ Components -->
-        <h5 class="indent">Edit Base Product & Components  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditBaseProducts()"></i></h5>
-        <ul class="indent metatag-list" v-if="selectedBaseProduct || selectedComponent1 || selectedComponent2">
-          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-            <ul>
-              <!-- edit BaseProduct -->
-              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-              <li class="list-group-item" v-if="selectedBaseProduct && selectedBaseProduct.label">
-                  <span v-if="!selectedBaseProduct.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(selectedBaseProduct.label[language.id])">[[ baseProducts[selectedBaseProduct.value].label[language.id].value ]]</span>
-                    <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(selectedBaseProduct.label[language.id])"></i>
-                  </span>
-                <div v-if="selectedBaseProduct.label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="selectedBaseProduct.label[language.id].edit" @click="closeEditMe(selectedBaseProduct.label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="selectedBaseProduct.label[language.id].value" @keyup.enter="closeEditMe(selectedBaseProduct.label[language.id])">
-                </div>
-              </li>
-              <!-- edit Component1 -->
-
-              <li class="list-group-item" v-if="selectedComponent1">
-                <span v-if="!selectedComponent1.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent1.value].label[language.id])">[[ components[selectedComponent1.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent1.value].label[language.id])"></i>
-                </span>
-                <div v-if="components[selectedComponent1.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent1.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent1.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent1.value].label[language.id])">
-                </div>
-              </li>
-              <li class="list-group-item" v-if="selectedComponent2">
-                <span v-if="!selectedComponent2.label[language.id].edit">
-
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent2.value].label[language.id])">[[ components[selectedComponent2.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent2.value].label[language.id])"></i>
-                </span>
-                <div v-if="components[selectedComponent2.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent2.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent2.value].label[language.id])"></i>
-                  <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent2.value].label[language.id])">
-                </div>
-              </li>
-
-
-            </ul>
-
-          </li>
-        </ul>
-        <!-- End edit BaseProduct/ Components -->
       </div>
     </div>
     <!-- End Product Names  -->
@@ -484,52 +423,30 @@
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new Material"
-                track-by="value"
+                track-by="id"
                 v-model="selectedMaterials"
-                :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="true"
                 :options="optionsMaterial"
                 :searchable="true"
-                :taggable="true"
-                @tag="createMaterialOption"
+                @input="saveMaterials"
         ></multiselect>
-      </div>
-      <div class="row">
-        <div class="actions" v-if="!show_materials_edit">
-          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-          <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
+        <div class="switch active" v-if="remove_mode_material" @click="switchRemoveMaterial">
+          <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
         </div>
-      </div>
-      <div class="row" v-if="show_materials_edit">
-        <!-- Edit Materials -->
-        <i class="indent" v-if="!selectedMaterials.length > 0">Please select Materials to edit ...</i>
-        <h5 class="indent" v-if="selectedMaterials.length > 0">Edit Materials  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMaterials()"></i></h5>
-        <ul class="indent metatag-list" v-if="selectedMaterials.length > 0">
-          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-            <ul>
-              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-              <li class="list-group-item" v-for="material in selectedMaterials">
-                  <span v-if="!materials[material.value].label[language.id].edit">
-                    <i class="fa fa-industry fa-pull-left"></i>
-                    [[ materials[material.value].label[language.id].value ]]
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
-                  </span>
+        <div class="switch" v-if="!remove_mode_material" @click="switchRemoveMaterial">
+          <i class="fa fa-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
+        </div>
+        <div class="info-box">
+          <h5><i class="fa fa-info" aria-hidden="true"></i> &nbsp; Info</h5>
+          <ul>
+            <li>Select one material from the dropdown to add it to all active products</li>
+            <li>Select <b>-</b> to remove all materials from the active products</li>
+            <li>Click "Remove selected" to remove single materials</li>
+          </ul>
+        </div>
 
-                <div v-if="materials[material.value].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
-                  <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
-                </div>
-
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <!-- End edit materials -->
       </div>
       <!-- End Product Materials -->
     </div>
@@ -538,68 +455,29 @@
       <div class="margin-bottom">
         <multiselect
                 label="search"
-                tag-placeholder="Add this as a new Metatag"
-                track-by="value"
+                track-by="id"
                 v-model="selectedMetatags"
-                :allow-empty="true"
-                :custom-label="customOptionLabel"
+                :custom-label="customLabel"
                 :hide-selected="true"
                 :multiple="true"
                 :options="optionsMetatag"
                 :searchable="true"
-                :taggable="true"
-                @tag="createMetatagOption"
+                @input="saveMetatags"
         ></multiselect>
-      </div>
-      <div class="row">
-        <div class="actions" v-if="!show_metatags_edit">
-          <button v-if="!selectedMetatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-          <button v-if="selectedMetatags.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMetatags()" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-
-          <span v-if="!selectedMetatags.length > 0">
-            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile </button>
-            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible </button>
-          </span>
-          <span v-if="selectedMetatags.length > 0">
-            <button type="button" class="btn btn-success fa-pull-right cursor" @click="visibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile</button>
-            <button type="button" class="btn btn-warning fa-pull-right cursor" @click="invisibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible</button>
-          </span>
-
-          <button v-if="!selectedMetatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-          <button v-if="selectedMetatags.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMetatags()" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-
+        <div class="switch active" v-if="remove_mode_metatag" @click="switchRemoveMetatag">
+          <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
         </div>
-      </div>
-      <div class="row" v-if="show_metatags_edit">
-        <!-- Edit Metatags -->
-        <i class="indent" v-if="!selectedMetatags.length > 0">Please select Metatags to edit ...</i>
-        <h5 class="indent" v-if="selectedMetatags.length > 0">Edit Metatags  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMetatags()"></i></h5>
-        <ul class="indent metatag-list" v-if="selectedMetatags.length > 0">
-          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-            <ul>
-              <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-              <li class="list-group-item" v-for="metatag in selectedMetatags">
-                  <span v-if="!metatags[metatag.id].label[language.id].edit">
-                    <i class="fa fa-tag fa-pull-left"></i>
-                    [[ metatags[metatag.id].label[language.id].value ]]
-                    <span class="alias" v-if="metatags[metatag.id].alias[language.id].value.length > 0">
-                      <i class="fa fa-tags"></i>[[ metatags[metatag.id].alias[language.id].value ]]
-                    </span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(metatags[metatag.id].label[language.id])"></i>
-                  </span>
-                <div v-if="metatags[metatag.id].label[language.id].edit">
-                  <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="metatags[metatag.id].label[language.id].edit" @click="closeEditMe(metatags[metatag.id].label[language.id])"></i>
-                  <h5><i class="fa fa-tag fa-pull-left"></i>Label</h5> <input class="full-width" v-model="metatags[metatag.id].label[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
-                </div>
-                <div v-if="metatags[metatag.id].label[language.id].edit">
-                  <h5><i class="fa fa-tags"></i> Aliases</h5>
-                  <input class="full-width" v-model="metatags[metatag.id].alias[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <!-- End edit metatags -->
+        <div class="switch" v-if="!remove_mode_metatag" @click="switchRemoveMetatag">
+          <i class="fa fa-square-o" aria-hidden="true"></i> <b>Remove selected</b> instead adding
+        </div>
+        <div class="info-box">
+          <h5><i class="fa fa-info" aria-hidden="true"></i> &nbsp; Info</h5>
+          <ul>
+            <li>Select one metatag from the dropdown to add it to all active products</li>
+            <li>Select <b>-</b> to remove all metatags from the active products</li>
+            <li>Click "Remove selected" to remove single materials</li>
+          </ul>
+        </div>
       </div>
       <!-- End Meta Tag -->
     </div>
@@ -612,16 +490,23 @@
           Base Products
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
-          <vue-bootstrap-table
-                  :columns="columns"
-                  :values="optionsBaseProduct"
-                  :show-filter="true"
-                  :show-column-picker="false"
-                  :sortable="true"
-                  :paginated="false"
-                  :multi-column-sortable="true"
-                  :filter-case-sensitive="false"
-          ></vue-bootstrap-table>
+
+          <datatable
+                  :source="translationsBaseProducts"
+                  :editable="true"
+                  :threshold="table.threshold">
+            <datatable-column v-for = "column in table.columns.default"
+                              :id = "column.id"
+                              :label = "column.label"
+                              :width = "column.width"
+                              :sortable="column.sortable"
+                              :groupable="column.groupable"
+                              :aggregators="column.aggregators"
+                              :formatter="column.formatter">
+              <span  v-bind:class="'flag-icon ' + column.icon"></span>
+            </datatable-column>
+          </datatable>
+
         </p>
       </div>
       <div>
@@ -651,683 +536,7 @@
       <div>
         <h4 class="product_descriptions">
           <i v-if="!show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-          <i v-if="show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-minus-square-o" aria-hidden<div id="app" v-bind:class="editorLanguage">
-          <div class="app-nav">
-            <nav v-bind:class="headline" @click.prevent>
-              <a href="#" class="name" @click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
-              <a href="#" class="name" @click="makeActive('material')">Material <i class="fa fa-industry fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
-              <a href="#" class="metatags" @click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
-              <a href="#" class="preview" @click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-              <a href="#" class="translations" @click="makeActive('translations')">Translations <i class="fa fa-globe fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-              <a href="#" class="admin" @click="makeActive('admin')">
-                &nbsp;<i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
-            </nav>
-          </div>
-          <!-- show active messages -->
-          <div class="container messages" v-cloak>
-            <div v-bind:class="'alert alert-' + message.type" v-for="message in messages_to_show">
-              <i class="date">[[message.date]]:</i>
-              <span>[[message.message]]</span>
-              <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
-            </div>
-          </div>
-          <!-- end active messages -->
-          <!-- Settings button -->
-          <div class="container">
-            <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" title="Set languages for Editor and Preview features" @click="toggle_settings"></i>
-          </div>
-          <!-- end settings button -->
-          <!-- settings section -->
-          <div class="container settings" v-show="show_settings">
-            <ul class="list-group">
-              <li class="list-group-item align-right">
-                <section class="settings language_editor">
-          <span class="icon_label">
-            <i class="fa fa-pencil fa-2x" aria-hidden="true" title="Set Editor language"></i>
-          </span>
-                  <span v-for="language in settings.supportedLanguages">
-            <span class="language" @click="addEditorLanguage(language.id)">
-              <i style="color:darkgreen;" class="fa fa-caret-right" aria-hidden="true" v-if="language.id == editorLanguage"></i>
-              <span v-bind:class="'flag-icon '+language.flag" ></span>
-            <i style="color:darkgreen;" class="fa fa-caret-left" aria-hidden="true" v-if="language.id == editorLanguage"></i>
-          </span>
-        </span>
-                </section>
-                <span class="settings seperator">|</span>
-                <section class="settings language_preview">
-          <span class="icon_label">
-            <i class="fa fa fa-eye fa-2x" aria-hidden="true" title="Set/ unset languages for the preview feature"></i>
-          </span>
-                  <span v-for="language in settings.supportedLanguages">
-          <span class="language" @click="toggle_language(language)">
-              <i class="fa fa-circle-o" aria-hidden="true" v-if="!language.status"></i>
-              <i class="fa fa-check-circle-o" aria-hidden="true" v-if="language.status"></i>
-              <span v-bind:class="'flag-icon '+language.flag" ></span>
-          </span>
-        </span>
-                </section>
-              </li>
-            </ul>
-          </div>
-          <!-- end settings section -->
-          <div class="container">
-            <h2 class="headline"><span v-bind:class="headline_icon" ></span> [[headline]]</h2>
-            <div v-if="show_load" v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }">
-              <section class="product-management load_products" @click.stop >
-                <!-- Add Products -->
-                <header class="header">
-                  <div class="margin-bottom">
-                    <input class="new-product"
-                           autofocus autocomplete="off"
-                           placeholder="Enter products model code"
-                           v-model="newProduct"
-                           @keyup.enter="addProduct">
-                    <button class="fa fa-arrow-left switch_actionbar btn btn-default cursor" title="Load Product" aria-hidden="true" @click="addProduct()"></button>
-                  </div>
-
-                  <div class="actionbar" v-if="hasProducts" >
-                    <span class="action"><i>Select:</i></span>
-                    <section v-if="!hasEditableProducts">
-                      <span title="Nothing to SELECT" class="action"><i style="color:#ccc;" class="fa fa-check-circle-o"  aria-hidden="true"></i></span>
-                      <span title="Nothing to INVERT" class="action"><i style="color:#ccc;" class="fa fa-random" aria-hidden="true"></i></span>
-                      <span title="Nothing to DESELECT" class="action"><i style="color:#ccc;" class="fa fa-circle-o" aria-hidden="true"></i></span>
-                    </section>
-                    <section v-if="hasEditableProducts">
-                      <span title="SELECT ALL products" class="action cursor" @click="selectAllProducts(true)"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
-                      <span title="INVERT current selection" class="action cursor" @click="invertSelectedlProducts()"><i style="color:gold;" class="fa fa-random" aria-hidden="true"></i></span>
-                      <span title="DESELECT ALL" class="action cursor" @click="selectAllProducts(false)"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
-                    </section>
-                    <span> | </span>
-                    <span class="actions"><i>Actions:</i></span>
-                    <section v-if="!hasEditableProducts">
-                      <span title="Nothing to DELETE" class="action"><i style="color:#ccc;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
-                      <span title="Nothing to HIDE" class="action"><i style="color:#ccc;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
-                    </section>
-                    <section v-if="hasEditableProducts">
-                      <span title="DELETE all selected products" class="action cursor" @click="removeSeletedProducts()"><i style="color:darkred;" class="fa fa-trash-o" aria-hidden="true" ></i></span>
-                      <span title="HIDE all selected products" class="action cursor" @click="hideSelectedProducts()"><i style="color:darkred;" class="fa fa-eye-slash" aria-hidden="true" ></i></span>
-                    </section>
-                    <span v-if="hasHiddenProducts" title="SHOW all hidden products" class="action cursor" @click="showAllProducts()"><i style="color:darkgreen;" class="fa fa-eye" aria-hidden="true"></i></span>
-                    <section v-if="show_preview">
-                      <span> | </span>
-                      <span><i>Filter:</i></span>
-                      <span title="Filter names" class="action cursor" @click="switchMe('preview_filter_name')">
-                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_name, 'fa-circle-o': !preview_filter_name}"  aria-hidden="true"></i> Names
-                </span>
-                      <span title="Filter descriptions" class="action cursor" @click="switchMe('preview_filter_description')">
-                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_description, 'fa-circle-o': !preview_filter_description}"  aria-hidden="true"></i> Descriptions
-                </span>
-                      <span title="Filter materials" class="action cursor" @click="switchMe('preview_filter_material')">
-                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_material, 'fa-circle-o': !preview_filter_material}"  aria-hidden="true"></i> Materials
-                </span>
-                      <span title="Filter metatags" class="action cursor" @click="switchMe('preview_filter_metatag')">
-                  <i class="fa" v-bind:class="{ 'fa-check-circle-o': preview_filter_metatag, 'fa-circle-o': !preview_filter_metatag}"  aria-hidden="true"></i> Metatags
-                </span>
-                    </section>
-                  </div>
-                </header>
-                <!-- End add products -->
-                <section class="main" v-show="products.length" v-cloak>
-                  <!-- List products -->
-                  <ul class="product-list">
-                    <li v-for="product in products_visible"
-                        class="product"
-                        :key="product.id"
-                        :class="{ active: product.active }">
-                      <div class="view">
-                        <input class="toggle" type="checkbox" v-model="product.active">
-                        <i class="product_action fa fa-trash-o fa-2x fa-pull-right cursor text-danger" aria-hidden="true" @click="removeProduct(product)"></i>
-                        <i class="product_action fa fa-eye-slash fa-2x fa-pull-right cursor text-muted" aria-hidden="true" @click="hideProduct(product)"></i>
-                        <label class="white-space">[[product.modelCode]]
-                          <i class="fa fa-floppy-o cursor" title="'Save '+ product.modelCode +' to database'" aria-hidden="true" @click="exportProduct(product)" v-if="product.dirty"></i>
-                          <span v-if="product.productImage" class="product_image">
-                    <!-- ProductImage -->
-                    <a v-bind:href="product.productImage" target="_blank">
-                      <img v-bind:src="product.productImage" class="img-rounded" width="50">
-                    </a>
-                  </span>
-                        </label>
-                        <!-- Generic Product Names by language -->
-                        <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
-                          <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                            <span v-bind:class="'flag-icon '+language.flag" @click="debugMe(product)"></span>
-
-                            <span v-if="product.base_product || product.component1 || product.component2">
-                      <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
-                      <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
-                      <span class="cursor" @click="editMe(product.names[language.id], product)"
-                            v-if="product.names[language.id] && !(product.cached_names && product.cached_names[language.id].value==product.names[language.id].value)">
-                        [[product.names[language.id].original_value ]]
-                      </span>
-                      <a class="fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" href="product.detailsLink +'&lang='+language.id" title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                        <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                      </a>
-                      <div class="customized_name"
-                           v-if="product.names[language.id] && ((product.names[language.id].original_value!=product.names[language.id].value) || product.names[language.id].edit)" >
-                        <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
-                        <span v-if="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)" class="fa fa-pencil-square-o fa-pull-left customized_name_icon cursor" v-bind:title="'custom name for '+ language.id"></span>
-                        <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
-                        <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
-                          <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.esc="closeEditMe(product.names[language.id])" @keyup.enter="closeEditMe(product.names[language.id])"></textarea>
-                        </div>
-                        <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" v-bind:title="'Delete custom name for '+language.id" @click="removeCustomName(product.names[language.id])"></i>
-                      </div>
-                    </span>
-                            <span class="cached" v-if="product.cached_names && product.cached_names[language.id]"
-                                  v-bind:class="{ 'override': ((product.base_product || product.component1 || product.component2) && (product.names[language.id] && product.cached_names[language.id] && product.cached_names[language.id].value != product.names[language.id].value))}">
-                      [[ product.cached_names[language.id].value ]] <br>
-                    </span>
-
-                          </li>
-                        </ul>
-                        <!-- End Product Names by language -->
-                        <div class="indent" v-if="show_material">
-                          <!-- material configuration -->
-                          <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
-                            <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                              <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
-                              <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0 && materials[material]">/</span>
-                        <span v-if="materials[material] && materials[material]['label'][language.id]!== undefined">
-                         [[ materials[material]['label'][language.id]['value'] ]]
-                        </span>
-                      </span>
-                              <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
-                              <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                                <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                              </a>
-                              <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials && product.materials.length >0 }">
-                        [[ product.cached_materials[language.id].value ]]
-                      </span>
-                            </li>
-                          </ul>
-                          <!-- end material -->
-                        </div>
-                        <div v-if="show_metatags">
-                          <!-- Metatag preview -->
-                          <ul  class="indent"
-                               v-if="(product.metatags && product.metatags.length>0) || (product.cached_metatags)">
-                            <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                              <ul>
-                                <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-                                  <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) }">
-                            [[ product.cached_metatags[language.id].value ]]
-                          </span>
-                                </li>
-                                <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
-                                  <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
-                                  <span v-if="metatags[metatag] && metatags[metatag].label[language.id]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-
-                                  <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                          <!-- Meta tag preview end -->
-                        </div>
-                        <!-- Preview Feature -->
-                        <div class="product_preview" v-on:click.stop v-if="show_preview">
-                          <div class="indent" v-if="preview_filter_name">
-                            <h5 class="product_name inline" v-if="product.base_product"><i class="fa fa-commenting-o fa-pull-left" aria-hidden="true" ></i> Names:</h5>
-                            <ul class="list-group" v-if="product.base_product">
-                              <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
-                                <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.names[language.id] && product.names[language.id].edit" @click="closeEditMe(product.names[language.id])"></i>
-                                <span v-bind:class="'flag-icon '+language.flag" ></span>
-                                <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                                  <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                                </a>
-                                <span v-if="product.names[language.id] && !product.names[language.id].edit" class="cursor" @click="editMe(product.names[language.id], product)">[[ product.names[language.id].value ]]</span>
-                                <div class="editable" v-if="product.names && product.names[language.id] && product.names[language.id].edit">
-                                  <textarea v-if="product.names[language.id] && product.names[language.id].value" v-model="product.names[language.id].value" @keyup.enter="closeEditMe(product.names[language.id])" @keyup.esc="closeEditMe(product.names[language.id])"></textarea>
-                                </div>
-                                <span class="cached" v-if="product.cached_names && product.cached_names[language.id]" v-bind:class="{ 'override': product.names[language.id] && (product.base_product || product.component1 || product.component2)}">
-                         [[product.cached_names[language.id].value ]] <br>
-                        </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <div v-if="product.descriptions && preview_filter_description" class="indent description">
-                            <h5><i class="fa fa-info-circle fa-pull-left" aria-hidden="true" ></i> Descriptions:</h5>
-                            <ul class="list-group">
-                              <!-- Language dependent items -->
-                              <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-
-                                <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="product.descriptions[language.id] && !product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
-                                <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id] && product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
-
-                                <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)" v-if="languages_autodescription.indexOf(language.id)>-1"></i>
-
-                                <span v-bind:class="'flag-icon '+language.flag" ></span>
-                                <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                                  <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                                </a>
-                                <!-- original description -->
-
-                                <span v-if="product.cached_descriptions && product.cached_descriptions[language.id] && product.descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value) }">
-                          [[ product.cached_descriptions[language.id].value ]]</span>
-                                <!-- end original description -->
-                                <span v-if="!product.cached_descriptions || ((product.descriptions[language.id] && product.cached_descriptions[language.id]) && !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value))" class="cursor" @click="editMe(product.descriptions[language.id],product)">
-                          [[product.descriptions[language.id].value ]]
-                        </span>
-                                <div class="editable" v-if="product.descriptions[language.id]" v-show="product.descriptions[language.id].edit">
-                                  <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditMe(product.descriptions[language.id])"></textarea>
-                                </div>
-
-                              </li>
-                              <!-- end language dependent items -->
-                            </ul>
-                          </div>
-                          <div v-if="(product.materials.length>0 || product.cached_materials) && preview_filter_material" class="indent">
-                            <h5><i class="fa fa-industry fa-pull-left" aria-hidden="true"></i> Materials:</h5>
-                            <!-- Material Preview -->
-                            <ul class="list-group">
-                              <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
-
-                                <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0">/</span>
-
-                        <span v-if="materials[material] && materials[material].label">[[ materials[material].label[language.id].value ]]</span>
-                      </span>
-                                <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
-                                <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials.length >0 }">
-                        [[ product.cached_materials[language.id].value ]]
-                      </span>
-                                <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                                  <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                                </a>
-                              </li>
-                            </ul>
-                            <!-- End Material Preview -->
-                          </div>
-                          <div v-if="preview_filter_metatag && (product.cached_metatags || (product.metatags && product.metatags.length>0))">
-                            <h5 class="indent"><i class="fa fa-tags fa-pull-left" aria-hidden="true"></i> Metatags:</h5>
-                            <!-- Meta tag preview -->
-                            <ul  class="indent" v-if="product.cached_metatags || (product.metatags && product.metatags.length>0)">
-                              <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                <ul>
-                                  <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-
-                                    <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
-                                          v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
-                            [[ product.cached_metatags[language.id].value ]]
-                          </span>
-                                  </li>
-                                  <li class="list-group-item" v-for="metatag in product.metatags" v-show="metatags[metatag]">
-                          <span v-if="metatags[metatag]">
-                              <i class="fa fa-tag fa-pull-left"></i>
-                            <span v-if="metatags[metatag].invisible" class="fa fa-minus-circle" aria-hidden="true"></span>
-                            [[ metatags[metatag].label[language.id].value ]]
-                          </span>
-                                    <span class="alias" v-if="metatags[metatag] && metatags[metatag].alias[language.id].value.length > 0">
-                              <i class="fa fa-tags"></i>[[ metatags[metatag].alias[language.id].value ]]
-                            </span>
-                                    <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
-                                  </li>
-                                </ul>
-                              </li>
-                            </ul>
-                            <!-- Meta tag preview end -->
-                          </div>
-                        </div>
-                        <!-- Preview END -->
-                      </div>
-                    </li>
-                  </ul>
-                  <!-- End List products -->
-                </section>
-              </section>
-            </div>
-            <!-- Add Products end -->
-            <!-- Add Product Names -->
-            <div class="products_name row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_names">
-              <div class="margin-bottom" v-if="show_base_product_edit && !show_name_scheme_edit"><i class="indent">Please select at least one base_product or component to edit ...</i></div>
-              <div class="margin-bottom">
-                <multiselect
-                        label="de"
-                        track-by="id"
-                        v-model="selectedBaseProduct"
-                        :allow-empty="false"
-                        :custom-label="customOptionLabel"
-                        :hide-selected="true"
-                        :multiple="false"
-                        :options="optionsBaseProduct"
-                        :searchable="true"
-                ></multiselect>
-              </div>
-              <div class="margin-bottom">
-                <multiselect
-                        label="search"
-                        tag-placeholder="Add this as a new Component"
-                        track-by="value"
-                        v-model="selectedComponent1"
-                        :allow-empty="true"
-                        :custom-label="customOptionLabel"
-                        :hide-selected="true"
-                        :multiple="false"
-                        :options="optionsComponent"
-                        :searchable="true"
-                        :taggable="true"
-                        @tag="createComponent1Option"
-                ></multiselect>
-              </div>
-              <div class="margin-bottom">
-                <multiselect
-                        label="search"
-                        tag-placeholder="Add this as a new Component"
-                        track-by="value"
-                        v-model="selectedComponent2"
-                        :allow-empty="true"
-                        :custom-label="customOptionLabel"
-                        :hide-selected="true"
-                        :multiple="false"
-                        :options="optionsComponent"
-                        :searchable="true"
-                        :taggable="true"
-                        @tag="createComponent2Option"
-                ></multiselect>
-              </div>
-              <div class="row">
-                <div class="actions" v-if="!show_base_product_edit || !show_name_scheme_edit">
-                  <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-                  <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)" type="button" class="btn btn-success fa-pull-right cursor" @click="saveNameScheme()"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Set </button>
-
-                  <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-                  <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="editBaseProducts()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-
-                  <button v-if="!((selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label))" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
-                  <button v-if="(selectedBaseProduct && selectedBaseProduct.label)|| (selectedComponent1 && selectedComponent1.label) || (selectedComponent2 && selectedComponent2.label)"type="button" class="btn btn-warning fa-pull-right cursor" @click="deactivateItem('base_product')"><i class="fa fa-trash fa-2x" aria-hidden="true"></i> Delete </button>
-                </div>
-              </div>
-
-              <div class="row" v-if="show_base_product_edit && show_name_scheme_edit">
-                <!-- Edit BaseProduct/ Components -->
-                <h5 class="indent">Edit Base Product & Components  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditBaseProducts()"></i></h5>
-                <ul class="indent metatag-list" v-if="selectedBaseProduct || selectedComponent1 || selectedComponent2">
-                  <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                    <ul>
-                      <!-- edit BaseProduct -->
-                      <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                      <li class="list-group-item" v-if="selectedBaseProduct && selectedBaseProduct.label">
-                  <span v-if="!selectedBaseProduct.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(selectedBaseProduct.label[language.id])">[[ baseProducts[selectedBaseProduct.value].label[language.id].value ]]</span>
-                    <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(selectedBaseProduct.label[language.id])"></i>
-                  </span>
-                        <div v-if="selectedBaseProduct.label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="selectedBaseProduct.label[language.id].edit" @click="closeEditMe(selectedBaseProduct.label[language.id])"></i>
-                          <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="selectedBaseProduct.label[language.id].value" @keyup.enter="closeEditMe(selectedBaseProduct.label[language.id])">
-                        </div>
-                      </li>
-                      <!-- edit Component1 -->
-
-                      <li class="list-group-item" v-if="selectedComponent1">
-                <span v-if="!selectedComponent1.label[language.id].edit">
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent1.value].label[language.id])">[[ components[selectedComponent1.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent1.value].label[language.id])"></i>
-                </span>
-                        <div v-if="components[selectedComponent1.value].label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent1.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent1.value].label[language.id])"></i>
-                          <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent1.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent1.value].label[language.id])">
-                        </div>
-                      </li>
-                      <li class="list-group-item" v-if="selectedComponent2">
-                <span v-if="!selectedComponent2.label[language.id].edit">
-
-                    <i class="fa fa-commenting-o fa-pull-left"></i>
-                    <span @click="editMe(components[selectedComponent2.value].label[language.id])">[[ components[selectedComponent2.value].label[language.id].value ]]</span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(components[selectedComponent2.value].label[language.id])"></i>
-                </span>
-                        <div v-if="components[selectedComponent2.value].label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="components[selectedComponent2.value].label[language.id].edit" @click="closeEditMe(components[selectedComponent2.value].label[language.id])"></i>
-                          <h5><i class="fa fa-commenting-o fa-pull-left"></i>Label</h5> <input class="full-width" v-model="components[selectedComponent2.value].label[language.id].value" @keyup.enter="closeEditMe(components[selectedComponent2.value].label[language.id])">
-                        </div>
-                      </li>
-
-
-                    </ul>
-
-                  </li>
-                </ul>
-                <!-- End edit BaseProduct/ Components -->
-              </div>
-            </div>
-            <!-- End Product Names  -->
-            <div class="row col-xs-12 col-sm-6 col-md-6" v-if="show_material">
-              <!-- Product Materials -->
-              <div class="margin-bottom">
-                <multiselect
-                        label="search"
-                        tag-placeholder="Add this as a new Material"
-                        track-by="value"
-                        v-model="selectedMaterials"
-                        :allow-empty="true"
-                        :custom-label="customOptionLabel"
-                        :hide-selected="true"
-                        :multiple="true"
-                        :options="optionsMaterial"
-                        :searchable="true"
-                        :taggable="true"
-                        @tag="createMaterialOption"
-                ></multiselect>
-              </div>
-              <div class="row">
-                <div class="actions" v-if="!show_materials_edit">
-                  <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-                  <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMaterials()"><i class="fa fa-industry fa-2x" aria-hidden="true"></i> Set </button>
-                  <button v-if="!selectedMaterials.length > 0" type="button" class="btn btn-default disabled fa-pull-right cursor"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-                  <button v-if="selectedMaterials.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMaterials()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-                </div>
-              </div>
-              <div class="row" v-if="show_materials_edit">
-                <!-- Edit Materials -->
-                <i class="indent" v-if="!selectedMaterials.length > 0">Please select Materials to edit ...</i>
-                <h5 class="indent" v-if="selectedMaterials.length > 0">Edit Materials  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMaterials()"></i></h5>
-                <ul class="indent metatag-list" v-if="selectedMaterials.length > 0">
-                  <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                    <ul>
-                      <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                      <li class="list-group-item" v-for="material in selectedMaterials">
-                  <span v-if="!materials[material.value].label[language.id].edit">
-                    <i class="fa fa-industry fa-pull-left"></i>
-                    [[ materials[material.value].label[language.id].value ]]
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(materials[material.value].label[language.id])"></i>
-                  </span>
-
-                        <div v-if="materials[material.value].label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="materials[material.value].label[language.id].edit" @click="closeEditMe(materials[material.value].label[language.id])"></i>
-                          <h5><i class="fa fa-industry fa-pull-left"></i>Label</h5> <input class="full-width" v-model="materials[material.value].label[language.id].value" @keyup.enter="closeEditMe(materials[material.value].label[language.id])">
-                        </div>
-
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <!-- End edit materials -->
-              </div>
-              <!-- End Product Materials -->
-            </div>
-            <div class="products_metatags row col-xs-12 col-sm-6 col-md-6" @click.stop v-if="show_metatags">
-              <!-- Meta Tags -->
-              <div class="margin-bottom">
-                <multiselect
-                        label="search"
-                        tag-placeholder="Add this as a new Metatag"
-                        track-by="value"
-                        v-model="selectedMetatags"
-                        :allow-empty="true"
-                        :custom-label="customOptionLabel"
-                        :hide-selected="true"
-                        :multiple="true"
-                        :options="optionsMetatag"
-                        :searchable="true"
-                        :taggable="true"
-                        @tag="createMetatagOption"
-                ></multiselect>
-              </div>
-              <div class="row">
-                <div class="actions" v-if="!show_metatags_edit">
-                  <button v-if="!selectedMetatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-                  <button v-if="selectedMetatags.length > 0" type="button" class="btn btn-success fa-pull-right cursor" @click="saveMetatags()" title="Set selected metatags on active products"><i class="fa fa-tags fa-2x" aria-hidden="true"></i> Set </button>
-
-                  <span v-if="!selectedMetatags.length > 0">
-            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile </button>
-            <button type="button" class="btn btn-default fa-pull-right cursor disabled" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible </button>
-          </span>
-                  <span v-if="selectedMetatags.length > 0">
-            <button type="button" class="btn btn-success fa-pull-right cursor" @click="visibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye fa-2x" aria-hidden="true"></i> Visibile</button>
-            <button type="button" class="btn btn-warning fa-pull-right cursor" @click="invisibleMetatags()" title="Switch visibility of selected metatags"><i class="fa fa-eye-slash fa-2x" aria-hidden="true"></i> Invisible</button>
-          </span>
-
-                  <button v-if="!selectedMetatags.length > 0" type="button" class="btn btn-default fa-pull-right cursor disabled" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-                  <button v-if="selectedMetatags.length > 0" type="button" class="btn btn-warning fa-pull-right cursor" @click="editMetatags()" title="Edit selected metatags"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Edit </button>
-
-                </div>
-              </div>
-              <div class="row" v-if="show_metatags_edit">
-                <!-- Edit Metatags -->
-                <i class="indent" v-if="!selectedMetatags.length > 0">Please select Metatags to edit ...</i>
-                <h5 class="indent" v-if="selectedMetatags.length > 0">Edit Metatags  <i class="fa fa-times-circle-o fa-2x fa-pull-right close-edit-metatags cursor" aria-hidden="true" @click="closeEditMetatags()"></i></h5>
-                <ul class="indent metatag-list" v-if="selectedMetatags.length > 0">
-                  <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                    <ul>
-                      <li><span v-bind:class="'flag-icon fa-pull-left '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span></li>
-                      <li class="list-group-item" v-for="metatag in selectedMetatags">
-                  <span v-if="!metatags[metatag.id].label[language.id].edit">
-                    <i class="fa fa-tag fa-pull-left"></i>
-                    [[ metatags[metatag.id].label[language.id].value ]]
-                    <span class="alias" v-if="metatags[metatag.id].alias[language.id].value.length > 0">
-                      <i class="fa fa-tags"></i>[[ metatags[metatag.id].alias[language.id].value ]]
-                    </span>
-                     <i class="fa fa-pull-right fa-pencil cursor" @click="editMe(metatags[metatag.id].label[language.id])"></i>
-                  </span>
-                        <div v-if="metatags[metatag.id].label[language.id].edit">
-                          <i class="fa fa-pull-right fa-times-circle-o cursor" style="margin-top:-10px;" v-if="metatags[metatag.id].label[language.id].edit" @click="closeEditMe(metatags[metatag.id].label[language.id])"></i>
-                          <h5><i class="fa fa-tag fa-pull-left"></i>Label</h5> <input class="full-width" v-model="metatags[metatag.id].label[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
-                        </div>
-                        <div v-if="metatags[metatag.id].label[language.id].edit">
-                          <h5><i class="fa fa-tags"></i> Aliases</h5>
-                          <input class="full-width" v-model="metatags[metatag.id].alias[language.id].value" @keyup.enter="closeEditMe(metatags[metatag.id].label[language.id])">
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <!-- End edit metatags -->
-              </div>
-              <!-- End Meta Tag -->
-            </div>
-            <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translations">
-              <!-- Translation stuff -->
-              <div>
-                <h4 class="base_products">
-                  <i v-if="!show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  <i v-if="show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                  Base Products
-                </h4>
-                <p v-if="show_translation_base_products" class="translation_table base_products">
-                  <vue-bootstrap-table
-                          :columns="columns"
-                          :values="optionsBaseProduct"
-                          :show-filter="true"
-                          :show-column-picker="false"
-                          :sortable="true"
-                          :paginated="false"
-                          :multi-column-sortable="true"
-                          :filter-case-sensitive="false"
-                  ></vue-bootstrap-table>
-                </p>
-              </div>
-              <div>
-                <h4 class="components">
-                  <i v-if="!show_translation_components" @click="toggleTranslationVisibility('components')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  <i v-if="show_translation_components" @click="toggleTranslationVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                  Components
-                </h4>
-                <p v-if="show_translation_components" class="translation_table components"></p>
-              </div>
-              <div>
-                <h4 class="materials">
-                  <i v-if="!show_translation_materials" @click="toggleTranslationVisibility('materials')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  <i v-if="show_translation_materials" @click="toggleTranslationVisibility('materials')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                  Materials
-                </h4>
-                <p v-if="show_translation_materials" class="translation_table materials">table with all existing ressources</p>
-              </div>
-              <div>
-                <h4 class="metatags">
-                  <i v-if="!show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  <i v-if="show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                  Metatags
-                </h4>
-                <p v-if="show_translation_metatags" class="translation_table metatags">table with all existing ressources</p>
-              </div>
-              <div>
-                <h4 class="product_descriptions">
-                  <i v-if="!show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  <i v-if="show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                  Product Descriptions
-                </h4>
-                <p v-if="show_translation_descriptions" class="translation_table product_descriptions">table with all existing ressources</p>
-              </div>
-            </div>
-            <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
-              <!-- Settings & Messages -->
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <h5>BaseProducts & Components & Materials & Metatags</h5>
-                  <a href="#" class="export cursor" @click="clearAll()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All Select boxes ... fresh start </a>
-                  <b style="font-size:2em"> | </b>
-                  <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
-                  <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
-
-                  <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
-                  <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
-                  <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
-                  <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
-                  <a href="#" class="export cursor" @click="debugSettings()">settings</a>
-                </li>
-                <li class="list-group-item">
-                  <h5>Messages</h5>
-                  <a href="#" class="export cursor" @click="addMessage('Test message added for demo purpose.', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
-                  <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-                  <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
-                </li>
-              </ul>
-              <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
-              <ul class="list-group">
-                <li class="list-group-item" v-for="message in messages_danger">
-                  <div v-bind:class="'alert alert-' + message.type" >
-                    <i class="date">[[message.date]]:</i>
-                    <span>[[message.message]]</span>
-                    <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-                  </div>
-
-                </li>
-              </ul>
-              <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
-              <ul class="list-group">
-                <li class="list-group-item" v-for="message in messages_success">
-                  <div v-bind:class="'alert alert-' + message.type" >
-                    <i class="date">[[message.date]]:</i>
-                    <span>[[message.message]]</span>
-                    <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-                  </div>
-                </li>
-              </ul>
-              <!-- End Settings & Messages -->
-            </div>
-          </div>
-        </div>="true"></i>
+          <i v-if="show_translation_descriptions" @click="toggleTranslationVisibility('descriptions')" class="fa fa-minus-square-o" aria-hidden="true"></i>
           Product Descriptions
         </h4>
         <p v-if="show_translation_descriptions" class="translation_table product_descriptions">table with all existing ressources</p>

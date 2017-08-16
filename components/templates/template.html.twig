@@ -455,16 +455,23 @@
           Base Products
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
-          <vue-bootstrap-table
-                  :columns="columns"
-                  :values="optionsBaseProduct"
-                  :show-filter="true"
-                  :show-column-picker="false"
-                  :sortable="true"
-                  :paginated="false"
-                  :multi-column-sortable="true"
-                  :filter-case-sensitive="false"
-          ></vue-bootstrap-table>
+
+          <datatable
+                  :source="translationsBaseProducts"
+                  :editable="true"
+                  :threshold="table.threshold">
+            <datatable-column v-for = "column in table.columns.default"
+                              :id = "column.id"
+                              :label = "column.label"
+                              :width = "column.width"
+                              :sortable="column.sortable"
+                              :groupable="column.groupable"
+                              :aggregators="column.aggregators"
+                              :formatter="column.formatter">
+              <span  v-bind:class="'flag-icon ' + column.icon"></span>
+            </datatable-column>
+          </datatable>
+
         </p>
       </div>
       <div>
