@@ -14,7 +14,7 @@
   <script src="./assets/date_fns.min.js"></script>
   <script src="./assets/datatable.components.bundle.js"></script>
   <script src="./assets/intro.min.js"></script>
-  
+
   <!-- load data -->
   <script src="config/base_products.js"></script>
   <script src="config/components.js"></script>
@@ -490,7 +490,6 @@
           Base Products
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
-
           <datatable
                   :source="translationsBaseProducts"
                   :editable="true"
@@ -506,7 +505,6 @@
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
           </datatable>
-
         </p>
       </div>
       <div>
@@ -515,7 +513,23 @@
           <i v-if="show_translation_components" @click="toggleTranslationVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
           Components
         </h4>
-        <p v-if="show_translation_components" class="translation_table components"></p>
+        <p v-if="show_translation_components" class="translation_table components">
+          <datatable
+                  :source="translationsComponents"
+                  :editable="true"
+                  :threshold="table.threshold">
+            <datatable-column v-for = "column in table.columns.default"
+                              :id = "column.id"
+                              :label = "column.label"
+                              :width = "column.width"
+                              :sortable="column.sortable"
+                              :groupable="column.groupable"
+                              :aggregators="column.aggregators"
+                              :formatter="column.formatter">
+              <span  v-bind:class="'flag-icon ' + column.icon"></span>
+            </datatable-column>
+          </datatable>
+        </p>
       </div>
       <div>
         <h4 class="materials">
@@ -523,7 +537,23 @@
           <i v-if="show_translation_materials" @click="toggleTranslationVisibility('materials')" class="fa fa-minus-square-o" aria-hidden="true"></i>
           Materials
         </h4>
-        <p v-if="show_translation_materials" class="translation_table materials">table with all existing ressources</p>
+        <p v-if="show_translation_materials" class="translation_table materials">
+          <datatable
+                  :source="translationsMaterials"
+                  :editable="true"
+                  :threshold="table.threshold">
+            <datatable-column v-for = "column in table.columns.default"
+                              :id = "column.id"
+                              :label = "column.label"
+                              :width = "column.width"
+                              :sortable="column.sortable"
+                              :groupable="column.groupable"
+                              :aggregators="column.aggregators"
+                              :formatter="column.formatter">
+              <span  v-bind:class="'flag-icon ' + column.icon"></span>
+            </datatable-column>
+          </datatable>
+        </p>
       </div>
       <div>
         <h4 class="metatags">
@@ -531,7 +561,23 @@
           <i v-if="show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
           Metatags
         </h4>
-        <p v-if="show_translation_metatags" class="translation_table metatags">table with all existing ressources</p>
+        <p v-if="show_translation_metatags" class="translation_table metatags">
+          <datatable
+                  :source="translationsMetatags"
+                  :editable="true"
+                  :threshold="table.threshold">
+            <datatable-column v-for = "column in table.columns.default"
+                              :id = "column.id"
+                              :label = "column.label"
+                              :width = "column.width"
+                              :sortable="column.sortable"
+                              :groupable="column.groupable"
+                              :aggregators="column.aggregators"
+                              :formatter="column.formatter">
+              <span  v-bind:class="'flag-icon ' + column.icon"></span>
+            </datatable-column>
+          </datatable>
+        </p>
       </div>
       <div>
         <h4 class="product_descriptions">

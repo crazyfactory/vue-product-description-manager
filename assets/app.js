@@ -500,6 +500,48 @@ new Vue({
             else {
                 return []
             }
+        },
+        translationsComponents: function () {
+            if (ComponentOptions && ComponentOptions.content) {
+                var response = []
+                ComponentOptions.content.forEach(function (option, index) {
+                    if(option.name !== '-'){
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+            else {
+                return []
+            }
+        },
+        translationsMaterials: function () {
+            if (MaterialOptions && MaterialOptions.content) {
+                var response = []
+                MaterialOptions.content.forEach(function (option, index) {
+                    if(option.name !== '-'){
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+            else {
+                return []
+            }
+        },
+        translationsMetatags: function () {
+            if (MetatagOptions && MetatagOptions.content) {
+                var response = []
+                MetatagOptions.content.forEach(function (option, index) {
+                    if(option.name !== '-'){
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+            else {
+                return []
+            }
         }
 
     },
