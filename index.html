@@ -494,7 +494,7 @@
                   :source="translationsBaseProducts"
                   :editable="true"
                   :threshold="table.threshold">
-            <datatable-column v-for = "column in table.columns.default"
+            <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
                               :width = "column.width"
@@ -518,7 +518,7 @@
                   :source="translationsComponents"
                   :editable="true"
                   :threshold="table.threshold">
-            <datatable-column v-for = "column in table.columns.default"
+            <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
                               :width = "column.width"
@@ -542,7 +542,7 @@
                   :source="translationsMaterials"
                   :editable="true"
                   :threshold="table.threshold">
-            <datatable-column v-for = "column in table.columns.default"
+            <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
                               :width = "column.width"
@@ -566,7 +566,7 @@
                   :source="translationsMetatags"
                   :editable="true"
                   :threshold="table.threshold">
-            <datatable-column v-for = "column in table.columns.default"
+            <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
                               :width = "column.width"
@@ -636,6 +636,7 @@
     </div>
   </div>
 </div>
+
 <script src="assets/app.js"></script>
 </body>
 </html>
