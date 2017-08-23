@@ -566,6 +566,14 @@ new Vue({
             else {
                 return []
             }
+        },
+        validNewRessource: function(){
+            if(this.newRessourceType=='' || this.newRessourceLabelDefault==''){
+                return false
+            }
+            else {
+                return true
+            }
         }
 
     },
@@ -610,6 +618,9 @@ new Vue({
                 this.products = this.products.concat(my_product_list)
                 this.newProduct = ''
             }
+        },
+        addRessource: function (){
+            console.log('add ressource')
         },
         clearSettings: function () {
             console.log('BEFORE')
