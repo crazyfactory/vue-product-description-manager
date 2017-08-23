@@ -141,6 +141,13 @@ new Vue({
         selectedProductFilterIndex: null,
         selectedProducts: [],
 
+        newRessourceType:'',
+        newRessourceLabelDefault:'',
+        newRessourceLabelDe:'',
+        newRessourceLabelEnUS:'',
+        newRessourceLabelNl:'',
+        newRessourceAlias:'',
+
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
@@ -158,6 +165,7 @@ new Vue({
         remove_mode_material: false,
         remove_mode_metatag: false,
         show_actionbar: false,
+        show_add_new:false,
         show_export: false,
         show_load: true,
         show_material: false,
@@ -288,6 +296,18 @@ new Vue({
                 productStorage.save(products)
             },
             deep: true
+        },
+        newRessourceLabelDefault: function (newValue, oldValue) {
+            if(this.newRessourceLabelEnUS === '' || this.newRessourceLabelEnUS === oldValue){
+                this.newRessourceLabelEnUS = newValue
+            }
+
+            if(this.newRessourceLabelDe === '' || this.newRessourceLabelDe === oldValue){
+                this.newRessourceLabelDe = newValue
+            }
+            if(this.newRessourceLabelNl === '' || this.newRessourceLabelNl === oldValue){
+                this.newRessourceLabelNl = newValue
+            }
         }
     },
     computed: {
@@ -484,7 +504,13 @@ new Vue({
             })
             return products
         },
-        translationsBaseProducts: function () {
+        translationsBaseProducts: {
+            set: function (something) {
+                console.log('Save me');
+                console.log(something)
+
+            },
+            get: function () {
                 if (BaseProductOptions && BaseProductOptions.content) {
                     var response = []
                     BaseProductOptions.content.forEach(function (option, index) {
@@ -497,6 +523,7 @@ new Vue({
                 else {
                     return []
                 }
+            }
         },
         translationsComponents: function () {
             if (ComponentOptions && ComponentOptions.content) {
@@ -598,11 +625,6 @@ new Vue({
             this.selectedMaterials = []
             this.selectedMetatags = []
         },
-
-        closeEditMe: function (item) {
-            item.edit = false
-            item.value = item.value.replace(/\r?\n|\r/g, "")
-        },
         customLabel: function (option) {
             return option[this.editorLanguage];
         },
@@ -643,6 +665,13 @@ new Vue({
             console.log(values)
 
         },
+        debugRessources: function(){
+            console.log('Debug');
+            console.log(this.newRessourceType)
+            console.log(this.newRessourceLabelEnUS)
+            console.log(this.newRessourceLabelDefault)
+            console.log(this.newRessourceLabelDe)
+        },
         debugComponents: function () {
             console.log("Local (app.components_local)")
             console.log(this.components_local)
@@ -662,9 +691,6 @@ new Vue({
             console.log('aus die maus')
         },
         debugMetatags: function () {
-            console.log("Local (app.metatags_local)")
-            console.log(this.metatags_local)
-            console.log("ALL Metatags (app.metatags)")
             console.log(this.metatags)
             console.log('ferdsch')
         },
@@ -685,13 +711,6 @@ new Vue({
             }
             return option['label'][this.editorLanguage]['value']
         },
-        editMe: function (item, item_parent) {
-            item.edit = true
-            if (item_parent) {
-                item_parent.dirty = true
-            }
-        },
-
         exportAllProducts: function () {
             dirtyProducts = this.dirtyProducts
 
@@ -837,6 +856,7 @@ new Vue({
             this.show_preview = false
             this.show_message = false
             this.show_load = true
+            this.show_add_new = false
             this.isFullScreen = false
             this.headline_icon = ''
 
@@ -882,6 +902,13 @@ new Vue({
                     this.show_translations = true
                     this.headline = 'Translations'
                     this.headline_icon = "fa fa-globe"
+                    break
+                case 'add_new':
+                    this.show_load = false
+                    this.isFullScreen = true
+                    this.show_add_new = true
+                    this.headline = 'Create Ressources'
+                    this.headline_icon = "fa fa-plus"
                     break
             }
         },

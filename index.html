@@ -27,8 +27,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.css" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-
-
   <link rel="stylesheet" type="text/css" href="assets/style.css" />
   <link rel="stylesheet" type="text/css" href="assets/vue-multiselect.min.css" />
 </head>
@@ -36,6 +34,7 @@
 <div id="app" v-bind:class="editorLanguage">
   <div class="app-nav">
     <nav v-bind:class="headline" @click.prevent>
+      <a href="#" class="name" @click="makeActive('add_new')"><i class="fa fa-plus fa-2x fa-pull-right menu-icon" aria-hidden="true"></i>&nbsp;</a>
       <a href="#" class="name" @click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="name" @click="makeActive('material')">Material <i class="fa fa-industry fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
       <a href="#" class="metatags" @click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
@@ -335,7 +334,6 @@
                       <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <ul>
                           <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-
                             <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
                                   v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
                             [[ product.cached_metatags[language.id].value ]]
@@ -491,9 +489,10 @@
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
           <datatable
-                  :source="translationsBaseProducts"
+                  v-bind:source="translationsBaseProducts"
                   :editable="true"
                   :threshold="table.threshold">
+            <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" width="20" >&nbsp;</datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
@@ -504,6 +503,11 @@
                               :formatter="column.formatter">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
+            <template slot="actions_baseproducts" scope="cell" v-bind:class="'active_'+cell.row.is_active">
+              <a v-if="cell.row.is_active"><i class="fa fa-eye-slash 2x" aria-hidden="true"></i></a>
+              <a v-if="!cell.row.is_active" ><i class="fa fa-eye 2x" aria-hidden="true"></i></a>
+              <a><i class="fa fa-trash-o 2x" aria-hidden="true"></i></a>
+            </template>
           </datatable>
         </p>
       </div>
@@ -566,6 +570,7 @@
                   :source="translationsMetatags"
                   :editable="true"
                   :threshold="table.threshold">
+            <datatable-column id="actions" label="Actions" :sortable="false" :groupable="false"></datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
@@ -576,6 +581,11 @@
                               :formatter="column.formatter">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
+            <template slot="actions" scope="cell">
+              <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+              <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+              <a><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            </template>
           </datatable>
         </p>
       </div>
@@ -586,6 +596,39 @@
           Product Descriptions
         </h4>
         <p v-if="show_translation_descriptions" class="translation_table product_descriptions">table with all existing ressources</p>
+      </div>
+    </div>
+    <!-- Create NEW BaseProduct/ Component/Material/Metatag -->
+    <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_add_new">
+      <!-- Translation stuff -->
+      <div class="addNewForm">
+        <h4>Create a new ... </h4>
+        <p>
+          <select v-model="newRessourceType">
+            <option disabled value="">Please select one</option>
+            <option value="base_product">Base Product</option>
+            <option value="component">Component</option>
+            <option value="material">Material</option>
+            <option value="metatag">Metatag</option>
+          </select>
+        </p>
+        <h4>Labels</h4>
+        <p>
+          <label for="newRessourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
+          <input id="newRessourceLabelDefault" v-model="newRessourceLabelDefault" placeholder="Default label (en-GB)"><br>
+
+          <label for="newRessourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
+          <input id="newRessourceLabelDe" v-model="newRessourceLabelDe" placeholder="German label (de)"><br>
+
+          <label for="newRessourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
+          <input id="newRessourceLabelEnUS" v-model="newRessourceLabelEnUS" placeholder="American label (en-US)"><br>
+
+          <label for="newRessourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
+          <input id="newRessourceLabelNl" v-model="newRessourceLabelNl" placeholder="Dutch label (nl)">
+        </p>
+        <p>
+
+        </p>
       </div>
     </div>
     <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
@@ -636,6 +679,7 @@
     </div>
   </div>
 </div>
+
 
 <script src="assets/app.js"></script>
 </body>
