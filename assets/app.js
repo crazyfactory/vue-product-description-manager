@@ -125,9 +125,6 @@ var settingStorage = {
 }
 
 
-Vue.component('translations-table', {
-    template: '<h3>Rasta</h3>'
-})
 
 new Vue({
     el: '#app',
@@ -488,18 +485,18 @@ new Vue({
             return products
         },
         translationsBaseProducts: function () {
-            if (BaseProductOptions && BaseProductOptions.content) {
-                var response = []
-                BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-'){
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-            else {
-                return []
-            }
+                if (BaseProductOptions && BaseProductOptions.content) {
+                    var response = []
+                    BaseProductOptions.content.forEach(function (option, index) {
+                        if(option.name !== '-'){
+                            response.push(option);
+                        }
+                    })
+                    return response
+                }
+                else {
+                    return []
+                }
         },
         translationsComponents: function () {
             if (ComponentOptions && ComponentOptions.content) {

@@ -300,7 +300,6 @@
                       <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                         <ul>
                           <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
-
                             <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
                                   v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
                             [[ product.cached_metatags[language.id].value ]]
@@ -456,9 +455,10 @@
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
           <datatable
-                  :source="translationsBaseProducts"
+                  v-bind:source="translationsBaseProducts"
                   :editable="true"
                   :threshold="table.threshold">
+            <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" width="20" >&nbsp;</datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
@@ -469,6 +469,11 @@
                               :formatter="column.formatter">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
+            <template slot="actions_baseproducts" scope="cell" v-bind:class="'active_'+cell.row.is_active">
+              <a v-if="cell.row.is_active"><i class="fa fa-eye-slash 2x" aria-hidden="true"></i></a>
+              <a v-if="!cell.row.is_active" ><i class="fa fa-eye 2x" aria-hidden="true"></i></a>
+              <a><i class="fa fa-trash-o 2x" aria-hidden="true"></i></a>
+            </template>
           </datatable>
         </p>
       </div>
@@ -531,6 +536,7 @@
                   :source="translationsMetatags"
                   :editable="true"
                   :threshold="table.threshold">
+            <datatable-column id="actions" label="Actions" :sortable="false" :groupable="false"></datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.id"
                               :label = "column.label"
@@ -541,6 +547,11 @@
                               :formatter="column.formatter">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
+            <template slot="actions" scope="cell">
+              <a><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide </a> |
+              <a><i class="fa fa-eye-slash" aria-hidden="true"></i>Show </a> |
+              <a><i class="fa fa-trash-o" aria-hidden="true"></i> Delete </a>
+            </template>
           </datatable>
         </p>
       </div>
