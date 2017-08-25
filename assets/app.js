@@ -1432,7 +1432,7 @@ new Vue({
 
         validRessourceType: function(){
             switch(this.newRessourceType) {
-                case 'Base Producta':
+                case 'Base Product':
                     return this.translationsBaseProducts
                     break
                 case 'Component':
@@ -1452,6 +1452,7 @@ new Vue({
         },
         validateRessourceLabel: function(source){
             has_error = false
+            is_unique = true
 
             // validate that every label has an entry and we dont have duplicates
             if(this.newRessourceLabelDefault==''){
@@ -1474,10 +1475,48 @@ new Vue({
                 this.addMessage('Labels can not be empty. Please fix the indicated fields.', 'info' )
                 return false
             }
-            return true
+
+            _this = this
+            labelDefault = _this.newRessourceLabelDefault
+            labelDe      = _this.newRessourceLabelDe
+            labelEnUS    = _this.newRessourceLabelEnUS
+            labelNl      = _this.newRessourceLabelNl
+
+            error_message='A problem occured while validating your new '+ this.newRessourceType +' request.'
+
             source.forEach( function (item, index) {
 
+                if(labelDefault.toLowerCase() == item['en-GB'].toLowerCase())
+                {
+                    _this.newRessourceLabelDefaultClass= "form-group has-error has-feedback"
+                    has_error = true
+                    error_message=error_message+' The default label (`' + labelDefault + '`) already exists as `'+ item['en-GB'] +'`.'
+                }
+                if(labelDe.toLowerCase() == item['de'].toLowerCase())
+                {
+                    _this.newRessourceLabelDeClass= "form-group has-error has-feedback"
+                    has_error = true
+                    error_message=error_message+' The german label (`' + labelDe + '`) already exists as `'+ item['de'] +'`.'
+                }
+                if(labelEnUS.toLowerCase() == item['en-US'].toLowerCase())
+                {
+                    _this.newRessourceLabelEnUSClass= "form-group has-error has-feedback"
+                    has_error = true
+                    error_message=error_message+' The american label (`' + labelEnUS + '`) already exists as `'+ item['en-US'] +'`.'
+                }
+                if(labelNl.toLowerCase() == item['nl'].toLowerCase())
+                {
+                    _this.newRessourceLabelNlClass= "form-group has-error has-feedback"
+                    has_error = true
+                    error_message=error_message+' The dutch label (`' + labelNl + '`) already exists as `'+ item['nl'] +'`.'
+                }
             })
+            if(has_error){
+                this.addMessage(error_message, 'info' )
+                return false
+            }
+
+            return true
         },
         visibleMetatags: function () {
             var all_products = this.products;

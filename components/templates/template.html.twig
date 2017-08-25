@@ -569,8 +569,7 @@
 
     <div v-bind:class="{ 'well col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_add_new">
       <!-- Translation stuff -->
-
-      <div class="col-xs-6 col-sm-3 col-md-3">
+      <div class="col-xs-6 col-sm-4 col-md-4">
         <h4 v-if="!newRessourceType==''">Let's add a new [[ newRessourceType ]]  </h4>
         <h4 v-if="newRessourceType==''">What you want to create?</h4>
         <p v-bind:class="newRessourceTypeClass">
@@ -583,7 +582,7 @@
           </select>
         </p>
       </div>
-      <div  v-if="newRessourceType!=''" v-bind:class="{ 'col-xs-6 col-sm-6 col-md-6': newRessourceType!='Metatag', 'col-xs-6 col-sm-3 col-md-3':newRessourceType=='Metatag' }">
+      <div  v-if="newRessourceType!=''" class="col-xs-6 col-sm-4 col-md-4" >
         <h4>with labels </h4>
         <p>
             <span v-bind:class="newRessourceLabelDefaultClass">
@@ -604,8 +603,8 @@
             </span>
         </p>
       </div>
-      <div class="col-xs-6 col-sm-3 col-md-3" v-if="newRessourceType=='Metatag'">
-        <h4> and Alias</h4>
+      <div class="col-xs-6 col-sm-4 col-md-4" v-if="newRessourceType=='Metatag'">
+        <h4> and aliases</h4>
         <p>
           <label for="newAliasDefault"><i class="fa fa-tags" aria-hidden="true"></i></label>
           <input class="form-control" id="newAliasDefault" v-model="newRessourceAliasDefault" placeholder="Default Alias (en-GB)"><br>
@@ -628,52 +627,51 @@
       </div>
     </div>
 
-  </div>
-  <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
-    <!-- Settings & Messages -->
-    <ul class="list-group">
-      <li class="list-group-item">
-        <h5>BaseProducts & Components & Materials & Metatags</h5>
-        <a href="#" class="export cursor" @click="clearAll()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All Select boxes ... fresh start </a>
-        <b style="font-size:2em"> | </b>
-        <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
-        <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
+    <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
+      <!-- Settings & Messages -->
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h5>BaseProducts & Components & Materials & Metatags</h5>
+          <a href="#" class="export cursor" @click="clearAll()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All Select boxes ... fresh start </a>
+          <b style="font-size:2em"> | </b>
+          <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
 
-        <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
-        <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
-        <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
-        <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
-        <a href="#" class="export cursor" @click="debugSettings()">settings</a>
-      </li>
-      <li class="list-group-item">
-        <h5>Messages</h5>
-        <a href="#" class="export cursor" @click="addMessage('Test message added for demo purpose.', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
-        <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-        <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
-      </li>
-    </ul>
-    <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
-    <ul class="list-group">
-      <li class="list-group-item" v-for="message in messages_danger">
-        <div v-bind:class="'alert alert-' + message.type" >
-          <i class="date">[[message.date]]:</i>
-          <span>[[message.message]]</span>
-          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-        </div>
+          <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
+          <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
+          <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
+          <a href="#" class="export cursor" @click="debugSettings()">settings</a>
+        </li>
+        <li class="list-group-item">
+          <h5>Messages</h5>
+          <a href="#" class="export cursor" @click="addMessage('Test message added for demo purpose.', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
+          <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
+        </li>
+      </ul>
+      <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="message in messages_danger">
+          <div v-bind:class="'alert alert-' + message.type" >
+            <i class="date">[[message.date]]:</i>
+            <span>[[message.message]]</span>
+            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
+          </div>
 
-      </li>
-    </ul>
-    <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
-    <ul class="list-group">
-      <li class="list-group-item" v-for="message in messages_success">
-        <div v-bind:class="'alert alert-' + message.type" >
-          <i class="date">[[message.date]]:</i>
-          <span>[[message.message]]</span>
-          <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-        </div>
-      </li>
-    </ul>
-    <!-- End Settings & Messages -->
+        </li>
+      </ul>
+      <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="message in messages_success">
+          <div v-bind:class="'alert alert-' + message.type" >
+            <i class="date">[[message.date]]:</i>
+            <span>[[message.message]]</span>
+            <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
+          </div>
+        </li>
+      </ul>
+      <!-- End Settings & Messages -->
+    </div>
   </div>
-</div>
 </div>
