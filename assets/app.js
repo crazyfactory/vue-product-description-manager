@@ -142,11 +142,19 @@ new Vue({
         selectedProducts: [],
 
         newRessourceType:'',
+        newRessourceTypeClass: 'form-goup',
         newRessourceLabelDefault:'',
+        newRessourceLabelDefaultClass:'form-goup',
         newRessourceLabelDe:'',
+        newRessourceLabelDeClass:'form-group',
         newRessourceLabelEnUS:'',
+        newRessourceLabelEnUSClass:'form-group',
         newRessourceLabelNl:'',
-        newRessourceAlias:'',
+        newRessourceLabelNlClass:'form-group',
+        newRessourceAliasDefault:'',
+        newRessourceAliasDe:'',
+        newRessourceAliasEnUS:'',
+        newRessourceAliasNl:'',
 
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
@@ -307,6 +315,17 @@ new Vue({
             }
             if(this.newRessourceLabelNl === '' || this.newRessourceLabelNl === oldValue){
                 this.newRessourceLabelNl = newValue
+            }
+        },
+        newRessourceAliasDefault: function (newValue, oldValue) {
+            if(this.newRessourceAliasEnUS === '' || this.newRessourceAliasEnUS === oldValue){
+                this.newRessourceAliasEnUS = newValue
+            }
+            if(this.newRessourceAliasDe === '' || this.newRessourceAliasDe === oldValue){
+                this.newRessourceAliasDe = newValue
+            }
+            if(this.newRessourceAliasNl === '' || this.newRessourceAliasNl === oldValue){
+                this.newRessourceAliasNl = newValue
             }
         }
     },
@@ -620,7 +639,14 @@ new Vue({
             }
         },
         addRessource: function (){
-            console.log('add ressource')
+
+            //validate Ressourcetype a
+            source = this.validRessourceType()
+            if(source && this.validateRessourceLabel(source))
+            {
+                console.log('Feuer frei')
+            }
+
         },
         clearSettings: function () {
             console.log('BEFORE')
@@ -1403,6 +1429,56 @@ new Vue({
             }
             else return response.join(" ")
         },
+
+        validRessourceType: function(){
+            switch(this.newRessourceType) {
+                case 'Base Producta':
+                    return this.translationsBaseProducts
+                    break
+                case 'Component':
+                    return this.translationsComponents
+                    break
+                case 'Material':
+                    return this.translationsMaterials
+                    break
+                case 'Metatag':
+                    return this.translationsMetatags
+                    break
+                default:
+                    this.addMessage('Please choose a valid Ressource Type', 'info' )
+                    this.newRessourceTypeClass = "form-group has-error has-feedback"
+                    return false
+            }
+        },
+        validateRessourceLabel: function(source){
+            has_error = false
+
+            // validate that every label has an entry and we dont have duplicates
+            if(this.newRessourceLabelDefault==''){
+                this.newRessourceLabelDefaultClass= "form-group has-error has-feedback"
+                has_error=true
+            }
+            if(this.newRessourceLabelDe==''){
+                this.newRessourceLabelDeClass= "form-group has-error has-feedback"
+                has_error=true
+            }
+            if(this.newRessourceLabelEnUS==''){
+                this.newRessourceLabelEnUSClass= "form-group has-error has-feedback"
+                has_error=true
+            }
+            if(this.newRessourceLabelNl==''){
+                this.newRessourceLabelNlClass= "form-group has-error has-feedback"
+                has_error=true
+            }
+            if(has_error){
+                this.addMessage('Labels can not be empty. Please fix the indicated fields.', 'info' )
+                return false
+            }
+            return true
+            source.forEach( function (item, index) {
+
+            })
+        },
         visibleMetatags: function () {
             var all_products = this.products;
             var all_metatags = this.metatags;
@@ -1423,5 +1499,6 @@ new Vue({
                 api.call()
             }
         },
+
     }
 })

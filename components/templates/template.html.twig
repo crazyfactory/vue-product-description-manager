@@ -566,13 +566,15 @@
       </div>
     </div>
     <!-- Create NEW BaseProduct/ Component/Material/Metatag -->
-    <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_add_new">
+
+    <div v-bind:class="{ 'well col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_add_new">
       <!-- Translation stuff -->
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <h4 v-if="!newRessourceType==''">Yeah, let's add a new [[ newRessourceType ]]! </h4>
+
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <h4 v-if="!newRessourceType==''">Let's add a new [[ newRessourceType ]]  </h4>
         <h4 v-if="newRessourceType==''">What you want to create?</h4>
-        <p>
-          <select v-model="newRessourceType">
+        <p v-bind:class="newRessourceTypeClass">
+          <select v-model="newRessourceType"class="form-control" >
             <option disabled value="">Please select one</option>
             <option>Base Product</option>
             <option>Component</option>
@@ -581,29 +583,51 @@
           </select>
         </p>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <h4>Let's set some labels ...</h4>
+      <div  v-if="newRessourceType!=''" v-bind:class="{ 'col-xs-6 col-sm-6 col-md-6': newRessourceType!='Metatag', 'col-xs-6 col-sm-3 col-md-3':newRessourceType=='Metatag' }">
+        <h4>with labels </h4>
         <p>
-          <label for="newRessourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
-          <input id="newRessourceLabelDefault" v-model="newRessourceLabelDefault" placeholder="Default label (en-GB)"><br>
-
-          <label for="newRessourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
-          <input id="newRessourceLabelDe" v-model="newRessourceLabelDe" placeholder="German label (de)"><br>
-
-          <label for="newRessourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
-          <input id="newRessourceLabelEnUS" v-model="newRessourceLabelEnUS" placeholder="American label (en-US)"><br>
-
-          <label for="newRessourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
-          <input id="newRessourceLabelNl" v-model="newRessourceLabelNl" placeholder="Dutch label (nl)">
+            <span v-bind:class="newRessourceLabelDefaultClass">
+                <label for="newRessourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
+                <input class="form-control" id="newRessourceLabelDefault" v-model="newRessourceLabelDefault" placeholder="Default label (en-GB)">
+            </span><br>
+          <span v-bind:class="newRessourceLabelDeClass">
+                <label for="newRessourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
+                <input class="form-control" id="newRessourceLabelDe" v-model="newRessourceLabelDe" placeholder="German label (de)">
+            </span><br>
+          <span v-bind:class="newRessourceLabelEnUSClass">
+                <label for="newRessourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
+                <input class="form-control" id="newRessourceLabelEnUS" v-model="newRessourceLabelEnUS" placeholder="American label (en-US)">
+            </span><br>
+          <span v-bind:class="newRessourceLabelNlClass">
+                <label for="newRessourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
+                <input class="form-control" id="newRessourceLabelNl" v-model="newRessourceLabelNl" placeholder="Dutch label (nl)">
+            </span>
         </p>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-6">
+      <div class="col-xs-6 col-sm-3 col-md-3" v-if="newRessourceType=='Metatag'">
+        <h4> and Alias</h4>
+        <p>
+          <label for="newAliasDefault"><i class="fa fa-tags" aria-hidden="true"></i></label>
+          <input class="form-control" id="newAliasDefault" v-model="newRessourceAliasDefault" placeholder="Default Alias (en-GB)"><br>
+
+          <label for="newAliasDe"><i class="fa fa-tags" aria-hidden="true"></i></label>
+          <input class="form-control" id="newAliasDe" v-model="newRessourceAliasDe" placeholder="German Alias (de)"><br>
+
+          <label for="newAliasEnUS"><i class="fa fa-tags" aria-hidden="true"></i></label>
+          <input class="form-control" id="newAliasEnUS" v-model="newRessourceAliasEnUS" placeholder="American alias (en-US)"><br>
+
+          <label for="newAliasNl"><i class="fa fa-tags" aria-hidden="true"></i></label>
+          <input class="form-control" id="newAliasNl" v-model="newRessourceAliasNl" placeholder="Dutch alias (nl)">
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12">
         <button v-if="!validNewRessource" type="button" class="btn btn-default disabled fa-pull-right cursor">Not ready yet ...</button>
         <button v-if="validNewRessource" type="button" class="btn btn-success fa-pull-right cursor" @click="addRessource">
           Add [[ newRessourceType ]]
         </button>
       </div>
     </div>
+
   </div>
   <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
     <!-- Settings & Messages -->

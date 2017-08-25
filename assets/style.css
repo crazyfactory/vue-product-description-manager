@@ -544,3 +544,9 @@ label.white-space{
     content: "";
     font-family: sans-serif;
 }
+
+.form-control{
+    width:80%;
+    margin-bottom:1em;
+    display: inline-block;
+}
