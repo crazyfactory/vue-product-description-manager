@@ -125,7 +125,6 @@ var settingStorage = {
 }
 
 
-
 new Vue({
     el: '#app',
     components: {
@@ -639,14 +638,31 @@ new Vue({
             }
         },
         addRessource: function (){
-
             //validate Ressourcetype a
             source = this.validRessourceType()
             if(source && this.validateRessourceLabel(source))
             {
-                console.log('Feuer frei')
-            }
+                ressource={
+                    'ressourceType':this.newRessourceType,
+                    'is_active':"1",
+                    'name':'dummy',
+                    'de': this.newRessourceLabelDe,
+                    'en-GB':this.newRessourceLabelDefault,
+                    'en-US':this.newRessourceLabelEnUS,
+                    'nl':this.newRessourceLabelNl
+                }
 
+                if (hasApi) {
+                    // clear product input
+                    api.app = this
+                    api.data = ressource
+                    api.action = 'add_ressource'
+                    api.call()
+                }
+                else{
+
+                }
+            }
         },
         clearSettings: function () {
             console.log('BEFORE')
@@ -1485,7 +1501,6 @@ new Vue({
             error_message='A problem occured while validating your new '+ this.newRessourceType +' request.'
 
             source.forEach( function (item, index) {
-
                 if(labelDefault.toLowerCase() == item['en-GB'].toLowerCase())
                 {
                     _this.newRessourceLabelDefaultClass= "form-group has-error has-feedback"
