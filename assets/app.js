@@ -683,14 +683,6 @@ new Vue({
         customLabel: function (option) {
             return option[this.editorLanguage];
         },
-        customOptionLabel: function (option) {
-            if (!option['label']) return option
-
-            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value'] === "") {
-                return option['label']['en-GB']['value']
-            }
-            return option['label'][this.editorLanguage]['value']
-        },
         deactivateMessages: function () {
             this.messages.forEach(function (message) {
                 message.show = false
@@ -734,20 +726,19 @@ new Vue({
             console.log(this.components)
         },
         debugBaseProducts: function () {
-            console.log("ALL BaseProducts (app.base_products)")
-            //console.log(this.baseProductOptions)
+            console.log("ALL BaseProducts")
             console.log(this.selectedBaseProduct)
+            console.log(this.optionsBaseProduct)
         },
         debugMaterials: function () {
-            console.log("Local (app.materials_local)")
-            console.log(this.materials_local)
             console.log("ALL Materials (app.materials)")
-            console.log(this.materials)
-            console.log('aus die maus')
+            console.log(this.selectedMaterials)
+            console.log(this.optionsMaterial)
         },
         debugMetatags: function () {
-            console.log(this.metatags)
-            console.log('ferdsch')
+            console.log('All Metatags')
+            console.log(this.selectedMetatags)
+            console.log(this.optionsMetatag)
         },
         debugMe: function (me) {
             console.log(me)
@@ -757,33 +748,6 @@ new Vue({
         },
         debugSettings: function () {
             console.log(this.settings)
-        },
-        indexOptionLabel: function (option) {
-            if (!option['label']) return option
-
-            if (typeof option['label'][this.editorLanguage] === 'undefined' || option['label'][this.editorLanguage]['value'] === "") {
-                return option['label']['en-GB']['value']
-            }
-            return option['label'][this.editorLanguage]['value']
-        },
-        exportAllProducts: function () {
-            dirtyProducts = this.dirtyProducts
-
-            if (!hasApi) {
-                productList = []
-                dirtyProducts.forEach(function (product) {
-                    product.dirty = false
-                    productList.push(product.modelCode)
-                })
-                msg = productList.join(", ") + ' were succesfully saved'
-                this.addMessage(msg, 'success')
-            }
-            else {
-                me = this
-                dirtyProducts.forEach(function (product) {
-                    me.exportProduct(product)
-                })
-            }
         },
         exportProduct: function (product) {
             dict_materials = this.materials
@@ -1005,44 +969,6 @@ new Vue({
                 })
             })
             return products
-        },
-        optionFactory: function (value) {
-            // no spaces and all lowercase for id/value
-            normalized_value = value.replace(/ /g, "_").toLowerCase()
-
-            // prepare label structure
-            var label = {}
-            var alias = {}
-            this.settings.supportedLanguages.forEach(function (language) {
-                // create index for localization
-                label[language.id] =
-                    {
-                        "value": value,
-                        "edit": false,
-                        "active": true
-                    }
-                alias[language.id] =
-                    {
-                        "value": "",
-                        "edit": false,
-                        "active": true
-                    }
-
-            })
-
-
-            var option = {
-                alias: alias,
-                dirty: true,
-                id: normalized_value,
-                invisible: false,
-                label: label,
-                new: true,
-                search: value,
-                value: normalized_value
-            }
-
-            return option
         },
         invisibleMetatags: function () {
             var all_products = this.products
