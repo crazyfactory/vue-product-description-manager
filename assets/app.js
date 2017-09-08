@@ -332,7 +332,6 @@ new Vue({
         optionsBaseProduct: function (){
             currentLanguage = this.editorLanguage
             stash = []
-
             BaseProductOptions.content.forEach(function (item) {
                 search = item[currentLanguage]
                 if (item.is_active==1){
@@ -383,7 +382,6 @@ new Vue({
         },
         baseProducts: function () {
             stash = {}
-
             this.optionsBaseProduct.forEach(function (item) {
                 stash[item.value] = item
             })
@@ -640,16 +638,23 @@ new Vue({
         addRessource: function (){
             //validate Ressourcetype a
             source = this.validRessourceType()
+
             if(source && this.validateRessourceLabel(source))
             {
-                ressource={
+                ressource = {
                     'ressourceType':this.newRessourceType,
-                    'is_active':"1",
-                    'name':'dummy',
+                    'name': this.newRessourceLabelDefault.replace(" ", "_").toLowerCase(),
+                    'is_active': '1',
+                    'en-GB': this.newRessourceLabelDefault,
+                    'en-US': this.newRessourceLabelEnUS,
                     'de': this.newRessourceLabelDe,
-                    'en-GB':this.newRessourceLabelDefault,
-                    'en-US':this.newRessourceLabelEnUS,
-                    'nl':this.newRessourceLabelNl
+                    'nl': this.newRessourceLabelNl,
+                    'es': this.newRessourceLabelDefault,
+                    'fr': this.newRessourceLabelDefault,
+                    'pt': this.newRessourceLabelDefault,
+                    'it': this.newRessourceLabelDefault,
+                    'ru': this.newRessourceLabelDefault,
+                    'sv': this.newRessourceLabelDefault
                 }
 
                 if (hasApi) {
@@ -658,9 +663,6 @@ new Vue({
                     api.data = ressource
                     api.action = 'add_ressource'
                     api.call()
-                }
-                else{
-
                 }
             }
         },
@@ -1411,9 +1413,6 @@ new Vue({
         removeCustomName: function (item) {
             item.value = item.original_value
             item.edit = false
-        },
-        renderTableCol: function (arg1, arg2) {
-            console.log('different scope baby');
         },
         validateNewProducts: function (){
 
