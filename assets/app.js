@@ -155,6 +155,30 @@ new Vue({
         newRessourceAliasEnUS:'',
         newRessourceAliasNl:'',
 
+        dirtyTranslations: {
+            isDirty:false,
+            baseProducts:{
+                isDirty: false,
+                entryList: [],
+                stash: []
+            },
+            components: {
+                isDirty: false,
+                entryList: [],
+                stash: []
+            },
+            materials: {
+                isDirty: false,
+                entryList: [],
+                stash: []
+            },
+            metatags: {
+                isDirty: false,
+                entryList: [],
+                stash: []
+            },
+        },
+
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
@@ -520,26 +544,22 @@ new Vue({
             })
             return products
         },
-        translationsBaseProducts: {
-            set: function (something) {
-                console.log('Save me');
-                console.log(something)
+        translationsBaseProducts: function(){
+            console.log('GET translationsBaseProducts')
 
-            },
-            get: function () {
-                if (BaseProductOptions && BaseProductOptions.content) {
-                    var response = []
-                    BaseProductOptions.content.forEach(function (option, index) {
-                        if(option.name !== '-'){
-                            response.push(option);
-                        }
-                    })
-                    return response
-                }
-                else {
-                    return []
-                }
+            if (BaseProductOptions && BaseProductOptions.content) {
+                var response = []
+                BaseProductOptions.content.forEach(function (option, index) {
+                    if(option.name !== '-'){
+                        response.push(option);
+                    }
+                })
+                return response
             }
+            else {
+                return []
+            }
+
         },
         translationsComponents: function () {
             if (ComponentOptions && ComponentOptions.content) {
@@ -831,6 +851,46 @@ new Vue({
                 my_product = Api_response[random_nr]
                 my_description = my_product.descriptions[language]
                 this.products[index].descriptions[language] = my_description
+            }
+        },
+        saveTranslationUpdate: function(type, cell){
+
+            id = cell.row.id
+            index = this.dirtyTranslations[type]['entryList'].indexOf(id)
+
+            if(index > -1){
+                // remove element from entryList
+                this.dirtyTranslations[type]['entryList'].splice(index,1)
+            }
+            // validate if we still have translations to update
+            if(this.dirtyTranslations[type]['entryList'].length==0){
+                this.dirtyTranslations[type].isDirty = false
+            }
+            // reset all translatrions if we dont have any dirty translations anymore
+            if(!this.dirtyTranslations.baseProducts.isDirty && !this.dirtyTranslations.components.isDirty && !this.dirtyTranslations.materials.isDirty && !this.dirtyTranslations.metatags.isDirty)
+            {
+                // all translations are clean
+                this.dirtyTranslations.isDirty = false
+            }
+            // add DB save here
+            console.log('now please save me to DB')
+
+        },
+        saveTranslationUpdates: function(type){
+            console.log("Lets save all " + type)
+            this.dirtyTranslations[type].isDirty = false
+        },
+        stashUpdate: function(type, cell){
+            // validate that we stash each row only once
+            id = cell.row.id
+            if(this.dirtyTranslations[type]['entryList'].indexOf(id)==-1){
+                // mark Translations as dirty
+                this.dirtyTranslations.isDirty=true
+                // mark type Translations as dirty
+                this.dirtyTranslations[type]['isDirty']=true
+                // add row to stash for update
+                this.dirtyTranslations[type]['entryList'].push(id)
+                this.dirtyTranslations[type]['stash'].push(cell)
             }
         },
         hideMessage: function (message) {
@@ -1370,7 +1430,6 @@ new Vue({
             }
             else return response.join(" ")
         },
-
         validRessourceType: function(){
             switch(this.newRessourceType) {
                 case 'Base Product':

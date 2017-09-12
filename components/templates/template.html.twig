@@ -421,29 +421,37 @@
         <h4 class="base_products">
           <i v-if="!show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
           <i v-if="show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-          Base Products
+          Base Products  <i class="fa fa-floppy-o cursor" title="'Save BaseProduct Translation to database'" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
         </h4>
         <p v-if="show_translation_base_products" class="translation_table base_products">
           <datatable
-                  v-bind:source="translationsBaseProducts"
+                  :source="translationsBaseProducts"
                   :editable="true"
                   :threshold="table.threshold">
             <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" width="20" >&nbsp;</datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
-                              :id = "column.id"
+                              :id = "column.label"
                               :label = "column.label"
                               :width = "column.width"
                               :sortable="column.sortable"
-                              :groupable="column.groupable"
-                              :aggregators="column.aggregators"
-                              :formatter="column.formatter">
+            >
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
-            <template slot="actions_baseproducts" scope="cell" v-bind:class="'active_'+cell.row.is_active">
+            <template slot="actions_baseproducts" scope="cell">
               <a v-if="cell.row.is_active"><i class="fa fa-eye-slash 2x" aria-hidden="true"></i></a>
               <a v-if="!cell.row.is_active" ><i class="fa fa-eye 2x" aria-hidden="true"></i></a>
               <a><i class="fa fa-trash-o 2x" aria-hidden="true"></i></a>
             </template>
+            <template slot="de"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="en-GB" scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="en-US" scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="es"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="fr"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="it"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="nl"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="pt"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="ru"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
+            <template slot="sv"    scope="cell"><input :value="cell.value" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
           </datatable>
         </p>
       </div>
@@ -468,6 +476,16 @@
                               :formatter="column.formatter">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
+            <template slot="de"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="en-GB" scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="en-US" scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="es"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="fr"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="it"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="nl"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="pt"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="ru"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
+            <template slot="sv"    scope="cell"><input :value="cell.value" type="text" @input.once="stashUpdate('components', cell)"/></template>
           </datatable>
         </p>
       </div>
