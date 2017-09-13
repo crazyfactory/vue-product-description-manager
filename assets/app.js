@@ -545,8 +545,6 @@ new Vue({
             return products
         },
         translationsBaseProducts: function(){
-            console.log('GET translationsBaseProducts')
-
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
                 BaseProductOptions.content.forEach(function (option, index) {
@@ -559,7 +557,6 @@ new Vue({
             else {
                 return []
             }
-
         },
         translationsComponents: function () {
             if (ComponentOptions && ComponentOptions.content) {
@@ -926,70 +923,73 @@ new Vue({
 
         },
         makeActive: function (item) {
-            // deactivate all
-            this.show_translations = false
-            this.show_names = false
-            this.show_metatags = false
-            this.show_material = false
-            this.show_export = false
-            this.show_preview = false
-            this.show_message = false
-            this.show_load = true
-            this.show_add_new = false
-            this.isFullScreen = false
-            this.headline_icon = ''
+            if(this.validateNavigation(item)){
+                // deactivate all
+                this.show_translations = false
+                this.show_names = false
+                this.show_metatags = false
+                this.show_material = false
+                this.show_export = false
+                this.show_preview = false
+                this.show_message = false
+                this.show_load = true
+                this.show_add_new = false
+                this.isFullScreen = false
+                this.headline_icon = ''
 
-            switch (item) {
-                case 'names':
-                    this.show_names = true
-                    this.headline = 'Product Names'
-                    this.headline_icon = "fa fa-commenting-o"
-                    break
-                case 'material':
-                    this.show_material = true
-                    this.headline = 'Material'
-                    this.headline_icon = "fa fa-industry"
-                    break
-                case 'preview':
-                    this.show_preview = true
-                    this.headline = 'Preview'
-                    this.isFullScreen = true
-                    this.headline_icon = "fa fa-eye"
-                    this.show_actionbar = true
-                    break
-                case 'metatags':
-                    this.show_metatags = true
-                    this.headline = 'Metatags'
-                    this.headline_icon = "fa fa-tags"
-                    break
-                case 'export':
-                    this.show_export = true
-                    this.show_load = false
-                    this.headline = 'Save changes'
-                    this.isFullScreen = true
-                    this.headline_icon = "fa fa-database"
-                    break
-                case 'admin':
-                    this.show_message = true
-                    this.show_load = false
-                    this.headline = 'Admin Panel'
-                    this.headline_icon = "fa fa-user-secret"
-                    break
-                case 'translations':
-                    this.show_load = false
-                    this.isFullScreen = true
-                    this.show_translations = true
-                    this.headline = 'Translations'
-                    this.headline_icon = "fa fa-globe"
-                    break
-                case 'add_new':
-                    this.show_load = false
-                    this.isFullScreen = true
-                    this.show_add_new = true
-                    this.headline = 'Create Ressources'
-                    this.headline_icon = "fa fa-plus"
-                    break
+                switch (item) {
+                    case 'names':
+                        this.show_names = true
+                        this.headline = 'Product Names'
+                        this.headline_icon = "fa fa-commenting-o"
+                        break
+                    case 'material':
+                        this.show_material = true
+                        this.headline = 'Material'
+                        this.headline_icon = "fa fa-industry"
+                        break
+                    case 'preview':
+                        this.show_preview = true
+                        this.headline = 'Preview'
+                        this.isFullScreen = true
+                        this.headline_icon = "fa fa-eye"
+                        this.show_actionbar = true
+                        break
+                    case 'metatags':
+                        this.show_metatags = true
+                        this.headline = 'Metatags'
+                        this.headline_icon = "fa fa-tags"
+                        break
+                    case 'export':
+                        this.show_export = true
+                        this.show_load = false
+                        this.headline = 'Save changes'
+                        this.isFullScreen = true
+                        this.headline_icon = "fa fa-database"
+                        break
+                    case 'admin':
+                        this.show_message = true
+                        this.show_load = false
+                        this.headline = 'Admin Panel'
+                        this.headline_icon = "fa fa-user-secret"
+                        break
+                    case 'translations':
+                        this.show_load = false
+                        this.isFullScreen = true
+                        this.show_translations = true
+                        this.headline = 'Translations'
+                        this.headline_icon = "fa fa-globe"
+                        break
+                    case 'add_new':
+                        this.show_load = false
+                        this.isFullScreen = true
+                        this.show_add_new = true
+                        this.headline = 'Create Ressources'
+                        this.headline_icon = "fa fa-plus"
+                        break
+                }
             }
+
         },
         mockedProducts: function (products_list) {
             var products = []
@@ -1399,6 +1399,41 @@ new Vue({
         removeCustomName: function (item) {
             item.value = item.original_value
             item.edit = false
+        },
+        resetTranslationState : function (){
+            this.dirtyTranslations = {
+                isDirty:false,
+                baseProducts:{
+                    isDirty: false,
+                    entryList: [],
+                    stash: []
+                },
+                components: {
+                    isDirty: false,
+                    entryList: [],
+                    stash: []
+                },
+                materials: {
+                    isDirty: false,
+                    entryList: [],
+                    stash: []
+                },
+                metatags: {
+                    isDirty: false,
+                    entryList: [],
+                    stash: []
+                },
+            }
+        },
+        validateNavigation : function (item){
+            if(this.dirtyTranslations.isDirty){
+                if(confirm("You have unsaved changes. Press `OK` to procceed and discard them or `Cancel` to stay and save them.") == true){
+                    this.resetTranslationState()
+                    return true
+                }
+                else return false
+            }
+            else return true
         },
         validateNewProducts: function (){
 
