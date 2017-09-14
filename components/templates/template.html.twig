@@ -426,16 +426,26 @@
           <li v-if="dirtyTranslations.baseProducts.isDirty">
             <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty">&nbsp;Save Base Products</i>
           </li>
+          <li v-if="dirtyTranslations.components.isDirty">
+            <i class="fa fa-floppy-o cursor" title="Save Component translations to database" aria-hidden="true" @click="saveTranslationUpdates('components')" v-if="dirtyTranslations.components.isDirty">&nbsp;Save Components</i>
+          </li>
+          <li v-if="dirtyTranslations.materials.isDirty">
+            <i class="fa fa-floppy-o cursor" title="Save Material translations to database" aria-hidden="true" @click="saveTranslationUpdates('materials')" v-if="dirtyTranslations.materials.isDirty">&nbsp;Save Materials</i>
+          </li>
+          <li v-if="dirtyTranslations.metatags.isDirty">
+            <i class="fa fa-floppy-o cursor" title="Save Metatag translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty">&nbsp;Save Metatags</i>
+          </li>
         </ul>
 
       </div>
       <div>
+        <h2  @click="debugMe(dirtyTranslations)">DEBUG</h2>
         <h4 class="base_products">
           <i v-if="!show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
           <i v-if="show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
           Base Products  <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
         </h4>
-        <h2  @click="debugMe(dirtyTranslations)">DEBUG</h2>
+
         <p v-show="show_translation_base_products" class="translation_table base_products">
           <datatable
                   :source="translationsBaseProducts"
@@ -446,8 +456,7 @@
                               :id = "column.label"
                               :label = "column.label"
                               :width = "column.width"
-                              :sortable="column.sortable"
-            >
+                              :sortable="column.sortable">
               <span  v-bind:class="'flag-icon ' + column.icon"></span>
             </datatable-column>
             <template slot="actions_baseproducts" scope="cell">
