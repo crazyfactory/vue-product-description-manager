@@ -27,10 +27,40 @@ var AppLanguages = [
         flag: 'flag-icon-us',
     },
     {
+        id: 'es',
+        status: false,
+        flag: 'flag-icon-es'
+    },
+    {
+        id: 'fr',
+        status: false,
+        flag: 'flag-icon-fr'
+    },
+    {
+        id: 'it',
+        status: false,
+        flag: 'flag-icon-it'
+    },
+    {
         id: 'nl',
         status: true,
         flag: 'flag-icon-nl',
     },
+    {
+        id: 'pt',
+        status: false,
+        flag: 'flag-icon-pt',
+    },
+    {
+        id: 'ru',
+        status: false,
+        flag: 'flag-icon-ru',
+    },
+    {
+        id: 'sv',
+        status: false,
+        flag: 'flag-icon-se',
+    }
 
 ]
 
@@ -308,10 +338,9 @@ new Vue({
                         groupable: true,
                         aggregators: []
                     }
-
                 ]
             }
-        }
+        },
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -353,6 +382,16 @@ new Vue({
         }
     },
     computed: {
+        activeLanguages: function(){
+            console.log('get active languages');
+            stash = []
+            this.supportedLanguages.forEach(function (item) {
+                if (item.status){
+                    stash.push(item)
+                }
+            })
+            return stash
+        },
         optionsBaseProduct: function (){
             currentLanguage = this.editorLanguage
             stash = []
@@ -607,7 +646,8 @@ new Vue({
             else {
                 return true
             }
-        }
+        },
+
 
     },
     methods: {
