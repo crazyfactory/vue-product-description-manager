@@ -550,3 +550,30 @@ label.white-space{
     margin-bottom:1em;
     display: inline-block;
 }
+.table-striped tr:nth-child(2n)>td{
+    background-color:#fafafa
+}
+
+.datatable th{padding:0}
+.datatable-linenumber-cell,
+.datatable-linenumber-column{text-align:center}
+.datatable-aggregate-cell,
+.datatable-linenumber-cell{font-weight:600;background-color:#fafafc!important;border-right-color:#dde}
+.datatable-group-chip{margin-right:.5rem}
+.datatable-collection .datatable-collection .datatable-resultset{border-top:1px solid #dde}.datatable-group{padding:0;background-color:#fff}
+.datatable-group,.datatable-groups-header{border-bottom:1px solid #dde}
+.datatable-group-header{padding:.5rem 1rem;background-color:#fafafc}
+.datatable-grouping-over{box-shadow:0 0 0 2px #2196f3}
+.datatable-row-indent{display:inline-block;width:1.5rem;height:1em}
+.datatable-group-label{font-weight:600}
+.datatable-info-cell{text-align:center;font-weight:600}
+.datatable-aggregators .datatable-info-cell{border-bottom:1px solid #dde}
+.datatable-options{padding:.75rem 1rem;background-color:#fafafc;border-top:1px solid #dde}
+.datatable-editable .datatable-cell{position:relative;padding:0!important;overflow:visible}
+.datatable-editable .datatable-cell input,.datatable-editable .datatable-cell select{display:block;width:100%;height:auto;padding:.5rem 1rem;background-color:transparent;border:none;border-radius:0}
+.datatable-editable .datatable-cell input:active,.datatable-editable .datatable-cell input:focus,.datatable-editable .datatable-cell select:active,.datatable-editable .datatable-cell select:focus{box-shadow:0 0 0 2px #2196f3}
+.datatable-column{padding:.75rem 1rem;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.datatable-sort-arrow{width:0;height:0;border:.375rem solid transparent}
+.datatable-sort-arrow-asc{border-bottom-color:currentColor;-webkit-transform:translateY(-.1875rem);transform:translateY(-.1875rem)}
+.datatable-sort-arrow-desc{border-top-color:currentColor;-webkit-transform:translateY(.1875rem);transform:translateY(.1875rem)}
+

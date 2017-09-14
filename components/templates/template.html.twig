@@ -451,7 +451,7 @@
                   :source="translationsBaseProducts"
                   :editable="true"
                   :threshold="table.threshold">
-            <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" width="20" >&nbsp;</datatable-column>
+            <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
             <datatable-column v-for = "column in table.columns.default" :key="column.id"
                               :id = "column.label"
                               :label = "column.label"
