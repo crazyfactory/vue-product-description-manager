@@ -215,7 +215,7 @@ new Vue({
         settings: settingStorage.fetch(),
         table: {
             editable: true,
-            threshold:50,
+            threshold:100,
             columns: {
                 default:[
                     {
@@ -876,6 +876,14 @@ new Vue({
         saveTranslationUpdates: function(type){
             console.log("Lets save all " + type)
             this.dirtyTranslations[type].isDirty = false
+            this.dirtyTranslations[type].stash = []
+            this.dirtyTranslations[type].entryList = []
+
+            if(!(this.dirtyTranslations.baseProducts.isDirty || this.dirtyTranslations.components.isDirty || this.dirtyTranslations.materials.isDirty || this.dirtyTranslations.metatags.isDirty))
+            {
+                this.dirtyTranslations.isDirty = false
+            }
+
         },
         stashUpdate: function(type, cell){
             // validate that we stash each row only once
