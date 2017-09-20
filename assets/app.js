@@ -396,10 +396,8 @@ new Vue({
             stash = []
             BaseProductOptions.content.forEach(function (item) {
                 search = item[currentLanguage]
-                if (item.is_active==1){
-                    item['search']=search
-                    stash.push(item)
-                }
+                item['search']=search
+                stash.push(item)
             })
             return stash
         },
@@ -586,7 +584,7 @@ new Vue({
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
                 BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-'){
+                    if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
@@ -600,7 +598,7 @@ new Vue({
             if (ComponentOptions && ComponentOptions.content) {
                 var response = []
                 ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-'){
+                    if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
@@ -614,7 +612,7 @@ new Vue({
             if (MaterialOptions && MaterialOptions.content) {
                 var response = []
                 MaterialOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-'){
+                    if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
@@ -628,7 +626,7 @@ new Vue({
             if (MetatagOptions && MetatagOptions.content) {
                 var response = []
                 MetatagOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-'){
+                    if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
