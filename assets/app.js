@@ -170,20 +170,20 @@ new Vue({
         selectedProductFilterIndex: null,
         selectedProducts: [],
 
-        newRessourceType:'',
-        newRessourceTypeClass: 'form-goup',
-        newRessourceLabelDefault:'',
-        newRessourceLabelDefaultClass:'form-goup',
-        newRessourceLabelDe:'',
-        newRessourceLabelDeClass:'form-group',
-        newRessourceLabelEnUS:'',
-        newRessourceLabelEnUSClass:'form-group',
-        newRessourceLabelNl:'',
-        newRessourceLabelNlClass:'form-group',
-        newRessourceAliasDefault:'',
-        newRessourceAliasDe:'',
-        newRessourceAliasEnUS:'',
-        newRessourceAliasNl:'',
+        newResourceType:'',
+        newResourceTypeClass: 'form-goup',
+        newResourceLabelDefault:'',
+        newResourceLabelDefaultClass:'form-goup',
+        newResourceLabelDe:'',
+        newResourceLabelDeClass:'form-group',
+        newResourceLabelEnUS:'',
+        newResourceLabelEnUSClass:'form-group',
+        newResourceLabelNl:'',
+        newResourceLabelNlClass:'form-group',
+        newResourceAliasDefault:'',
+        newResourceAliasDe:'',
+        newResourceAliasEnUS:'',
+        newResourceAliasNl:'',
 
         dirtyTranslations: {
             isDirty:false,
@@ -357,27 +357,27 @@ new Vue({
             },
             deep: true
         },
-        newRessourceLabelDefault: function (newValue, oldValue) {
-            if(this.newRessourceLabelEnUS === '' || this.newRessourceLabelEnUS === oldValue){
-                this.newRessourceLabelEnUS = newValue
+        newResourceLabelDefault: function (newValue, oldValue) {
+            if(this.newResourceLabelEnUS === '' || this.newResourceLabelEnUS === oldValue){
+                this.newResourceLabelEnUS = newValue
             }
 
-            if(this.newRessourceLabelDe === '' || this.newRessourceLabelDe === oldValue){
-                this.newRessourceLabelDe = newValue
+            if(this.newResourceLabelDe === '' || this.newResourceLabelDe === oldValue){
+                this.newResourceLabelDe = newValue
             }
-            if(this.newRessourceLabelNl === '' || this.newRessourceLabelNl === oldValue){
-                this.newRessourceLabelNl = newValue
+            if(this.newResourceLabelNl === '' || this.newResourceLabelNl === oldValue){
+                this.newResourceLabelNl = newValue
             }
         },
-        newRessourceAliasDefault: function (newValue, oldValue) {
-            if(this.newRessourceAliasEnUS === '' || this.newRessourceAliasEnUS === oldValue){
-                this.newRessourceAliasEnUS = newValue
+        newResourceAliasDefault: function (newValue, oldValue) {
+            if(this.newResourceAliasEnUS === '' || this.newResourceAliasEnUS === oldValue){
+                this.newResourceAliasEnUS = newValue
             }
-            if(this.newRessourceAliasDe === '' || this.newRessourceAliasDe === oldValue){
-                this.newRessourceAliasDe = newValue
+            if(this.newResourceAliasDe === '' || this.newResourceAliasDe === oldValue){
+                this.newResourceAliasDe = newValue
             }
-            if(this.newRessourceAliasNl === '' || this.newRessourceAliasNl === oldValue){
-                this.newRessourceAliasNl = newValue
+            if(this.newResourceAliasNl === '' || this.newResourceAliasNl === oldValue){
+                this.newResourceAliasNl = newValue
             }
         }
     },
@@ -636,8 +636,8 @@ new Vue({
                 return []
             }
         },
-        validNewRessource: function(){
-            if(this.newRessourceType=='' || this.newRessourceLabelDefault==''){
+        validNewResource: function(){
+            if(this.newResourceType=='' || this.newResourceLabelDefault==''){
                 return false
             }
             else {
@@ -689,33 +689,33 @@ new Vue({
                 this.newProduct = ''
             }
         },
-        addRessource: function (){
-            //validate Ressourcetype a
-            source = this.validRessourceType()
+        addResource: function (){
+            //validate Resourcetype a
+            source = this.validResourceType()
 
-            if(source && this.validateRessourceLabel(source))
+            if(source && this.validateResourceLabel(source))
             {
-                ressource = {
-                    'ressourceType':this.newRessourceType,
-                    'name': this.newRessourceLabelDefault.replace(" ", "_").toLowerCase(),
+                resource = {
+                    'resourceType':this.newResourceType,
+                    'name': this.newResourceLabelDefault.replace(" ", "_").toLowerCase(),
                     'is_active': '1',
-                    'en-GB': this.newRessourceLabelDefault,
-                    'en-US': this.newRessourceLabelEnUS,
-                    'de': this.newRessourceLabelDe,
-                    'nl': this.newRessourceLabelNl,
-                    'es': this.newRessourceLabelDefault,
-                    'fr': this.newRessourceLabelDefault,
-                    'pt': this.newRessourceLabelDefault,
-                    'it': this.newRessourceLabelDefault,
-                    'ru': this.newRessourceLabelDefault,
-                    'sv': this.newRessourceLabelDefault
+                    'en-GB': this.newResourceLabelDefault,
+                    'en-US': this.newResourceLabelEnUS,
+                    'de': this.newResourceLabelDe,
+                    'nl': this.newResourceLabelNl,
+                    'es': this.newResourceLabelDefault,
+                    'fr': this.newResourceLabelDefault,
+                    'pt': this.newResourceLabelDefault,
+                    'it': this.newResourceLabelDefault,
+                    'ru': this.newResourceLabelDefault,
+                    'sv': this.newResourceLabelDefault
                 }
 
                 if (hasApi) {
                     // clear product input
                     api.app = this
-                    api.data = ressource
-                    api.action = 'add_ressource'
+                    api.data = resource
+                    api.action = 'add_resource'
                     api.call()
                 }
             }
@@ -766,12 +766,12 @@ new Vue({
             console.log(values)
 
         },
-        debugRessources: function(){
+        debugResources: function(){
             console.log('Debug');
-            console.log(this.newRessourceType)
-            console.log(this.newRessourceLabelEnUS)
-            console.log(this.newRessourceLabelDefault)
-            console.log(this.newRessourceLabelDe)
+            console.log(this.newResourceType)
+            console.log(this.newResourceLabelEnUS)
+            console.log(this.newResourceLabelDefault)
+            console.log(this.newResourceLabelDe)
         },
         debugComponents: function () {
             console.log("Local (app.components_local)")
@@ -916,7 +916,7 @@ new Vue({
 
                 api.app = this
                 api.data = data
-                api.action = 'save_ressource'
+                api.action = 'save_resource'
                 api.call()
             }
         },
@@ -945,18 +945,26 @@ new Vue({
                 this.dirtyTranslations[type]['stash'].push(cell)
             }
         },
-        deleteRessource: function(type, cell){
-            if(hasApi)
-            {
-                data = {
-                    type : type,
-                    translation : cell.row
-                }
+        deleteResource: function(type, cell){
+            proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
 
-                api.app = this
-                api.data = data
-                api.action = 'delete_ressource'
-                api.call()
+            if(proceed){
+                console.log('delete me')
+                console.log(type)
+                console.log(cell)
+
+                if(hasApi)
+                {
+                    data = {
+                        type : type,
+                        translation : cell.row
+                    }
+
+                    api.app = this
+                    api.data = data
+                    api.action = 'delete_resource'
+                    api.call()
+                }
             }
 
         },
@@ -1053,7 +1061,7 @@ new Vue({
                     this.show_load = false
                     this.isFullScreen = true
                     this.show_add_new = true
-                    this.headline = 'Create Ressources'
+                    this.headline = 'Create Resources'
                     this.headline_icon = "fa fa-plus"
                     break
             }
@@ -1507,8 +1515,8 @@ new Vue({
             }
             else return response.join(" ")
         },
-        validRessourceType: function(){
-            switch(this.newRessourceType) {
+        validResourceType: function(){
+            switch(this.newResourceType) {
                 case 'Base Product':
                     return this.translationsBaseProducts
                     break
@@ -1522,30 +1530,30 @@ new Vue({
                     return this.translationsMetatags
                     break
                 default:
-                    this.addMessage('Please choose a valid Ressource Type', 'info' )
-                    this.newRessourceTypeClass = "form-group has-error has-feedback"
+                    this.addMessage('Please choose a valid Resource Type', 'info' )
+                    this.newResourceTypeClass = "form-group has-error has-feedback"
                     return false
             }
         },
-        validateRessourceLabel: function(source){
+        validateResourceLabel: function(source){
             has_error = false
             is_unique = true
 
             // validate that every label has an entry and we dont have duplicates
-            if(this.newRessourceLabelDefault==''){
-                this.newRessourceLabelDefaultClass= "form-group has-error has-feedback"
+            if(this.newResourceLabelDefault==''){
+                this.newResourceLabelDefaultClass= "form-group has-error has-feedback"
                 has_error=true
             }
-            if(this.newRessourceLabelDe==''){
-                this.newRessourceLabelDeClass= "form-group has-error has-feedback"
+            if(this.newResourceLabelDe==''){
+                this.newResourceLabelDeClass= "form-group has-error has-feedback"
                 has_error=true
             }
-            if(this.newRessourceLabelEnUS==''){
-                this.newRessourceLabelEnUSClass= "form-group has-error has-feedback"
+            if(this.newResourceLabelEnUS==''){
+                this.newResourceLabelEnUSClass= "form-group has-error has-feedback"
                 has_error=true
             }
-            if(this.newRessourceLabelNl==''){
-                this.newRessourceLabelNlClass= "form-group has-error has-feedback"
+            if(this.newResourceLabelNl==''){
+                this.newResourceLabelNlClass= "form-group has-error has-feedback"
                 has_error=true
             }
             if(has_error){
@@ -1554,35 +1562,35 @@ new Vue({
             }
 
             _this = this
-            labelDefault = _this.newRessourceLabelDefault
-            labelDe      = _this.newRessourceLabelDe
-            labelEnUS    = _this.newRessourceLabelEnUS
-            labelNl      = _this.newRessourceLabelNl
+            labelDefault = _this.newResourceLabelDefault
+            labelDe      = _this.newResourceLabelDe
+            labelEnUS    = _this.newResourceLabelEnUS
+            labelNl      = _this.newResourceLabelNl
 
-            error_message='A problem occured while validating your new '+ this.newRessourceType +' request.'
+            error_message='A problem occured while validating your new '+ this.newResourceType +' request.'
 
             source.forEach( function (item, index) {
                 if(labelDefault.toLowerCase() == item['en-GB'].toLowerCase())
                 {
-                    _this.newRessourceLabelDefaultClass= "form-group has-error has-feedback"
+                    _this.newResourceLabelDefaultClass= "form-group has-error has-feedback"
                     has_error = true
                     error_message=error_message+' The default label (`' + labelDefault + '`) already exists as `'+ item['en-GB'] +'`.'
                 }
                 if(labelDe.toLowerCase() == item['de'].toLowerCase())
                 {
-                    _this.newRessourceLabelDeClass= "form-group has-error has-feedback"
+                    _this.newResourceLabelDeClass= "form-group has-error has-feedback"
                     has_error = true
                     error_message=error_message+' The german label (`' + labelDe + '`) already exists as `'+ item['de'] +'`.'
                 }
                 if(labelEnUS.toLowerCase() == item['en-US'].toLowerCase())
                 {
-                    _this.newRessourceLabelEnUSClass= "form-group has-error has-feedback"
+                    _this.newResourceLabelEnUSClass= "form-group has-error has-feedback"
                     has_error = true
                     error_message=error_message+' The american label (`' + labelEnUS + '`) already exists as `'+ item['en-US'] +'`.'
                 }
                 if(labelNl.toLowerCase() == item['nl'].toLowerCase())
                 {
-                    _this.newRessourceLabelNlClass= "form-group has-error has-feedback"
+                    _this.newResourceLabelNlClass= "form-group has-error has-feedback"
                     has_error = true
                     error_message=error_message+' The dutch label (`' + labelNl + '`) already exists as `'+ item['nl'] +'`.'
                 }

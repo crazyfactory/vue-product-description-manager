@@ -462,7 +462,7 @@
                         </datatable-column>
 
                         <template slot="actions_baseproducts" scope="cell">
-                            <span @input="deleteRessource('baseProducts', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                            <span @click="deleteResource('baseProducts', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
                         </template>
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
@@ -583,10 +583,10 @@
         <div v-bind:class="{ 'well col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_add_new">
             <!-- Translation stuff -->
             <div class="col-xs-6 col-sm-4 col-md-4">
-                <h4 v-if="!newRessourceType==''">Let's add a new [[ newRessourceType ]]  </h4>
-                <h4 v-if="newRessourceType==''">What you want to create?</h4>
-                <p v-bind:class="newRessourceTypeClass">
-                    <select v-model="newRessourceType"class="form-control" >
+                <h4 v-if="!newResourceType==''">Let's add a new [[ newResourceType ]]  </h4>
+                <h4 v-if="newResourceType==''">What you want to create?</h4>
+                <p v-bind:class="newResourceTypeClass">
+                    <select v-model="newResourceType"class="form-control" >
                         <option disabled value="">Please select one</option>
                         <option>Base Product</option>
                         <option>Component</option>
@@ -595,47 +595,47 @@
                     </select>
                 </p>
             </div>
-            <div  v-if="newRessourceType!=''" class="col-xs-6 col-sm-4 col-md-4" >
+            <div  v-if="newResourceType!=''" class="col-xs-6 col-sm-4 col-md-4" >
                 <h4>with labels </h4>
                 <p>
-            <span v-bind:class="newRessourceLabelDefaultClass">
-                <label for="newRessourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
-                <input class="form-control" id="newRessourceLabelDefault" v-model="newRessourceLabelDefault" placeholder="Default label (en-GB)">
+            <span v-bind:class="newResourceLabelDefaultClass">
+                <label for="newResourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
+                <input class="form-control" id="newResourceLabelDefault" v-model="newResourceLabelDefault" placeholder="Default label (en-GB)">
             </span><br>
-                    <span v-bind:class="newRessourceLabelDeClass">
-                <label for="newRessourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
-                <input class="form-control" id="newRessourceLabelDe" v-model="newRessourceLabelDe" placeholder="German label (de)">
+                    <span v-bind:class="newResourceLabelDeClass">
+                <label for="newResourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
+                <input class="form-control" id="newResourceLabelDe" v-model="newResourceLabelDe" placeholder="German label (de)">
             </span><br>
-                    <span v-bind:class="newRessourceLabelEnUSClass">
-                <label for="newRessourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
-                <input class="form-control" id="newRessourceLabelEnUS" v-model="newRessourceLabelEnUS" placeholder="American label (en-US)">
+                    <span v-bind:class="newResourceLabelEnUSClass">
+                <label for="newResourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
+                <input class="form-control" id="newResourceLabelEnUS" v-model="newResourceLabelEnUS" placeholder="American label (en-US)">
             </span><br>
-                    <span v-bind:class="newRessourceLabelNlClass">
-                <label for="newRessourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
-                <input class="form-control" id="newRessourceLabelNl" v-model="newRessourceLabelNl" placeholder="Dutch label (nl)">
+                    <span v-bind:class="newResourceLabelNlClass">
+                <label for="newResourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
+                <input class="form-control" id="newResourceLabelNl" v-model="newResourceLabelNl" placeholder="Dutch label (nl)">
             </span>
                 </p>
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-4" v-if="newRessourceType=='Metatag'">
+            <div class="col-xs-6 col-sm-4 col-md-4" v-if="newResourceType=='Metatag'">
                 <h4> and aliases</h4>
                 <p>
                     <label for="newAliasDefault"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasDefault" v-model="newRessourceAliasDefault" placeholder="Default Alias (en-GB)"><br>
+                    <input class="form-control" id="newAliasDefault" v-model="newResourceAliasDefault" placeholder="Default Alias (en-GB)"><br>
 
                     <label for="newAliasDe"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasDe" v-model="newRessourceAliasDe" placeholder="German Alias (de)"><br>
+                    <input class="form-control" id="newAliasDe" v-model="newResourceAliasDe" placeholder="German Alias (de)"><br>
 
                     <label for="newAliasEnUS"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasEnUS" v-model="newRessourceAliasEnUS" placeholder="American alias (en-US)"><br>
+                    <input class="form-control" id="newAliasEnUS" v-model="newResourceAliasEnUS" placeholder="American alias (en-US)"><br>
 
                     <label for="newAliasNl"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasNl" v-model="newRessourceAliasNl" placeholder="Dutch alias (nl)">
+                    <input class="form-control" id="newAliasNl" v-model="newResourceAliasNl" placeholder="Dutch alias (nl)">
                 </p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <button v-if="!validNewRessource" type="button" class="btn btn-default disabled fa-pull-right cursor">Not ready yet ...</button>
-                <button v-if="validNewRessource" type="button" class="btn btn-success fa-pull-right cursor" @click="addRessource">
-                    Add [[ newRessourceType ]]
+                <button v-if="!validNewResource" type="button" class="btn btn-default disabled fa-pull-right cursor">Not ready yet ...</button>
+                <button v-if="validNewResource" type="button" class="btn btn-success fa-pull-right cursor" @click="addResource">
+                    Add [[ newResourceType ]]
                 </button>
             </div>
         </div>
