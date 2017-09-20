@@ -945,6 +945,21 @@ new Vue({
                 this.dirtyTranslations[type]['stash'].push(cell)
             }
         },
+        deleteRessource: function(type, cell){
+            if(hasApi)
+            {
+                data = {
+                    type : type,
+                    translation : cell.row
+                }
+
+                api.app = this
+                api.data = data
+                api.action = 'delete_ressource'
+                api.call()
+            }
+
+        },
         hideMessage: function (message) {
             message.show = false
         },

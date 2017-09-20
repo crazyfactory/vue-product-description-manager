@@ -462,9 +462,7 @@
                         </datatable-column>
 
                         <template slot="actions_baseproducts" scope="cell">
-                            <a v-if="cell.row.is_active"><i class="fa fa-eye-slash 2x" aria-hidden="true"></i></a>
-                            <a v-if="!cell.row.is_active" ><i class="fa fa-eye 2x" aria-hidden="true"></i></a>
-                            <a><i class="fa fa-trash-o 2x" aria-hidden="true"></i></a>
+                            <span @input="deleteRessource('baseProducts', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
                         </template>
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
