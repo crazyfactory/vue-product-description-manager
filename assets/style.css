@@ -577,3 +577,14 @@ label.white-space{
 .datatable-sort-arrow-asc{border-bottom-color:currentColor;-webkit-transform:translateY(-.1875rem);transform:translateY(-.1875rem)}
 .datatable-sort-arrow-desc{border-top-color:currentColor;-webkit-transform:translateY(.1875rem);transform:translateY(.1875rem)}
 
+.absolute {
+    position:absolute;
+}
+
+.datatable-cell input.table_input
+{
+    padding: 0 5px 10px 35px;
+}
+thead.datatable-columns{
+    display:none;
+}

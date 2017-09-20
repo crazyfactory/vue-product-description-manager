@@ -840,7 +840,7 @@ new Vue({
                             alias_array = my_aliases.split(',')
                         }
 
-                        if (alias_array) {
+                        if (my_aliases) {
                             alias_array.forEach(function (alias) {
                                 alias = "-" + alias.trim()
 
