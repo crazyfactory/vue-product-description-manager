@@ -488,6 +488,7 @@
                             :source="translationsComponents"
                             :editable="true"
                             :threshold="table.threshold">
+                        <datatable-column id="actions_components" label="Actions" :sortable="false" :groupable="false" ></datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -497,6 +498,9 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
+                        <template slot="actions_components" scope="cell">
+                            <span @click="deleteResource('components', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                        </template>
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></template>
                         <template slot="en-US" scope="cell"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></template>
@@ -521,6 +525,7 @@
                             :source="translationsMaterials"
                             :editable="true"
                             :threshold="table.threshold">
+                        <datatable-column id="actions_materials" label="Actions" :sortable="false" :groupable="false" ></datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -530,6 +535,9 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
+                        <template slot="actions_materials" scope="cell">
+                            <span @click="deleteResource('materials', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                        </template>
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></template>
                         <template slot="en-US" scope="cell"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></template>
@@ -554,6 +562,7 @@
                             :source="translationsMetatags"
                             :editable="true"
                             :threshold="table.threshold">
+                        <datatable-column id="actions_metatags" label="Actions" :sortable="false" :groupable="false" ></datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -563,7 +572,9 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
-                        </datatable-column>
+                        <template slot="actions_metatags" scope="cell">
+                            <span @click="deleteResource('metatags', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                        </template>
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/></template>
                         <template slot="en-US" scope="cell"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/></template>
