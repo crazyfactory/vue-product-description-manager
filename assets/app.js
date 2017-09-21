@@ -253,8 +253,8 @@ new Vue({
                         icon: "flag-icon-de",
                         label: "de",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -262,8 +262,8 @@ new Vue({
                         icon: "flag-icon-gb",
                         label: "en-GB",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -271,8 +271,8 @@ new Vue({
                         icon: "flag-icon-us",
                         label: "en-US",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -280,8 +280,8 @@ new Vue({
                         icon: "flag-icon-es",
                         label: "es",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -289,8 +289,8 @@ new Vue({
                         icon: "flag-icon-fr",
                         label: "fr",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -298,8 +298,8 @@ new Vue({
                         icon: "flag-icon-it",
                         label: "it",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -307,8 +307,8 @@ new Vue({
                         icon: "flag-icon-nl",
                         label: "nl",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -316,8 +316,8 @@ new Vue({
                         icon: "flag-icon-pt",
                         label: "pt",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -325,8 +325,8 @@ new Vue({
                         icon: "flag-icon-ru",
                         label: "ru",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     },
                     {
@@ -334,8 +334,8 @@ new Vue({
                         icon: "flag-icon-se",
                         label: "sv",
                         width: null,
-                        sortable: true,
-                        groupable: true,
+                        sortable: false,
+                        groupable: false,
                         aggregators: []
                     }
                 ]
@@ -734,6 +734,10 @@ new Vue({
             this.selectedMaterials = []
             this.selectedMetatags = []
         },
+        closeEditMe: function (item) {
+            item.edit = false
+            item.value = item.value.replace(/\r?\n|\r/g, "")
+        },
         customLabel: function (option) {
             return option[this.editorLanguage];
         },
@@ -906,7 +910,7 @@ new Vue({
                 // all translations are clean
                 this.dirtyTranslations.isDirty = false
             }
-            // add DB save here
+            // save to DB
             if(hasApi)
             {
                 data = {
@@ -922,13 +926,33 @@ new Vue({
         },
         saveTranslationUpdates: function(type){
             console.log("Lets save all " + type)
-            this.dirtyTranslations[type].isDirty = false
-            this.dirtyTranslations[type].stash = []
-            this.dirtyTranslations[type].entryList = []
+
+            if(type =='baseProducts' || type =='components' || type =='materials' || type =='metatags'){
+                stash = this.dirtyTranslations[type].stash
+                entryList = this.dirtyTranslations[type].entryList
+
+                this.dirtyTranslations[type].isDirty = false
+                this.dirtyTranslations[type].stash = []
+                this.dirtyTranslations[type].entryList = []
+
+                data = {
+                    type : type,
+                    translations : stash
+                }
+            }
 
             if(!(this.dirtyTranslations.baseProducts.isDirty || this.dirtyTranslations.components.isDirty || this.dirtyTranslations.materials.isDirty || this.dirtyTranslations.metatags.isDirty))
             {
                 this.dirtyTranslations.isDirty = false
+            }
+
+            // save to DB
+            if(hasApi)
+            {
+                api.app = this
+                api.data = data
+                api.action = 'save_resources'
+                api.call()
             }
 
         },
@@ -967,6 +991,12 @@ new Vue({
                 }
             }
 
+        },
+        editMe: function (item, item_parent) {
+            item.edit = true
+            if (item_parent) {
+                item_parent.dirty = true
+            }
         },
         hideMessage: function (message) {
             message.show = false
