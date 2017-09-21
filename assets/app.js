@@ -184,6 +184,7 @@ new Vue({
         newResourceAliasDe:'',
         newResourceAliasEnUS:'',
         newResourceAliasNl:'',
+        newResourceIsHidden: false,
 
         dirtyTranslations: {
             isDirty:false,
@@ -692,6 +693,8 @@ new Vue({
         addResource: function (){
             //validate Resourcetype a
             source = this.validResourceType()
+            // newResourceAliasDefault
+
 
             if(source && this.validateResourceLabel(source))
             {
@@ -699,16 +702,27 @@ new Vue({
                     'resourceType':this.newResourceType,
                     'name': this.newResourceLabelDefault.replace(" ", "_").toLowerCase(),
                     'is_active': '1',
+                    'is_hidden': this.newResourceIsHidden,
                     'en-GB': this.newResourceLabelDefault,
+                    'alias_en-GB': this.newResourceAliasDefault,
                     'en-US': this.newResourceLabelEnUS,
+                    'alias_en-US': this.newResourceAliasEnUS,
                     'de': this.newResourceLabelDe,
+                    'alias_de': this.newResourceAliasDe,
                     'nl': this.newResourceLabelNl,
+                    'alias_nl': this.newResourceAliasNl,
                     'es': this.newResourceLabelDefault,
+                    'alias_es': this.newResourceAliasDefault,
                     'fr': this.newResourceLabelDefault,
+                    'alias_fr': this.newResourceAliasDefault,
                     'pt': this.newResourceLabelDefault,
+                    'alias_pt': this.newResourceAliasDefault,
                     'it': this.newResourceLabelDefault,
+                    'alias_it': this.newResourceAliasDefault,
                     'ru': this.newResourceLabelDefault,
-                    'sv': this.newResourceLabelDefault
+                    'alias_ru': this.newResourceAliasDefault,
+                    'sv': this.newResourceLabelDefault,
+                    'alias_sv': this.newResourceAliasDefault,
                 }
 
                 if (hasApi) {
@@ -927,6 +941,7 @@ new Vue({
         saveTranslationUpdates: function(type){
             console.log("Lets save all " + type)
 
+
             if(type =='baseProducts' || type =='components' || type =='materials' || type =='metatags'){
                 stash = this.dirtyTranslations[type].stash
                 entryList = this.dirtyTranslations[type].entryList
@@ -939,6 +954,7 @@ new Vue({
                     type : type,
                     translations : stash
                 }
+
             }
 
             if(!(this.dirtyTranslations.baseProducts.isDirty || this.dirtyTranslations.components.isDirty || this.dirtyTranslations.materials.isDirty || this.dirtyTranslations.metatags.isDirty))

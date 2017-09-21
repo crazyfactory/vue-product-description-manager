@@ -606,3 +606,6 @@ thead.datatable-columns{
 .datatable .datatable-options input{
     width:100%;
 }
+.new .menu-icon{
+    top:-6px;
+}
