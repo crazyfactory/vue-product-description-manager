@@ -182,6 +182,7 @@
                                                     <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" title="Delete this tag" @click="removeMetatag(product, metatag)"></i>
                                                     <span v-if="product.metatags ">
                                                         <i class="fa fa-tag fa-pull-left"></i>
+                                                        <i class="fa fa-eye-slash fa-pull-left" v-if="metatag.is_hidden>0"></i>
                                                         [[ metatag[language.id] ]]
                                                     </span>
                                                     <span class="alias" v-if='metatag && metatag["alias_" +language.id]'>

@@ -436,6 +436,7 @@ new Vue({
                 search = item[currentLanguage]
                 if (item.is_active==1){
                     item['search']=search
+                    item['is_hidden'] = item['is_hidden'].toString();
                     stash.push(item)
                 }
             })
@@ -939,9 +940,6 @@ new Vue({
             }
         },
         saveTranslationUpdates: function(type){
-            console.log("Lets save all " + type)
-
-
             if(type =='baseProducts' || type =='components' || type =='materials' || type =='metatags'){
                 stash = this.dirtyTranslations[type].stash
                 entryList = this.dirtyTranslations[type].entryList
