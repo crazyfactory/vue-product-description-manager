@@ -32,9 +32,29 @@ var AppLanguages = [
         flag: 'flag-icon-es'
     },
     {
+        id: 'nl',
+        status: true,
+        flag: 'flag-icon-nl',
+    },
+    {
+        id: 'cs',
+        status: false,
+        flag: 'flag-icon-cz',
+    },
+    {
+        id: 'fi',
+        status: false,
+        flag: 'flag-icon-fi'
+    },
+    {
         id: 'fr',
         status: false,
         flag: 'flag-icon-fr'
+    },
+    {
+        id: 'hr',
+        status: false,
+        flag: 'flag-icon-hr'
     },
     {
         id: 'it',
@@ -42,9 +62,14 @@ var AppLanguages = [
         flag: 'flag-icon-it'
     },
     {
-        id: 'nl',
-        status: true,
-        flag: 'flag-icon-nl',
+        id: 'nb',
+        status: false,
+        flag: 'flag-icon-no',
+    },
+    {
+        id: 'pl',
+        status: false,
+        flag: 'flag-icon-pl',
     },
     {
         id: 'pt',
@@ -144,9 +169,8 @@ var STORAGE_KEY_SETTING = 'crazy-settings'
 var settingStorage = {
     fetch: function () {
         var settings = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTING) || '{}')
-        if (typeof settings.supportedLanguages == 'undefined') {
-            settings.supportedLanguages = AppLanguages
-        }
+        settings.supportedLanguages = AppLanguages
+
         return settings
     },
     save: function (settings) {
@@ -185,7 +209,6 @@ new Vue({
         newResourceAliasEnUS:'',
         newResourceAliasNl:'',
         newResourceIsHidden: false,
-
         dirtyTranslations: {
             isDirty:false,
             baseProducts:{
@@ -209,7 +232,6 @@ new Vue({
                 stash: []
             },
         },
-
         conjunction: ComponentOptions.conjunction,
         headline: 'Product Names',
         headline_icon: 'fa fa-commenting-o',
