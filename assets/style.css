@@ -609,3 +609,9 @@ thead.datatable-columns{
 .new .menu-icon{
     top:-6px;
 }
+.ok{
+    color:green;
+}
+.attention{
+    color:red;
+}

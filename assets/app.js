@@ -987,19 +987,13 @@ new Vue({
         },
         deleteResource: function(type, cell){
             proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
-
             if(proceed){
-                console.log('delete me')
-                console.log(type)
-                console.log(cell)
-
                 if(hasApi)
                 {
                     data = {
                         type : type,
                         translation : cell.row
                     }
-
                     api.app = this
                     api.data = data
                     api.action = 'delete_resource'
@@ -1440,6 +1434,22 @@ new Vue({
         },
         switchRemoveMetatag: function(){
             this.remove_mode_metatag = !this.remove_mode_metatag
+        },
+        setHiddenTag: function(cell){
+            if(cell.row['is_hidden'] =="1") cell.row['is_hidden'] ="0"
+            else cell.row['is_hidden'] ="1"
+
+            if(hasApi)
+            {
+                data = {
+                    translation : cell.row,
+                    type : 'metatags'
+                }
+                api.app = this
+                api.data = data
+                api.action = 'set_hidden_tag'
+                api.call()
+            }
         },
         toggle_language: function (language) {
             language.status = !language.status
