@@ -685,6 +685,9 @@ new Vue({
                 date: today
             }
             this.messages.unshift(msg)
+            setTimeout( function(msg){
+                msg.show=false
+            },5000, msg);
 
         },
         addProduct: function () {
