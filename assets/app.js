@@ -193,7 +193,7 @@ new Vue({
         selectedMetatags: [],
         selectedProductFilterIndex: null,
         selectedProducts: [],
-
+        changesSinceUpdate: null,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
@@ -545,6 +545,15 @@ new Vue({
         isSmallScreen: function () {
             return !this.isFullScreen
         },
+        lastChangesSinceUpdate: function () {
+            if(hasApi && this.changesSinceUpdate==null){
+                api.app = this
+                api.action = 'get_translation_status'
+                api.call()
+                return false
+            }
+            else return this.changesSinceUpdate
+        },
         materials: function () {
             materials = {}
             this.optionsMaterial.forEach(function (item) {
@@ -717,10 +726,8 @@ new Vue({
             }
         },
         addResource: function (){
-            //validate Resourcetype a
+            //validate Resourcetype
             source = this.validResourceType()
-            // newResourceAliasDefault
-
 
             if(source && this.validateResourceLabel(source))
             {
@@ -950,6 +957,7 @@ new Vue({
                 // all translations are clean
                 this.dirtyTranslations.isDirty = false
             }
+            this.changesSinceUpdate = null
             // save to DB
             if(hasApi)
             {
@@ -984,7 +992,7 @@ new Vue({
             {
                 this.dirtyTranslations.isDirty = false
             }
-
+            this.changesSinceUpdate = null
             // save to DB
             if(hasApi)
             {
@@ -1010,6 +1018,7 @@ new Vue({
         },
         deleteResource: function(type, cell){
             proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
+            this.changesSinceUpdate = null
             if(proceed){
                 if(hasApi)
                 {
