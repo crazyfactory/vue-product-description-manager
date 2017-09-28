@@ -446,7 +446,7 @@
                     Base Products  <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
                 </h4>
 
-                <p v-show="show_translation_base_products" class="translation_table base_products">
+                <p v-if="show_translation_base_products" class="translation_table base_products">
                     <datatable
                             :source="translationsBaseProducts"
                             :editable="true"
@@ -462,9 +462,13 @@
                                           :formatter="column.formatter">
                         </datatable-column>
 
-                        <template slot="actions_baseproducts" scope="cell">
-                            <span @click="deleteResource('baseProducts', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                        <template slot="actions_baseproducts" scope="cell" >
+                            <div @click="deleteResource('baseProducts', cell)" v-bind:class="cell.row['is_active']">
+                                <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
+                                [[ cell.row['is_active'] ]]
+                            </div>
                         </template>
+
                         <template slot="de"    scope="cell"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
                         <template slot="en-GB" scope="cell"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>
                         <template slot="en-US" scope="cell"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></template>

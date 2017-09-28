@@ -1018,8 +1018,12 @@ new Vue({
         },
         deleteResource: function(type, cell){
             proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
-            this.changesSinceUpdate = null
+            //this.changesSinceUpdate = null
+
             if(proceed){
+                cell.row.is_active="0"
+                if(type=="baseProducts") this.show_translation_base_products = false
+
                 if(hasApi)
                 {
                     data = {
