@@ -90,37 +90,6 @@ var AppLanguages = [
 ]
 
 /*
- * prepares our fetched data for in app use
- * sets 'en_GB' as default value
- * introduces search index
- */
-function storage_helper(data) {
-    var response = []
-    var default_value = ''
-    data.forEach(function (option, index) {
-        if (option && option['label'] && option['label']['en-GB'] && option['label']['en-GB']['value']) {
-            default_value = option['label']['en-GB']['value']
-        }
-        else {
-            //skip iteration if we dont have default value
-            return
-        }
-
-
-        option['search'] = default_value
-        for (var language in option.label) {
-            if (option.label.hasOwnProperty(language)) {
-                if (!option.label[language]['value']) {
-                    option.label[language]['value'] = default_value
-                }
-            }
-        }
-        response.push(option)
-    })
-    return response
-}
-
-/*
  * add products
  */
 // localStorage persistence
@@ -248,6 +217,7 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
+        rawMetatags: null,
         show_actionbar: false,
         show_add_new:false,
         show_export: false,
@@ -454,15 +424,27 @@ new Vue({
             stash = []
             currentLanguage = this.editorLanguage
 
-            MetatagOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                if (item.is_active==1){
-                    item['search']=search
-                    item['is_hidden'] = item['is_hidden'].toString();
-                    stash.push(item)
-                }
-            })
-            return stash
+            if(!hasApi){
+                return []
+            }
+
+            if(this.rawMetatags==null){
+                api.app = this
+                api.action = 'get_metatags'
+                api.call()
+                return []
+            }
+            else{
+                this.rawMetatags.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        item['is_hidden'] = item['is_hidden'].toString();
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         baseProducts: function () {
             stash = {}
@@ -656,17 +638,25 @@ new Vue({
             }
         },
         translationsMetatags: function () {
-            if (MetatagOptions && MetatagOptions.content) {
+            if(!hasApi){
+                return []
+            }
+
+            if(this.rawMetatags==null){
+                api.app = this
+                api.action = 'get_metatags'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                MetatagOptions.content.forEach(function (option, index) {
+
+                this.rawMetatags.forEach(function (option, index) {
                     if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
                 return response
-            }
-            else {
-                return []
             }
         },
         validNewResource: function(){
