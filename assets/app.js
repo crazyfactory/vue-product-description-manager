@@ -1018,11 +1018,14 @@ new Vue({
         },
         deleteResource: function(type, cell){
             proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
-            //this.changesSinceUpdate = null
+            this.changesSinceUpdate = null
 
             if(proceed){
                 cell.row.is_active="0"
                 if(type=="baseProducts") this.show_translation_base_products = false
+                if(type=="components") this.show_translation_components = false
+                if(type=="materials") this.show_translation_materials = false
+                if(type=="metatags") this.show_translation_metatags = false
 
                 if(hasApi)
                 {
@@ -1036,7 +1039,6 @@ new Vue({
                     api.call()
                 }
             }
-
         },
         editMe: function (item, item_parent) {
             item.edit = true
