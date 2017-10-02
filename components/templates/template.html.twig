@@ -437,6 +437,18 @@
                         <i class="fa fa-floppy-o cursor" title="Save Metatag translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty">&nbsp;Save Metatags</i>
                     </li>
                 </ul>
+            </div>
+            <div v-if="show_translation_status" class="alert alert-warning">
+                <b>Translation Status</b>
+                <br/><br/>
+                <div>
+                    We have been busy since our last Products Update. We<br>
+                    <span  v-for = "change in lastChangesSinceUpdate">
+                        <i> [[ change ]],</i>
+                    </span>
+                    <br>
+                    so lets get these changes live and <a @click="productsTranslationUpdate()"><i class="fa fa-magic" aria-hidden="true"></i> update all effected products now <i class="fa fa-magic" aria-hidden="true"></i>!</a>
+                </div>
 
             </div>
             <div>

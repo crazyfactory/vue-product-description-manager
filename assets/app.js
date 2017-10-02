@@ -9,7 +9,7 @@ else {
     // how long is a product kept in local storage? (in ms)
     var validationRange = 86400000
 }
-
+var ShowTranslationStatus= true
 var AppLanguages = [
     {
         id: 'de',
@@ -230,6 +230,7 @@ new Vue({
         show_preview: false,
         show_settings: false,
         show_translations: false,
+        show_translation_status: ShowTranslationStatus,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
@@ -683,9 +684,7 @@ new Vue({
             else {
                 return true
             }
-        },
-
-
+        }
     },
     methods: {
         addEditorLanguage: function (value) {
@@ -945,8 +944,30 @@ new Vue({
                 this.products[index].descriptions[language] = my_description
             }
         },
+        productsTranslationUpdate: function(){
+            if(this.dirtyTranslations.isDirty){
+                this.addMessage('Please save your local changes before you update the Products.', 'danger')
+                return false
+            }
+            if (hasApi) {
+                api.app = this
+                api.action = 'validate_translation_update'
+                api.call()
+            }
+        },
+        productsTranslationUpdateDone: function(){
+            console.log('Updated Products')
+        },
+        productsTranslationValidation: function(result){
+            proceed=confirm('You are going to update ' + result.count + ' products! Press `OK` to proceed or `Cancel` to abort the operation.')
+            if(proceed){
+                this.addMessage('Lets update the Products dawg!', 'success')
+            }
+            else{
+                this.addMessage('Update aborted!', 'info')
+            }
+        },
         saveTranslationUpdate: function(type, cell){
-
             id = cell.row.id
             index = this.dirtyTranslations[type]['entryList'].indexOf(id)
 
