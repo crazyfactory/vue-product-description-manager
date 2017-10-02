@@ -217,6 +217,7 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
+        rawMaterials : null,
         rawMetatags: null,
         show_actionbar: false,
         show_add_new:false,
@@ -411,14 +412,25 @@ new Vue({
             stash = []
             currentLanguage = this.editorLanguage
 
-            MaterialOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                if (item.is_active==1){
-                    item['search']=search
-                    stash.push(item)
-                }
-            })
-            return stash
+            if(!hasApi){
+                return []
+            }
+            if(this.rawMaterials==null){
+                api.app = this
+                api.action = 'get_materials'
+                api.call()
+                return []
+            }
+            else{
+                this.rawMaterials.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         optionsMetatag: function (){
             stash = []
@@ -624,24 +636,29 @@ new Vue({
             }
         },
         translationsMaterials: function () {
-            if (MaterialOptions && MaterialOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawMaterials==null){
+                api.app = this
+                api.action = 'get_materials'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                MaterialOptions.content.forEach(function (option, index) {
+                this.rawMaterials.forEach(function (option, index) {
                     if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
                 return response
             }
-            else {
-                return []
-            }
         },
         translationsMetatags: function () {
             if(!hasApi){
                 return []
             }
-
             if(this.rawMetatags==null){
                 api.app = this
                 api.action = 'get_metatags'
