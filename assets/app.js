@@ -9,7 +9,7 @@ else {
     // how long is a product kept in local storage? (in ms)
     var validationRange = 86400000
 }
-var ShowTranslationStatus= true
+
 var AppLanguages = [
     {
         id: 'de',
@@ -162,7 +162,6 @@ new Vue({
         selectedMetatags: [],
         selectedProductFilterIndex: null,
         selectedProducts: [],
-        changesSinceUpdate: null,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
@@ -230,7 +229,6 @@ new Vue({
         show_preview: false,
         show_settings: false,
         show_translations: false,
-        show_translation_status: ShowTranslationStatus,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
@@ -336,6 +334,7 @@ new Vue({
                 ]
             }
         },
+        translationUpdates: LogData.content
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -540,15 +539,6 @@ new Vue({
         isSmallScreen: function () {
             return !this.isFullScreen
         },
-        lastChangesSinceUpdate: function () {
-            if(hasApi && this.changesSinceUpdate==null){
-                api.app = this
-                api.action = 'get_translation_status'
-                api.call()
-                return false
-            }
-            else return this.changesSinceUpdate
-        },
         materials: function () {
             materials = {}
             this.optionsMaterial.forEach(function (item) {
@@ -607,6 +597,14 @@ new Vue({
                 }
             })
             return products
+        },
+        showUpdatePanel: function (){
+            if(this.translationUpdates.length>0 || this.dirtyTranslations.isDirty){
+                return true
+            }
+            else{
+                return false
+            }
         },
         translationsBaseProducts: function(){
             if (BaseProductOptions && BaseProductOptions.content) {
@@ -955,17 +953,30 @@ new Vue({
                 api.call()
             }
         },
-        productsTranslationUpdateDone: function(){
-            console.log('Updated Products')
-        },
         productsTranslationValidation: function(result){
-            proceed=confirm('You are going to update ' + result.count + ' products! Press `OK` to proceed or `Cancel` to abort the operation.')
-            if(proceed){
-                this.addMessage('Lets update the Products dawg!', 'success')
+            if(result.count > 0){
+                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor <b>we'll drop all your loaded products.</b>")
+                if(proceed){
+                    this.addMessage('Lets update the Products.', 'success')
+                    this.products=[]
+                    if(hasApi)
+                    {
+                        api.app = this
+                        api.data = result
+                        api.action = 'translation_update'
+                        api.call()
+                    }
+                }
+                else{
+                    this.addMessage('Update aborted!', 'info')
+                }
             }
             else{
-                this.addMessage('Update aborted!', 'info')
+                // we got updates, but no effected products
+                this.translationUpdates=[]
+                this.addMessage('No products to update, process aborted!', 'info')
             }
+
         },
         saveTranslationUpdate: function(type, cell){
             id = cell.row.id
@@ -985,7 +996,6 @@ new Vue({
                 // all translations are clean
                 this.dirtyTranslations.isDirty = false
             }
-            this.changesSinceUpdate = null
             // save to DB
             if(hasApi)
             {
@@ -1020,7 +1030,6 @@ new Vue({
             {
                 this.dirtyTranslations.isDirty = false
             }
-            this.changesSinceUpdate = null
             // save to DB
             if(hasApi)
             {
@@ -1046,7 +1055,6 @@ new Vue({
         },
         deleteResource: function(type, cell){
             proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
-            this.changesSinceUpdate = null
 
             if(proceed){
                 cell.row.is_active="0"
