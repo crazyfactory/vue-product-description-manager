@@ -14,6 +14,7 @@ Add one or many products and create a auto-transatable content by setting:
 - *Material* : add/ manage materials of the product
 - *Metatags* : Automatic creation/set of metatags from BaseProduct, Components and Material. Add/manage autotranslatable Metatags
 - *Description* : get automated description (if provided in API endpoint)
+- *new Translation management*
 
 ### GUI features
 *ActionBar*
@@ -23,15 +24,20 @@ Add one or many products and create a auto-transatable content by setting:
  
 ### Language
  Supported languages are so far:
+ - *cs*
  - *de*
  - *en-GB*
- - *en_US*
+ - *en-US*
  - *es*
+ - *fi*
  - *fr*
+ - *hr*
  - *it*
+ - *nb*
+ - *nl*
+ - *pl*
  - *pt*
  - *ru*
- - *se*
  - *sv*
 
 
@@ -57,6 +63,7 @@ var api{
 ```
 
 ## Changelog
+- 2.0.0: use VueJs 2.x, dynamic data-tables and new multi-select dropdowns
 - 1.1.0: Editor language settings are persistent through sessions
 - 1.0.0 MVP
 - 0.3.0 RC3
