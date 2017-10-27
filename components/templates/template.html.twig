@@ -8,7 +8,7 @@
             <a href="#" class="preview" @click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="translations" @click="makeActive('translations')">Translations <i class="fa fa-globe fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="admin" @click="makeActive('admin')">
-                &nbsp;<i class="fa fa-user-secret fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+                &nbsp;<i class="fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
         </nav>
     </div>
     <!-- show active messages -->
@@ -801,46 +801,15 @@
 
         <div class="message row col-xs-12 col-sm-12 col-md-12" @click.stop v-if="show_message">
             <!-- Settings & Messages -->
+            <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> Message history</h5>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <h5>BaseProducts & Components & Materials & Metatags</h5>
-                    <a href="#" class="export cursor" @click="clearAll()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Clear All Select boxes ... fresh start </a>
-                    <b style="font-size:2em"> | </b>
-                    <a href="#" class="export cursor" @click="debugBaseProducts()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug BaseProducts</a>&nbsp;&nbsp;
-                    <a href="#" class="export cursor" @click="debugComponents()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Components</a>&nbsp;&nbsp;
-
-                    <a href="#" class="export cursor" @click="debugMaterials()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Materials</a>&nbsp;&nbsp;
-                    <a href="#" class="export cursor" @click="debugMetatags()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug Metatags</a>
-                    <a href="#" class="export cursor" @click="debugSettings()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug</a>
-                    <a href="#" class="export cursor" @click="clearSettings()">OR Clear</a>
-                    <a href="#" class="export cursor" @click="debugSettings()">settings</a>
-                </li>
-                <li class="list-group-item">
-                    <h5>Messages</h5>
-                    <a href="#" class="export cursor" @click="addMessage('Test message added for demo purpose.', 'danger')"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i> Add Error message</a>&nbsp;&nbsp;
-                    <a href="#" class="export cursor" @click="removeMessages()"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete ALL messages</a>&nbsp;&nbsp;
-                    <a href="#" class="export cursor" @click="debugMessages()"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Debug messages</a>
-                </li>
-            </ul>
-            <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of failure</h5>
-            <ul class="list-group">
-                <li class="list-group-item" v-for="message in messages_danger">
+                <li class="list-group-item" v-for="message in messages">
                     <div v-bind:class="'alert alert-' + message.type" >
                         <i class="date">[[message.date]]:</i>
                         <span>[[message.message]]</span>
                         <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
                     </div>
 
-                </li>
-            </ul>
-            <h5><i class="fa fa-envelope-o" aria-hidden="true"></i> A history of success</h5>
-            <ul class="list-group">
-                <li class="list-group-item" v-for="message in messages_success">
-                    <div v-bind:class="'alert alert-' + message.type" >
-                        <i class="date">[[message.date]]:</i>
-                        <span>[[message.message]]</span>
-                        <i class="fa fa-trash-o fa-pull-right cursor" aria-hidden="true" @click="removeMessage(message)" ></i>
-                    </div>
                 </li>
             </ul>
             <!-- End Settings & Messages -->

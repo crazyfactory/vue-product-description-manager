@@ -1161,8 +1161,8 @@ new Vue({
                 case 'admin':
                     this.show_message = true
                     this.show_load = false
-                    this.headline = 'Admin Panel'
-                    this.headline_icon = "fa fa-user-secret"
+                    this.headline = 'Message History'
+                    this.headline_icon = "fa fa-envelope-o"
                     break
                 case 'translations':
                     this.show_load = false
