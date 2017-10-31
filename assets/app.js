@@ -1128,6 +1128,13 @@ new Vue({
             this.isFullScreen = false
             this.headline_icon = ''
 
+            // force clearing of all dropdowns
+            this.selectedBaseProduct = null
+            this.selectedComponent1 = null
+            this.selectedComponent2 = null
+            this.selectedMaterials = []
+            this.selectedMetatags = []
+
             switch (item) {
                 case 'names':
                     this.show_names = true
@@ -1276,6 +1283,13 @@ new Vue({
             })
             // delete all products
             this.products = keep_products
+
+            // force clearing of all dropdowns
+            this.selectedBaseProduct = null
+            this.selectedComponent1 = null
+            this.selectedComponent2 = null
+            this.selectedMaterials = []
+            this.selectedMetatags = []
         },
         saveMaterials: function () {
             var selectedMaterials = this.selectedMaterials
@@ -1468,6 +1482,13 @@ new Vue({
                     product.names = product_names
                 }
             })
+
+            // force clearing of all dropdowns
+            this.selectedBaseProduct = null
+            this.selectedComponent1 = null
+            this.selectedComponent2 = null
+            this.selectedMaterials = []
+            this.selectedMetatags = []
 
         },
         selectAllProducts: function (value) {
