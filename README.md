@@ -63,6 +63,7 @@ var api{
 ```
 
 ## Changelog
+- 2.0.1: Resource clearance Bug (#4) fixed
 - 2.0.0: use VueJs 2.x, dynamic data-tables and new multi-select dropdowns
 - 1.1.0: Editor language settings are persistent through sessions
 - 1.0.0 MVP
