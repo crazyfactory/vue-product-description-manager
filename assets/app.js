@@ -154,6 +154,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        accessRight:AccessRight,
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -334,7 +335,8 @@ new Vue({
                 ]
             }
         },
-        translationUpdates: LogData.content
+        translationUpdates: LogData.content,
+
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -684,6 +686,11 @@ new Vue({
             }
         }
     },
+    mounted:function(){
+        if(AccessRight != 1){
+            this.getDescriptorView()
+        }
+    },
     methods: {
         addEditorLanguage: function (value) {
             this.editorLanguage = value
@@ -921,6 +928,23 @@ new Vue({
                 api.action = 'save_product'
                 api.call()
             }
+        },
+        getDescriptorView: function (){
+
+            languages = this.accessRight;
+            AppLanguages.forEach(function (element) {
+                if (languages.includes(element['id'])) {
+                    element['status'] = true
+                } else {
+                    element['status'] = false
+                }
+            });
+
+            this.show_load = false
+            this.isFullScreen = true
+            this.show_translations = true
+
+            window.scrollTo(0, 0)
         },
         getGeneratedDescription: function (product, language) {
             index = this.products.indexOf(product)
