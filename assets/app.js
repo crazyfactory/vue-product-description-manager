@@ -154,7 +154,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        accessRight:AccessRight,
+        accessRight: AccessRight,
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -335,8 +335,7 @@ new Vue({
                 ]
             }
         },
-        translationUpdates: LogData.content,
-
+        translationUpdates: LogData.content
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -686,7 +685,7 @@ new Vue({
             }
         }
     },
-    mounted:function(){
+    mounted: function(){
         if(AccessRight != 1){
             this.getDescriptorView()
         }
@@ -933,11 +932,9 @@ new Vue({
 
             languages = this.accessRight;
             AppLanguages.forEach(function (element) {
-                if (languages.includes(element['id'])) {
-                    element['status'] = true
-                } else {
-                    element['status'] = false
-                }
+                element['status'] = languages.includes(element['id'])
+                                    ? true
+                                    : false
             });
 
             this.show_load = false
