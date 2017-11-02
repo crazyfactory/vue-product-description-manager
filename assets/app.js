@@ -932,9 +932,7 @@ new Vue({
 
             languages = this.accessRight;
             AppLanguages.forEach(function (element) {
-                element['status'] = languages.includes(element['id'])
-                                    ? true
-                                    : false
+                element['status'] === languages.includes(element['id'])
             });
 
             this.show_load = false
