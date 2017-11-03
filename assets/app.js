@@ -10,85 +10,6 @@ else {
     var validationRange = 86400000
 }
 
-var AppLanguages = [
-    {
-        id: 'de',
-        status: true,
-        flag: 'flag-icon-de',
-    },
-    {
-        id: 'en-GB',
-        status: true,
-        flag: 'flag-icon-gb',
-    },
-    {
-        id: 'en-US',
-        status: true,
-        flag: 'flag-icon-us',
-    },
-    {
-        id: 'es',
-        status: false,
-        flag: 'flag-icon-es'
-    },
-    {
-        id: 'nl',
-        status: false,
-        flag: 'flag-icon-nl',
-    },
-    {
-        id: 'cs',
-        status: false,
-        flag: 'flag-icon-cz',
-    },
-    {
-        id: 'fi',
-        status: false,
-        flag: 'flag-icon-fi'
-    },
-    {
-        id: 'fr',
-        status: false,
-        flag: 'flag-icon-fr'
-    },
-    {
-        id: 'hr',
-        status: false,
-        flag: 'flag-icon-hr'
-    },
-    {
-        id: 'it',
-        status: false,
-        flag: 'flag-icon-it'
-    },
-    {
-        id: 'nb',
-        status: false,
-        flag: 'flag-icon-no',
-    },
-    {
-        id: 'pl',
-        status: false,
-        flag: 'flag-icon-pl',
-    },
-    {
-        id: 'pt',
-        status: false,
-        flag: 'flag-icon-pt',
-    },
-    {
-        id: 'ru',
-        status: false,
-        flag: 'flag-icon-ru',
-    },
-    {
-        id: 'sv',
-        status: false,
-        flag: 'flag-icon-se',
-    }
-
-]
-
 /*
  * add products
  */
@@ -154,7 +75,6 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        accessRight: AccessRight,
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -202,9 +122,14 @@ new Vue({
             },
         },
         conjunction: ComponentOptions.conjunction,
-        headline: 'Product Names',
-        headline_icon: 'fa fa-commenting-o',
-        isFullScreen: false,
+        headline: this.isAdmin
+            ? 'Product Names'
+            : 'Translation Management',
+        headline_icon: this.isAdmin
+            ? 'fa fa-commenting-o'
+            : 'fa fa-globe',
+        isAdmin: IsAdmin,
+        isFullScreen: !this.isAdmin,
         isLoading: false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es', 'nl'],
         messages: messageStorage.fetch(),
@@ -222,14 +147,14 @@ new Vue({
         show_actionbar: false,
         show_add_new:false,
         show_export: false,
-        show_load: true,
+        show_load: this.isAdmin,
         show_material: false,
         show_metatags: false,
         show_message: false,
-        show_names: true,
+        show_names: this.isAdmin,
         show_preview: false,
         show_settings: false,
-        show_translations: false,
+        show_translations: !this.isAdmin,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
@@ -685,11 +610,6 @@ new Vue({
             }
         }
     },
-    mounted: function(){
-        if(AccessRight != 1){
-            this.getDescriptorView()
-        }
-    },
     methods: {
         addEditorLanguage: function (value) {
             this.editorLanguage = value
@@ -927,19 +847,6 @@ new Vue({
                 api.action = 'save_product'
                 api.call()
             }
-        },
-        getDescriptorView: function (){
-
-            languages = this.accessRight;
-            AppLanguages.forEach(function (element) {
-                element['status'] === languages.includes(element['id'])
-            });
-
-            this.show_load = false
-            this.isFullScreen = true
-            this.show_translations = true
-
-            window.scrollTo(0, 0)
         },
         getGeneratedDescription: function (product, language) {
             index = this.products.indexOf(product)
