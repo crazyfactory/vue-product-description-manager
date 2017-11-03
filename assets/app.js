@@ -122,14 +122,14 @@ new Vue({
             },
         },
         conjunction: ComponentOptions.conjunction,
-        headline: this.isAdmin
+        headline: IsAdmin
             ? 'Product Names'
             : 'Translation Management',
-        headline_icon: this.isAdmin
+        headline_icon: IsAdmin
             ? 'fa fa-commenting-o'
             : 'fa fa-globe',
         isAdmin: IsAdmin,
-        isFullScreen: !this.isAdmin,
+        isFullScreen: !IsAdmin,
         isLoading: false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
@@ -147,14 +147,14 @@ new Vue({
         show_actionbar: false,
         show_add_new:false,
         show_export: false,
-        show_load: this.isAdmin,
+        show_load: IsAdmin,
         show_material: false,
         show_metatags: false,
         show_message: false,
-        show_names: this.isAdmin,
+        show_names: IsAdmin,
         show_preview: false,
         show_settings: false,
-        show_translations: !this.isAdmin,
+        show_translations: !IsAdmin,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
