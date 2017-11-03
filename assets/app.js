@@ -10,85 +10,6 @@ else {
     var validationRange = 86400000
 }
 
-var AppLanguages = [
-    {
-        id: 'de',
-        status: true,
-        flag: 'flag-icon-de',
-    },
-    {
-        id: 'en-GB',
-        status: true,
-        flag: 'flag-icon-gb',
-    },
-    {
-        id: 'en-US',
-        status: true,
-        flag: 'flag-icon-us',
-    },
-    {
-        id: 'es',
-        status: false,
-        flag: 'flag-icon-es'
-    },
-    {
-        id: 'nl',
-        status: true,
-        flag: 'flag-icon-nl',
-    },
-    {
-        id: 'cs',
-        status: false,
-        flag: 'flag-icon-cz',
-    },
-    {
-        id: 'fi',
-        status: false,
-        flag: 'flag-icon-fi'
-    },
-    {
-        id: 'fr',
-        status: false,
-        flag: 'flag-icon-fr'
-    },
-    {
-        id: 'hr',
-        status: false,
-        flag: 'flag-icon-hr'
-    },
-    {
-        id: 'it',
-        status: false,
-        flag: 'flag-icon-it'
-    },
-    {
-        id: 'nb',
-        status: false,
-        flag: 'flag-icon-no',
-    },
-    {
-        id: 'pl',
-        status: false,
-        flag: 'flag-icon-pl',
-    },
-    {
-        id: 'pt',
-        status: false,
-        flag: 'flag-icon-pt',
-    },
-    {
-        id: 'ru',
-        status: false,
-        flag: 'flag-icon-ru',
-    },
-    {
-        id: 'sv',
-        status: false,
-        flag: 'flag-icon-se',
-    }
-
-]
-
 /*
  * add products
  */
@@ -201,9 +122,14 @@ new Vue({
             },
         },
         conjunction: ComponentOptions.conjunction,
-        headline: 'Product Names',
-        headline_icon: 'fa fa-commenting-o',
-        isFullScreen: false,
+        headline: IsAdmin
+            ? 'Product Names'
+            : 'Translation Management',
+        headline_icon: IsAdmin
+            ? 'fa fa-commenting-o'
+            : 'fa fa-globe',
+        isAdmin: IsAdmin,
+        isFullScreen: !IsAdmin,
         isLoading: false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
         messages: messageStorage.fetch(),
@@ -221,14 +147,14 @@ new Vue({
         show_actionbar: false,
         show_add_new:false,
         show_export: false,
-        show_load: true,
+        show_load: IsAdmin,
         show_material: false,
         show_metatags: false,
         show_message: false,
-        show_names: true,
+        show_names: IsAdmin,
         show_preview: false,
         show_settings: false,
-        show_translations: false,
+        show_translations: !IsAdmin,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
