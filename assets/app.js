@@ -205,7 +205,7 @@ new Vue({
         headline_icon: 'fa fa-commenting-o',
         isFullScreen: false,
         isLoading: false,
-        languages_autodescription: ['de', 'en-GB', 'en-US', 'es'],
+        languages_autodescription: ['de', 'en-GB', 'en-US', 'es', 'nl'],
         messages: messageStorage.fetch(),
         newProduct: '',
         // Preview filter
