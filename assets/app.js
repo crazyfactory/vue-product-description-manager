@@ -33,7 +33,7 @@ var AppLanguages = [
     },
     {
         id: 'nl',
-        status: true,
+        status: false,
         flag: 'flag-icon-nl',
     },
     {
