@@ -1483,7 +1483,7 @@ new Vue({
                     }
                     api.app = this
                     api.data = data
-                    api.action = 'save_resource'
+                    api.action = 'update_translation_requested'
                     api.call()
                 }
             }

@@ -476,7 +476,7 @@
                                 <span @click="deleteResource('baseProducts', cell)" >
                                     <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
                                 </span>
-                                <span @click="switchTranslationRequest('baseProducts', cell)">
+                                <span @click="switchTranslationStatus('baseProducts', cell)">
                                     <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
                                     <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
                                 </span>
