@@ -98,6 +98,7 @@ new Vue({
         newResourceAliasEnUS:'',
         newResourceAliasNl:'',
         newResourceIsHidden: false,
+        newResourceTranslationRequested: true,
         dirtyTranslations: {
             isDirty:false,
             baseProducts:{
@@ -142,6 +143,8 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
+        rawBaseProduct: null,
+        rawCompoent: null,
         rawMaterials : null,
         rawMetatags: null,
         show_actionbar: false,
@@ -533,6 +536,9 @@ new Vue({
             }
         },
         translationsBaseProducts: function(){
+            if(this.rawBaseProduct == null)
+            this.rawBaseProduct = BaseProductOptions;
+
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
                 BaseProductOptions.content.forEach(function (option, index) {
@@ -547,6 +553,10 @@ new Vue({
             }
         },
         translationsComponents: function () {
+            if(this.rawCompoent == null){
+                this.rawCompoent = ComponentOptions.content
+            }
+
             if (ComponentOptions && ComponentOptions.content) {
                 var response = []
                 ComponentOptions.content.forEach(function (option, index) {
@@ -686,6 +696,7 @@ new Vue({
                     'alias_ru': this.newResourceAliasDefault,
                     'sv': this.newResourceLabelDefault,
                     'alias_sv': this.newResourceAliasDefault,
+                    'translation_requested': '1',
                 }
 
                 if (hasApi) {
@@ -1455,6 +1466,27 @@ new Vue({
         },
         switchRemoveMetatag: function(){
             this.remove_mode_metatag = !this.remove_mode_metatag
+        },
+        switchTranslationStatus: function(type, cell){
+            proceed = cell.row['translation_requested'] == 1
+                ? confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.')
+                : confirm('Do you want to request for translation of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.')
+
+            if (proceed) {
+                if (hasApi) {
+                    cell.row['translation_requested'] = cell.row['translation_requested'] == '1'
+                        ? '0'
+                        : '1'
+                    data = {
+                        translation: cell.row,
+                        type: type
+                    }
+                    api.app = this
+                    api.data = data
+                    api.action = 'save_resource'
+                    api.call()
+                }
+            }
         },
         setHiddenTag: function(cell){
             if(cell.row['is_hidden'] =="1") cell.row['is_hidden'] ="0"

@@ -615,3 +615,12 @@ thead.datatable-columns{
 .attention{
     color:red;
 }
+.request{
+    color:#ffc107;
+}
+.complete-request{
+    color:limegreen;
+}
+.right-distance{
+    margin-right: 10px;
+}

@@ -472,11 +472,16 @@
                         </datatable-column>
 
                         <template slot="actions_baseproducts" scope="cell" >
-                            <div @click="deleteResource('baseProducts', cell)" v-if="cell.row['is_active']=='1'">
-                                <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
+                            <div  class="right-distance">
+                                <span @click="deleteResource('baseProducts', cell)" >
+                                    <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
+                                </span>
+                                <span @click="switchTranslationRequest('baseProducts', cell)">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
+                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </template>
-
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
                         <template slot="en-GB" scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
                         <template slot="en-US" scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
@@ -518,7 +523,13 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_components" scope="cell">
-                            <div v-if="cell.row['is_active']=='1'"><span @click="deleteResource('components', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span></div>
+                            <div class="right-distance">
+                                <span @click="deleteResource('components', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                                <span @click="switchTranslationStatus('components', cell)">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
+                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </template>
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></div></template>
                         <template slot="en-GB" scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></div></template>
@@ -560,7 +571,13 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_materials" scope="cell">
-                            <div v-if="cell.row['is_active']=='1'"><span @click="deleteResource('materials', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span></div>
+                            <div v-if="cell.row['is_active']=='1'"  class="right-distance">
+                                <span @click="deleteResource('materials', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
+                                <span @click="switchTranslationStatus('materials', cell)">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
+                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </template>
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></div></template>
                         <template slot="en-GB" scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></div></template>
@@ -602,11 +619,14 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_metatags" scope="cell">
-                            <div v-if="cell.row['is_active']=='1'">
+                            <div v-if="cell.row['is_active']=='1'"  class="right-distance">
                                 <span @click="deleteResource('metatags', cell)"><i class="attention fa fa-trash-o 2x" aria-hidden="true"></i></span>
                                 <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']==1"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                                 <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']!=1"><i class="ok fa fa-eye" aria-hidden="true"></i></span>
-                                &nbsp;
+                                <span @click="switchTranslationStatus('metatags', cell)">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
+                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </template>
                         <template slot="de"    scope="cell">
@@ -772,6 +792,13 @@
                     <span v-bind:class="newResourceLabelNlClass">
                 <label for="newResourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
                 <input class="form-control" id="newResourceLabelNl" v-model="newResourceLabelNl" placeholder="Dutch label (nl)">
+            </span>
+                    <span>
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="newResourceTranslationRequested"
+                         v-model="newResourceTranslationRequested">
+                  <span @click="debugMe(newResourceTranslationRequested)">Translation Requested?</span>
+                </label>
             </span>
                 </p>
             </div>
