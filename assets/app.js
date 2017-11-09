@@ -542,8 +542,14 @@ new Vue({
             if (BaseProductOptions && BaseProductOptions.content) {
                 var response = []
                 BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
+                    if(IsAdmin == true){
+                        if(option.name !== '-' && option.is_active==1){
+                            response.push(option);
+                        }
+                    }else{
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                            response.push(option);
+                        }
                     }
                 })
                 return response
@@ -560,8 +566,14 @@ new Vue({
             if (ComponentOptions && ComponentOptions.content) {
                 var response = []
                 ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
+                    if(IsAdmin == true){
+                        if(option.name !== '-' && option.is_active==1){
+                            response.push(option);
+                        }
+                    }else{
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                            response.push(option);
+                        }
                     }
                 })
                 return response
@@ -583,8 +595,14 @@ new Vue({
             else{
                 var response = []
                 this.rawMaterials.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
+                    if(IsAdmin == true){
+                        if(option.name !== '-' && option.is_active==1){
+                            response.push(option);
+                        }
+                    }else{
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                            response.push(option);
+                        }
                     }
                 })
                 return response
@@ -604,8 +622,14 @@ new Vue({
                 var response = []
 
                 this.rawMetatags.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
+                    if(IsAdmin == true){
+                        if(option.name !== '-' && option.is_active==1){
+                            response.push(option);
+                        }
+                    }else{
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                            response.push(option);
+                        }
                     }
                 })
                 return response
