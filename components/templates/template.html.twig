@@ -1,5 +1,5 @@
 <div id="app" v-bind:class="editorLanguage">
-    <div v-if="isAdmin" class="app-nav">
+    <div class="app-nav">
         <nav v-bind:class="headline" @click.prevent>
             <a href="#" class="new" @click="makeActive('add_new')"><i class="fa fa-plus fa-2x fa-pull-right menu-icon" aria-hidden="true"></i>&nbsp;</a>
             <a href="#" class="name" @click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
@@ -21,12 +21,12 @@
     </div>
     <!-- end active messages -->
     <!-- Settings button -->
-    <div v-if="isAdmin" class="container">
+    <div class="container">
         <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" title="Set languages for Editor and Preview features" @click="toggle_settings"></i>
     </div>
     <!-- end settings button -->
     <!-- settings section -->
-    <div v-if="isAdmin" class="container settings" v-show="show_settings">
+    <div class="container settings" v-show="show_settings">
         <ul class="list-group">
             <li class="list-group-item align-right">
                 <section class="settings language_editor">
