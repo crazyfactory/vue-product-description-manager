@@ -1511,7 +1511,7 @@ new Vue({
         switchRemoveMetatag: function(){
             this.remove_mode_metatag = !this.remove_mode_metatag
         },
-        switchTranslationStatus: function(type, cell){
+        switchTranslatorStatus: function(type, cell){
             proceed = confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.');
 
             if (proceed && hasApi) {
