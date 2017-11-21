@@ -1,5 +1,5 @@
 <div id="app" v-bind:class="editorLanguage">
-    <div class="app-nav">
+    <div v-if="isAdmin" class="app-nav">
         <nav v-bind:class="headline" @click.prevent>
             <a href="#" class="new" @click="makeActive('add_new')"><i class="fa fa-plus fa-2x fa-pull-right menu-icon" aria-hidden="true"></i>&nbsp;</a>
             <a href="#" class="name" @click="makeActive('names')">Names <i class="fa fa-commenting-o fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
@@ -7,6 +7,7 @@
             <a href="#" class="metatags" @click="makeActive('metatags')">Metatags <i class="fa fa-tags fa-2x fa-pull-right menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="preview" @click="makeActive('preview')">Preview <i class="fa fa-eye fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="translations" @click="makeActive('translations')">Translations <i class="fa fa-globe fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
+            <a href="#" class="translator" @click="makeActive('translator')">Translator View <i class="fa fa-globe fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
             <a href="#" class="admin" @click="makeActive('admin')">
                 &nbsp;<i class="fa fa-envelope-o fa-pull-right fa-2x menu-icon" aria-hidden="true"></i></a>
         </nav>
@@ -472,14 +473,8 @@
                         </datatable-column>
 
                         <template slot="actions_baseproducts" scope="cell" >
-                            <div  class="right-distance">
-                                <span @click="deleteResource('baseProducts', cell)" >
-                                    <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
-                                </span>
-                                <span @click="switchTranslationStatus('baseProducts', cell)">
-                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
-                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
-                                </span>
+                            <div @click="deleteResource('baseProducts', cell)" v-if="cell.row['is_active']=='1'">
+                                <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
                             </div>
                         </template>
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
@@ -523,12 +518,8 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_components" scope="cell">
-                            <div class="right-distance">
+                            <div v-if="cell.row['is_active']=='1'">
                                 <span @click="deleteResource('components', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
-                                <span @click="switchTranslationStatus('components', cell)">
-                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
-                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
-                                </span>
                             </div>
                         </template>
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></div></template>
@@ -571,12 +562,8 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_materials" scope="cell">
-                            <div v-if="cell.row['is_active']=='1'"  class="right-distance">
+                            <div v-if="cell.row['is_active']=='1'">
                                 <span @click="deleteResource('materials', cell)"><i class="fa fa-trash-o 2x" aria-hidden="true"></i></span>
-                                <span @click="switchTranslationStatus('materials', cell)">
-                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
-                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
-                                </span>
                             </div>
                         </template>
                         <template slot="de"    scope="cell"><div v-if="cell.row['is_active']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></div></template>
@@ -619,14 +606,11 @@
                                           :formatter="column.formatter">
                         </datatable-column>
                         <template slot="actions_metatags" scope="cell">
-                            <div v-if="cell.row['is_active']=='1'"  class="right-distance">
+                            <div v-if="cell.row['is_active']=='1'">
                                 <span @click="deleteResource('metatags', cell)"><i class="attention fa fa-trash-o 2x" aria-hidden="true"></i></span>
                                 <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']==1"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                                 <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']!=1"><i class="ok fa fa-eye" aria-hidden="true"></i></span>
-                                <span @click="switchTranslationStatus('metatags', cell)">
-                                    <i v-if="cell.row['translation_requested'] == '1'" class="request fa fa-bell" aria-hidden="true"></i>
-                                    <i v-else class="complete-request fa fa-check-circle" aria-hidden="true"></i>
-                                </span>
+                                &nbsp;
                             </div>
                         </template>
                         <template slot="de"    scope="cell">
@@ -749,6 +733,101 @@
                                 <input class="table_input" v-model:value="cell.row['alias_pl']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
+                    </datatable>
+                </p>
+            </div>
+        </div>
+        <!--  This is the Translator View -->
+        <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translator">
+            {# Base Products #}
+            <div>
+                <h4 class="base_products">
+                    <i v-if="!show_translator_base_products" @click="toggleTranslatorVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <i v-if="show_translator_base_products" @click="toggleTranslatorVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                    Base Products
+                    <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
+                </h4>
+                <p v-if="show_translator_base_products" class="translation_table base_products">
+                    <datatable
+                            :source="translatorBaseProducts"
+                            :editable="true"
+                            :threshold="table.threshold">
+                        <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column v-for = "column in activeLanguages" :key="column.id"
+                                          :id = "column.id"
+                                          :label = "column.label"
+                                          :width = "column.width"
+                                          :sortable="column.sortable"
+                                          :groupable="column.groupable"
+                                          :aggregators="column.aggregators"
+                                          :formatter="column.formatter">
+                        </datatable-column>
+                        <template slot="actions_baseproducts" scope="cell" >
+                            <span @click="switchTranslationStatus('baseProducts', cell)" title="Confirm as translated">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
+                            </span>
+                        </template>
+                        <template slot="de"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="en-GB" scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="en-US" scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="es"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-es"></span> <input class="table_input" v-model:value="cell.row['es']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="fr"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-fr"></span> <input class="table_input" v-model:value="cell.row['fr']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="it"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-it"></span> <input class="table_input" v-model:value="cell.row['it']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="nl"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-nl"></span> <input class="table_input" v-model:value="cell.row['nl']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="pt"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-pt"></span> <input class="table_input" v-model:value="cell.row['pt']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="ru"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-ru"></span> <input class="table_input" v-model:value="cell.row['ru']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="sv"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-se"></span> <input class="table_input" v-model:value="cell.row['sv']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="cs"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-cz"></span> <input class="table_input" v-model:value="cell.row['cs']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="fi"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-fi"></span> <input class="table_input" v-model:value="cell.row['fi']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="hr"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-hr"></span> <input class="table_input" v-model:value="cell.row['hr']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="nb"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-no"></span> <input class="table_input" v-model:value="cell.row['nb']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="pl"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-pl"></span> <input class="table_input" v-model:value="cell.row['pl']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                    </datatable>
+                </p>
+            </div>
+            {# components #}
+            <div>
+                <h4 class="component">
+                    <i v-if="!show_translator_components" @click="toggleTranslatorVisibility('components')" class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <i v-if="show_translator_components" @click="toggleTranslatorVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                    Components
+                    <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
+                </h4>
+                <p v-if="show_translator_components" class="translation_table">
+                    <datatable
+                            :source="translatorComponents"
+                            :editable="true"
+                            :threshold="table.threshold">
+                        <datatable-column id="actions_components" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column v-for = "column in activeLanguages" :key="column.id"
+                                          :id = "column.id"
+                                          :label = "column.label"
+                                          :width = "column.width"
+                                          :sortable="column.sortable"
+                                          :groupable="column.groupable"
+                                          :aggregators="column.aggregators"
+                                          :formatter="column.formatter">
+                        </datatable-column>
+                        <template slot="actions_components" scope="cell" >
+                            <span @click="switchTranslationStatus('components', cell)" title="Confirm as translated">
+                                    <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
+                            </span>
+                        </template>
+                        <template slot="de"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="en-GB" scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-gb"></span> <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="en-US" scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-us"></span> <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="es"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-es"></span> <input class="table_input" v-model:value="cell.row['es']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="fr"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-fr"></span> <input class="table_input" v-model:value="cell.row['fr']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="it"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-it"></span> <input class="table_input" v-model:value="cell.row['it']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="nl"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-nl"></span> <input class="table_input" v-model:value="cell.row['nl']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="pt"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-pt"></span> <input class="table_input" v-model:value="cell.row['pt']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="ru"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-ru"></span> <input class="table_input" v-model:value="cell.row['ru']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="sv"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-se"></span> <input class="table_input" v-model:value="cell.row['sv']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="cs"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-cz"></span> <input class="table_input" v-model:value="cell.row['cs']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="fi"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-fi"></span> <input class="table_input" v-model:value="cell.row['fi']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="hr"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-hr"></span> <input class="table_input" v-model:value="cell.row['hr']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="nb"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-no"></span> <input class="table_input" v-model:value="cell.row['nb']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
+                        <template slot="pl"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-pl"></span> <input class="table_input" v-model:value="cell.row['pl']" type="text" @input="stashUpdate('baseProducts', cell)" @keyup.enter="saveTranslationUpdate('baseProducts', cell)"/></div></template>
                     </datatable>
                 </p>
             </div>
