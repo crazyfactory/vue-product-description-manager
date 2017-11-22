@@ -760,9 +760,9 @@
             <div v-if="show_description_translator" class="alert alert-info description-translator-view">
                 <i aria-hidden="true" class="fa fa-times fa-pull-right cursor"  @click="toggleDescriptionTranslator"></i>
                 <div><b>Edit</b>: You can edit text by click at the text.</div>
-                <div><b>Single Save</b>: Text will be saved after you clicked enter button.</div>
-                <div><b>Bulk Save</b>: All texts will be saved when you click <i class="fa fa-floppy-o" ></i>  after title.</div>
-                <div><b>Confirm as translated</b>: if you are complete translation all language, please click <i class="fa fa-check-square-o" ></i>  on left side of row.</div>
+                <div><b>Simple Save</b>: Pressing the `ENTER` button after typing will automatically save your changes to the field.</div>
+                <div><b>Group Save</b>: The <i class="fa fa-floppy-o" ></i> icon after the Resource headline indicates that you have unsafed changes to one or more resource. All texts will be saved when you click <i class="fa fa-floppy-o" ></i>  icon.</div>
+                <div><b>Confirm as fully translated</b>: if the translation of a resource is done for all languages, you can mark it as resolved by clicking the <i class="fa fa-check-square-o" ></i> icon on the very left side of row. The completed resource will disappear from the table as a direct result.</div>
             </div>
             {# Base Products #}
             <div>
