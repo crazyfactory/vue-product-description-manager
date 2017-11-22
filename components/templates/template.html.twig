@@ -757,6 +757,13 @@
         </div>
         <!--  This is the Translator View -->
         <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translator">
+            <div v-if="show_description_translator" class="alert alert-info description-translator-view">
+                <i aria-hidden="true" class="fa fa-times fa-pull-right cursor"  @click="toggleDescriptionTranslator"></i>
+                <div><b>Edit</b>: You can edit text by click at the text.</div>
+                <div><b>Single Save</b>: Text will be saved after you clicked enter button.</div>
+                <div><b>Bulk Save</b>: All texts will be saved when you click <i class="fa fa-floppy-o" ></i>  after title.</div>
+                <div><b>Confirm as translated</b>: if you are complete translation all language, please click <i class="fa fa-check-square-o" ></i>  on left side of row.</div>
+            </div>
             {# Base Products #}
             <div>
                 <h4 class="base_products">
@@ -895,12 +902,12 @@
                     </datatable>
                 </p>
             </div>
-            {# Matatags  #}
+            {# Metatags  #}
             <div>
                 <h4 class="metatags">
                     <i v-if="!show_translator_metatags" @click="toggleTranslatorVisibility('metatags')" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     <i v-if="show_translator_metatags" @click="toggleTranslatorVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                    Matatags
+                    Metatags
                     <i class="fa fa-floppy-o cursor" title="Save Metatags translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty"></i>
                 </h4>
                 <p v-if="show_translator_metatags" class="translation_table">

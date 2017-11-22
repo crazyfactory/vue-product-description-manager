@@ -571,7 +571,13 @@ label.white-space{
 .datatable-options{padding:.75rem 1rem;background-color:#fafafc;border-top:1px solid #dde}
 .datatable-editable .datatable-cell{position:relative;padding:0!important;overflow:visible}
 .datatable-editable .datatable-cell input,.datatable-editable .datatable-cell select{display:block;width:100%;height:auto;padding:.5rem 1rem;background-color:transparent;border:none;border-radius:0}
-.datatable-editable .datatable-cell input:active,.datatable-editable .datatable-cell input:focus,.datatable-editable .datatable-cell select:active,.datatable-editable .datatable-cell select:focus{box-shadow:0 0 0 2px #2196f3}
+
+.datatable-editable .datatable-cell input:active, .datatable-editable .datatable-cell input:focus, .datatable-editable .datatable-cell select:active, .datatable-editable .datatable-cell select:focus {
+    box-shadow: 0 0 0 2px #ADD8E6;
+    height: 22px;
+    background-color: #DCDCDC;
+}
+
 .datatable-column{padding:.75rem 1rem;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .datatable-sort-arrow{width:0;height:0;border:.375rem solid transparent}
 .datatable-sort-arrow-asc{border-bottom-color:currentColor;-webkit-transform:translateY(-.1875rem);transform:translateY(-.1875rem)}

@@ -83,6 +83,7 @@ new Vue({
         selectedMetatags: [],
         selectedProductFilterIndex: null,
         selectedProducts: [],
+        show_description_translator: true,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
@@ -1639,6 +1640,9 @@ new Vue({
                     this.show_translator_metatags = !this.show_translator_metatags
                     break
             }
+        },
+        toggleDescriptionTranslator: function(){
+            this.show_description_translator = !this.show_description_translator
         },
         updateNameSchemes: function () {
             // update product names
