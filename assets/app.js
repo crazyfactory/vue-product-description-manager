@@ -76,7 +76,6 @@ new Vue({
     },
     data: {
         // new multiselect props
-        appLanguages:AppLanguages,
         selectedBaseProduct: null,
         selectedComponent1: null,
         selectedComponent2: null,
@@ -100,7 +99,7 @@ new Vue({
         newResourceAliasEnUS:'',
         newResourceAliasNl:'',
         newResourceIsHidden: false,
-        newResourceTranslationRequested: 1,
+        newResourceTranslationRequested: true,
         dirtyTranslations: {
             isDirty:false,
             baseProducts:{
@@ -764,7 +763,7 @@ new Vue({
                     'alias_ru': this.newResourceAliasDefault,
                     'sv': this.newResourceLabelDefault,
                     'alias_sv': this.newResourceAliasDefault,
-                    'translation_requested': this.newResourceTranslationRequested ? 1 : 0,
+                    'translation_requested': this.newResourceTranslationRequested,
                 }
 
                 if (hasApi) {
@@ -1261,15 +1260,12 @@ new Vue({
                 api.call()
             }
         },
-        is_languages_active: function(id){
-            languages_id = []
-            this.appLanguages.forEach(function (language) {
-                if (language['status']) {
-                    languages_id.push(language['id'])
-                }
-            })
+        is_active_language: function(id){
+            languages_id = $.map( this.activeLanguages, function( language ) {
+                return language['id']
+            });
 
-            return languages_id.indexOf(id)
+            return languages_id.indexOf(id) > -1
         },
         removeMaterial: function (product) {
             // remove material from one product

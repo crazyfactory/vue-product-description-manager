@@ -970,7 +970,7 @@
                     <label class="form-check-label">
                       <input type="checkbox" class="form-check-input" id="newResourceTranslationRequested"
                              v-model="newResourceTranslationRequested">
-                      <span @click="debugMe(newResourceTranslationRequested)">Translation Requested?</span>
+                      <span>Translation Requested?</span>
                     </label>
                 </span>
             </div>
@@ -985,15 +985,15 @@
                         <label for="newResourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
                         <input class="form-control" id="newResourceLabelDefault" v-model="newResourceLabelDefault" placeholder="Default label (en-GB)">
                     </span>
-                     <span v-if="is_languages_active('de') > -1" v-bind:class="newResourceLabelDeClass">
+                     <span v-if="is_active_language('de')" v-bind:class="newResourceLabelDeClass">
                         <label for="newResourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
                         <input class="form-control" id="newResourceLabelDe" v-model="newResourceLabelDe" placeholder="German label (de)">
                     </span>
-                     <span v-if="is_languages_active('en-US') > -1" v-bind:class="newResourceLabelEnUSClass">
+                     <span v-if="is_active_language('en-US')" v-bind:class="newResourceLabelEnUSClass">
                         <label for="newResourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
                         <input class="form-control" id="newResourceLabelEnUS" v-model="newResourceLabelEnUS" placeholder="American label (en-US)">
                     </span>
-                    <span v-if="is_languages_active('nl') > -1" v-bind:class="newResourceLabelNlClass">
+                    <span v-if="is_active_language('nl')" v-bind:class="newResourceLabelNlClass">
                         <label for="newResourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
                         <input class="form-control" id="newResourceLabelNl" v-model="newResourceLabelNl" placeholder="Dutch label (nl)">
                     </span>
