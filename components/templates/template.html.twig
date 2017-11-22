@@ -966,6 +966,13 @@
                         <option>Metatag</option>
                     </select>
                 </p>
+                <span v-if="!newResourceType ==''">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" id="newResourceTranslationRequested"
+                             v-model="newResourceTranslationRequested">
+                      <span @click="debugMe(newResourceTranslationRequested)">Translation Requested?</span>
+                    </label>
+                </span>
             </div>
             <div class="col-xs-4 col-sm-1 col-md-1" v-if="newResourceType == 'Metatag'">
                 <h4>hidden?</h4>
@@ -974,29 +981,22 @@
             <div   v-if="newResourceType!=''" class="col-xs-6 col-sm-4 col-md-4" >
                 <h4>with labels </h4>
                 <p>
-            <span v-bind:class="newResourceLabelDefaultClass">
-                <label for="newResourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
-                <input class="form-control" id="newResourceLabelDefault" v-model="newResourceLabelDefault" placeholder="Default label (en-GB)">
-            </span><br>
-                    <span v-bind:class="newResourceLabelDeClass">
-                <label for="newResourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
-                <input class="form-control" id="newResourceLabelDe" v-model="newResourceLabelDe" placeholder="German label (de)">
-            </span><br>
-                    <span v-bind:class="newResourceLabelEnUSClass">
-                <label for="newResourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
-                <input class="form-control" id="newResourceLabelEnUS" v-model="newResourceLabelEnUS" placeholder="American label (en-US)">
-            </span><br>
-                    <span v-bind:class="newResourceLabelNlClass">
-                <label for="newResourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
-                <input class="form-control" id="newResourceLabelNl" v-model="newResourceLabelNl" placeholder="Dutch label (nl)">
-            </span>
-                    <span>
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" id="newResourceTranslationRequested"
-                         v-model="newResourceTranslationRequested">
-                  <span>Translation Requested?</span>
-                </label>
-            </span>
+                    <span v-bind:class="newResourceLabelDefaultClass">
+                        <label for="newResourceLabelDefault"><span class="flag-icon flag-icon-gb"></span></label>
+                        <input class="form-control" id="newResourceLabelDefault" v-model="newResourceLabelDefault" placeholder="Default label (en-GB)">
+                    </span>
+                     <span v-if="is_languages_active('de') > -1" v-bind:class="newResourceLabelDeClass">
+                        <label for="newResourceLabelDe"><span class="flag-icon flag-icon-de"></span></label>
+                        <input class="form-control" id="newResourceLabelDe" v-model="newResourceLabelDe" placeholder="German label (de)">
+                    </span>
+                     <span v-if="is_languages_active('en-US') > -1" v-bind:class="newResourceLabelEnUSClass">
+                        <label for="newResourceLabelEnUS"><span class="flag-icon flag-icon-us"></span></label>
+                        <input class="form-control" id="newResourceLabelEnUS" v-model="newResourceLabelEnUS" placeholder="American label (en-US)">
+                    </span>
+                    <span v-if="is_languages_active('nl') > -1" v-bind:class="newResourceLabelNlClass">
+                        <label for="newResourceLabelNl"><span class="flag-icon flag-icon-nl"></span></label>
+                        <input class="form-control" id="newResourceLabelNl" v-model="newResourceLabelNl" placeholder="Dutch label (nl)">
+                    </span>
                 </p>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-4" v-if="newResourceType=='Metatag'">
