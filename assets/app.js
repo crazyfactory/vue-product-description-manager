@@ -315,6 +315,7 @@ new Vue({
             stash = []
             this.supportedLanguages.forEach(function (item) {
                 if (item.status){
+                    item.translator_id = "translator_" + item.id
                     stash.push(item)
                 }
             })
