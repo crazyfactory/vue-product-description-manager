@@ -1261,7 +1261,7 @@ new Vue({
             }
         },
         is_active_language: function(id){
-            languages_id = $.map( this.activeLanguages, function( language ) {
+            languages_id = this.activeLanguages.map(function( language ) {
                 return language['id']
             });
 
