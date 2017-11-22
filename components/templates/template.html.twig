@@ -453,7 +453,8 @@
                 <h4 class="base_products">
                     <i v-if="!show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     <i v-if="show_translation_base_products" @click="toggleTranslationVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                    Base Products  <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
+                    Base Products
+                    <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
                 </h4>
 
                 <p v-if="show_translation_base_products" class="translation_table base_products">
@@ -777,7 +778,7 @@
                             :source="translatorBaseProducts"
                             :editable="true"
                             :threshold="table.threshold">
-                        <datatable-column id="actions_baseproducts" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column id="translator_actions_baseproducts" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -787,7 +788,7 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
-                        <template slot="actions_baseproducts" scope="cell" >
+                        <template slot="translator_actions_baseproducts" scope="cell" >
                             <span @click="switchTranslatorStatus('baseProducts', cell)" title="Confirm as translated">
                                     <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
                             </span>
@@ -823,7 +824,7 @@
                             :source="translatorComponents"
                             :editable="true"
                             :threshold="table.threshold">
-                        <datatable-column id="actions_components" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column id="translator_actions_components" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -833,7 +834,7 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
-                        <template slot="actions_components" scope="cell" >
+                        <template slot="translator_actions_components" scope="cell" >
                             <span @click="switchTranslatorStatus('components', cell)" title="Confirm as translated">
                                     <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
                             </span>
@@ -869,7 +870,7 @@
                             :source="translatorMaterials"
                             :editable="true"
                             :threshold="table.threshold">
-                        <datatable-column id="actions_materials" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column id="translator_actions_materials" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -879,7 +880,7 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
-                        <template slot="actions_materials" scope="cell" >
+                        <template slot="translator_actions_materials" scope="cell" >
                             <span @click="switchTranslatorStatus('materials', cell)" title="Confirm as translated">
                                     <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
                             </span>
@@ -915,7 +916,7 @@
                             :source="translatorMetatags"
                             :editable="true"
                             :threshold="table.threshold">
-                        <datatable-column id="actions_metatags" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
+                        <datatable-column id="translator_actions_metatags" label="Actions" :sortable="false" :groupable="false" >&nbsp;</datatable-column>
                         <datatable-column v-for = "column in activeLanguages" :key="column.id"
                                           :id = "column.id"
                                           :label = "column.label"
@@ -925,7 +926,7 @@
                                           :aggregators="column.aggregators"
                                           :formatter="column.formatter">
                         </datatable-column>
-                        <template slot="actions_metatags" scope="cell" >
+                        <template slot="translator_actions_metatags" scope="cell" >
                             <span @click="switchTranslatorStatus('metatags', cell)" title="Confirm as translated">
                                     <i v-if="cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
                             </span>
