@@ -607,14 +607,28 @@ new Vue({
             else{
                 var response = []
                 this.rawMaterials.forEach(function (option, index) {
-                    if(IsAdmin == true){
-                        if(option.name !== '-' && option.is_active==1){
-                            response.push(option);
-                        }
-                    }else{
-                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
-                            response.push(option);
-                        }
+                    if (option.name !== '-' && option.is_active == 1) {
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+        },
+        translatorMaterials: function () {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawMaterials==null){
+                api.app = this
+                api.action = 'get_materials'
+                api.call()
+                return []
+            }
+            else{
+                var response = []
+                this.rawMaterials.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
+                        response.push(option);
                     }
                 })
                 return response
@@ -634,14 +648,29 @@ new Vue({
                 var response = []
 
                 this.rawMetatags.forEach(function (option, index) {
-                    if(IsAdmin == true){
-                        if(option.name !== '-' && option.is_active==1){
-                            response.push(option);
-                        }
-                    }else{
-                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
-                            response.push(option);
-                        }
+                    if(option.name !== '-' && option.is_active==1){
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+        },
+        translatorMetatags: function () {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawMetatags==null){
+                api.app = this
+                api.action = 'get_metatags'
+                api.call()
+                return []
+            }
+            else{
+                var response = []
+
+                this.rawMetatags.forEach(function (option, index) {
+                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                        response.push(option);
                     }
                 })
                 return response
@@ -1527,8 +1556,29 @@ new Vue({
                     }
                     api.app = this
                     api.data = data
-                    api.action = 'update_translation_requested'
+                    api.action = 'update_translator_requested'
                     api.call()
+            }
+        },
+        switchTranslationStatus: function(type, cell){
+
+            if (hasApi) {
+                cell.row['translation_requested'] = cell.row['translation_requested'] == 1
+                    ? 0
+                    : 1
+
+                if(type=="baseProducts") this.show_translation_base_products = false
+                if(type=="components") this.show_translation_components = false
+
+                data = {
+                    translation: cell.row,
+                    type: type
+                }
+                api.app = this
+                api.data = data
+                api.action = 'update_translation_requested'
+
+                api.call()
             }
         },
         setHiddenTag: function(cell){
