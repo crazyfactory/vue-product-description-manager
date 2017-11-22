@@ -125,7 +125,7 @@
                                 <!-- Generic Product Names by language -->
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                        <span v-bind:class="'flag-icon '+language.flag" @click="debugMe(product)"></span>
+                                        <span v-bind:class="'flag-icon '+language.flag" ></span>
                                         <span v-if="product.base_product || product.component1 || product.component2">
                       <i class="fa fa-trash-o fa-pull-right cursor" title="Remove this Product name" aria-hidden="true" @click="removeProductName(product)"></i>
                       <i class="fa fa-pencil fa-pull-right cursor" title="Add custom name" aria-hidden="true" v-show="product.names[language.id] && !product.names[language.id].edit" @click="editMe(product.names[language.id], product)"></i>
@@ -155,7 +155,7 @@
                                     <!-- material configuration -->
                                     <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                            <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
+                                            <span v-bind:class="'flag-icon cursor '+language.flag"></span>
                                             <span v-for="(material, index) in product.materials">
                         <span v-if="index > 0 && material">/</span>
                         <span v-if="material[language.id] && material[language.id]!== undefined">[[ material[language.id] ]]</span>
@@ -175,7 +175,7 @@
                                     <ul  class="indent" v-if="(product.metatags && product.metatags.length>0) || (product.cached_metatags)">
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                                             <ul>
-                                                <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
+                                                <li v-bind:class="{'no-bottom-space': product.cached_metatags && product.cached_metatags[language.id] }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span>
                                                     <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags" v-bind:class="{ 'override': (product.metatags && product.metatags.length>0) }">
                                                         [[ product.cached_metatags[language.id].value ]]</span>
                                                 </li>
@@ -252,7 +252,7 @@
                                         <!-- Material Preview -->
                                         <ul class="list-group">
                                             <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-                                                <span v-bind:class="'flag-icon cursor '+language.flag" @click="debugMe(product)"></span>
+                                                <span v-bind:class="'flag-icon cursor '+language.flag" ></span>
                                                 <span v-for="(material, index) in product.materials">
                                                     <span v-if="index > 0">/</span>
                                                     <span v-if="material[language.id]">[[ material[language.id] ]]</span>
@@ -274,7 +274,7 @@
                                         <ul  class="indent" v-if="product.cached_metatags || (product.metatags && product.metatags.length>0)">
                                             <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                                                 <ul>
-                                                    <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" @click="debugMe(product)" style="margin-top:-8px; margin-left:-12px;"></span>
+                                                    <li v-bind:class="{'no-bottom-space': product.cached_metatags }"><span v-bind:class="'flag-icon fa-pull-left cursor '+language.flag" style="margin-top:-8px; margin-left:-12px;"></span>
                                                         <span v-if="product.cached_metatags && product.cached_metatags[language.id]" class="cached metatags"
                                                               v-bind:class="{ 'override': (product.metatags && product.metatags.length>0)}">
                               [[ product.cached_metatags[language.id].value ]]
@@ -810,6 +810,7 @@
                     </datatable>
                 </p>
             </div>
+            </div>debug
             {# Components #}
             <div>
                 <h4 class="components">
@@ -967,7 +968,7 @@
                 </p>
             </div>
             <div class="col-xs-4 col-sm-1 col-md-1" v-if="newResourceType == 'Metatag'">
-                <h4 @click="debugMe(newResourceIsHidden)">hidden?</h4>
+                <h4>hidden?</h4>
                 <input type="checkbox"  id="newResourceIsHidden" v-model="newResourceIsHidden">
             </div>
             <div   v-if="newResourceType!=''" class="col-xs-6 col-sm-4 col-md-4" >
@@ -993,7 +994,7 @@
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" id="newResourceTranslationRequested"
                          v-model="newResourceTranslationRequested">
-                  <span @click="debugMe(newResourceTranslationRequested)">Translation Requested?</span>
+                  <span>Translation Requested?</span>
                 </label>
             </span>
                 </p>
