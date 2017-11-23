@@ -144,8 +144,6 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
-        rawBaseProduct: null,
-        rawCompoent: null,
         rawMaterials : null,
         rawMetatags: null,
         show_actionbar: false,
@@ -546,8 +544,8 @@ new Vue({
                 var response = []
 
                 BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
-                            response.push(option);
+                    if (option.name !== '-' && option.is_active == 1) {
+                        response.push(option);
                     }
                 })
                 return response
