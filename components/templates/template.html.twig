@@ -474,8 +474,8 @@
                         </datatable-column>
 
                         <template slot="actions_baseproducts" scope="cell">
-                            <div class="right-distance">
-                                <span @click="deleteResource('baseProducts', cell)" v-if="cell.row['is_active']=='1'">
+                            <div class="right-distance" v-if="cell.row['is_active']=='1'">
+                                <span @click="deleteResource('baseProducts', cell)" >
                                     <i class="fa fa-trash-o 2x" aria-hidden="true"></i>
                                 </span>
                                 <span @click="switchTranslationStatus('baseProducts', cell)">

@@ -1556,8 +1556,6 @@ new Vue({
                 cell.row['translation_requested'] = 0
                 if(type=="baseProducts") this.show_translator_base_products = false
                 if(type=="components") this.show_translator_components = false
-                if(type=="materials") this.show_translator_materials = false
-                if(type=="metatags") this.show_translator_metatags = false
 
                 data = {
                         translation: cell.row,
