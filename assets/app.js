@@ -1568,9 +1568,7 @@ new Vue({
         switchTranslationStatus: function(type, cell){
 
             if (hasApi) {
-                cell.row['translation_requested'] = cell.row['translation_requested'] == 1
-                    ? 0
-                    : 1
+                cell.row['translation_requested'] = cell.row['translation_requested'] ? 0 : 1
 
                 if(type=="baseProducts") this.show_translation_base_products = false
                 if(type=="components") this.show_translation_components = false
@@ -1582,7 +1580,6 @@ new Vue({
                 api.app = this
                 api.data = data
                 api.action = 'update_translation_requested'
-
                 api.call()
             }
         },
