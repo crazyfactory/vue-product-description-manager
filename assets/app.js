@@ -81,8 +81,6 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
-        selectedProductFilterIndex: null,
-        selectedProducts: [],
         show_description_translator: true,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
