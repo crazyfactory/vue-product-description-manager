@@ -167,6 +167,7 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
+        update_panel_status: false,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -532,7 +533,7 @@ new Vue({
             return products
         },
         showUpdatePanel: function (){
-            if(this.translationUpdates.length>0 || this.dirtyTranslations.isDirty){
+            if(this.translationUpdates.length>0 || this.dirtyTranslations.isDirty || this.update_panel_status){
                 return true
             }
             else{
