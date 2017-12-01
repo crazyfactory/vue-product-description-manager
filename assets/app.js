@@ -81,8 +81,6 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
-        selectedProductFilterIndex: null,
-        selectedProducts: [],
         show_description_translator: true,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
@@ -438,6 +436,13 @@ new Vue({
                 }
                 return this.settings.supportedLanguages
             }
+        },
+        selectedDirtyProducts: function () {
+            list_products = this.products.filter(function (product) {
+                return product.active === true && product.dirty === true
+            })
+
+            return list_products
         },
         hasDirtyProducts: function () {
             var bool = false
@@ -921,6 +926,73 @@ new Vue({
                 api.app = this
                 api.data = product
                 api.action = 'save_product'
+                api.call()
+            }
+        },
+        getLocalizedMaterials: function (language, materials) {
+            localized_materials[language] = []
+            materials.forEach(function (material) {
+                localized_materials[language].push(material[language])
+            })
+
+            return localized_materials[language]
+        },
+        getLocalizedMetatags: function (language, metatags) {
+            localized_metatags[language] = []
+
+            metatags.forEach(function (metatag) {
+                my_label = metatag[language]
+
+                if (metatag.invisible) {
+                    my_label = "-" + my_label
+                }
+
+                localized_metatags[language].push(my_label)
+
+
+                // add alias
+                my_aliases = metatag['alias_' + language]
+
+                if (my_aliases) {
+                    alias_array = my_aliases.split(',')
+
+                    alias_array.forEach(function (alias) {
+                        alias = "-" + alias.trim()
+
+                        if (alias.length > 1 && localized_metatags[language].indexOf(alias) < 0) {
+                            localized_metatags[language].push(alias)
+                        }
+                    })
+                }
+            })
+
+            return localized_metatags[language]
+        },
+        saveSelectedProducts: function () {
+            _this = this
+            localized_materials = {}
+            localized_metatags = {}
+            export_languages = this.activeLanguages.map(function (language) {
+                return language.id
+            })
+            _this.selectedDirtyProducts.forEach(function (product) {
+                localized_materials[product.db_id] = {}
+                localized_metatags[product.db_id] = {}
+                _this.activeLanguages.forEach(function (language) {
+                    localized_materials[product.db_id][language.id] = _this.getLocalizedMaterials(language.id, product.materials)
+                    localized_metatags[product.db_id][language.id] = _this.getLocalizedMetatags(language.id, product.metatags)
+                })
+
+                product['localized_materials'] = localized_materials[product.db_id]
+                product['localized_metatags'] = localized_metatags[product.db_id]
+                product['export_languages'] = export_languages
+            })
+
+            if (hasApi) {
+                api.app = this
+                api.language = export_languages
+                api.data = this.selectedDirtyProducts
+                api.action = 'save_products'
                 api.call()
             }
         },
@@ -1568,9 +1640,7 @@ new Vue({
         switchTranslationStatus: function(type, cell){
 
             if (hasApi) {
-                cell.row['translation_requested'] = cell.row['translation_requested'] == 1
-                    ? 0
-                    : 1
+                cell.row['translation_requested'] = cell.row['translation_requested'] ? 0 : 1
 
                 if(type=="baseProducts") this.show_translation_base_products = false
                 if(type=="components") this.show_translation_components = false
@@ -1582,7 +1652,6 @@ new Vue({
                 api.app = this
                 api.data = data
                 api.action = 'update_translation_requested'
-
                 api.call()
             }
         },
