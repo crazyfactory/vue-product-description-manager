@@ -861,11 +861,11 @@ new Vue({
         exportProduct: function (product) {
             msg = "";
             if (!product.base_product && !product.materials.length) {
-                msg = "Are you sure to save empty `baseproduct` and empty `materials` in `" + product.modelCode +"` ?"
+                msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode +"` ?"
             } else if (!product.materials.length) {
-                msg = "Are you sure to save empty `material` in `" + product.modelCode + "` ?"
+                msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
             } else if(!product.base_product) {
-                msg = "Are you sure to save empty `baseproduct` in `" + product.modelCode + "` ?"
+                msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
             }
 
             proceed = true
