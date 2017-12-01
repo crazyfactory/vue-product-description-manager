@@ -10,6 +10,85 @@ else {
     var validationRange = 86400000
 }
 
+var AppLanguages = [
+    {
+        id: 'de',
+        status: true,
+        flag: 'flag-icon-de',
+    },
+    {
+        id: 'en-GB',
+        status: true,
+        flag: 'flag-icon-gb',
+    },
+    {
+        id: 'en-US',
+        status: true,
+        flag: 'flag-icon-us',
+    },
+    {
+        id: 'es',
+        status: false,
+        flag: 'flag-icon-es'
+    },
+    {
+        id: 'nl',
+        status: false,
+        flag: 'flag-icon-nl',
+    },
+    {
+        id: 'cs',
+        status: false,
+        flag: 'flag-icon-cz',
+    },
+    {
+        id: 'fi',
+        status: false,
+        flag: 'flag-icon-fi'
+    },
+    {
+        id: 'fr',
+        status: false,
+        flag: 'flag-icon-fr'
+    },
+    {
+        id: 'hr',
+        status: false,
+        flag: 'flag-icon-hr'
+    },
+    {
+        id: 'it',
+        status: false,
+        flag: 'flag-icon-it'
+    },
+    {
+        id: 'nb',
+        status: false,
+        flag: 'flag-icon-no',
+    },
+    {
+        id: 'pl',
+        status: false,
+        flag: 'flag-icon-pl',
+    },
+    {
+        id: 'pt',
+        status: false,
+        flag: 'flag-icon-pt',
+    },
+    {
+        id: 'ru',
+        status: false,
+        flag: 'flag-icon-ru',
+    },
+    {
+        id: 'sv',
+        status: false,
+        flag: 'flag-icon-se',
+    }
+
+]
+
 /*
  * add products
  */
@@ -81,7 +160,7 @@ new Vue({
         selectedComponent2: null,
         selectedMaterials: [],
         selectedMetatags: [],
-        show_description_translator: true,
+        selectedProductFilterIndex: null,
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
@@ -97,7 +176,6 @@ new Vue({
         newResourceAliasEnUS:'',
         newResourceAliasNl:'',
         newResourceIsHidden: false,
-        newResourceTranslationRequested: true,
         dirtyTranslations: {
             isDirty:false,
             baseProducts:{
@@ -122,14 +200,9 @@ new Vue({
             },
         },
         conjunction: ComponentOptions.conjunction,
-        headline: IsAdmin
-            ? 'Product Names'
-            : 'Translation Management',
-        headline_icon: IsAdmin
-            ? 'fa fa-commenting-o'
-            : 'fa fa-globe',
-        isAdmin: IsAdmin,
-        isFullScreen: !IsAdmin,
+        headline: 'Product Names',
+        headline_icon: 'fa fa-commenting-o',
+        isFullScreen: false,
         isLoading: false,
         languages_autodescription: ['de', 'en-GB', 'en-US', 'es', 'nl'],
         messages: messageStorage.fetch(),
@@ -147,24 +220,20 @@ new Vue({
         show_actionbar: false,
         show_add_new:false,
         show_export: false,
-        show_load: IsAdmin,
+        show_load: true,
         show_material: false,
         show_metatags: false,
         show_message: false,
-        show_names: IsAdmin,
+        show_names: true,
         show_preview: false,
         show_settings: false,
         show_translations: false,
-        show_translator: !IsAdmin,
         show_translation_base_products: false,
         show_translation_components: false,
         show_translation_materials: false,
         show_translation_metatags: false,
         show_translation_descriptions: false,
-        show_translator_base_products: false,
-        show_translator_components: false,
-        show_translator_materials: false,
-        show_translator_metatags: false,
+
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -310,7 +379,6 @@ new Vue({
             stash = []
             this.supportedLanguages.forEach(function (item) {
                 if (item.status){
-                    item.translator_id = "translator_" + item.id
                     stash.push(item)
                 }
             })
@@ -559,37 +627,11 @@ new Vue({
                 return []
             }
         },
-        translatorBaseProducts: function(){
-            if (BaseProductOptions && BaseProductOptions.content) {
-                var response = []
-
-                BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-        },
         translationsComponents: function () {
             if (ComponentOptions && ComponentOptions.content) {
                 var response = []
                 ComponentOptions.content.forEach(function (option, index) {
                     if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-            else {
-                return []
-            }
-        },
-        translatorComponents: function(){
-            if (ComponentOptions && ComponentOptions.content) {
-                var response = []
-                ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
                         response.push(option);
                     }
                 })
@@ -612,27 +654,7 @@ new Vue({
             else{
                 var response = []
                 this.rawMaterials.forEach(function (option, index) {
-                    if (option.name !== '-' && option.is_active == 1) {
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-        },
-        translatorMaterials: function () {
-            if(!hasApi){
-                return []
-            }
-            if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
-                return []
-            }
-            else{
-                var response = []
-                this.rawMaterials.forEach(function (option, index) {
-                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
+                    if(option.name !== '-' && option.is_active==1){
                         response.push(option);
                     }
                 })
@@ -654,27 +676,6 @@ new Vue({
 
                 this.rawMetatags.forEach(function (option, index) {
                     if(option.name !== '-' && option.is_active==1){
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-        },
-        translatorMetatags: function () {
-            if(!hasApi){
-                return []
-            }
-            if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
-            }
-            else{
-                var response = []
-
-                this.rawMetatags.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
                         response.push(option);
                     }
                 })
@@ -766,7 +767,6 @@ new Vue({
                     'alias_ru': this.newResourceAliasDefault,
                     'sv': this.newResourceLabelDefault,
                     'alias_sv': this.newResourceAliasDefault,
-                    'translation_requested': this.newResourceTranslationRequested,
                 }
 
                 if (hasApi) {
@@ -1200,7 +1200,6 @@ new Vue({
             this.show_load = true
             this.show_add_new = false
             this.isFullScreen = false
-            this.show_translator = false
             this.headline_icon = ''
 
             // force clearing of all dropdowns
@@ -1251,13 +1250,6 @@ new Vue({
                     this.isFullScreen = true
                     this.show_translations = true
                     this.headline = 'Translations'
-                    this.headline_icon = "fa fa-globe"
-                    break
-                case 'translator':
-                    this.show_load = false
-                    this.isFullScreen = true
-                    this.show_translator = true
-                    this.headline = 'Translation Management'
                     this.headline_icon = "fa fa-globe"
                     break
                 case 'add_new':
@@ -1329,13 +1321,6 @@ new Vue({
                 api.action = 'invisible_metatags'
                 api.call()
             }
-        },
-        is_active_language: function(id){
-            languages_id = this.activeLanguages.map(function( language ) {
-                return language['id']
-            });
-
-            return languages_id.indexOf(id) > -1
         },
         removeMaterial: function (product) {
             // remove material from one product
@@ -1619,42 +1604,6 @@ new Vue({
         switchRemoveMetatag: function(){
             this.remove_mode_metatag = !this.remove_mode_metatag
         },
-        switchTranslatorStatus: function(type, cell){
-            proceed = confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.');
-
-            if (proceed && hasApi) {
-                cell.row['translation_requested'] = 0
-                if(type=="baseProducts") this.show_translator_base_products = false
-                if(type=="components") this.show_translator_components = false
-
-                data = {
-                        translation: cell.row,
-                        type: type
-                    }
-                    api.app = this
-                    api.data = data
-                    api.action = 'update_translator_requested'
-                    api.call()
-            }
-        },
-        switchTranslationStatus: function(type, cell){
-
-            if (hasApi) {
-                cell.row['translation_requested'] = cell.row['translation_requested'] ? 0 : 1
-
-                if(type=="baseProducts") this.show_translation_base_products = false
-                if(type=="components") this.show_translation_components = false
-
-                data = {
-                    translation: cell.row,
-                    type: type
-                }
-                api.app = this
-                api.data = data
-                api.action = 'update_translation_requested'
-                api.call()
-            }
-        },
         setHiddenTag: function(cell){
             if(cell.row['is_hidden'] =="1") cell.row['is_hidden'] ="0"
             else cell.row['is_hidden'] ="1"
@@ -1696,26 +1645,6 @@ new Vue({
                     this.show_translation_descriptions = !this.show_translation_descriptions
                     break
             }
-        },
-        toggleTranslatorVisibility: function (item) {
-
-            switch (item) {
-                case 'base_products':
-                    this.show_translator_base_products = !this.show_translator_base_products
-                    break
-                case 'components':
-                    this.show_translator_components = !this.show_translator_components
-                    break
-                case 'materials':
-                    this.show_translator_materials = !this.show_translator_materials
-                    break
-                case 'metatags':
-                    this.show_translator_metatags = !this.show_translator_metatags
-                    break
-            }
-        },
-        toggleDescriptionTranslator: function(){
-            this.show_description_translator = !this.show_description_translator
         },
         updateNameSchemes: function () {
             // update product names
