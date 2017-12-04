@@ -165,6 +165,8 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
+        baseProductStatus:true,
+        componentStatus:true,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -553,15 +555,17 @@ new Vue({
             }
         },
         translatorBaseProducts: function(){
-            if (BaseProductOptions && BaseProductOptions.content) {
-                var response = []
-
-                BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
-                        response.push(option);
-                    }
-                })
-                return response
+            if(this.baseProductStatus){
+                this.baseProductStatus = false
+                if (BaseProductOptions && BaseProductOptions.content) {
+                    var response = []
+                    BaseProductOptions.content.forEach(function (option, index) {
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
+                            response.push(option);
+                        }
+                    })
+                    return response
+                }
             }
         },
         translationsComponents: function () {
@@ -579,17 +583,20 @@ new Vue({
             }
         },
         translatorComponents: function(){
-            if (ComponentOptions && ComponentOptions.content) {
-                var response = []
-                ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
-                        response.push(option);
-                    }
-                })
-                return response
-            }
-            else {
-                return []
+            if(this.componentStatus){
+                this.componentStatus = false
+                if (ComponentOptions && ComponentOptions.content) {
+                    var response = []
+                    ComponentOptions.content.forEach(function (option, index) {
+                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
+                            response.push(option);
+                        }
+                    })
+                    return response
+                }
+                else {
+                    return []
+                }
             }
         },
         translationsMaterials: function () {
