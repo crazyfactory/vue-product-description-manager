@@ -161,7 +161,8 @@ new Vue({
         selectedMaterials: [],
         selectedMetatags: [],
         selectedProductFilterIndex: null,
-        newResourceType:'',
+        mockedDirtyProduct: [],
+        newResourceType: '',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
         newResourceLabelDefaultClass:'form-goup',
@@ -988,13 +989,18 @@ new Vue({
                 product['export_languages'] = export_languages
             })
 
-            if (hasApi) {
-                api.app = this
-                api.language = export_languages
-                api.data = this.selectedDirtyProducts
-                api.action = 'save_products'
-                api.call()
-            }
+            _this.selectedDirtyProducts.reduce((promiseChain, product) => {
+                return promiseChain.then(() => new Promise((resolve) => {
+                    if (hasApi) {
+                        api.app = _this
+                        api.language = export_languages
+                        api.data = product
+                        api.action = 'save_products'
+                        api.resolve = resolve
+                        api.call()
+                    }
+                }));
+            }, Promise.resolve());
         },
         getGeneratedDescription: function (product, language) {
             index = this.products.indexOf(product)
