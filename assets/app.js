@@ -877,8 +877,7 @@ new Vue({
                 if (!product.base_product && !product.materials.length) {
                     msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode +"` ?"
                 }
-                proceed = confirm(msg)
-                if(!proceed) return
+                if(!confirm(msg)) return
             }
 
             // localize materials
