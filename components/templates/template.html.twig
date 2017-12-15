@@ -836,7 +836,7 @@
                         </datatable-column>
                         <template slot="translator_actions_components" scope="cell" >
                             <span @click="switchTranslatorStatus('components', cell)" title="Confirm as translated">
-                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
+                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="request fa fa-bell right-distance" aria-hidden="true"></i>
                             </span>
                         </template>
                         <template slot="translator_de"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('components', cell)" @keyup.enter="saveTranslationUpdate('components', cell)"/></div></template>
@@ -882,7 +882,7 @@
                         </datatable-column>
                         <template slot="translator_actions_materials" scope="cell" >
                             <span @click="switchTranslatorStatus('materials', cell)" title="Confirm as translated">
-                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
+                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="request fa fa-bell right-distance" aria-hidden="true"></i>
                             </span>
                         </template>
                         <template slot="translator_de"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('materials', cell)" @keyup.enter="saveTranslationUpdate('materials', cell)"/></div></template>
@@ -928,7 +928,7 @@
                         </datatable-column>
                         <template slot="translator_actions_metatags" scope="cell" >
                             <span @click="switchTranslatorStatus('metatags', cell)" title="Confirm as translated">
-                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="fa fa-check-square-o right-distance" aria-hidden="true"></i>
+                                    <i v-if="isAdmin && cell.row['translation_requested'] == '1'" class="request fa fa-bell right-distance" aria-hidden="true"></i>
                             </span>
                         </template>
                         <template slot="translator_de"    scope="cell"><div v-if="cell.row['translation_requested']=='1'"><span  class="absolute flag-icon flag-icon-de"></span> <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/></div></template>
