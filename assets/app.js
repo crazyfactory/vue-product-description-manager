@@ -1575,7 +1575,7 @@ new Vue({
                     }
                     api.app = this
                     api.data = data
-                    api.action = 'update_translator_requested'
+                    api.action = 'translation_complete'
                     api.call()
             }
         },
