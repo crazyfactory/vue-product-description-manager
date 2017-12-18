@@ -165,8 +165,8 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
-        reloadBaseProducts: false,
-        reloadComponents: false,
+        reloadBaseProducts: true,
+        reloadComponents: true,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -555,17 +555,18 @@ new Vue({
             }
         },
         translatorBaseProducts: function(){
-            if(!this.reloadBaseProducts){
-                this.reloadBaseProducts = true
-                if (BaseProductOptions && BaseProductOptions.content) {
-                    var response = []
-                    BaseProductOptions.content.forEach(function (option, index) {
-                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
-                            response.push(option);
-                        }
-                    })
-                    return response
-                }
+            if (this.reloadBaseProducts && BaseProductOptions && BaseProductOptions.content) {
+                this.reloadBaseProducts = false
+                var response = []
+                BaseProductOptions.content.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+            else {
+                return []
             }
         },
         translationsComponents: function () {
@@ -583,20 +584,18 @@ new Vue({
             }
         },
         translatorComponents: function(){
-            if(!this.reloadComponents){
-                this.reloadComponents = true
-                if (ComponentOptions && ComponentOptions.content) {
-                    var response = []
-                    ComponentOptions.content.forEach(function (option, index) {
-                        if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
-                            response.push(option);
-                        }
-                    })
-                    return response
-                }
-                else {
-                    return []
-                }
+            if (this.reloadComponents && ComponentOptions && ComponentOptions.content) {
+                this.reloadComponents = false
+                var response = []
+                ComponentOptions.content.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
+                        response.push(option);
+                    }
+                })
+                return response
+            }
+            else {
+                return []
             }
         },
         translationsMaterials: function () {
