@@ -1076,8 +1076,6 @@ new Vue({
                 cell.row.is_active="0"
                 if(type=="baseProducts") this.show_translation_base_products = false
                 if(type=="components") this.show_translation_components = false
-                if(type=="materials") this.show_translation_materials = false
-                if(type=="metatags") this.show_translation_metatags = false
 
                 if(hasApi)
                 {
