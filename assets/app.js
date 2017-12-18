@@ -165,8 +165,8 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
-        baseProductStatus:true,
-        componentStatus:true,
+        reloadBaseProducts: false,
+        reloadComponents: false,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -555,8 +555,8 @@ new Vue({
             }
         },
         translatorBaseProducts: function(){
-            if(this.baseProductStatus){
-                this.baseProductStatus = false
+            if(!this.reloadBaseProducts){
+                this.reloadBaseProducts = true
                 if (BaseProductOptions && BaseProductOptions.content) {
                     var response = []
                     BaseProductOptions.content.forEach(function (option, index) {
@@ -583,8 +583,8 @@ new Vue({
             }
         },
         translatorComponents: function(){
-            if(this.componentStatus){
-                this.componentStatus = false
+            if(!this.reloadComponents){
+                this.reloadComponents = true
                 if (ComponentOptions && ComponentOptions.content) {
                     var response = []
                     ComponentOptions.content.forEach(function (option, index) {
