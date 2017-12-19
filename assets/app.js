@@ -142,6 +142,8 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
+        rawBaseproducts : null,
+        rawComponents : null,
         rawMaterials : null,
         rawMetatags: null,
         show_actionbar: false,
@@ -317,27 +319,52 @@ new Vue({
             return stash
         },
         optionsBaseProduct: function (){
-            currentLanguage = this.editorLanguage
             stash = []
-            BaseProductOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                item['search']=search
-                stash.push(item)
-            })
-            return stash
+            currentLanguage = this.editorLanguage
+
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
+                this.rawBaseproducts.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         optionsComponent: function (){
             stash = []
             currentLanguage = this.editorLanguage
 
-            ComponentOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                if (item.is_active==1){
-                    item['search']=search
-                    stash.push(item)
-                }
-            })
-            return stash
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
+                this.rawComponents.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         optionsMaterial: function (){
             stash = []
@@ -538,26 +565,39 @@ new Vue({
             }
         },
         translationsBaseProducts: function(){
-            if (BaseProductOptions && BaseProductOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-
-                BaseProductOptions.content.forEach(function (option, index) {
+                this.rawBaseproducts.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1) {
                         response.push(option);
                     }
                 })
                 return response
             }
-            else {
-                return []
-            }
         },
         translatorBaseProducts: function(){
-            if (BaseProductOptions && BaseProductOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-
-                BaseProductOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
+                this.rawBaseproducts.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
                         response.push(option);
                     }
                 })
@@ -565,31 +605,44 @@ new Vue({
             }
         },
         translationsComponents: function () {
-            if (ComponentOptions && ComponentOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
+                this.rawComponents.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1) {
                         response.push(option);
                     }
                 })
+                console.log("response", response)
                 return response
-            }
-            else {
-                return []
             }
         },
         translatorComponents: function(){
-            if (ComponentOptions && ComponentOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1){
+                this.rawComponents.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
                         response.push(option);
                     }
                 })
                 return response
-            }
-            else {
-                return []
             }
         },
         translationsMaterials: function () {
@@ -859,13 +912,25 @@ new Vue({
             console.log(this.settings)
         },
         exportProduct: function (product) {
-            dict_materials = this.materials
-            dict_metatags = this.metatags
+            // validate if baseProduct or Material is empty for this product
+            if (!product.base_product || !product.materials.length) {
+                if (!product.materials.length) {
+                    msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
+                }
+                if(!product.base_product) {
+                    msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
+                }
+                if (!product.base_product && !product.materials.length) {
+                    msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode +"` ?"
+                }
+                if(!confirm(msg)) return
+            }
 
             // localize materials
             localized_materials = {}
             localized_metatags = {}
             export_languages = []
+
             this.settings.supportedLanguages.forEach(function (language) {
                 if (language.status) {
                     export_languages.push(language.id)
@@ -874,26 +939,23 @@ new Vue({
 
                     for (var i = 0; i < product.materials.length; i++) {
                         localized_materials[language.id].push(product.materials[i][language.id])
-
                     }
-                    for (var i = 0; i < product.metatags.length; i++) {
-                        //localized_metatags[language.id].push(product.metatags[i][language.id])
 
+                    for (var i = 0; i < product.metatags.length; i++) {
                         metatag = product.metatags[i]
                         my_label = metatag[language.id]
+
                         if (metatag.invisible) {
                             my_label = "-" + my_label
                         }
-                        localized_metatags[language.id].push(my_label)
 
+                        localized_metatags[language.id].push(my_label)
                         // add alias
                         my_aliases = metatag['alias_'+language.id]
 
                         if(my_aliases){
                             alias_array = my_aliases.split(',')
-                        }
 
-                        if (my_aliases) {
                             alias_array.forEach(function (alias) {
                                 alias = "-" + alias.trim()
 
@@ -1058,10 +1120,6 @@ new Vue({
 
             if(proceed){
                 cell.row.is_active="0"
-                if(type=="baseProducts") this.show_translation_base_products = false
-                if(type=="components") this.show_translation_components = false
-                if(type=="materials") this.show_translation_materials = false
-                if(type=="metatags") this.show_translation_metatags = false
 
                 if(hasApi)
                 {
@@ -1550,8 +1608,6 @@ new Vue({
 
             if (proceed && hasApi) {
                 cell.row['translation_requested'] = 0
-                if(type=="baseProducts") this.show_translator_base_products = false
-                if(type=="components") this.show_translator_components = false
 
                 data = {
                         translation: cell.row,
@@ -1559,17 +1615,13 @@ new Vue({
                     }
                     api.app = this
                     api.data = data
-                    api.action = 'update_translator_requested'
+                    api.action = 'translation_complete'
                     api.call()
             }
         },
         switchTranslationStatus: function(type, cell){
-
             if (hasApi) {
-                cell.row['translation_requested'] = cell.row['translation_requested'] ? 0 : 1
-
-                if(type=="baseProducts") this.show_translation_base_products = false
-                if(type=="components") this.show_translation_components = false
+                cell.row['translation_requested'] = parseInt(cell.row['translation_requested']) ? 0 : 1
 
                 data = {
                     translation: cell.row,
