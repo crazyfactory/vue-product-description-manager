@@ -121,7 +121,7 @@ new Vue({
                 stash: []
             },
         },
-        conjunction: ComponentOptions.conjunction,
+        conjunction: ComponentConjunctions,
         headline: IsAdmin
             ? 'Product Names'
             : 'Translation Management',
@@ -621,7 +621,6 @@ new Vue({
                         response.push(option);
                     }
                 })
-                console.log("response", response)
                 return response
             }
         },
