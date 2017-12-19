@@ -142,6 +142,8 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
+        rawBaseproducts : null,
+        rawComponents : null,
         rawMaterials : null,
         rawMetatags: null,
         show_actionbar: false,
@@ -165,8 +167,6 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
-        reloadBaseProducts: true,
-        reloadComponents: true,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
@@ -319,27 +319,52 @@ new Vue({
             return stash
         },
         optionsBaseProduct: function (){
-            currentLanguage = this.editorLanguage
             stash = []
-            BaseProductOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                item['search']=search
-                stash.push(item)
-            })
-            return stash
+            currentLanguage = this.editorLanguage
+
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
+                this.rawBaseproducts.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         optionsComponent: function (){
             stash = []
             currentLanguage = this.editorLanguage
 
-            ComponentOptions.content.forEach(function (item) {
-                search = item[currentLanguage]
-                if (item.is_active==1){
-                    item['search']=search
-                    stash.push(item)
-                }
-            })
-            return stash
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
+                this.rawComponents.forEach(function (item) {
+                    search = item[currentLanguage]
+                    if (item.is_active==1){
+                        item['search']=search
+                        stash.push(item)
+                    }
+                })
+                return stash
+            }
         },
         optionsMaterial: function (){
             stash = []
@@ -540,62 +565,84 @@ new Vue({
             }
         },
         translationsBaseProducts: function(){
-            if (BaseProductOptions && BaseProductOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-
-                BaseProductOptions.content.forEach(function (option, index) {
+                this.rawBaseproducts.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1) {
                         response.push(option);
                     }
                 })
                 return response
             }
-            else {
-                return []
-            }
         },
         translatorBaseProducts: function(){
-            if (this.reloadBaseProducts && BaseProductOptions && BaseProductOptions.content) {
-                this.reloadBaseProducts = false
+            if(!hasApi){
+                return []
+            }
+            if(this.rawBaseproducts==null){
+                api.app = this
+                api.action = 'get_baseproducts'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                BaseProductOptions.content.forEach(function (option, index) {
+                this.rawBaseproducts.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
                         response.push(option);
                     }
                 })
                 return response
-            }
-            else {
-                return []
             }
         },
         translationsComponents: function () {
-            if (ComponentOptions && ComponentOptions.content) {
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                ComponentOptions.content.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
+                this.rawComponents.forEach(function (option, index) {
+                    if (option.name !== '-' && option.is_active == 1) {
                         response.push(option);
                     }
                 })
+                console.log("response", response)
                 return response
-            }
-            else {
-                return []
             }
         },
         translatorComponents: function(){
-            if (this.reloadComponents && ComponentOptions && ComponentOptions.content) {
-                this.reloadComponents = false
+            if(!hasApi){
+                return []
+            }
+            if(this.rawComponents==null){
+                api.app = this
+                api.action = 'get_components'
+                api.call()
+                return []
+            }
+            else{
                 var response = []
-                ComponentOptions.content.forEach(function (option, index) {
+                this.rawComponents.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
                         response.push(option);
                     }
                 })
                 return response
-            }
-            else {
-                return []
             }
         },
         translationsMaterials: function () {
@@ -1073,8 +1120,6 @@ new Vue({
 
             if(proceed){
                 cell.row.is_active="0"
-                if(type=="baseProducts") this.show_translation_base_products = false
-                if(type=="components") this.show_translation_components = false
 
                 if(hasApi)
                 {
@@ -1563,8 +1608,6 @@ new Vue({
 
             if (proceed && hasApi) {
                 cell.row['translation_requested'] = 0
-                if(type=="baseProducts") this.show_translator_base_products = false
-                if(type=="components") this.show_translator_components = false
 
                 data = {
                         translation: cell.row,
@@ -1577,12 +1620,8 @@ new Vue({
             }
         },
         switchTranslationStatus: function(type, cell){
-
             if (hasApi) {
                 cell.row['translation_requested'] = parseInt(cell.row['translation_requested']) ? 0 : 1
-
-                if(type=="baseProducts") this.show_translation_base_products = false
-                if(type=="components") this.show_translation_components = false
 
                 data = {
                     translation: cell.row,
