@@ -318,6 +318,15 @@ new Vue({
             })
             return stash
         },
+        activeLanguagesId: function () {
+             return this.supportedLanguages.map(function (item) {
+                if (item.status){
+                   return item.id
+                }
+            }).filter(function (item) {
+                 return item !== undefined
+             })
+        },
         optionsBaseProduct: function (){
             stash = []
             currentLanguage = this.editorLanguage
@@ -463,6 +472,13 @@ new Vue({
                 }
                 return this.settings.supportedLanguages
             }
+        },
+        selectedDirtyProducts: function () {
+            list_products = this.products.filter(function (product) {
+                return product.active === true && product.dirty === true
+            })
+
+            return list_products
         },
         hasDirtyProducts: function () {
             var bool = false
@@ -822,6 +838,13 @@ new Vue({
                     api.call()
                 }
             }
+        },
+        bulkSaveProducts: function(){
+            api.app = this
+            api.language = this.activeLanguagesId
+            api.data = this.selectedDirtyProducts[0]
+            api.action = 'save_products'
+            api.call()
         },
         clearSettings: function () {
             console.log('BEFORE')
