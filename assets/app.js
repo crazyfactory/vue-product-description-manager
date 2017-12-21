@@ -839,10 +839,13 @@ new Vue({
                 }
             }
         },
-        bulkSaveProducts: function(){
+        bulkSaveProducts: function () {
+            data = {
+                product: this.selectedDirtyProducts[0],
+                languages: this.activeLanguagesId
+            }
             api.app = this
-            api.language = this.activeLanguagesId
-            api.data = this.selectedDirtyProducts[0]
+            api.data = data
             api.action = 'save_products'
             api.call()
         },
