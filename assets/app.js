@@ -319,13 +319,13 @@ new Vue({
             return stash
         },
         activeLanguagesId: function () {
-             return this.supportedLanguages.map(function (item) {
-                if (item.status){
-                   return item.id
+            stash = []
+            this.supportedLanguages.forEach(function (item) {
+                if (item.status) {
+                    stash.push(item.id)
                 }
-            }).filter(function (item) {
-                 return item !== undefined
-             })
+            })
+            return stash
         },
         optionsBaseProduct: function (){
             stash = []
@@ -474,11 +474,9 @@ new Vue({
             }
         },
         selectedDirtyProducts: function () {
-            list_products = this.products.filter(function (product) {
+            return this.products.filter(function (product) {
                 return product.active === true && product.dirty === true
             })
-
-            return list_products
         },
         hasDirtyProducts: function () {
             var bool = false
