@@ -82,7 +82,6 @@ new Vue({
         selectedMaterials: [],
         selectedMetatags: [],
         show_description_translator: true,
-        mockedProductAfterUpdate: [],
         newResourceType:'',
         newResourceTypeClass: 'form-goup',
         newResourceLabelDefault:'',
