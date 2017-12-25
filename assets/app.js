@@ -838,14 +838,18 @@ new Vue({
             }
         },
         bulkSaveProducts: function () {
-            data = {
-                product: this.selectedDirtyProducts[0],
-                languages: this.activeLanguagesId
+            if (this.selectedDirtyProducts.length > 0) {
+                data = {
+                    product: this.selectedDirtyProducts[0],
+                    languages: this.activeLanguagesId
+                }
+                api.app = this
+                api.data = data
+                api.action = 'save_products'
+                api.call()
+            } else {
+                return false
             }
-            api.app = this
-            api.data = data
-            api.action = 'save_products'
-            api.call()
         },
         clearSettings: function () {
             console.log('BEFORE')
