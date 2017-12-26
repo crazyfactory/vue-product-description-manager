@@ -984,6 +984,57 @@ new Vue({
                 this.products[index].descriptions[language] = my_description
             }
         },
+        bulkChangeTranslationStatus: function (type) {
+            proceed = confirm('Are you sure to confirm all languages and all resources are complete? Please only proceed if you are sure about it.');
+            if (proceed && hasApi) {
+                id_list = []
+                switch (type) {
+                    case 'baseProducts':
+                        this.rawBaseproducts.forEach(function (option) {
+                            if (option.translation_requested == 1) {
+                                option.translation_requested = 0
+                                id_list.push(option.id)
+                            }
+                        })
+                        break
+                    case 'components':
+                        this.rawComponents.forEach(function (option) {
+                            if (option.translation_requested == 1) {
+                                option.translation_requested = 0
+                                id_list.push(option.id)
+                            }
+                        })
+                        break
+                    case 'materials':
+                        this.rawMaterials.forEach(function (option) {
+                            if (option.translation_requested == 1) {
+                                option.translation_requested = 0
+                                id_list.push(option.id)
+                            }
+                        })
+                        break
+                    case 'metatags':
+                        this.rawMetatags.forEach(function (option) {
+                            if (option.translation_requested == 1) {
+                                option.translation_requested = 0
+                                id_list.push(option.id)
+                            }
+                        })
+                        break
+                }
+
+                api.app = this
+                api.data = {
+                    translation: {
+                        id: id_list,
+                        translation_requested: 0
+                    },
+                    type: type
+                }
+                api.action = 'translation_complete'
+                api.call()
+            }
+        },
         productsTranslationUpdate: function(){
             if(this.dirtyTranslations.isDirty){
                 this.addMessage('Please save your local changes before you update the Products.', 'danger')

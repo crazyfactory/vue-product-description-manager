@@ -774,6 +774,9 @@
                     <i v-if="show_translator_base_products" @click="toggleTranslatorVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Base Products
                     <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
+                    <i v-if="show_translator_base_products && translatorBaseProducts.length > 0"
+                       @click="bulkChangeTranslationStatus('baseProducts')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_base_products" class="translation_table base_products">
                     <datatable
