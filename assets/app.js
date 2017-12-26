@@ -318,6 +318,15 @@ new Vue({
             })
             return stash
         },
+        activeLanguagesId: function () {
+            stash = []
+            this.supportedLanguages.forEach(function (item) {
+                if (item.status) {
+                    stash.push(item.id)
+                }
+            })
+            return stash
+        },
         optionsBaseProduct: function (){
             stash = []
             currentLanguage = this.editorLanguage
@@ -463,6 +472,11 @@ new Vue({
                 }
                 return this.settings.supportedLanguages
             }
+        },
+        selectedDirtyProducts: function () {
+            return this.products.filter(function (product) {
+                return product.active === true && product.dirty === true
+            })
         },
         hasDirtyProducts: function () {
             var bool = false
@@ -823,6 +837,20 @@ new Vue({
                 }
             }
         },
+        bulkSaveProducts: function () {
+            if (this.selectedDirtyProducts.length > 0) {
+                data = {
+                    product: this.selectedDirtyProducts[0],
+                    languages: this.activeLanguagesId
+                }
+                api.app = this
+                api.data = data
+                api.action = 'save_products'
+                api.call()
+            } else {
+                return false
+            }
+        },
         clearSettings: function () {
             console.log('BEFORE')
             console.log(this.settings)
@@ -916,72 +944,25 @@ new Vue({
                 if (!product.materials.length) {
                     msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
                 }
-                if(!product.base_product) {
+                if (!product.base_product) {
                     msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
                 }
                 if (!product.base_product && !product.materials.length) {
-                    msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode +"` ?"
+                    msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode + "` ?"
                 }
-                if(!confirm(msg)) return
+                if (!confirm(msg)) return
             }
 
-            // localize materials
-            localized_materials = {}
-            localized_metatags = {}
-            export_languages = []
-
-            this.settings.supportedLanguages.forEach(function (language) {
-                if (language.status) {
-                    export_languages.push(language.id)
-                    localized_materials[language.id] = []
-                    localized_metatags[language.id] = []
-
-                    for (var i = 0; i < product.materials.length; i++) {
-                        localized_materials[language.id].push(product.materials[i][language.id])
-                    }
-
-                    for (var i = 0; i < product.metatags.length; i++) {
-                        metatag = product.metatags[i]
-                        my_label = metatag[language.id]
-
-                        if (metatag.invisible) {
-                            my_label = "-" + my_label
-                        }
-
-                        localized_metatags[language.id].push(my_label)
-                        // add alias
-                        my_aliases = metatag['alias_'+language.id]
-
-                        if(my_aliases){
-                            alias_array = my_aliases.split(',')
-
-                            alias_array.forEach(function (alias) {
-                                alias = "-" + alias.trim()
-
-                                if (alias.length > 1 && localized_metatags[language.id].indexOf(alias)< 0) {
-                                    localized_metatags[language.id].push(alias)
-                                }
-                            })
-                        }
-                    }
-                }
-            })
-            product['localized_materials'] = localized_materials
-            product['localized_metatags'] = localized_metatags
-            product['export_languages'] = export_languages
-
-            if (!hasApi) {
-                product.dirty = false
-                product.updated = Date.now()
-                msg = '"' + product.modelCode + '" was succesfully saved'
-                this.addMessage(msg, 'success')
+            data = {
+                product: product,
+                languages: this.activeLanguagesId
             }
-            else {
-                api.app = this
-                api.data = product
-                api.action = 'save_product'
-                api.call()
-            }
+
+            api.app = this
+            api.data = data
+            api.action = 'save_product'
+            api.call()
+
         },
         getGeneratedDescription: function (product, language) {
             index = this.products.indexOf(product)
