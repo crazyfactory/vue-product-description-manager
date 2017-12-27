@@ -10,6 +10,25 @@ else {
     var validationRange = 86400000
 }
 
+type_dict ={
+    baseProducts:{
+        name: "Base Products",
+        key: "translatorBaseProducts"
+    },
+    components:{
+        name: "Components",
+        key: "translatorComponents"
+    },
+    materials:{
+        name: "Materials",
+        key: "translatorMaterials"
+    },
+    metatags:{
+        name: "Metatags",
+        key: "translatorMetatags"
+    },
+}
+
 /*
  * add products
  */
@@ -985,54 +1004,32 @@ new Vue({
             }
         },
         bulkChangeTranslationStatus: function (type) {
-            proceed = confirm('Are you sure to confirm all languages and all resources are complete? Please only proceed if you are sure about it.');
+            proceed = confirm("Are you sure that you want to set all " + type_dict[type]['name'] + " to be fully translated?")
+            id_list = this[type_dict[type]['key']].map(function (a) {
+                return a.id;
+            })
+            var group_resources = [], chunkSize = 900;
+            for (var i = 0; i < id_list.length; i += chunkSize) {
+                group_resources.push(id_list.slice(i, i + chunkSize));
+            }
             if (proceed && hasApi) {
-                id_list = []
-                switch (type) {
-                    case 'baseProducts':
-                        this.rawBaseproducts.forEach(function (option) {
-                            if (option.translation_requested == 1) {
-                                option.translation_requested = 0
-                                id_list.push(option.id)
-                            }
-                        })
-                        break
-                    case 'components':
-                        this.rawComponents.forEach(function (option) {
-                            if (option.translation_requested == 1) {
-                                option.translation_requested = 0
-                                id_list.push(option.id)
-                            }
-                        })
-                        break
-                    case 'materials':
-                        this.rawMaterials.forEach(function (option) {
-                            if (option.translation_requested == 1) {
-                                option.translation_requested = 0
-                                id_list.push(option.id)
-                            }
-                        })
-                        break
-                    case 'metatags':
-                        this.rawMetatags.forEach(function (option) {
-                            if (option.translation_requested == 1) {
-                                option.translation_requested = 0
-                                id_list.push(option.id)
-                            }
-                        })
-                        break
-                }
+                let requests = group_resources.reduce((promiseChain, item) => {
+                    return promiseChain.then(() => new Promise((resolve) => {
+                        api.app = this
+                        api.data = {
+                            translation: {
+                                id: item,
+                                translation_requested: 0
+                            },
+                            type: type,
+                        },
+                            api.action = 'bulk_translation_complete'
+                        api.resolve = resolve
+                        api.call()
+                    }));
+                }, Promise.resolve());
 
-                api.app = this
-                api.data = {
-                    translation: {
-                        id: id_list,
-                        translation_requested: 0
-                    },
-                    type: type
-                }
-                api.action = 'translation_complete'
-                api.call()
+                requests.then(() => this.addMessage('Hey, you just updated translation status of the' + type_dict[type]['name'] + ' successfully.', 'success'))
             }
         },
         productsTranslationUpdate: function(){

@@ -823,6 +823,9 @@
                     <i v-if="show_translator_components" @click="toggleTranslatorVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Components
                     <i class="fa fa-floppy-o cursor" title="Save Components translations to database" aria-hidden="true" @click="saveTranslationUpdates('components')" v-if="dirtyTranslations.components.isDirty"></i>
+                    <i v-if="show_translator_components && translatorComponents.length > 0"
+                       @click="bulkChangeTranslationStatus('components')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_components" class="translation_table">
                     <datatable
@@ -869,6 +872,9 @@
                     <i v-if="show_translator_materials" @click="toggleTranslatorVisibility('materials')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Materials
                     <i class="fa fa-floppy-o cursor" title="Save Materials translations to database" aria-hidden="true" @click="saveTranslationUpdates('materials')" v-if="dirtyTranslations.materials.isDirty"></i>
+                    <i v-if="show_translator_materials && translatorMaterials.length > 0"
+                       @click="bulkChangeTranslationStatus('materials')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_materials" class="translation_table">
                     <datatable
@@ -915,6 +921,9 @@
                     <i v-if="show_translator_metatags" @click="toggleTranslatorVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Metatags
                     <i class="fa fa-floppy-o cursor" title="Save Metatags translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty"></i>
+                    <i v-if="show_translator_metatags && translatorMetatags.length > 0"
+                       @click="bulkChangeTranslationStatus('metatags')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_metatags" class="translation_table">
                     <datatable
