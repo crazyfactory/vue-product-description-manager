@@ -267,22 +267,30 @@ new Vue({
             }
         },
         translationUpdates: LogData.content,
-        type_dict: {
+        resourceDict: {
             baseProducts: {
+                list: this.baseProducts,
                 name: "Base Products",
-                key: "translatorBaseProducts"
+                selectableOptions: "optionsBaseProduct",
+                translationRequested: "translatorBaseProducts"
             },
             components: {
+                list: this.components,
                 name: "Components",
-                key: "translatorComponents"
+                selectableOptions: "optionsComponent",
+                translationRequested: "translatorComponents"
             },
             materials: {
+                list: this.materials,
                 name: "Materials",
-                key: "translatorMaterials"
+                selectableOptions: "optionsMaterial",
+                translationRequested: "translatorMaterials"
             },
             metatags: {
+                list: this.metatags,
                 name: "Metatags",
-                key: "translatorMetatags"
+                selectableOptions: "optionsMetatag",
+                translationRequested: "translatorMetatags"
             },
         }
     },
@@ -1003,19 +1011,18 @@ new Vue({
             }
         },
         bulkChangeTranslationStatus: function (type) {
-            proceed = confirm("Are you sure that you want to set all " + this.type_dict[type]['name'] + " to be fully translated?")
+            proceed = confirm("Are you sure that you want to set all " + this.resourceDict[type]['name'] + " to be fully translated?")
 
             if (proceed && hasApi) {
-                id_list = this[this.type_dict[type]['key']].map(function (a) {
+                let resource_translation_requested = this[this.resourceDict[type].translationRequested]
+                let id_list = resource_translation_requested.map(function (a) {
                     return a.id;
                 })
 
-                // ['1','2','3','4'] -> [['1','2'],['3','4']]: chunkSize = 2
-                var group_resources = [], chunkSize = 900;
-                for (var i = 0; i < id_list.length; i += chunkSize) {
-                    group_resources.push(id_list.slice(i, i + chunkSize));
+                let group_resources = [], chunk_size = 900;
+                for (let i = 0; i < id_list.length; i += chunk_size) {
+                    group_resources.push(id_list.slice(i, i + chunk_size));
                 }
-                _this = this
 
                 let promise_status_list = group_resources.map((item) => {
                     return new Promise((resolve, reject) => {
@@ -1030,7 +1037,8 @@ new Vue({
                         }).then(function (response) {
                             return response.json()
                         }).then(function (response) {
-                            _this[_this.type_dict[type]['key']].forEach(function (resource) {
+                            resource_translation_requested.forEach(function (resource) {
+
                                 //verify if resource.id exist in response then switch to translation_requested = 0
                                 if ((response.resources).indexOf(resource.id) > -1) {
                                     resource.translation_requested = 0
@@ -1044,8 +1052,8 @@ new Vue({
                 })
 
                 Promise.all(promise_status_list)
-                    .then(() => _this.addMessage("Hey, you just updated translation status of all the " + this.type_dict[type]['name'] + " successfully.", 'success'))
-                    .catch(() => _this.addMessage("Sorry, something went wrong!", 'danger'));
+                    .then(() => this.addMessage("Hey, you just updated translation status of all the " + this.resourceDict[type]['name'] + " successfully.", 'success'))
+                    .catch(() => this.addMessage("Sorry, something went wrong!", 'danger'));
             }
         },
         productsTranslationUpdate: function(){
