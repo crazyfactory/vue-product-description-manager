@@ -269,25 +269,25 @@ new Vue({
         translationUpdates: LogData.content,
         resourceDict: {
             baseProducts: {
-                list: this.baseProducts,
+                list: "baseProducts",
                 name: "Base Products",
                 selectableOptions: "optionsBaseProduct",
                 translationRequested: "translatorBaseProducts"
             },
             components: {
-                list: this.components,
+                list: "components",
                 name: "Components",
                 selectableOptions: "optionsComponent",
                 translationRequested: "translatorComponents"
             },
             materials: {
-                list: this.materials,
+                list: "materials",
                 name: "Materials",
                 selectableOptions: "optionsMaterial",
                 translationRequested: "translatorMaterials"
             },
             metatags: {
-                list: this.metatags,
+                list: "metatags",
                 name: "Metatags",
                 selectableOptions: "optionsMetatag",
                 translationRequested: "translatorMetatags"
