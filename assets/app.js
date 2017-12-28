@@ -1,32 +1,13 @@
-if (typeof api !== 'undefined') {
+if (typeof api !== 'undefined' || typeof api_endpoint !=='undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi = true
     // how long is a product kept in local storage? (in ms)
-    var validationRange = api.validationRange ? api.validationRange : 86400000
+    var validationRange = 86400000
 }
 else {
     var hasApi = false
     // how long is a product kept in local storage? (in ms)
     var validationRange = 86400000
-}
-
-type_dict ={
-    baseProducts:{
-        name: "Base Products",
-        key: "translatorBaseProducts"
-    },
-    components:{
-        name: "Components",
-        key: "translatorComponents"
-    },
-    materials:{
-        name: "Materials",
-        key: "translatorMaterials"
-    },
-    metatags:{
-        name: "Metatags",
-        key: "translatorMetatags"
-    },
 }
 
 /*
@@ -285,7 +266,25 @@ new Vue({
                 ]
             }
         },
-        translationUpdates: LogData.content
+        translationUpdates: LogData.content,
+        type_dict: {
+            baseProducts: {
+                name: "Base Products",
+                key: "translatorBaseProducts"
+            },
+            components: {
+                name: "Components",
+                key: "translatorComponents"
+            },
+            materials: {
+                name: "Materials",
+                key: "translatorMaterials"
+            },
+            metatags: {
+                name: "Metatags",
+                key: "translatorMetatags"
+            },
+        }
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -1004,32 +1003,49 @@ new Vue({
             }
         },
         bulkChangeTranslationStatus: function (type) {
-            proceed = confirm("Are you sure that you want to set all " + type_dict[type]['name'] + " to be fully translated?")
-            id_list = this[type_dict[type]['key']].map(function (a) {
-                return a.id;
-            })
-            var group_resources = [], chunkSize = 900;
-            for (var i = 0; i < id_list.length; i += chunkSize) {
-                group_resources.push(id_list.slice(i, i + chunkSize));
-            }
-            if (proceed && hasApi) {
-                let requests = group_resources.reduce((promiseChain, item) => {
-                    return promiseChain.then(() => new Promise((resolve) => {
-                        api.app = this
-                        api.data = {
-                            translation: {
-                                id: item,
-                                translation_requested: 0
-                            },
-                            type: type,
-                        },
-                            api.action = 'bulk_translation_complete'
-                        api.resolve = resolve
-                        api.call()
-                    }));
-                }, Promise.resolve());
+            proceed = confirm("Are you sure that you want to set all " + this.type_dict[type]['name'] + " to be fully translated?")
 
-                requests.then(() => this.addMessage('Hey, you just updated translation status of the' + type_dict[type]['name'] + ' successfully.', 'success'))
+            if (proceed && hasApi) {
+                id_list = this[this.type_dict[type]['key']].map(function (a) {
+                    return a.id;
+                })
+
+                // ['1','2','3','4'] -> [['1','2'],['3','4']]: chunkSize = 2
+                var group_resources = [], chunkSize = 900;
+                for (var i = 0; i < id_list.length; i += chunkSize) {
+                    group_resources.push(id_list.slice(i, i + chunkSize));
+                }
+                _this = this
+
+                let promise_status_list = group_resources.map((item) => {
+                    return new Promise((resolve, reject) => {
+                        fetch(api_endpoint, {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'bulk_translation_complete',
+                                resources: item,
+                                type: type
+                            })
+                        }).then(function (response) {
+                            return response.json()
+                        }).then(function (response) {
+                            _this[_this.type_dict[type]['key']].forEach(function (resource) {
+                                //verify if resource.id exist in response then switch to translation_requested = 0
+                                if ((response.resources).indexOf(resource.id) > -1) {
+                                    resource.translation_requested = 0
+                                }
+                            })
+                            resolve()
+                        }).catch(function () {
+                            reject()
+                        })
+                    })
+                })
+
+                Promise.all(promise_status_list)
+                    .then(() => _this.addMessage("Hey, you just updated translation status of all the " + this.type_dict[type]['name'] + " successfully.", 'success'))
+                    .catch(() => _this.addMessage("Sorry, something went wrong!", 'danger'));
             }
         },
         productsTranslationUpdate: function(){
