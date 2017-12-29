@@ -397,9 +397,25 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_components',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawComponents = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -727,9 +743,25 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_components',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawComponents = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -747,9 +779,25 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_components',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawComponents = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
