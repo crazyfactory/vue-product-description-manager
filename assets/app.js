@@ -866,8 +866,12 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                        _this.addMessage(response.message, 'success')
-                        window.reload()
+                        if (response.success) {
+                            _this.addMessage(response.message, 'success')
+                            window.reload()
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
