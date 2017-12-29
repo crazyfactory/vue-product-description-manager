@@ -446,10 +446,28 @@ new Vue({
             }
 
             if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
+                if(this.rawMetatags==null){
+                    _this = this
+                    fetch(
+                        api_endpoint,
+                        {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'get_metatags',
+                            })
+                        })
+                        .then(function (response) {
+                            return response.json()
+                        })
+                        .then(function (response) {
+                            _this.rawMetatags = response.data.content
+                        })
+                        .catch(function () {
+                            _this.addMessage("Sorry, something went wrong!", 'danger')
+                        })
+                    return []
+                }
             }
             else{
                 this.rawMetatags.forEach(function (item) {
@@ -773,9 +791,25 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_metatags',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawMetatags = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -794,10 +828,28 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
+                if(this.rawMetatags==null){
+                    _this = this
+                    fetch(
+                        api_endpoint,
+                        {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'get_metatags',
+                            })
+                        })
+                        .then(function (response) {
+                            return response.json()
+                        })
+                        .then(function (response) {
+                            _this.rawMetatags = response.data.content
+                        })
+                        .catch(function () {
+                            _this.addMessage("Sorry, something went wrong!", 'danger')
+                        })
+                    return []
+                }
             }
             else{
                 var response = []
