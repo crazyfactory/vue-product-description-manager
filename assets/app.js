@@ -357,9 +357,25 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_baseproducts',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawBaseproducts = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -639,9 +655,25 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_baseproducts',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawBaseproducts = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -659,9 +691,25 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_baseproducts',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawBaseproducts = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
