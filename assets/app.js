@@ -850,13 +850,25 @@ new Vue({
                     'translation_requested': this.newResourceTranslationRequested,
                 }
 
-                if (hasApi) {
-                    // clear product input
-                    api.app = this
-                    api.data = resource
-                    api.action = 'add_resource'
-                    api.call()
-                }
+                _this = this
+                fetch(
+                    api_endpoint, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'add_resource',
+                            data: resource,
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.addMessage(response.message, 'success')
+                        window.reload()
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         bulkSaveProducts: function () {
