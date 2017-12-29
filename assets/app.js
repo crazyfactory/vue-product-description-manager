@@ -852,14 +852,16 @@ new Vue({
 
                 _this = this
                 fetch(
-                    api_endpoint, {
+                    api_endpoint,
+                    {
                         credentials: 'include',
                         method: 'POST',
                         body: JSON.stringify({
                             action: 'add_resource',
                             data: resource,
                         })
-                    })
+                    }
+                )
                     .then(function (response) {
                         return response.json()
                     })
