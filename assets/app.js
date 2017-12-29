@@ -405,9 +405,25 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_materials',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawMaterials = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -685,9 +701,26 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_materials',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        console.log("translationsMaterials")
+                        _this.rawMaterials = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
@@ -705,9 +738,26 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_materials',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        console.log("translatorMaterials")
+                        _this.rawMaterials = response.data.content
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
                 return []
             }
             else{
