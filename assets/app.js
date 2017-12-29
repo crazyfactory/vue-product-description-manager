@@ -1176,23 +1176,38 @@ new Vue({
                 this.dirtyTranslations[type]['stash'].push(cell)
             }
         },
-        deleteResource: function(type, cell){
-            proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
+        deleteResource: function (type, cell) {
+            proceed = confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
 
-            if(proceed){
-                cell.row.is_active="0"
-
-                if(hasApi)
-                {
-                    data = {
-                        type : type,
-                        translation : cell.row
-                    }
-                    api.app = this
-                    api.data = data
-                    api.action = 'delete_resource'
-                    api.call()
-                }
+            if (proceed && hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint, {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'delete_resource',
+                            data: {
+                                type: type,
+                                translation: cell.row
+                            },
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            cell.row.is_active = 0
+                            _this.translationUpdates = ["deleted_resource"]
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         editMe: function (item, item_parent) {
