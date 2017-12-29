@@ -1006,16 +1006,28 @@ new Vue({
 
         },
         getGeneratedDescription: function (product, language) {
-            index = this.products.indexOf(product)
-            product.dirty = true
-
             if (hasApi) {
-                api.app = this
-                api.language = language
-                api.data = product.propertyFormula
-                api.action = 'generate_description'
-                api.product_index = index
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'generate_description',
+                            data: product.propertyFormula
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                           product.descriptions[language] = response[language];
+                           product.dirty = true
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
             else {
                 // use fake api response from api.js
@@ -1188,7 +1200,8 @@ new Vue({
             if (proceed && hasApi) {
                 _this = this
                 fetch(
-                    api_endpoint, {
+                    api_endpoint,
+                    {
                         credentials: 'include',
                         method: 'POST',
                         body: JSON.stringify({
