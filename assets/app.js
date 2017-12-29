@@ -715,7 +715,6 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                        console.log("translationsMaterials")
                         _this.rawMaterials = response.data.content
                     })
                     .catch(function () {
@@ -752,7 +751,6 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                        console.log("translatorMaterials")
                         _this.rawMaterials = response.data.content
                     })
                     .catch(function () {
