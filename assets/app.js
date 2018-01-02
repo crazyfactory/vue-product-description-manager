@@ -2026,20 +2026,36 @@ new Vue({
                 api.call()
             }
         },
-        setHiddenTag: function(cell){
-            if(cell.row['is_hidden'] =="1") cell.row['is_hidden'] ="0"
-            else cell.row['is_hidden'] ="1"
-
-            if(hasApi)
-            {
-                data = {
-                    translation : cell.row,
-                    type : 'metatags'
-                }
-                api.app = this
-                api.data = data
-                api.action = 'set_hidden_tag'
-                api.call()
+        setHiddenTag: function (cell) {
+            if (hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'set_hidden_tag',
+                            data: {
+                                translation: cell.row,
+                                type: 'metatags'
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            _this.addMessage(response.message, 'success')
+                            cell.row['is_hidden'] = 1 - parseInt(cell.row['is_hidden']);
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         toggle_language: function (language) {
