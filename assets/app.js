@@ -1418,35 +1418,53 @@ new Vue({
 
         },
         saveTranslationUpdate: function(type, cell){
-            id = cell.row.id
-            index = this.dirtyTranslations[type]['entryList'].indexOf(id)
+            if (hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_resource',
+                            data: {
+                                translation: cell.row,
+                                type: type
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            id = cell.row.id
+                            index = _this.dirtyTranslations[type]['entryList'].indexOf(id)
 
-            if(index > -1){
-                // remove element from entryList
-                this.dirtyTranslations[type]['entryList'].splice(index,1)
-            }
-            // validate if we still have translations to update
-            if(this.dirtyTranslations[type]['entryList'].length==0){
-                this.dirtyTranslations[type].isDirty = false
-            }
-            // reset all translatrions if we dont have any dirty translations anymore
-            if(!this.dirtyTranslations.baseProducts.isDirty && !this.dirtyTranslations.components.isDirty && !this.dirtyTranslations.materials.isDirty && !this.dirtyTranslations.metatags.isDirty)
-            {
-                // all translations are clean
-                this.dirtyTranslations.isDirty = false
-            }
-            // save to DB
-            if(hasApi)
-            {
-                data = {
-                    type : type,
-                    translation : cell.row
-                }
+                            if (index > -1) {
+                                // remove element from entryList
+                                _this.dirtyTranslations[type]['entryList'].splice(index, 1)
+                            }
+                            // validate if we still have translations to update
+                            if (_this.dirtyTranslations[type]['entryList'].length == 0) {
+                                _this.dirtyTranslations[type].isDirty = false
+                            }
+                            // reset all translatrions if we dont have any dirty translations anymore
+                            if (!_this.dirtyTranslations.baseProducts.isDirty && !_this.dirtyTranslations.components.isDirty && !_this.dirtyTranslations.materials.isDirty && !_this.dirtyTranslations.metatags.isDirty) {
+                                // all translations are clean
+                                _this.dirtyTranslations.isDirty = false
+                            }
 
-                api.app = this
-                api.data = data
-                api.action = 'save_resource'
-                api.call()
+                            _this.addMessage(response.message, 'success')
+                            _this.translationUpdates = ['resource updated']
+
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         saveTranslationUpdates: function(type){
