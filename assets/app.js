@@ -1499,8 +1499,7 @@ new Vue({
                     })
                     .then(function (response) {
                         if (response.success) {
-                            id = cell.row.id
-                            index = _this.dirtyTranslations[type]['entryList'].indexOf(id)
+                            index = _this.dirtyTranslations[type]['entryList'].indexOf(cell.row.id)
 
                             if (index > -1) {
                                 // remove element from entryList
@@ -1528,33 +1527,48 @@ new Vue({
                     })
             }
         },
-        saveTranslationUpdates: function(type){
-            if(type =='baseProducts' || type =='components' || type =='materials' || type =='metatags'){
-                stash = this.dirtyTranslations[type].stash
-                entryList = this.dirtyTranslations[type].entryList
-
-                this.dirtyTranslations[type].isDirty = false
-                this.dirtyTranslations[type].stash = []
-                this.dirtyTranslations[type].entryList = []
-
-                data = {
-                    type : type,
-                    translations : stash
-                }
-
-            }
-
-            if(!(this.dirtyTranslations.baseProducts.isDirty || this.dirtyTranslations.components.isDirty || this.dirtyTranslations.materials.isDirty || this.dirtyTranslations.metatags.isDirty))
-            {
-                this.dirtyTranslations.isDirty = false
-            }
+        saveTranslationUpdates: function (type) {
             // save to DB
-            if(hasApi)
-            {
-                api.app = this
-                api.data = data
-                api.action = 'save_resources'
-                api.call()
+            if (hasApi && (type == 'baseProducts' || type == 'components' || type == 'materials' || type == 'metatags')) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_resources',
+                            data: {
+                                type: type,
+                                translations: _this.dirtyTranslations[type].stash.map(function (resource) {
+                                    return resource.row
+                                })
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            _this.dirtyTranslations[type].isDirty = false
+                            _this.dirtyTranslations[type].stash = []
+                            _this.dirtyTranslations[type].entryList = []
+                            if (!(_this.dirtyTranslations.baseProducts.isDirty
+                                || _this.dirtyTranslations.components.isDirty
+                                || _this.dirtyTranslations.materials.isDirty
+                                || _this.dirtyTranslations.metatags.isDirty)
+                            ) {
+                                _this.dirtyTranslations.isDirty = false
+                            }
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
 
         },
