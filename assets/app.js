@@ -1205,16 +1205,45 @@ new Vue({
                 if (!confirm(msg)) return
             }
 
-            data = {
-                product: product,
-                languages: this.activeLanguagesId
+            if (hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_product',
+                            data: {
+                                product: product,
+                                languages: this.activeLanguagesId
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            // prepare product to written back into app
+                            product.dirty = false
+                            product.hidden = false
+                            product.active = true
+                            product.updated = Date.now()
+
+                            for (var language in product.names) {
+                                product.names[language]['dirty'] = false;
+                                product.names[language]['edit'] = false;
+                            }
+                            _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
+                        } else {
+                            _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
-
-            api.app = this
-            api.data = data
-            api.action = 'save_product'
-            api.call()
-
         },
         getGeneratedDescription: function (product, language) {
             if (hasApi) {
