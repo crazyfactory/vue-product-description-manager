@@ -1090,17 +1090,49 @@ new Vue({
             }
         },
         bulkSaveProducts: function () {
-            if (this.selectedDirtyProducts.length > 0) {
-                data = {
-                    product: this.selectedDirtyProducts[0],
-                    languages: this.activeLanguagesId
-                }
-                api.app = this
-                api.data = data
-                api.action = 'save_products'
-                api.call()
-            } else {
-                return false
+            if (hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_products',
+                            data: {
+                                product: this.selectedDirtyProducts[0],
+                                languages: this.activeLanguagesId
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (typeof _this.modelCodeSuccess == 'undefined') {
+                            _this.modelCodeSuccess = []
+                        }
+                        if (response.success) {
+                            _this.selectedDirtyProducts[0].hidden = false
+                            _this.selectedDirtyProducts[0].active = true
+                            _this.selectedDirtyProducts[0].updated = Date.now()
+                            _this.selectedDirtyProducts[0].dirty = false
+                            _this.modelCodeSuccess.push(response['product']['modelCode'])
+                            if (_this.selectedDirtyProducts.length > 0) {
+                                _this.bulkSaveProducts()
+                            }
+                            else {
+                                _this.addMessage("Success saving " + _this.modelCodeSuccess + " to the database", 'success')
+                                _this.modelCodeSuccess = []
+                            }
+                        }
+                        else {
+                            _this.addMessage("Sorry, we had a problem saving " + response['product']['modelCode'] + " to the database and we will abort saving then!", 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         clearSettings: function () {
