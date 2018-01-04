@@ -1499,11 +1499,17 @@ new Vue({
                     })
                     .then(function (response) {
                         if (response.success) {
-                            index = _this.dirtyTranslations[type]['entryList'].indexOf(cell.row.id)
-
+                            resource_id = response.data.id
+                            index = _this.dirtyTranslations[type]['entryList'].indexOf(resource_id)
                             if (index > -1) {
                                 // remove element from entryList
                                 _this.dirtyTranslations[type]['entryList'].splice(index, 1)
+                                // remove element from stash
+                                _this.dirtyTranslations[type]['stash'].forEach(function (item, key) {
+                                    if (item.row.id === resource_id) {
+                                        _this.dirtyTranslations[type]['stash'].splice(key, 1)
+                                    }
+                                }, resource_id)
                             }
                             // validate if we still have translations to update
                             if (_this.dirtyTranslations[type]['entryList'].length == 0) {
