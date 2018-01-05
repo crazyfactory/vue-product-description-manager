@@ -478,7 +478,6 @@ new Vue({
             }
 
             if(this.rawMetatags==null){
-                if(this.rawMetatags==null){
                     _this = this
                     fetch(
                         api_endpoint,
@@ -499,7 +498,6 @@ new Vue({
                             _this.addMessage("Sorry, something went wrong!", 'danger')
                         })
                     return []
-                }
             }
             else{
                 this.rawMetatags.forEach(function (item) {
@@ -924,7 +922,6 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null){
-                if(this.rawMetatags==null){
                     _this = this
                     fetch(
                         api_endpoint,
@@ -945,7 +942,6 @@ new Vue({
                             _this.addMessage("Sorry, something went wrong!", 'danger')
                         })
                     return []
-                }
             }
             else{
                 var response = []
@@ -1447,10 +1443,26 @@ new Vue({
                 this.addMessage('Please save your local changes before you update the Products.', 'danger')
                 return false
             }
-            if (hasApi) {
-                api.app = this
-                api.action = 'validate_translation_update'
-                api.call()
+            if(hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'validate_translation_update',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.productsTranslationValidation(response.result)
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         productsTranslationValidation: function(result){
