@@ -2215,30 +2215,68 @@ new Vue({
             proceed = confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.');
 
             if (proceed && hasApi) {
-                cell.row['translation_requested'] = 0
-
-                data = {
-                        translation: cell.row,
-                        type: type
-                    }
-                    api.app = this
-                    api.data = data
-                    api.action = 'translation_complete'
-                    api.call()
+                if (hasApi) {
+                    _this = this
+                    fetch(
+                        api_endpoint,
+                        {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'update_translation_requested',
+                                data: {
+                                    translation: cell.row,
+                                    type: type
+                                }
+                            })
+                        })
+                        .then(function (response) {
+                            return response.json()
+                        })
+                        .then(function (response) {
+                            if (response.success) {
+                                cell.row['translation_requested'] = 0
+                                _this.addMessage(response.message, 'success')
+                            } else {
+                                _this.addMessage(response.message, 'danger')
+                            }
+                        })
+                        .catch(function () {
+                            _this.addMessage("Sorry, something went wrong!", 'danger')
+                        })
+                }
             }
         },
         switchTranslationStatus: function(type, cell){
             if (hasApi) {
-                cell.row['translation_requested'] = parseInt(cell.row['translation_requested']) ? 0 : 1
-
-                data = {
-                    translation: cell.row,
-                    type: type
-                }
-                api.app = this
-                api.data = data
-                api.action = 'update_translation_requested'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'update_translation_requested',
+                            data: {
+                                translation: cell.row,
+                                type: type
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            cell.row['translation_requested'] = 1 - parseInt(cell.row['translation_requested'])
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         setHiddenTag: function (cell) {
