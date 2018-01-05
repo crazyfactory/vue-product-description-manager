@@ -1461,10 +1461,114 @@ new Vue({
                     this.products=[]
                     if(hasApi)
                     {
-                        api.app = this
-                        api.data = result
-                        api.action = 'translation_update'
-                        api.call()
+                        _this = this
+                        fetch(
+                            api_endpoint,
+                            {
+                                credentials: 'include',
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    action: 'translation_update',
+                                    data: result
+                                })
+                            })
+                            .then(function (response) {
+                                return response.json()
+                            })
+                            .then(function (response) {
+                                //set message
+                                _this.addMessage(response.message, 'success')
+                                _this.translationUpdates = []
+                                //push Products back
+                                products = response['rejected']
+
+                                //action for getting products
+                                var product_names = []
+                                for (var key in products) {
+                                    if (key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key]) {
+                                        my_product = products[key];
+                                        product_names.push(my_product.id)
+
+                                        var base_product = {}
+                                        if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
+                                            for (var i = 0; i < _this.rawBaseproducts.length; i++) {
+                                                if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                                                    base_product = _this.rawBaseproducts[i]
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        var component1 = {}
+                                        var found_1 = false
+                                        var component2 = {}
+                                        var found_2 = false
+
+                                        if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
+                                            || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
+
+                                            for (var i = 0; i < _this.rawComponents.length; i++) {
+                                                if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
+                                                    component1 = _this.rawComponents[i]
+                                                    found_1 = true
+                                                }
+                                                if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
+                                                    component2 = _this.rawComponents[i]
+                                                    found_2 = true
+                                                }
+                                                if (found_1 && found_2) {
+                                                    break
+                                                }
+                                            }
+                                        }
+
+                                        var material_stash = []
+
+                                        for (var i = 0; i < products.materials.length; i++) {
+                                            if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
+                                                material_stash.push(products.materials[i]);
+                                            }
+                                        }
+
+                                        var metatag_stash = []
+
+                                        for (var i = 0; i < products.metatags.length; i++) {
+                                            if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
+                                                metatag_stash.push(products.metatags[i]);
+                                            }
+                                        }
+
+                                        _this.products.push({
+                                            active: true,
+                                            cached_descriptions: my_product.cached_descriptions,
+                                            cached_materials: my_product.cached_materials,
+                                            cached_metatags: my_product.cached_metatags,
+                                            cached_names: my_product.cached_names,
+                                            component1: component1,
+                                            component2: component2,
+                                            base_product: base_product,
+                                            detailsLink: my_product.details_link,
+                                            db_id: my_product.db_id,
+                                            dirty: false,
+                                            descriptions: my_product.descriptions,
+                                            hidden: false,
+                                            id: productStorage.uid++,
+                                            materials: material_stash,
+                                            metatags: metatag_stash,
+                                            modelCode: my_product.id,
+                                            name_scheme: null,
+                                            names: {},
+                                            productImage: my_product.product_image['S'],
+                                            properties: my_product.properties,
+                                            propertyFormula: my_product.propertyFormula,
+                                            updated: Date.now()
+                                        });
+                                    }
+                                }
+                            })
+                            .catch(function () {
+                                _this.addMessage("Sorry, something went wrong!", 'danger')
+                            })
                     }
                 }
                 else{
