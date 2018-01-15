@@ -1,4 +1,7 @@
 <div id="app" v-bind:class="editorLanguage">
+    <div class="loading" v-bind:class="{'show': showLoading }">
+        <i class="icon-loading fa fa-spinner fa-spin"></i>
+    </div>
     <div v-if="isAdmin" class="app-nav">
         <nav v-bind:class="headline" @click.prevent>
             <a href="#" class="new" @click="makeActive('add_new')"><i class="fa fa-plus fa-2x fa-pull-right menu-icon" aria-hidden="true"></i>&nbsp;</a>
