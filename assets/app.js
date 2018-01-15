@@ -1087,7 +1087,7 @@ new Vue({
         },
         bulkSaveProducts: function () {
             if (hasApi) {
-                model_code = []
+                let model_code = []
                 let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
                     return promiseChain.then(() => new Promise((resolve, reject) => {
                         fetch(api_endpoint, {
