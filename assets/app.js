@@ -1087,8 +1087,9 @@ new Vue({
         },
         bulkSaveProducts: function () {
             if (hasApi) {
-                let promise_status_list = this.selectedDirtyProducts.map((item) => {
-                    return new Promise((resolve, reject) => {
+                model_code = []
+                let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
+                    return promiseChain.then(() => new Promise((resolve, reject) => {
                         fetch(api_endpoint, {
                             credentials: 'include',
                             method: 'POST',
@@ -1103,27 +1104,26 @@ new Vue({
                             return response.json()
                         }).then(function (response) {
                             if (response.success) {
-                                resolve(response.product.modelCode)
+                                model_code.push(response.product.modelCode)
+                                resolve()
                             } else {
                                 reject("Sorry, we had a problem saving " + response.product.modelCode + " to the database and we will abort saving then!")
                             }
                         }).catch(function () {
                             reject("Sorry, something went wrong!")
                         })
-                    })
-                })
+                    }));
+                }, Promise.resolve());
 
-                Promise.all(promise_status_list)
-                    .then((model_code) => {
-                        this.selectedDirtyProducts.forEach(function (product) {
-                            product.hidden = false
-                            product.active = true
-                            product.updated = Date.now()
-                            product.dirty = false
-                        })
-                        this.addMessage("Success saving " + model_code + " to the database", 'success')
+                promise_status_list.then(() => {
+                    this.selectedDirtyProducts.forEach(function (product) {
+                        product.hidden = false
+                        product.active = true
+                        product.updated = Date.now()
+                        product.dirty = false
                     })
-                    .catch((message) => this.addMessage(message, 'danger'));
+                    this.addMessage("Success saving " + model_code + " to the database", 'success')
+                }).catch((message) => this.addMessage(message, 'danger'));
             }
         },
         clearSettings: function () {
