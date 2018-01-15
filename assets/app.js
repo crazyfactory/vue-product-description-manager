@@ -75,6 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        showLoading: false,
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -489,6 +490,7 @@ new Vue({
                             })
                         })
                         .then(function (response) {
+                            this.showLoading = false
                             return response.json()
                         })
                         .then(function (response) {
@@ -496,6 +498,7 @@ new Vue({
                         })
                         .catch(function () {
                             _this.addMessage("Sorry, something went wrong!", 'danger')
+                            this.showLoading = false
                         })
                     return []
             }
@@ -670,6 +673,7 @@ new Vue({
             }
             if(this.rawBaseproducts==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -684,9 +688,11 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.rawBaseproducts = response.data.content
+                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
+                        _this.showLoading = false
                     })
                 return []
             }
@@ -706,6 +712,7 @@ new Vue({
             }
             if(this.rawBaseproducts==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -720,9 +727,11 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.rawBaseproducts = response.data.content
+                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
+                        _this.showLoading = false
                     })
                 return []
             }
@@ -742,6 +751,7 @@ new Vue({
             }
             if(this.rawComponents==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -756,9 +766,11 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.rawComponents = response.data.content
+                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
+                        _this.showLoading = false
                     })
                 return []
             }
@@ -778,6 +790,7 @@ new Vue({
             }
             if(this.rawComponents==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -792,9 +805,11 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.rawComponents = response.data.content
+                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
+                        _this.showLoading = false
                     })
                 return []
             }
@@ -814,6 +829,7 @@ new Vue({
             }
             if(this.rawMaterials==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -827,9 +843,11 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
+                        _this.showLoading = false
                         _this.rawMaterials = response.data.content
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
                 return []
@@ -850,6 +868,7 @@ new Vue({
             }
             if(this.rawMaterials==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -863,9 +882,11 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
+                        _this.showLoading = false
                         _this.rawMaterials = response.data.content
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
                 return []
@@ -886,6 +907,7 @@ new Vue({
             }
             if(this.rawMetatags==null){
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -899,9 +921,11 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
+                        _this.showLoading = false
                         _this.rawMetatags = response.data.content
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
                 return []
@@ -921,27 +945,31 @@ new Vue({
             if(!hasApi){
                 return []
             }
-            if(this.rawMetatags==null){
-                    _this = this
-                    fetch(
-                        api_endpoint,
-                        {
-                            credentials: 'include',
-                            method: 'POST',
-                            body: JSON.stringify({
-                                action: 'get_metatags',
-                            })
+            if(this.rawMetatags==null) {
+                _this = this
+                this.showLoading = true
+
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_metatags',
                         })
-                        .then(function (response) {
-                            return response.json()
-                        })
-                        .then(function (response) {
-                            _this.rawMetatags = response.data.content
-                        })
-                        .catch(function () {
-                            _this.addMessage("Sorry, something went wrong!", 'danger')
-                        })
-                    return []
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.showLoading = false
+                        _this.rawMetatags = response.data.content
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
+                return []
             }
             else{
                 var response = []
@@ -995,6 +1023,7 @@ new Vue({
                 // clear product input
                 this.newProduct = ''
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1009,9 +1038,11 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
+                        _this.showLoading = false
                         _this.pushProducts(response)
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
             }
@@ -1058,6 +1089,7 @@ new Vue({
                 }
 
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1074,9 +1106,11 @@ new Vue({
                     })
                     .then(function (response) {
                         if (response.success) {
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'success')
                             window.reload()
                         } else {
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'danger')
                         }
                     })
@@ -1088,6 +1122,7 @@ new Vue({
         bulkSaveProducts: function () {
             if (hasApi) {
                 let model_code = []
+                this.showLoading = true
                 let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
                     return promiseChain.then(() => new Promise((resolve, reject) => {
                         fetch(api_endpoint, {
@@ -1122,8 +1157,12 @@ new Vue({
                         product.updated = Date.now()
                         product.dirty = false
                     })
+                    this.showLoading = false
                     this.addMessage("Success saving " + model_code + " to the database", 'success')
-                }).catch((message) => this.addMessage(message, 'danger'));
+                }).catch((message) => {
+                    this.addMessage(message, 'danger')
+                    this.showLoading = false
+                });
             }
         },
         clearSettings: function () {
@@ -1230,6 +1269,7 @@ new Vue({
 
             if (hasApi) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1258,8 +1298,10 @@ new Vue({
                                 product.names[language]['dirty'] = false;
                                 product.names[language]['edit'] = false;
                             }
+                            _this.showLoading = false
                             _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
                         } else {
+                            _this.showLoading = false
                             _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
                         }
                     })
@@ -1271,6 +1313,7 @@ new Vue({
         getGeneratedDescription: function (product, language) {
             if (hasApi) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1287,8 +1330,10 @@ new Vue({
                     .then(function (response) {
                            product.descriptions[language] = response[language];
                            product.dirty = true
+                           _this.showLoading = false
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
             }
@@ -1313,6 +1358,7 @@ new Vue({
                 for (let i = 0; i < id_list.length; i += chunk_size) {
                     group_resources.push(id_list.slice(i, i + chunk_size));
                 }
+                this.showLoading = true
 
                 let promise_status_list = group_resources.map((item) => {
                     return new Promise((resolve, reject) => {
@@ -1342,8 +1388,14 @@ new Vue({
                 })
 
                 Promise.all(promise_status_list)
-                    .then(() => this.addMessage("Hey, you just updated translation status of all the " + this.resourceDict[type]['name'] + " successfully.", 'success'))
-                    .catch(() => this.addMessage("Sorry, something went wrong!", 'danger'));
+                    .then(() => {
+                        this.showLoading = false
+                        this.addMessage("Hey, you just updated translation status of all the " + this.resourceDict[type]['name'] + " successfully.", 'success')
+                    })
+                    .catch(() => {
+                        this.showLoading = false
+                        this.addMessage("Sorry, something went wrong!", 'danger')
+                    });
             }
         },
         pushProducts: function(products){
@@ -1440,6 +1492,7 @@ new Vue({
             }
             if(hasApi) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1454,15 +1507,17 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.productsTranslationValidation(response.result)
+                        _this.showLoading = false
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
             }
         },
         productsTranslationValidation: function(result){
             if(result.count > 0){
-                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor <b>we'll drop all your loaded products.</b>")
+                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor we'll drop all your loaded products.")
                 if(proceed){
                     this.addMessage('Lets update the Products.', 'success')
                     this.products=[]
@@ -1574,17 +1629,20 @@ new Vue({
                                 }
                             })
                             .catch(function () {
+                                _this.showLoading = false
                                 _this.addMessage("Sorry, something went wrong!", 'danger')
                             })
                     }
                 }
                 else{
+                    this.showLoading = false
                     this.addMessage('Update aborted!', 'info')
                 }
             }
             else{
                 // we got updates, but no effected products
                 this.translationUpdates=[]
+                this.showLoading = false
                 this.addMessage('No products to update, process aborted!', 'info')
             }
 
@@ -1592,6 +1650,7 @@ new Vue({
         saveTranslationUpdate: function(type, cell){
             if (hasApi) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1632,14 +1691,17 @@ new Vue({
                                 _this.dirtyTranslations.isDirty = false
                             }
 
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'success')
                             _this.translationUpdates = ['resource updated']
 
                         } else {
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'danger')
                         }
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
             }
@@ -1648,6 +1710,7 @@ new Vue({
             // save to DB
             if (hasApi && (type == 'baseProducts' || type == 'components' || type == 'materials' || type == 'metatags')) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1678,8 +1741,10 @@ new Vue({
                             ) {
                                 _this.dirtyTranslations.isDirty = false
                             }
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'success')
                         } else {
+                            _this.showLoading = false
                             _this.addMessage(response.message, 'danger')
                         }
                     })
@@ -1707,6 +1772,7 @@ new Vue({
 
             if (proceed && hasApi) {
                 _this = this
+                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1724,6 +1790,7 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
+                        _this.showLoading = false
                         if (response.success) {
                             cell.row.is_active = 0
                             _this.translationUpdates = ["deleted_resource"]
@@ -1733,6 +1800,7 @@ new Vue({
                         }
                     })
                     .catch(function () {
+                        _this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
             }
