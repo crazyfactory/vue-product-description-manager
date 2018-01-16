@@ -1262,7 +1262,6 @@ new Vue({
             }
             if(hasApi) {
                 _this = this
-                this.showLoading = true
                 fetch(
                     api_endpoint,
                     {
@@ -1277,7 +1276,6 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.productsTranslationValidation(response.result)
-                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.showLoading = false
@@ -1290,6 +1288,7 @@ new Vue({
                 proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor we'll drop all your loaded products.")
                 if(proceed){
                     this.addMessage('Lets update the Products.', 'success')
+                    this.showLoading = true
                     this.products=[]
                     if(hasApi)
                     {
@@ -1397,6 +1396,7 @@ new Vue({
                                         });
                                     }
                                 }
+                                _this.showLoading = false
                             })
                             .catch(function () {
                                 _this.showLoading = false
