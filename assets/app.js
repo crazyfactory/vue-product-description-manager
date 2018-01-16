@@ -1170,16 +1170,16 @@ new Vue({
         },
         pushProducts: function(products){
 
-            var product_names = []
+            let product_names = []
 
-            for (var key in products) {
+            for (let key in products) {
                 if (key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key]) {
                     my_product = products[key];
                     product_names.push(my_product.id)
 
-                    var base_product = {}
+                    let base_product = {}
                     if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                        for (var i = 0; i < _this.rawBaseproducts.length; i++) {
+                        for (let i = 0; i < _this.rawBaseproducts.length; i++) {
                             if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
                                 base_product = _this.rawBaseproducts[i]
                                 break;
@@ -1187,15 +1187,15 @@ new Vue({
                         }
                     }
 
-                    var component1 = {}
-                    var found_1 = false
-                    var component2 = {}
-                    var found_2 = false
+                    let component1 = {}
+                    let found_1 = false
+                    let component2 = {}
+                    let found_2 = false
 
                     if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
                         || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
 
-                        for (var i = 0; i < _this.rawComponents.length; i++) {
+                        for (let i = 0; i < _this.rawComponents.length; i++) {
                             if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
                                 component1 = _this.rawComponents[i]
                                 found_1 = true
@@ -1210,17 +1210,17 @@ new Vue({
                         }
                     }
 
-                    var material_stash = []
+                    let material_stash = []
 
-                    for (var i = 0; i < products.materials.length; i++) {
+                    for (let i = 0; i < products.materials.length; i++) {
                         if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
                             material_stash.push(products.materials[i]);
                         }
                     }
 
-                    var metatag_stash = []
+                    let metatag_stash = []
 
-                    for (var i = 0; i < products.metatags.length; i++) {
+                    for (let i = 0; i < products.metatags.length; i++) {
                         if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
                             metatag_stash.push(products.metatags[i]);
                         }
@@ -1733,27 +1733,6 @@ new Vue({
                 })
             })
             return products
-        },
-        invisibleMetatags: function () {
-            var all_products = this.products
-            var all_metatags = this.metatags
-            this.selectedMetatags.forEach(function (metatag) {
-
-                all_metatags[metatag.value].invisible = true
-                all_products.forEach(function (product) {
-                    if (product.metatags.indexOf(metatag.value) > -1) {
-                        product.dirty = true
-                    }
-                })
-            })
-
-            if (hasApi) {
-                // make it persistent in DB
-                api.app = this
-                api.data = this.selectedMetatags
-                api.action = 'invisible_metatags'
-                api.call()
-            }
         },
         is_active_language: function(id){
             languages_id = this.activeLanguages.map(function( language ) {
@@ -2371,26 +2350,5 @@ new Vue({
 
             return true
         },
-        visibleMetatags: function () {
-            var all_products = this.products;
-            var all_metatags = this.metatags;
-            this.selectedMetatags.forEach(function (metatag) {
-                metatag.invisible = false
-                all_metatags[metatag.value].invisible = false
-                all_products.forEach(function (product) {
-                    if (product.metatags.indexOf(metatag.value) > -1) {
-                        product.dirty = true
-                    }
-                })
-            })
-            if (hasApi) {
-                // make it persistent in DB
-                api.app = this
-                api.data = this.selectedMetatags
-                api.action = 'visible_metatags'
-                api.call()
-            }
-        },
-
     }
 })
