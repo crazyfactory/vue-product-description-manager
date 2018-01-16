@@ -1,4 +1,4 @@
-if (typeof api !== 'undefined' || typeof api_endpoint !=='undefined') {
+if (typeof api_endpoint !=='undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi = true
     // how long is a product kept in local storage? (in ms)
@@ -358,26 +358,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                _this = this
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_baseproducts',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawBaseproducts = response.data.content
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 this.rawBaseproducts.forEach(function (item) {
@@ -398,26 +379,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                _this = this
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_components',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawComponents = response.data.content
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 this.rawComponents.forEach(function (item) {
@@ -438,26 +400,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                _this = this
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_materials',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawMaterials = response.data.content
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 this.rawMaterials.forEach(function (item) {
@@ -479,28 +422,7 @@ new Vue({
             }
 
             if(this.rawMetatags==null){
-                    _this = this
-                    fetch(
-                        api_endpoint,
-                        {
-                            credentials: 'include',
-                            method: 'POST',
-                            body: JSON.stringify({
-                                action: 'get_metatags',
-                            })
-                        })
-                        .then(function (response) {
-                            this.showLoading = false
-                            return response.json()
-                        })
-                        .then(function (response) {
-                            _this.rawMetatags = response.data.content
-                        })
-                        .catch(function () {
-                            _this.addMessage("Sorry, something went wrong!", 'danger')
-                            this.showLoading = false
-                        })
-                    return []
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 this.rawMetatags.forEach(function (item) {
@@ -672,29 +594,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_baseproducts',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawBaseproducts = response.data.content
-                        _this.showLoading = false
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                        _this.showLoading = false
-                    })
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 var response = []
@@ -711,29 +611,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_baseproducts',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawBaseproducts = response.data.content
-                        _this.showLoading = false
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                        _this.showLoading = false
-                    })
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 var response = []
@@ -750,29 +628,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_components',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawComponents = response.data.content
-                        _this.showLoading = false
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                        _this.showLoading = false
-                    })
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 var response = []
@@ -789,29 +645,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_components',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rawComponents = response.data.content
-                        _this.showLoading = false
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                        _this.showLoading = false
-                    })
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 var response = []
@@ -828,29 +662,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_materials',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.showLoading = false
-                        _this.rawMaterials = response.data.content
-                    })
-                    .catch(function () {
-                        _this.showLoading = false
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 var response = []
@@ -867,29 +679,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_materials',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.showLoading = false
-                        _this.rawMaterials = response.data.content
-                    })
-                    .catch(function () {
-                        _this.showLoading = false
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 var response = []
@@ -906,29 +696,7 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_metatags',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.showLoading = false
-                        _this.rawMetatags = response.data.content
-                    })
-                    .catch(function () {
-                        _this.showLoading = false
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 var response = []
@@ -946,30 +714,7 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null) {
-                _this = this
-                this.showLoading = true
-
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'get_metatags',
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.showLoading = false
-                        _this.rawMetatags = response.data.content
-                    })
-                    .catch(function () {
-                        _this.showLoading = false
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 var response = []
@@ -992,6 +737,31 @@ new Vue({
         }
     },
     methods: {
+        fetchResource: function(type, variable_name){
+            _this = this
+            this.showLoading = true
+            fetch(
+                api_endpoint,
+                {
+                    credentials: 'include',
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: type,
+                    })
+                })
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (response) {
+                    _this[variable_name] = response.data.content
+                    _this.showLoading = false
+                })
+                .catch(function () {
+                    _this.showLoading = false
+                    _this.addMessage("Sorry, something went wrong!", 'danger')
+                })
+            return []
+        },
         addEditorLanguage: function (value) {
             this.editorLanguage = value
         },
