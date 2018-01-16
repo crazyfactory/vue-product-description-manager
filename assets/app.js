@@ -1512,6 +1512,7 @@ new Vue({
                                 _this.dirtyTranslations.isDirty = false
                             }
                             _this.showLoading = false
+                            _this.translationUpdates = ['resource updated']
                             _this.addMessage(response.message, 'success')
                         } else {
                             _this.showLoading = false
