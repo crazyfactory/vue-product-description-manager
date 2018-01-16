@@ -1,4 +1,7 @@
 <div id="app" v-bind:class="editorLanguage">
+    <div class="loading" v-bind:class="{'show': showLoading }">
+        <i class="icon-loading fa fa-spinner fa-spin"></i>
+    </div>
     <div v-if="isAdmin" class="app-nav">
         <nav v-bind:class="headline" @click.prevent>
             <a href="#" class="new" @click="makeActive('add_new')"><i class="fa fa-plus fa-2x fa-pull-right menu-icon" aria-hidden="true"></i>&nbsp;</a>
@@ -761,11 +764,16 @@
         <!--  This is the Translator View -->
         <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translator">
             <div v-if="show_description_translator" class="alert alert-info description-translator-view">
-                <i aria-hidden="true" class="fa fa-times fa-pull-right cursor"  @click="toggleDescriptionTranslator"></i>
-                <div><b>Edit</b>: You can edit text by click at the text.</div>
-                <div><b>Simple Save</b>: Pressing the `ENTER` button after typing will automatically save your changes to the field.</div>
-                <div><b>Group Save</b>: The <i class="fa fa-floppy-o" ></i> icon after the Resource headline indicates that you have unsafed changes to one or more resource. All texts will be saved when you click <i class="fa fa-floppy-o" ></i>  icon.</div>
-                <div><b>Confirm as fully translated</b>: if the translation of a resource is done for all languages, you can mark it as resolved by clicking the <i class="fa fa-check-square-o" ></i> icon on the very left side of row. The completed resource will disappear from the table as a direct result.</div>
+                <i aria-hidden="true" class="fa fa-times fa-pull-right cursor" @click="toggleDescriptionTranslator"></i>
+                <div><i class="fa fa-pencil"></i> : Edit text by click it.</div>
+                <div><i class="fa fa-floppy-o"></i> : Save changes. If you click on the icon <b>behind</b> the
+                    headline you save <b>ALL</b> resources, <b>a single save</b> is performed by pressing `<b>ENTER</b>`
+                    after typing.
+                </div>
+                <div v-if="isAdmin"><i class="fa fa-bell"></i> : Confirm as fully translated. If you click the icon <b>behide</b> the
+                    headline you confirm <b>ALL</b> resources, the icon before each line sets <b>ONE</b> resource to
+                    completed.The completed resources will disappear from the table as a direct result.
+                </div>
             </div>
             {# Base Products #}
             <div>
@@ -774,6 +782,9 @@
                     <i v-if="show_translator_base_products" @click="toggleTranslatorVisibility('base_products')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Base Products
                     <i class="fa fa-floppy-o cursor" title="Save BaseProduct translations to database" aria-hidden="true" @click="saveTranslationUpdates('baseProducts')" v-if="dirtyTranslations.baseProducts.isDirty"></i>
+                    <i v-if="show_translator_base_products && translatorBaseProducts.length > 0"
+                       @click="bulkChangeTranslationStatus('baseProducts')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_base_products" class="translation_table base_products">
                     <datatable
@@ -820,6 +831,9 @@
                     <i v-if="show_translator_components" @click="toggleTranslatorVisibility('components')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Components
                     <i class="fa fa-floppy-o cursor" title="Save Components translations to database" aria-hidden="true" @click="saveTranslationUpdates('components')" v-if="dirtyTranslations.components.isDirty"></i>
+                    <i v-if="show_translator_components && translatorComponents.length > 0"
+                       @click="bulkChangeTranslationStatus('components')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_components" class="translation_table">
                     <datatable
@@ -866,6 +880,9 @@
                     <i v-if="show_translator_materials" @click="toggleTranslatorVisibility('materials')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Materials
                     <i class="fa fa-floppy-o cursor" title="Save Materials translations to database" aria-hidden="true" @click="saveTranslationUpdates('materials')" v-if="dirtyTranslations.materials.isDirty"></i>
+                    <i v-if="show_translator_materials && translatorMaterials.length > 0"
+                       @click="bulkChangeTranslationStatus('materials')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_materials" class="translation_table">
                     <datatable
@@ -912,6 +929,9 @@
                     <i v-if="show_translator_metatags" @click="toggleTranslatorVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
                     Metatags
                     <i class="fa fa-floppy-o cursor" title="Save Metatags translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty"></i>
+                    <i v-if="show_translator_metatags && translatorMetatags.length > 0"
+                       @click="bulkChangeTranslationStatus('metatags')" title="Confirm as all resource translated"
+                       class="request fa fa-bell right-distance" aria-hidden="true"></i>
                 </h4>
                 <p v-if="show_translator_metatags" class="translation_table">
                     <datatable

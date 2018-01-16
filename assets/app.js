@@ -1,8 +1,8 @@
-if (typeof api !== 'undefined') {
+if (typeof api_endpoint !=='undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi = true
     // how long is a product kept in local storage? (in ms)
-    var validationRange = api.validationRange ? api.validationRange : 86400000
+    var validationRange = 86400000
 }
 else {
     var hasApi = false
@@ -75,6 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        showLoading: false,
         // new multiselect props
         selectedBaseProduct: null,
         selectedComponent1: null,
@@ -266,7 +267,29 @@ new Vue({
                 ]
             }
         },
-        translationUpdates: LogData.content
+        translationUpdates: LogData.content,
+        resourceDict: {
+            baseProducts: {
+                name: "Base Products",
+                selectableOptions: "optionsBaseProduct",
+                translationRequested: "translatorBaseProducts"
+            },
+            components: {
+                name: "Components",
+                selectableOptions: "optionsComponent",
+                translationRequested: "translatorComponents"
+            },
+            materials: {
+                name: "Materials",
+                selectableOptions: "optionsMaterial",
+                translationRequested: "translatorMaterials"
+            },
+            metatags: {
+                name: "Metatags",
+                selectableOptions: "optionsMetatag",
+                translationRequested: "translatorMetatags"
+            },
+        }
     },
     delimiters: ['[[', ']]'],
     // watch products change for localStorage persistence
@@ -335,10 +358,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 this.rawBaseproducts.forEach(function (item) {
@@ -359,10 +379,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 this.rawComponents.forEach(function (item) {
@@ -383,10 +400,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 this.rawMaterials.forEach(function (item) {
@@ -408,10 +422,7 @@ new Vue({
             }
 
             if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 this.rawMetatags.forEach(function (item) {
@@ -583,10 +594,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 var response = []
@@ -603,10 +611,7 @@ new Vue({
                 return []
             }
             if(this.rawBaseproducts==null){
-                api.app = this
-                api.action = 'get_baseproducts'
-                api.call()
-                return []
+                return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
             else{
                 var response = []
@@ -623,10 +628,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 var response = []
@@ -643,10 +645,7 @@ new Vue({
                 return []
             }
             if(this.rawComponents==null){
-                api.app = this
-                api.action = 'get_components'
-                api.call()
-                return []
+                return this.fetchResource('get_components', 'rawComponents')
             }
             else{
                 var response = []
@@ -663,10 +662,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 var response = []
@@ -683,10 +679,7 @@ new Vue({
                 return []
             }
             if(this.rawMaterials==null){
-                api.app = this
-                api.action = 'get_materials'
-                api.call()
-                return []
+                return this.fetchResource('get_materials', 'rawMaterials')
             }
             else{
                 var response = []
@@ -703,10 +696,7 @@ new Vue({
                 return []
             }
             if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 var response = []
@@ -723,11 +713,8 @@ new Vue({
             if(!hasApi){
                 return []
             }
-            if(this.rawMetatags==null){
-                api.app = this
-                api.action = 'get_metatags'
-                api.call()
-                return []
+            if(this.rawMetatags==null) {
+                return this.fetchResource('get_metatags', 'rawMetatags')
             }
             else{
                 var response = []
@@ -750,6 +737,31 @@ new Vue({
         }
     },
     methods: {
+        fetchResource: function(type, variable_name){
+            _this = this
+            this.showLoading = true
+            fetch(
+                api_endpoint,
+                {
+                    credentials: 'include',
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: type,
+                    })
+                })
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (response) {
+                    _this[variable_name] = response.data.content
+                    _this.showLoading = false
+                })
+                .catch(function () {
+                    _this.showLoading = false
+                    _this.addMessage("Sorry, something went wrong!", 'danger')
+                })
+            return []
+        },
         addEditorLanguage: function (value) {
             this.editorLanguage = value
         },
@@ -780,11 +792,29 @@ new Vue({
             if (hasApi) {
                 // clear product input
                 this.newProduct = ''
-
-                api.app = this
-                api.data = value
-                api.action = 'get_products'
-                api.call()
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'get_products',
+                            data: value.split(" ").join(",")
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.showLoading = false
+                        _this.pushProducts(response)
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
             else {
                 var my_products = value.split(" ")
@@ -828,27 +858,81 @@ new Vue({
                     'translation_requested': this.newResourceTranslationRequested,
                 }
 
-                if (hasApi) {
-                    // clear product input
-                    api.app = this
-                    api.data = resource
-                    api.action = 'add_resource'
-                    api.call()
-                }
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'add_resource',
+                            data: resource,
+                        })
+                    }
+                )
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            _this.showLoading = false
+                            _this.addMessage(response.message, 'success')
+                            location.reload()
+                        } else {
+                            _this.showLoading = false
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         bulkSaveProducts: function () {
-            if (this.selectedDirtyProducts.length > 0) {
-                data = {
-                    product: this.selectedDirtyProducts[0],
-                    languages: this.activeLanguagesId
-                }
-                api.app = this
-                api.data = data
-                api.action = 'save_products'
-                api.call()
-            } else {
-                return false
+            if (hasApi) {
+                let model_code = []
+                this.showLoading = true
+                let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
+                    return promiseChain.then(() => new Promise((resolve, reject) => {
+                        fetch(api_endpoint, {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'save_products',
+                                data: {
+                                    product: item,
+                                    languages: this.activeLanguagesId
+                                }
+                            })
+                        }).then(function (response) {
+                            return response.json()
+                        }).then(function (response) {
+                            if (response.success) {
+                                model_code.push(response.product.modelCode)
+                                resolve()
+                            } else {
+                                reject("Sorry, we had a problem saving " + response.product.modelCode + " to the database and we will abort saving then!")
+                            }
+                        }).catch(function () {
+                            reject("Sorry, something went wrong!")
+                        })
+                    }));
+                }, Promise.resolve());
+
+                promise_status_list.then(() => {
+                    this.selectedDirtyProducts.forEach(function (product) {
+                        product.hidden = false
+                        product.active = true
+                        product.updated = Date.now()
+                        product.dirty = false
+                    })
+                    this.showLoading = false
+                    this.addMessage("Success saving " + model_code + " to the database", 'success')
+                }).catch((message) => {
+                    this.addMessage(message, 'danger')
+                    this.showLoading = false
+                });
             }
         },
         clearSettings: function () {
@@ -953,28 +1037,75 @@ new Vue({
                 if (!confirm(msg)) return
             }
 
-            data = {
-                product: product,
-                languages: this.activeLanguagesId
+            if (hasApi) {
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_product',
+                            data: {
+                                product: product,
+                                languages: this.activeLanguagesId
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            // prepare product to written back into app
+                            product.dirty = false
+                            product.hidden = false
+                            product.active = true
+                            product.updated = Date.now()
+
+                            for (var language in product.names) {
+                                product.names[language]['dirty'] = false;
+                                product.names[language]['edit'] = false;
+                            }
+                            _this.showLoading = false
+                            _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
+                        } else {
+                            _this.showLoading = false
+                            _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
-
-            api.app = this
-            api.data = data
-            api.action = 'save_product'
-            api.call()
-
         },
         getGeneratedDescription: function (product, language) {
-            index = this.products.indexOf(product)
-            product.dirty = true
-
             if (hasApi) {
-                api.app = this
-                api.language = language
-                api.data = product.propertyFormula
-                api.action = 'generate_description'
-                api.product_index = index
-                api.call()
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'generate_description',
+                            data: product.propertyFormula
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                           product.descriptions[language] = response[language];
+                           product.dirty = true
+                           _this.showLoading = false
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
             else {
                 // use fake api response from api.js
@@ -984,101 +1115,413 @@ new Vue({
                 this.products[index].descriptions[language] = my_description
             }
         },
+        bulkChangeTranslationStatus: function (type) {
+            proceed = confirm("Are you sure that you want to set all " + this.resourceDict[type]['name'] + " to be fully translated?")
+
+            if (proceed && hasApi) {
+                let resource_translation_requested = this[this.resourceDict[type].translationRequested]
+                let id_list = resource_translation_requested.map(function (a) {
+                    return a.id;
+                })
+
+                let group_resources = [], chunk_size = 900;
+                for (let i = 0; i < id_list.length; i += chunk_size) {
+                    group_resources.push(id_list.slice(i, i + chunk_size));
+                }
+                this.showLoading = true
+
+                let promise_status_list = group_resources.map((item) => {
+                    return new Promise((resolve, reject) => {
+                        fetch(api_endpoint, {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'bulk_translation_complete',
+                                resources: item,
+                                type: type
+                            })
+                        }).then(function (response) {
+                            return response.json()
+                        }).then(function (response) {
+                            resource_translation_requested.forEach(function (resource) {
+
+                                //verify if resource.id exist in response then switch to translation_requested = 0
+                                if ((response.resources).indexOf(resource.id) > -1) {
+                                    resource.translation_requested = 0
+                                }
+                            })
+                            resolve()
+                        }).catch(function () {
+                            reject()
+                        })
+                    })
+                })
+
+                Promise.all(promise_status_list)
+                    .then(() => {
+                        this.showLoading = false
+                        this.addMessage("Hey, you just updated translation status of all the " + this.resourceDict[type]['name'] + " successfully.", 'success')
+                    })
+                    .catch(() => {
+                        this.showLoading = false
+                        this.addMessage("Sorry, something went wrong!", 'danger')
+                    });
+            }
+        },
+        pushProducts: function(products){
+
+            let product_names = []
+
+            for (let key in products) {
+                if (key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key]) {
+                    my_product = products[key];
+                    product_names.push(my_product.id)
+
+                    let base_product = {}
+                    if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
+                        for (let i = 0; i < _this.rawBaseproducts.length; i++) {
+                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                                base_product = _this.rawBaseproducts[i]
+                                break;
+                            }
+                        }
+                    }
+
+                    let component1 = {}
+                    let found_1 = false
+                    let component2 = {}
+                    let found_2 = false
+
+                    if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
+                        || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
+
+                        for (let i = 0; i < _this.rawComponents.length; i++) {
+                            if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
+                                component1 = _this.rawComponents[i]
+                                found_1 = true
+                            }
+                            if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
+                                component2 = _this.rawComponents[i]
+                                found_2 = true
+                            }
+                            if (found_1 && found_2) {
+                                break
+                            }
+                        }
+                    }
+
+                    let material_stash = []
+
+                    for (let i = 0; i < products.materials.length; i++) {
+                        if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
+                            material_stash.push(products.materials[i]);
+                        }
+                    }
+
+                    let metatag_stash = []
+
+                    for (let i = 0; i < products.metatags.length; i++) {
+                        if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
+                            metatag_stash.push(products.metatags[i]);
+                        }
+                    }
+
+                    this.products.push({
+                        active: true,
+                        cached_descriptions: my_product.cached_descriptions,
+                        cached_materials: my_product.cached_materials,
+                        cached_metatags: my_product.cached_metatags,
+                        cached_names: my_product.cached_names,
+                        component1: component1,
+                        component2: component2,
+                        base_product: base_product,
+                        detailsLink: my_product.details_link,
+                        db_id: my_product.db_id,
+                        dirty: false,
+                        descriptions: my_product.descriptions,
+                        hidden: false,
+                        id: productStorage.uid++,
+                        materials: material_stash,
+                        metatags: metatag_stash,
+                        modelCode: my_product.id,
+                        name_scheme: null,
+                        names: {},
+                        productImage: my_product.product_image['S'],
+                        properties: my_product.properties,
+                        propertyFormula: my_product.propertyFormula,
+                        updated: Date.now()
+                    });
+
+                }
+            }
+        },
         productsTranslationUpdate: function(){
             if(this.dirtyTranslations.isDirty){
                 this.addMessage('Please save your local changes before you update the Products.', 'danger')
                 return false
             }
-            if (hasApi) {
-                api.app = this
-                api.action = 'validate_translation_update'
-                api.call()
+            if(hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'validate_translation_update',
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.productsTranslationValidation(response.result)
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         productsTranslationValidation: function(result){
             if(result.count > 0){
-                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor <b>we'll drop all your loaded products.</b>")
+                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor we'll drop all your loaded products.")
                 if(proceed){
                     this.addMessage('Lets update the Products.', 'success')
+                    this.showLoading = true
                     this.products=[]
                     if(hasApi)
                     {
-                        api.app = this
-                        api.data = result
-                        api.action = 'translation_update'
-                        api.call()
+                        _this = this
+                        fetch(
+                            api_endpoint,
+                            {
+                                credentials: 'include',
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    action: 'translation_update',
+                                    data: result
+                                })
+                            })
+                            .then(function (response) {
+                                return response.json()
+                            })
+                            .then(function (response) {
+                                //set message
+                                _this.addMessage(response.message, 'success')
+                                _this.translationUpdates = []
+                                //push Products back
+                                products = response['rejected']
+
+                                //action for getting products
+                                var product_names = []
+                                for (var key in products) {
+                                    if (key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key]) {
+                                        my_product = products[key];
+                                        product_names.push(my_product.id)
+
+                                        var base_product = {}
+                                        if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
+                                            for (var i = 0; i < _this.rawBaseproducts.length; i++) {
+                                                if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                                                    base_product = _this.rawBaseproducts[i]
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        var component1 = {}
+                                        var found_1 = false
+                                        var component2 = {}
+                                        var found_2 = false
+
+                                        if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
+                                            || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
+
+                                            for (var i = 0; i < _this.rawComponents.length; i++) {
+                                                if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
+                                                    component1 = _this.rawComponents[i]
+                                                    found_1 = true
+                                                }
+                                                if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
+                                                    component2 = _this.rawComponents[i]
+                                                    found_2 = true
+                                                }
+                                                if (found_1 && found_2) {
+                                                    break
+                                                }
+                                            }
+                                        }
+
+                                        var material_stash = []
+
+                                        for (var i = 0; i < products.materials.length; i++) {
+                                            if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
+                                                material_stash.push(products.materials[i]);
+                                            }
+                                        }
+
+                                        var metatag_stash = []
+
+                                        for (var i = 0; i < products.metatags.length; i++) {
+                                            if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
+                                                metatag_stash.push(products.metatags[i]);
+                                            }
+                                        }
+
+                                        _this.products.push({
+                                            active: true,
+                                            cached_descriptions: my_product.cached_descriptions,
+                                            cached_materials: my_product.cached_materials,
+                                            cached_metatags: my_product.cached_metatags,
+                                            cached_names: my_product.cached_names,
+                                            component1: component1,
+                                            component2: component2,
+                                            base_product: base_product,
+                                            detailsLink: my_product.details_link,
+                                            db_id: my_product.db_id,
+                                            dirty: false,
+                                            descriptions: my_product.descriptions,
+                                            hidden: false,
+                                            id: productStorage.uid++,
+                                            materials: material_stash,
+                                            metatags: metatag_stash,
+                                            modelCode: my_product.id,
+                                            name_scheme: null,
+                                            names: {},
+                                            productImage: my_product.product_image['S'],
+                                            properties: my_product.properties,
+                                            propertyFormula: my_product.propertyFormula,
+                                            updated: Date.now()
+                                        });
+                                    }
+                                }
+                                _this.showLoading = false
+                            })
+                            .catch(function () {
+                                _this.showLoading = false
+                                _this.addMessage("Sorry, something went wrong!", 'danger')
+                            })
                     }
                 }
                 else{
+                    this.showLoading = false
                     this.addMessage('Update aborted!', 'info')
                 }
             }
             else{
                 // we got updates, but no effected products
                 this.translationUpdates=[]
+                this.showLoading = false
                 this.addMessage('No products to update, process aborted!', 'info')
             }
 
         },
         saveTranslationUpdate: function(type, cell){
-            id = cell.row.id
-            index = this.dirtyTranslations[type]['entryList'].indexOf(id)
+            if (hasApi) {
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_resource',
+                            data: {
+                                translation: cell.row,
+                                type: type
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            resource_id = response.data.id
+                            index = _this.dirtyTranslations[type]['entryList'].indexOf(resource_id)
+                            if (index > -1) {
+                                // remove element from entryList
+                                _this.dirtyTranslations[type]['entryList'].splice(index, 1)
+                                // remove element from stash
+                                _this.dirtyTranslations[type]['stash'].forEach(function (item, key) {
+                                    if (item.row.id === resource_id) {
+                                        _this.dirtyTranslations[type]['stash'].splice(key, 1)
+                                    }
+                                }, resource_id)
+                            }
+                            // validate if we still have translations to update
+                            if (_this.dirtyTranslations[type]['entryList'].length == 0) {
+                                _this.dirtyTranslations[type].isDirty = false
+                            }
+                            // reset all translatrions if we dont have any dirty translations anymore
+                            if (!_this.dirtyTranslations.baseProducts.isDirty && !_this.dirtyTranslations.components.isDirty && !_this.dirtyTranslations.materials.isDirty && !_this.dirtyTranslations.metatags.isDirty) {
+                                // all translations are clean
+                                _this.dirtyTranslations.isDirty = false
+                            }
 
-            if(index > -1){
-                // remove element from entryList
-                this.dirtyTranslations[type]['entryList'].splice(index,1)
-            }
-            // validate if we still have translations to update
-            if(this.dirtyTranslations[type]['entryList'].length==0){
-                this.dirtyTranslations[type].isDirty = false
-            }
-            // reset all translatrions if we dont have any dirty translations anymore
-            if(!this.dirtyTranslations.baseProducts.isDirty && !this.dirtyTranslations.components.isDirty && !this.dirtyTranslations.materials.isDirty && !this.dirtyTranslations.metatags.isDirty)
-            {
-                // all translations are clean
-                this.dirtyTranslations.isDirty = false
-            }
-            // save to DB
-            if(hasApi)
-            {
-                data = {
-                    type : type,
-                    translation : cell.row
-                }
+                            _this.showLoading = false
+                            _this.addMessage(response.message, 'success')
+                            _this.translationUpdates = ['resource updated']
 
-                api.app = this
-                api.data = data
-                api.action = 'save_resource'
-                api.call()
+                        } else {
+                            _this.showLoading = false
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
-        saveTranslationUpdates: function(type){
-            if(type =='baseProducts' || type =='components' || type =='materials' || type =='metatags'){
-                stash = this.dirtyTranslations[type].stash
-                entryList = this.dirtyTranslations[type].entryList
-
-                this.dirtyTranslations[type].isDirty = false
-                this.dirtyTranslations[type].stash = []
-                this.dirtyTranslations[type].entryList = []
-
-                data = {
-                    type : type,
-                    translations : stash
-                }
-
-            }
-
-            if(!(this.dirtyTranslations.baseProducts.isDirty || this.dirtyTranslations.components.isDirty || this.dirtyTranslations.materials.isDirty || this.dirtyTranslations.metatags.isDirty))
-            {
-                this.dirtyTranslations.isDirty = false
-            }
+        saveTranslationUpdates: function (type) {
             // save to DB
-            if(hasApi)
-            {
-                api.app = this
-                api.data = data
-                api.action = 'save_resources'
-                api.call()
+            if (hasApi && (type == 'baseProducts' || type == 'components' || type == 'materials' || type == 'metatags')) {
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'save_resources',
+                            data: {
+                                type: type,
+                                translations: _this.dirtyTranslations[type].stash.map(function (resource) {
+                                    return resource.row
+                                })
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            _this.dirtyTranslations[type].isDirty = false
+                            _this.dirtyTranslations[type].stash = []
+                            _this.dirtyTranslations[type].entryList = []
+                            if (!(_this.dirtyTranslations.baseProducts.isDirty
+                                || _this.dirtyTranslations.components.isDirty
+                                || _this.dirtyTranslations.materials.isDirty
+                                || _this.dirtyTranslations.metatags.isDirty)
+                            ) {
+                                _this.dirtyTranslations.isDirty = false
+                            }
+                            _this.showLoading = false
+                            _this.translationUpdates = ['resource updated']
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.showLoading = false
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
 
         },
@@ -1095,23 +1538,42 @@ new Vue({
                 this.dirtyTranslations[type]['stash'].push(cell)
             }
         },
-        deleteResource: function(type, cell){
-            proceed=confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
+        deleteResource: function (type, cell) {
+            proceed = confirm('You are going to delete "' + cell.row[this.editorLanguage] + '"! Please only proceed if you are sure about it.')
 
-            if(proceed){
-                cell.row.is_active="0"
-
-                if(hasApi)
-                {
-                    data = {
-                        type : type,
-                        translation : cell.row
-                    }
-                    api.app = this
-                    api.data = data
-                    api.action = 'delete_resource'
-                    api.call()
-                }
+            if (proceed && hasApi) {
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'delete_resource',
+                            data: {
+                                type: type,
+                                translation: cell.row
+                            },
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.showLoading = false
+                        if (response.success) {
+                            cell.row.is_active = 0
+                            _this.translationUpdates = ["deleted_resource"]
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.showLoading = false
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         editMe: function (item, item_parent) {
@@ -1272,27 +1734,6 @@ new Vue({
                 })
             })
             return products
-        },
-        invisibleMetatags: function () {
-            var all_products = this.products
-            var all_metatags = this.metatags
-            this.selectedMetatags.forEach(function (metatag) {
-
-                all_metatags[metatag.value].invisible = true
-                all_products.forEach(function (product) {
-                    if (product.metatags.indexOf(metatag.value) > -1) {
-                        product.dirty = true
-                    }
-                })
-            })
-
-            if (hasApi) {
-                // make it persistent in DB
-                api.app = this
-                api.data = this.selectedMetatags
-                api.action = 'invisible_metatags'
-                api.call()
-            }
         },
         is_active_language: function(id){
             languages_id = this.activeLanguages.map(function( language ) {
@@ -1587,46 +2028,100 @@ new Vue({
             proceed = confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.');
 
             if (proceed && hasApi) {
-                cell.row['translation_requested'] = 0
-
-                data = {
-                        translation: cell.row,
-                        type: type
-                    }
-                    api.app = this
-                    api.data = data
-                    api.action = 'translation_complete'
-                    api.call()
+                if (hasApi) {
+                    _this = this
+                    fetch(
+                        api_endpoint,
+                        {
+                            credentials: 'include',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'update_translation_requested',
+                                data: {
+                                    translation: cell.row,
+                                    type: type
+                                }
+                            })
+                        })
+                        .then(function (response) {
+                            return response.json()
+                        })
+                        .then(function (response) {
+                            if (response.success) {
+                                cell.row['translation_requested'] = 0
+                                _this.addMessage(response.message, 'success')
+                            } else {
+                                _this.addMessage(response.message, 'danger')
+                            }
+                        })
+                        .catch(function () {
+                            _this.addMessage("Sorry, something went wrong!", 'danger')
+                        })
+                }
             }
         },
         switchTranslationStatus: function(type, cell){
             if (hasApi) {
-                cell.row['translation_requested'] = parseInt(cell.row['translation_requested']) ? 0 : 1
-
-                data = {
-                    translation: cell.row,
-                    type: type
-                }
-                api.app = this
-                api.data = data
-                api.action = 'update_translation_requested'
-                api.call()
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'update_translation_requested',
+                            data: {
+                                translation: cell.row,
+                                type: type
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            cell.row['translation_requested'] = 1 - parseInt(cell.row['translation_requested'])
+                            _this.addMessage(response.message, 'success')
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
-        setHiddenTag: function(cell){
-            if(cell.row['is_hidden'] =="1") cell.row['is_hidden'] ="0"
-            else cell.row['is_hidden'] ="1"
-
-            if(hasApi)
-            {
-                data = {
-                    translation : cell.row,
-                    type : 'metatags'
-                }
-                api.app = this
-                api.data = data
-                api.action = 'set_hidden_tag'
-                api.call()
+        setHiddenTag: function (cell) {
+            if (hasApi) {
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'set_hidden_tag',
+                            data: {
+                                translation: cell.row,
+                                type: 'metatags'
+                            }
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        if (response.success) {
+                            _this.addMessage(response.message, 'success')
+                            cell.row['is_hidden'] = 1 - parseInt(cell.row['is_hidden']);
+                        } else {
+                            _this.addMessage(response.message, 'danger')
+                        }
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
             }
         },
         toggle_language: function (language) {
@@ -1856,26 +2351,5 @@ new Vue({
 
             return true
         },
-        visibleMetatags: function () {
-            var all_products = this.products;
-            var all_metatags = this.metatags;
-            this.selectedMetatags.forEach(function (metatag) {
-                metatag.invisible = false
-                all_metatags[metatag.value].invisible = false
-                all_products.forEach(function (product) {
-                    if (product.metatags.indexOf(metatag.value) > -1) {
-                        product.dirty = true
-                    }
-                })
-            })
-            if (hasApi) {
-                // make it persistent in DB
-                api.app = this
-                api.data = this.selectedMetatags
-                api.action = 'visible_metatags'
-                api.call()
-            }
-        },
-
     }
 })
