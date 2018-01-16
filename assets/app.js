@@ -878,7 +878,7 @@ new Vue({
                         if (response.success) {
                             _this.showLoading = false
                             _this.addMessage(response.message, 'success')
-                            window.reload()
+                            location.reload()
                         } else {
                             _this.showLoading = false
                             _this.addMessage(response.message, 'danger')
