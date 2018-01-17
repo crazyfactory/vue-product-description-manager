@@ -902,7 +902,6 @@ new Vue({
                                 action: 'save_products',
                                 data: {
                                     product: item,
-                                    languages: this.activeLanguagesId
                                 }
                             })
                         }).then(function (response) {
@@ -1049,7 +1048,6 @@ new Vue({
                             action: 'save_product',
                             data: {
                                 product: product,
-                                languages: this.activeLanguagesId
                             }
                         })
                     })
