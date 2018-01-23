@@ -22,6 +22,10 @@
             <span>[[message.message]]</span>
             <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
+        <div v-if="Object.keys(getRejectedProducts).length - 3 > 0" class="alert alert-warning">
+            <span>There are [[Object.keys(getRejectedProducts).length - 3 ]] rejected products, please<a
+                        style="text-decoration: underline" @click="resolveRejectedProducts()"> CLICK </a> to resolve it</span>
+        </div>
     </div>
     <!-- end active messages -->
     <!-- Settings button -->
@@ -127,6 +131,14 @@
                     <a v-bind:href="product.productImage" target="_blank"><img v-bind:src="product.productImage" class="img-rounded" width="50"></a>
                   </span>
                                 </label>
+                                <div>
+                                    <ul class="rejected_tag">
+                                        <li v-for="type in product.rejectedType">
+                                            [[ type ]]
+                                        </li>
+                                    </ul>
+                                </div>
+
                                 <!-- Generic Product Names by language -->
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">

@@ -1727,6 +1727,7 @@ new Vue({
                         productImage: my_product.product_image['S'],
                         properties: my_product.properties,
                         propertyFormula: my_product.propertyFormula,
+                        rejectedType: my_product.rejected_type,
                         updated: Date.now()
                     });
                 }
