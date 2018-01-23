@@ -132,11 +132,9 @@
                   </span>
                                 </label>
                                 <div>
-                                    <ul class="rejected_tag">
-                                        <li v-for="type in product.rejectedType">
+                                        <span class="label label-danger rejected_tag" v-for="type in product.rejectedType">
                                             [[ type ]]
-                                        </li>
-                                    </ul>
+                                        </span>
                                 </div>
 
                                 <!-- Generic Product Names by language -->
