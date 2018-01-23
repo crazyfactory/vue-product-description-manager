@@ -75,6 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        rawRejectedProducts: null,
         showLoading: false,
         // new multiselect props
         selectedBaseProduct: null,
@@ -331,6 +332,37 @@ new Vue({
         }
     },
     computed: {
+        getRejectedProducts: function(){
+            if(!hasApi){
+                return []
+            }
+            if(this.rawRejectedProducts==null){
+                _this = this
+                this.showLoading = true
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: "get_rejected_products",
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rawRejectedProducts = response
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
+                return []
+            }
+            else{
+               return _this.rawRejectedProducts
+            }
+        },
         activeLanguages: function(){
             stash = []
             this.supportedLanguages.forEach(function (item) {
