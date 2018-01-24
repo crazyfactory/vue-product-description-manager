@@ -75,7 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        rawRejectedProducts: null,
+        rejectedProducts: null,
         showLoading: false,
         // new multiselect props
         selectedBaseProduct: null,
@@ -336,7 +336,7 @@ new Vue({
             if(!hasApi){
                 return []
             }
-            if(this.rawRejectedProducts==null){
+            if(this.rejectedProducts==null){
                 _this = this
                 this.showLoading = true
                 fetch(
@@ -352,7 +352,7 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                        _this.rawRejectedProducts = response
+                        _this.rejectedProducts = response
                     })
                     .catch(function () {
                         _this.addMessage("Sorry, something went wrong!", 'danger')
@@ -360,7 +360,8 @@ new Vue({
                 return []
             }
             else{
-               return _this.rawRejectedProducts
+
+                return _this.rejectedProducts
             }
         },
         activeLanguages: function(){
@@ -1656,8 +1657,7 @@ new Vue({
         },
         resolveRejectedProducts: function () {
             this.products = [];
-            console.log("test", this.rawRejectedProducts)
-            products = this.rawRejectedProducts
+            products = this.rejectedProducts
             //action for getting products
             var product_names = []
             for (var key in products) {
