@@ -132,8 +132,17 @@
                   </span>
                                 </label>
                                 <div>
-                                        <span class="label label-danger rejected_tag" v-for="type in product.rejectedType">
-                                            [[ type ]]
+                                     <span class="label label-danger rejected_tag" v-if="validateRejectedProduct('base_product', product)" >
+                                           no baseproduct
+                                        </span>
+                                    <span class="label label-danger rejected_tag" v-if="validateRejectedProduct('component1', product)">
+                                            no component1
+                                        </span>
+                                    <span class="label label-danger rejected_tag" v-if="validateRejectedProduct('component2', product)">
+                                            no component2
+                                        </span>
+                                    <span class="label label-danger rejected_tag" v-if="validateRejectedProduct('materials', product)">
+                                            no material
                                         </span>
                                 </div>
 

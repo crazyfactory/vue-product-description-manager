@@ -769,6 +769,16 @@ new Vue({
         }
     },
     methods: {
+        validateRejectedProduct: function (type, product) {
+            if(product['rejected_'+type]){
+                if(product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0){
+                    return true
+                }else{
+                    return false
+                }
+            }
+
+        },
         fetchResource: function(type, variable_name){
             _this = this
             this.showLoading = true
@@ -1728,6 +1738,10 @@ new Vue({
                         properties: my_product.properties,
                         propertyFormula: my_product.propertyFormula,
                         rejectedType: my_product.rejected_type,
+                        rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
+                        rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
+                        rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
+                        rejected_materials: my_product.rejected_type.indexOf('no_material')> -1,
                         updated: Date.now()
                     });
                 }
