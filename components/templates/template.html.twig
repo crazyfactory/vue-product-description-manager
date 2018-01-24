@@ -22,7 +22,7 @@
             <span>[[message.message]]</span>
             <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
-        <div v-if="Object.keys(getRejectedProducts).length - 3 > 0" class="alert alert-warning">
+        <div v-if="Object.keys(getRejectedProducts).length > 3" class="alert alert-warning">
             <span>There are [[Object.keys(getRejectedProducts).length - 3 ]] rejected products, please<a
                         style="text-decoration: underline" @click="resolveRejectedProducts()"> CLICK </a> to resolve it</span>
         </div>

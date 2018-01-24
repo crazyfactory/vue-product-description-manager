@@ -1737,7 +1737,7 @@ new Vue({
                         productImage: my_product.product_image['S'],
                         properties: my_product.properties,
                         propertyFormula: my_product.propertyFormula,
-                        rejectedType: my_product.rejected_type,
+                        is_rejected: true,
                         rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
                         rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                         rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
