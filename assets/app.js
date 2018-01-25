@@ -771,14 +771,23 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if(product['rejected_'+type]){
-                if(product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0){
-                    return true
-                }else{
-                    return false
-                }
+            if (product['is_rejected']
+                && product['rejected_' + type]
+                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                return false
+            } else {
+                return true
             }
-
+        },
+        isRejectedProduct:function(product){
+            if (this.validateRejectedProduct('base_product', product)
+                    && this.validateRejectedProduct('component1', product)
+                    && this.validateRejectedProduct('component2', product)
+                    && this.validateRejectedProduct('materials', product)
+                ) {
+                return false
+            }
+            return true
         },
         fetchResource: function(type, variable_name){
             _this = this
@@ -1078,6 +1087,7 @@ new Vue({
                 }
                 if (!confirm(msg)) return
             }
+            product['is_rejected'] = this.isRejectedProduct(product);
 
             if (hasApi) {
                 _this = this
@@ -1351,92 +1361,8 @@ new Vue({
                                 //set message
                                 _this.addMessage(response.message, 'success')
                                 _this.translationUpdates = []
-                                //push Products back
-                                products = response['rejected']
+                                console.log()
 
-                                //action for getting products
-                                var product_names = []
-                                for (var key in products) {
-                                    if (key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key]) {
-                                        my_product = products[key];
-                                        product_names.push(my_product.id)
-
-                                        var base_product = {}
-                                        if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                                            for (var i = 0; i < _this.rawBaseproducts.length; i++) {
-                                                if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
-                                                    base_product = _this.rawBaseproducts[i]
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                        var component1 = {}
-                                        var found_1 = false
-                                        var component2 = {}
-                                        var found_2 = false
-
-                                        if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
-                                            || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
-
-                                            for (var i = 0; i < _this.rawComponents.length; i++) {
-                                                if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
-                                                    component1 = _this.rawComponents[i]
-                                                    found_1 = true
-                                                }
-                                                if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
-                                                    component2 = _this.rawComponents[i]
-                                                    found_2 = true
-                                                }
-                                                if (found_1 && found_2) {
-                                                    break
-                                                }
-                                            }
-                                        }
-
-                                        var material_stash = []
-
-                                        for (var i = 0; i < products.materials.length; i++) {
-                                            if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
-                                                material_stash.push(products.materials[i]);
-                                            }
-                                        }
-
-                                        var metatag_stash = []
-
-                                        for (var i = 0; i < products.metatags.length; i++) {
-                                            if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
-                                                metatag_stash.push(products.metatags[i]);
-                                            }
-                                        }
-
-                                        _this.products.push({
-                                            active: true,
-                                            cached_descriptions: my_product.cached_descriptions,
-                                            cached_materials: my_product.cached_materials,
-                                            cached_metatags: my_product.cached_metatags,
-                                            cached_names: my_product.cached_names,
-                                            component1: component1,
-                                            component2: component2,
-                                            base_product: base_product,
-                                            detailsLink: my_product.details_link,
-                                            db_id: my_product.db_id,
-                                            dirty: false,
-                                            descriptions: my_product.descriptions,
-                                            hidden: false,
-                                            id: productStorage.uid++,
-                                            materials: material_stash,
-                                            metatags: metatag_stash,
-                                            modelCode: my_product.id,
-                                            name_scheme: null,
-                                            names: {},
-                                            productImage: my_product.product_image['S'],
-                                            properties: my_product.properties,
-                                            propertyFormula: my_product.propertyFormula,
-                                            updated: Date.now()
-                                        });
-                                    }
-                                }
                                 _this.showLoading = false
                             })
                             .catch(function () {
@@ -1737,7 +1663,7 @@ new Vue({
                         productImage: my_product.product_image['S'],
                         properties: my_product.properties,
                         propertyFormula: my_product.propertyFormula,
-                        is_rejected: true,
+                        is_rejected: my_product.is_rejected,
                         rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
                         rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                         rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
