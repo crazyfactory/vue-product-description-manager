@@ -75,7 +75,10 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
-        rejectedProducts: null,
+        rejectedProducts: {
+            is_update: false,
+            products: []
+        },
         showLoading: false,
         // new multiselect props
         selectedBaseProduct: null,
@@ -332,38 +335,6 @@ new Vue({
         }
     },
     computed: {
-        getRejectedProducts: function(){
-            if(!hasApi){
-                return []
-            }
-            if(this.rejectedProducts==null){
-                _this = this
-                this.showLoading = true
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: "get_rejected_products",
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rejectedProducts = response
-                    })
-                    .catch(function () {
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
-            }
-            else{
-
-                return _this.rejectedProducts
-            }
-        },
         activeLanguages: function(){
             stash = []
             this.supportedLanguages.forEach(function (item) {
@@ -767,7 +738,39 @@ new Vue({
             else {
                 return true
             }
-        }
+        },
+        getRejectedProducts: function(){
+            if(!hasApi){
+                return []
+            }
+            console.log("rejectedProducts")
+            if(this.rejectedProducts.is_update== false){
+                _this = this
+                fetch(
+                    api_endpoint,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: "get_rejected_products",
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (response) {
+                        _this.rejectedProducts.products = response
+                        _this.rejectedProducts.is_update = true
+                    })
+                    .catch(function () {
+                        _this.addMessage("Sorry, something went wrong!", 'danger')
+                    })
+                return []
+            }
+            else{
+                return _this.rejectedProducts.products
+            }
+        },
     },
     methods: {
         validateRejectedProduct: function (type, product) {
@@ -1121,6 +1124,7 @@ new Vue({
                             }
                             _this.showLoading = false
                             _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
+                            _this.rejectedProducts.is_update = false
                         } else {
                             _this.showLoading = false
                             _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
@@ -1364,6 +1368,7 @@ new Vue({
                                 console.log()
 
                                 _this.showLoading = false
+                                _this.rejectedProducts.is_update = false
                             })
                             .catch(function () {
                                 _this.showLoading = false
@@ -1583,7 +1588,7 @@ new Vue({
         },
         resolveRejectedProducts: function () {
             this.products = [];
-            products = this.rejectedProducts
+            products = this.rejectedProducts.products
             //action for getting products
             var product_names = []
             for (var key in products) {
