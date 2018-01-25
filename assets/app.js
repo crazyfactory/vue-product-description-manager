@@ -949,6 +949,7 @@ new Vue({
                 let model_code = []
                 this.showLoading = true
                 let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
+                    item['is_rejected'] = _this.isRejectedProduct(item)
                     return promiseChain.then(() => new Promise((resolve, reject) => {
                         fetch(api_endpoint, {
                             credentials: 'include',
@@ -983,6 +984,7 @@ new Vue({
                     })
                     this.showLoading = false
                     this.addMessage("Success saving " + model_code + " to the database", 'success')
+                    _this.rejectedProducts.is_update = false
                 }).catch((message) => {
                     this.addMessage(message, 'danger')
                     this.showLoading = false
@@ -1589,6 +1591,7 @@ new Vue({
         resolveRejectedProducts: function () {
             this.products = [];
             products = this.rejectedProducts.products
+            console.log("products", products)
             //action for getting products
             var product_names = []
             for (var key in products) {
@@ -1599,7 +1602,8 @@ new Vue({
                     var base_product = {}
                     if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
                         for (var i = 0; i < _this.rawBaseproducts.length; i++) {
-                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
+                                console.log("my_product.base_product['value']", my_product.base_product['value'])
                                 base_product = _this.rawBaseproducts[i]
                                 break;
                             }
@@ -1615,11 +1619,11 @@ new Vue({
                         || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
 
                         for (var i = 0; i < _this.rawComponents.length; i++) {
-                            if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
+                            if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
                                 component1 = _this.rawComponents[i]
                                 found_1 = true
                             }
-                            if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
+                            if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
                                 component2 = _this.rawComponents[i]
                                 found_2 = true
                             }
@@ -1644,6 +1648,7 @@ new Vue({
                             metatag_stash.push(products.metatags[i]);
                         }
                     }
+                    this.products = [];
 
                     _this.products.push({
                         active: true,
