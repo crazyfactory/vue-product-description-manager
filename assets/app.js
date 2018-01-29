@@ -1217,7 +1217,7 @@ new Vue({
                     });
             }
         },
-        pushProducts: function(products, is_rejected_products = false){
+        pushProducts: function(products, is_rejected_products = false) {
             for (let key in products) {
                 if (['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in products[key]) {
                     my_product = products[key];
@@ -1299,14 +1299,14 @@ new Vue({
 
                     if (is_rejected_products == true) {
                         if (this.products.length < 10) {
-                            rejected_products = {
+                            rejected_attributes = {
                                 is_rejected: my_product.is_rejected,
                                 rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
                                 rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                                 rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                                 rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
                             }
-                            Object.assign(ready_product, rejected_products)
+                            Object.assign(ready_product, rejected_attributes)
                         } else {
                             break;
                         }
