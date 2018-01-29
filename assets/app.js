@@ -1590,7 +1590,8 @@ new Vue({
             return false
 
         },
-        resolveRejectedProducts: function () {
+        showRejectedProducts: function () {
+            //clean data in products
             this.products = [];
             this.pushProducts(this.rejectedProducts.products, true)
             this.makeActive('names')

@@ -447,7 +447,7 @@
             <span v-if="Object.keys(getRejectedProducts).length > 3">There are <span
                         v-if="Object.keys(getRejectedProducts).length > 13">10+</span>
             <span v-else>[[Object.keys(getRejectedProducts).length - 3 ]]</span> rejected products, please<a
-                        style="text-decoration: underline" @click="resolveRejectedProducts()"> CLICK </a> to resolve it</span>
+                        style="text-decoration: underline" @click="showRejectedProducts()"> CLICK </a> to resolve it</span>
             </div>
             <!-- Translation stuff -->
             <div v-if="dirtyTranslations.isDirty" class="alert alert-warning">
