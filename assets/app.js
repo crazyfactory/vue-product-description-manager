@@ -1271,68 +1271,47 @@ new Vue({
                         }
                     }
 
-                    if(is_rejected_products == true){
+                    ready_product = {
+                        active: true,
+                        cached_descriptions: my_product.cached_descriptions,
+                        cached_materials: my_product.cached_materials,
+                        cached_metatags: my_product.cached_metatags,
+                        cached_names: my_product.cached_names,
+                        component1: component1,
+                        component2: component2,
+                        base_product: base_product,
+                        detailsLink: my_product.details_link,
+                        db_id: my_product.db_id,
+                        dirty: false,
+                        descriptions: my_product.descriptions,
+                        hidden: false,
+                        id: productStorage.uid++,
+                        materials: material_stash,
+                        metatags: metatag_stash,
+                        modelCode: my_product.id,
+                        name_scheme: null,
+                        names: {},
+                        productImage: my_product.product_image['S'],
+                        properties: my_product.properties,
+                        propertyFormula: my_product.propertyFormula,
+                        updated: Date.now()
+                    }
+
+                    if (is_rejected_products == true) {
                         if (this.products.length < 10) {
-                            _this.products.push({
-                                active: true,
-                                cached_descriptions: my_product.cached_descriptions,
-                                cached_materials: my_product.cached_materials,
-                                cached_metatags: my_product.cached_metatags,
-                                cached_names: my_product.cached_names,
-                                component1: component1,
-                                component2: component2,
-                                base_product: base_product,
-                                detailsLink: my_product.details_link,
-                                db_id: my_product.db_id,
-                                dirty: false,
-                                descriptions: my_product.descriptions,
-                                hidden: false,
-                                id: productStorage.uid++,
-                                materials: material_stash,
-                                metatags: metatag_stash,
-                                modelCode: my_product.id,
-                                name_scheme: null,
-                                names: {},
-                                productImage: my_product.product_image['S'],
-                                properties: my_product.properties,
-                                propertyFormula: my_product.propertyFormula,
+                            rejected_products = {
                                 is_rejected: my_product.is_rejected,
                                 rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
                                 rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                                 rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                                 rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                                updated: Date.now()
-                            });
-                        }else{
+                            }
+                            Object.assign(ready_product, rejected_products)
+                        } else {
                             break;
                         }
-                    }else{
-                        this.products.push({
-                            active: true,
-                            cached_descriptions: my_product.cached_descriptions,
-                            cached_materials: my_product.cached_materials,
-                            cached_metatags: my_product.cached_metatags,
-                            cached_names: my_product.cached_names,
-                            component1: component1,
-                            component2: component2,
-                            base_product: base_product,
-                            detailsLink: my_product.details_link,
-                            db_id: my_product.db_id,
-                            dirty: false,
-                            descriptions: my_product.descriptions,
-                            hidden: false,
-                            id: productStorage.uid++,
-                            materials: material_stash,
-                            metatags: metatag_stash,
-                            modelCode: my_product.id,
-                            name_scheme: null,
-                            names: {},
-                            productImage: my_product.product_image['S'],
-                            properties: my_product.properties,
-                            propertyFormula: my_product.propertyFormula,
-                            updated: Date.now()
-                        });
                     }
+                    _this.products.push(ready_product);
                 }
             }
         },
