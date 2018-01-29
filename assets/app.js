@@ -743,7 +743,6 @@ new Vue({
             if(!hasApi){
                 return []
             }
-            console.log("rejectedProducts")
             if(this.rejectedProducts.is_update== false){
                 _this = this
                 fetch(
@@ -1368,7 +1367,6 @@ new Vue({
                                 //set message
                                 _this.addMessage(response.message, 'success')
                                 _this.translationUpdates = []
-                                console.log()
 
                                 _this.showLoading = false
                                 _this.rejectedProducts.is_update = false
@@ -1592,7 +1590,6 @@ new Vue({
         resolveRejectedProducts: function () {
             this.products = [];
             products = this.rejectedProducts.products
-            console.log("products", products)
             //action for getting products
             var product_names = []
             for (var key in products) {
@@ -1604,7 +1601,6 @@ new Vue({
                     if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
                         for (var i = 0; i < _this.rawBaseproducts.length; i++) {
                             if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
-                                console.log("my_product.base_product['value']", my_product.base_product['value'])
                                 base_product = _this.rawBaseproducts[i]
                                 break;
                             }

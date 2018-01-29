@@ -22,10 +22,6 @@
             <span>[[message.message]]</span>
             <i class="fa fa-eye-slash fa-pull-right" aria-hidden="true" @click="hideMessage(message)" ></i>
         </div>
-        <div v-if="Object.keys(getRejectedProducts).length > 3" class="alert alert-warning">
-            <span>There are [[Object.keys(getRejectedProducts).length - 3 ]] rejected products, please<a
-                        style="text-decoration: underline" @click="resolveRejectedProducts()"> CLICK </a> to resolve it</span>
-        </div>
     </div>
     <!-- end active messages -->
     <!-- Settings button -->
@@ -447,6 +443,12 @@
             <!-- End Meta Tag -->
         </div>
         <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translations">
+            <div v-if="Object.keys(getRejectedProducts).length > 3" class="alert alert-warning">
+            <span v-if="Object.keys(getRejectedProducts).length > 3">There are <span
+                        v-if="Object.keys(getRejectedProducts).length > 13">10+</span>
+            <span v-else>[[Object.keys(getRejectedProducts).length - 3 ]]</span> rejected products, please<a
+                        style="text-decoration: underline" @click="resolveRejectedProducts()"> CLICK </a> to resolve it</span>
+            </div>
             <!-- Translation stuff -->
             <div v-if="dirtyTranslations.isDirty" class="alert alert-warning">
                 <b>Warning: unsaved changes!</b><br>
