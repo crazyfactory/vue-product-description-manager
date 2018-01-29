@@ -773,23 +773,15 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if (product['is_rejected']
-                && product['rejected_' + type]
-                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
-                return false
-            } else {
-                return true
-            }
+            return !(product['is_rejected']
+            && product['rejected_' + type]
+            && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
         },
-        isRejectedProduct:function(product){
-            if (this.validateRejectedProduct('base_product', product)
-                    && this.validateRejectedProduct('component1', product)
-                    && this.validateRejectedProduct('component2', product)
-                    && this.validateRejectedProduct('materials', product)
-                ) {
-                return false
-            }
-            return true
+        isRejectedProduct: function (product) {
+            return !(this.validateRejectedProduct('base_product', product)
+            && this.validateRejectedProduct('component1', product)
+            && this.validateRejectedProduct('component2', product)
+            && this.validateRejectedProduct('materials', product))
         },
         fetchResource: function(type, variable_name){
             _this = this
