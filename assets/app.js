@@ -172,10 +172,11 @@ new Vue({
         show_translator_components: false,
         show_translator_materials: false,
         show_translator_metatags: false,
+        show_rejected_products: false,
         settings: settingStorage.fetch(),
         table: {
             editable: true,
-            threshold:100,
+            threshold:5000,
             columns: {
                 default:[
                     {
@@ -739,11 +740,11 @@ new Vue({
                 return true
             }
         },
-        getRejectedProducts: function(){
-            if(!hasApi){
+        getRejectedProducts: function() {
+            if (!hasApi) {
                 return []
             }
-            if(this.rejectedProducts.is_update== false){
+            if (this.rejectedProducts.is_update == false) {
                 _this = this
                 fetch(
                     api_endpoint,
@@ -758,7 +759,7 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                        _this.rejectedProducts.products = response
+                        _this.rejectedProducts.products = _this.prepareProducts(response, true)
                         _this.rejectedProducts.is_update = true
                     })
                     .catch(function () {
@@ -766,8 +767,46 @@ new Vue({
                     })
                 return []
             }
-            else{
-                return _this.rejectedProducts.products
+            else {
+                var rejected_products = {
+                    rows: [],
+                    columns: [
+                        {
+                            id: "rejected_base_product",
+                            label: "Base Product",
+                            width: null,
+                            sortable: true,
+                            groupable: true,
+                            aggregators: []
+                        },
+                        {
+                            id: "rejected_component1",
+                            label: "Component1",
+                            width: null,
+                            sortable: true,
+                            groupable: true,
+                            aggregators: []
+                        },
+                        {
+                            id: "rejected_component2",
+                            label: "Component2",
+                            width: null,
+                            sortable: true,
+                            groupable: true,
+                            aggregators: []
+                        },
+                        {
+                            id: "rejected_materials",
+                            label: "Material",
+                            width: null,
+                            sortable: true,
+                            groupable: true,
+                            aggregators: []
+                        }
+                    ]
+                }
+                rejected_products.rows = _this.rejectedProducts.products
+                return rejected_products
             }
         },
     },
@@ -855,7 +894,9 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.showLoading = false
-                        _this.pushProducts(response)
+                        _this.prepareProducts(response).forEach(function (product) {
+                            _this.products.push(product)
+                        })
                     })
                     .catch(function () {
                         _this.showLoading = false
@@ -976,7 +1017,6 @@ new Vue({
                     this.showLoading = false
                     this.addMessage("Success saving " + model_code + " to the database", 'success')
                     this.rejectedProducts.is_update = false
-
                 }).catch((message) => {
                     this.addMessage(message, 'danger')
                     this.showLoading = false
@@ -1217,7 +1257,104 @@ new Vue({
                     });
             }
         },
-        pushProducts: function(products, is_rejected_products = false) {
+        prepareProducts: function(raw_products, is_rejected_products = false) {
+            var products = []
+            for (let key in raw_products) {
+                if (['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key]) {
+                    my_product = raw_products[key];
+
+                    let base_product = {}
+                    if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
+                        for (let i = 0; i < _this.rawBaseproducts.length; i++) {
+                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                                base_product = _this.rawBaseproducts[i]
+                                break;
+                            }
+                        }
+                    }
+
+                    let component1 = {}
+                    let found_1 = false
+                    let component2 = {}
+                    let found_2 = false
+
+                    if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
+                        || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
+
+                        for (let i = 0; i < _this.rawComponents.length; i++) {
+                            if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                                component1 = _this.rawComponents[i]
+                                found_1 = true
+                            }
+                            if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                                component2 = _this.rawComponents[i]
+                                found_2 = true
+                            }
+                            if (found_1 && found_2) {
+                                break
+                            }
+                        }
+                    }
+
+                    let material_stash = []
+
+                    for (let i = 0; i < raw_products.materials.length; i++) {
+                        if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1) {
+                            material_stash.push(raw_products.materials[i]);
+                        }
+                    }
+
+                    let metatag_stash = []
+
+                    for (let i = 0; i < raw_products.metatags.length; i++) {
+                        if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
+                            metatag_stash.push(raw_products.metatags[i]);
+                        }
+                    }
+
+                    ready_product = {
+                        active: true,
+                        cached_descriptions: my_product.cached_descriptions,
+                        cached_materials: my_product.cached_materials,
+                        cached_metatags: my_product.cached_metatags,
+                        cached_names: my_product.cached_names,
+                        component1: component1,
+                        component2: component2,
+                        base_product: base_product,
+                        detailsLink: my_product.details_link,
+                        db_id: my_product.db_id,
+                        dirty: false,
+                        descriptions: my_product.descriptions,
+                        hidden: false,
+                        id: productStorage.uid++,
+                        materials: material_stash,
+                        metatags: metatag_stash,
+                        modelCode: my_product.id,
+                        name_scheme: null,
+                        names: {},
+                        productImage: my_product.product_image['S'],
+                        properties: my_product.properties,
+                        propertyFormula: my_product.propertyFormula,
+                        updated: Date.now()
+                    }
+
+                    if (is_rejected_products == true) {
+                        rejected_attributes = {
+                            is_rejected: my_product.is_rejected,
+                            rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
+                            rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
+                            rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
+                            rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
+                        }
+                        Object.assign(ready_product, rejected_attributes)
+                    }
+
+                    products.push(ready_product)
+                }
+            }
+            return products
+        },
+        pushProducts: function(products) {
             for (let key in products) {
                 if (['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in products[key]) {
                     my_product = products[key];
@@ -1307,11 +1444,14 @@ new Vue({
                                 rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
                             }
                             Object.assign(ready_product, rejected_attributes)
+                            rejected_product.push(ready_product);
                         } else {
+                            return rejected_product
                             break;
                         }
+                    }else{
+                        _this.products.push(ready_product);
                     }
-                    _this.products.push(ready_product);
                 }
             }
         },
@@ -1593,7 +1733,7 @@ new Vue({
         showRejectedProducts: function () {
             //clean data in products
             this.products = [];
-            this.pushProducts(this.rejectedProducts.products, true)
+            this.products(this.prepareProducts(this.rejectedProducts.products, true))
             this.makeActive('names')
         },
         makeActive: function (item) {
@@ -2129,6 +2269,9 @@ new Vue({
                     break
                 case 'descriptions':
                     this.show_translation_descriptions = !this.show_translation_descriptions
+                    break
+                case 'rejected_products':
+                    this.show_rejected_products = !this.show_rejected_products
                     break
             }
         },

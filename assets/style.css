@@ -662,3 +662,43 @@ thead.datatable-columns{
     margin-right: 8px;
     margin-bottom: 8px;
 }
+#contain_rejected_products {
+    margin-top: 50px;
+    position: relative;
+}
+#contain_rejected_products thead.datatable-columns{
+    display:block;
+}
+
+#contain_rejected_products .admin-layout-table td{
+    padding: 0;
+}
+#contain_rejected_products .datatable-column,#contain_rejected_products  .datatable-cell {
+    padding: 0;
+    cursor: pointer;
+}
+#contain_rejected_products td.datatable-cell {
+    border-bottom: 1px solid #ccc;
+}
+
+#contain_rejected_products table th{
+    //border: 1px solid #ccc;
+}
+
+#contain_rejected_products .datatable .datatable-options {
+    position: absolute;
+    top: -39px;
+    left: 0;
+    right: 0;
+    padding: 0;
+    border-top: 0 none transparent;
+}
+
+#contain_rejected_products .hide_column_title {
+    visibility: hidden;
+}
+
+.checkbox input[type=checkbox]{
+    margin-left: 0;
+}
+
