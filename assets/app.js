@@ -745,9 +745,6 @@ new Vue({
             if (!hasApi) {
                 return []
             }
-            var rejected_data = {
-                products: []
-            }
             if (this.rejectedProducts.is_update == false) {
                 this.showLoading = true
                 _this = this
@@ -772,17 +769,23 @@ new Vue({
                         this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
-                return rejected_data
-            }
-            else {
-                rejected_data.products = _this.rejectedProducts.products
+                return []
+            }else{
+                // remove Product that was resolved
+                var i = _this.rejectedProducts.products.length
+                while (i--) {
+                    if ( _this.rejectedProducts.products[i].is_rejected != 1) {
+                        _this.rejectedProducts.products.splice(i, 1);
+                    }
+                }
                 this.showLoading = false
-                return rejected_data
+
+                return _this.rejectedProducts.products
             }
         },
         selectAll: {
             get: function () {
-                return this.selectedRejectedProduct.length == this.getRejectedProducts.products.length;
+                return this.selectedRejectedProduct.length == this.getRejectedProducts.length;
             },
             set: function (value) {
                 this.selectedRejectedProduct = value ? this.getRejectedProducts.products : [];
@@ -995,7 +998,6 @@ new Vue({
                     })
                     this.showLoading = false
                     this.addMessage("Success saving " + model_code + " to the database", 'success')
-                    this.rejectedProducts.is_update = false
                 }).catch((message) => {
                     this.addMessage(message, 'danger')
                     this.showLoading = false

@@ -707,18 +707,13 @@ thead.datatable-columns{
 .datatable-column > div {
     display: inline-block;
 }
-.title-rejected{
-    position: relative;
-}
 .title-rejected .nav-counter{
-    position: absolute;
+    margin-left: 5px;
     background: #FF0000;
     border-radius: 10px;
-    padding: 3px 6px;
+    padding: 3px 4px;
     font-size: 13px;
     color: #fff;
-    top: -19px;
-    right: -10px;
     -moz-opacity: 0.5;
     -khtml-opacity: 0.5;
     opacity: 0.8;
