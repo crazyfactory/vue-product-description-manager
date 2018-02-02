@@ -19,7 +19,7 @@ cache:
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update
+  - travis_retry composer install --prefer-dist
   - ulimit -c unlimited || true
 
 script:
