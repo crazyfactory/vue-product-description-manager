@@ -681,10 +681,6 @@ thead.datatable-columns{
     border-bottom: 1px solid #ccc;
 }
 
-#contain_rejected_products table th{
-    //border: 1px solid #ccc;
-}
-
 #contain_rejected_products .datatable .datatable-options {
     position: absolute;
     top: -39px;
@@ -700,5 +696,31 @@ thead.datatable-columns{
 
 .checkbox input[type=checkbox]{
     margin-left: 0;
+}
+.danger{
+    color:#FF0000;
+}
+.rejected i{
+    font-size: 20px;
+}
+
+.datatable-column > div {
+    display: inline-block;
+}
+.title-rejected{
+    position: relative;
+}
+.title-rejected .nav-counter{
+    position: absolute;
+    background: #FF0000;
+    border-radius: 10px;
+    padding: 3px 6px;
+    font-size: 13px;
+    color: #fff;
+    top: -19px;
+    right: -10px;
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.8;
 }
 

@@ -75,6 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        selectedRejectedProduct:[],
         rejectedProducts: {
             is_update: false,
             products: []
@@ -744,7 +745,11 @@ new Vue({
             if (!hasApi) {
                 return []
             }
+            var rejected_data = {
+                products: []
+            }
             if (this.rejectedProducts.is_update == false) {
+                this.showLoading = true
                 _this = this
                 fetch(
                     api_endpoint,
@@ -761,54 +766,28 @@ new Vue({
                     .then(function (response) {
                         _this.rejectedProducts.products = _this.prepareProducts(response, true)
                         _this.rejectedProducts.is_update = true
+                        this.showLoading = false
                     })
                     .catch(function () {
+                        this.showLoading = false
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
-                return []
+                return rejected_data
             }
             else {
-                var rejected_products = {
-                    rows: [],
-                    columns: [
-                        {
-                            id: "rejected_base_product",
-                            label: "Base Product",
-                            width: null,
-                            sortable: true,
-                            groupable: true,
-                            aggregators: []
-                        },
-                        {
-                            id: "rejected_component1",
-                            label: "Component1",
-                            width: null,
-                            sortable: true,
-                            groupable: true,
-                            aggregators: []
-                        },
-                        {
-                            id: "rejected_component2",
-                            label: "Component2",
-                            width: null,
-                            sortable: true,
-                            groupable: true,
-                            aggregators: []
-                        },
-                        {
-                            id: "rejected_materials",
-                            label: "Material",
-                            width: null,
-                            sortable: true,
-                            groupable: true,
-                            aggregators: []
-                        }
-                    ]
-                }
-                rejected_products.rows = _this.rejectedProducts.products
-                return rejected_products
+                rejected_data.products = _this.rejectedProducts.products
+                this.showLoading = false
+                return rejected_data
             }
         },
+        selectAll: {
+            get: function () {
+                return this.selectedRejectedProduct.length == this.getRejectedProducts.products.length;
+            },
+            set: function (value) {
+                this.selectedRejectedProduct = value ? this.getRejectedProducts.products : [];
+            }
+        }
     },
     methods: {
         validateRejectedProduct: function (type, product) {
@@ -1731,10 +1710,10 @@ new Vue({
 
         },
         showRejectedProducts: function () {
-            //clean data in products
-            this.products = [];
-            this.products(this.prepareProducts(this.rejectedProducts.products, true))
-            this.makeActive('names')
+            if(this.selectedRejectedProduct.length){
+                this.products = this.selectedRejectedProduct
+                this.makeActive('names')
+            }
         },
         makeActive: function (item) {
             // deactivate all
