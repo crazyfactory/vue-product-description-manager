@@ -77,7 +77,7 @@ new Vue({
     data: {
         selectedRejectedProduct:[],
         rejectedProducts: {
-            is_update: false,
+            isLoaded: false,
             products: []
         },
         showLoading: false,
@@ -745,7 +745,7 @@ new Vue({
             if (!hasApi) {
                 return []
             }
-            if (this.rejectedProducts.is_update == false) {
+            if (this.rejectedProducts.isLoaded == false) {
                 this.showLoading = true
                 _this = this
                 fetch(
@@ -762,7 +762,7 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.rejectedProducts.products = _this.prepareProducts(response, true)
-                        _this.rejectedProducts.is_update = true
+                        _this.rejectedProducts.isLoaded = true
                         this.showLoading = false
                     })
                     .catch(function () {
@@ -770,16 +770,15 @@ new Vue({
                         _this.addMessage("Sorry, something went wrong!", 'danger')
                     })
                 return []
-            }else{
+            } else {
                 // remove Product that was resolved
                 var i = _this.rejectedProducts.products.length
                 while (i--) {
-                    if ( _this.rejectedProducts.products[i].is_rejected != 1) {
+                    if (_this.rejectedProducts.products[i].is_rejected != 1) {
                         _this.rejectedProducts.products.splice(i, 1);
                     }
                 }
                 this.showLoading = false
-
                 return _this.rejectedProducts.products
             }
         },
@@ -788,9 +787,9 @@ new Vue({
                 return this.selectedRejectedProduct.length == this.getRejectedProducts.length;
             },
             set: function (value) {
-                this.selectedRejectedProduct = value ? this.getRejectedProducts.products : [];
+                this.selectedRejectedProduct = value ? this.getRejectedProducts.slice(0,500) : [];
             }
-        }
+        },
     },
     methods: {
         validateRejectedProduct: function (type, product) {
@@ -1139,7 +1138,6 @@ new Vue({
                             }
                             _this.showLoading = false
                             _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
-                            _this.rejectedProducts.is_update = false
                         } else {
                             _this.showLoading = false
                             _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
@@ -1493,7 +1491,6 @@ new Vue({
                                 _this.translationUpdates = []
 
                                 _this.showLoading = false
-                                _this.rejectedProducts.is_update = false
                             })
                             .catch(function () {
                                 _this.showLoading = false
@@ -1713,8 +1710,12 @@ new Vue({
         },
         showRejectedProducts: function () {
             if(this.selectedRejectedProduct.length){
-                this.products = this.selectedRejectedProduct
-                this.makeActive('names')
+                if (this.selectedRejectedProduct.length < 500) {
+                    this.products = this.selectedRejectedProduct
+                    this.makeActive('names')
+                }else{
+
+                }
             }
         },
         makeActive: function (item) {

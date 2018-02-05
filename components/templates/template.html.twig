@@ -864,13 +864,13 @@
                     <div id="contain_rejected_products">
                         <datatable :source="getRejectedProducts" :editable="false">
                            <datatable-column id="sel" label="sel" width="3.25rem" class="checkable-column" :sortable="false" :groupable="false" data-step="3">
-                                <checkbox id="sel-all" v-model="selectAll"></checkbox>
+                                <checkbox id="sel-all" v-model="selectAll" :disabled="selectedRejectedProduct.length >= 500" ></checkbox>
                             </datatable-column>
-                            <datatable-column id="modelCode" width="10.25em" :sortable="false" :groupable="false"
-                                              class="hide_column_title">
+                            <datatable-column id="modelCode" width="10.25em" :groupable="false" :sortable="true">
+                                Product Code
                             </datatable-column>
-                            <datatable-column id="productImage" width="10.25em" :sortable="false" :groupable="false"
-                                              class="hide_column_title">
+                            <datatable-column id="productImage" width="10.25em" :sortable="false" :groupable="false">
+                                Product Image
                             </datatable-column>
                             <datatable-column id="rejected_base_product" width="10.25em" :sortable="true"
                                               :groupable="false">
@@ -893,7 +893,7 @@
 
                             <template slot="sel" scope="cell">
                                 <div class="checkable-column">
-                                    <checkbox :id="cell.row.modelCode" :value="cell.row" v-model="selectedRejectedProduct"></checkbox>
+                                    <checkbox :id="cell.row.modelCode" :value="cell.row" v-model="selectedRejectedProduct" :disabled="selectedRejectedProduct.length >= 500"></checkbox>
                                 </div>
                             </template>
                             <template slot="productImage" scope="cell">
