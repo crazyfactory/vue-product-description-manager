@@ -793,6 +793,26 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
+            if (type == 'materials') {
+                if ((product['is_rejected'] && product['rejected_' + type])) {
+                    if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                        return false
+                    } else {
+                        result = true
+                        product.deleted_materials_resources.map(function (resource) {
+                            return resource.name
+                        }).forEach(function (resource) {
+                            if (product[type].map(function (resource) {
+                                    return resource.name
+                                }).indexOf(resource) > -1) {
+                                result = false
+                            }
+                        })
+                        return result
+                    }
+                }
+            }
+
             return !(product['is_rejected']
             && product['rejected_' + type]
             && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
@@ -1324,6 +1344,7 @@ new Vue({
                             rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                             rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                             rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
+                            deleted_materials_resources: my_product.deleted_materials_resources
                         }
                         Object.assign(ready_product, rejected_attributes)
                     }
@@ -1491,6 +1512,7 @@ new Vue({
                                 _this.translationUpdates = []
 
                                 _this.showLoading = false
+                                _this.rejectedProducts.isLoaded = false
                             })
                             .catch(function () {
                                 _this.showLoading = false
@@ -1660,6 +1682,7 @@ new Vue({
                             cell.row.is_active = 0
                             _this.translationUpdates = ["deleted_resource"]
                             _this.addMessage(response.message, 'success')
+                            _this.rejectedProducts.isLoaded = false
                         } else {
                             _this.addMessage(response.message, 'danger')
                         }
