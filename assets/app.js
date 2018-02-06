@@ -818,10 +818,22 @@ new Vue({
             && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
         },
         isRejectedProduct: function (product) {
-            return !(this.validateRejectedProduct('base_product', product)
-            && this.validateRejectedProduct('component1', product)
-            && this.validateRejectedProduct('component2', product)
-            && this.validateRejectedProduct('materials', product))
+            result = []
+            if(product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0){
+                result.push(true)
+            }
+
+            if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
+                result.push(true)
+            }
+
+            has_component2 = !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].length === 0)
+            is_component1_empty = (product['component1'] == null || Object.keys(product['component1']).length === 0 || product['component1'].length === 0)
+            if(has_component2 && is_component1_empty){
+                result.push(true)
+            }
+
+            return result.length > 0
         },
         fetchResource: function(type, variable_name){
             _this = this
@@ -1016,6 +1028,7 @@ new Vue({
                         product.dirty = false
                     })
                     this.showLoading = false
+                    this.rejectedProducts.isLoaded = false
                     this.addMessage("Success saving " + model_code + " to the database", 'success')
                 }).catch((message) => {
                     this.addMessage(message, 'danger')
@@ -1158,6 +1171,7 @@ new Vue({
                             }
                             _this.showLoading = false
                             _this.addMessage("Success saving " + response.product.modelCode + " to the database", 'success')
+                            _this.rejectedProducts.isLoaded = false
                         } else {
                             _this.showLoading = false
                             _this.addMessage("Sorry, we had a problem saving " + response.product.modelCode + " to the database", 'danger')
