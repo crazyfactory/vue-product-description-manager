@@ -745,33 +745,7 @@ new Vue({
             if (!hasApi) {
                 return []
             }
-            if (this.rejectedProducts.isLoaded == false) {
-                this.showLoading = true
-                _this = this
-                fetch(
-                    api_endpoint,
-                    {
-                        credentials: 'include',
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: "get_rejected_products",
-                        })
-                    })
-                    .then(function (response) {
-                        return response.json()
-                    })
-                    .then(function (response) {
-                        _this.rejectedProducts.products = _this.prepareProducts(response, true)
-                        _this.rejectedProducts.isLoaded = true
-                        this.showLoading = false
-                    })
-                    .catch(function () {
-                        this.showLoading = false
-                        _this.addMessage("Sorry, something went wrong!", 'danger')
-                    })
-                return []
-            } else {
-                // remove Product that was resolved
+            if (this.rejectedProducts.isLoaded) {
                 var i = _this.rejectedProducts.products.length
                 while (i--) {
                     if (_this.rejectedProducts.products[i].is_rejected != 1) {
@@ -781,6 +755,32 @@ new Vue({
                 this.showLoading = false
                 return _this.rejectedProducts.products
             }
+
+            this.showLoading = true
+            _this = this
+            fetch(
+                api_endpoint,
+                {
+                    credentials: 'include',
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: "get_rejected_products",
+                    })
+                })
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (response) {
+                    _this.rejectedProducts.products = _this.prepareProducts(response, true)
+                    _this.rejectedProducts.isLoaded = true
+                    this.showLoading = false
+                })
+                .catch(function () {
+                    this.showLoading = false
+                    _this.addMessage("Sorry, something went wrong!", 'danger')
+                })
+            return []
+
         },
         selectAll: {
             get: function () {
@@ -793,24 +793,20 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if (type == 'materials') {
-                if ((product['is_rejected'] && product['rejected_' + type])) {
-                    if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
-                        return false
-                    } else {
-                        result = true
-                        product.deleted_materials_resources.map(function (resource) {
-                            return resource.name
-                        }).forEach(function (resource) {
-                            if (product[type].map(function (resource) {
-                                    return resource.name
-                                }).indexOf(resource) > -1) {
-                                result = false
-                            }
-                        })
-                        return result
-                    }
+            if (type == 'materials' && (product['is_rejected'] && product['rejected_' + type])) {
+                if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                    return false
                 }
+                delete_resource_name = product.deleted_materials_resources.map(function (resource) {
+                    return resource.name
+                });
+                resource_names = product[type].map(function (resource) {
+                    return resource.name
+                })
+
+                return delete_resource_name.find(function (name) {
+                        return resource_names.indexOf(name) === -1
+                    }) !== undefined;
             }
 
             return !(product['is_rejected']
@@ -907,9 +903,7 @@ new Vue({
                     })
                     .then(function (response) {
                         _this.showLoading = false
-                        _this.prepareProducts(response).forEach(function (product) {
-                            _this.products.push(product)
-                        })
+                        _this.products.push(..._this.prepareProducts(response))
                     })
                     .catch(function () {
                         _this.showLoading = false
@@ -1273,201 +1267,101 @@ new Vue({
         prepareProducts: function(raw_products, is_rejected_products = false) {
             var products = []
             for (let key in raw_products) {
-                if (['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key]) {
-                    my_product = raw_products[key];
-
-                    let base_product = {}
-                    if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                        for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
-                                base_product = _this.rawBaseproducts[i]
-                                break;
-                            }
-                        }
-                    }
-
-                    let component1 = {}
-                    let found_1 = false
-                    let component2 = {}
-                    let found_2 = false
-
-                    if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
-                        || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
-
-                        for (let i = 0; i < _this.rawComponents.length; i++) {
-                            if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                                component1 = _this.rawComponents[i]
-                                found_1 = true
-                            }
-                            if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                                component2 = _this.rawComponents[i]
-                                found_2 = true
-                            }
-                            if (found_1 && found_2) {
-                                break
-                            }
-                        }
-                    }
-
-                    let material_stash = []
-
-                    for (let i = 0; i < raw_products.materials.length; i++) {
-                        if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1) {
-                            material_stash.push(raw_products.materials[i]);
-                        }
-                    }
-
-                    let metatag_stash = []
-
-                    for (let i = 0; i < raw_products.metatags.length; i++) {
-                        if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
-                            metatag_stash.push(raw_products.metatags[i]);
-                        }
-                    }
-
-                    ready_product = {
-                        active: true,
-                        cached_descriptions: my_product.cached_descriptions,
-                        cached_materials: my_product.cached_materials,
-                        cached_metatags: my_product.cached_metatags,
-                        cached_names: my_product.cached_names,
-                        component1: component1,
-                        component2: component2,
-                        base_product: base_product,
-                        detailsLink: my_product.details_link,
-                        db_id: my_product.db_id,
-                        dirty: false,
-                        descriptions: my_product.descriptions,
-                        hidden: false,
-                        id: productStorage.uid++,
-                        materials: material_stash,
-                        metatags: metatag_stash,
-                        modelCode: my_product.id,
-                        name_scheme: null,
-                        names: {},
-                        productImage: my_product.product_image['S'],
-                        properties: my_product.properties,
-                        propertyFormula: my_product.propertyFormula,
-                        updated: Date.now()
-                    }
-
-                    if (is_rejected_products == true) {
-                        rejected_attributes = {
-                            is_rejected: my_product.is_rejected,
-                            rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
-                            rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
-                            rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
-                            rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                            deleted_materials_resources: my_product.deleted_materials_resources
-                        }
-                        Object.assign(ready_product, rejected_attributes)
-                    }
-
-                    products.push(ready_product)
+                if (!(key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key])) {
+                    continue
                 }
-            }
-            return products
-        },
-        pushProducts: function(products) {
-            for (let key in products) {
-                if (['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in products[key]) {
-                    my_product = products[key];
 
-                    let base_product = {}
-                    if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                        for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                            if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
-                                base_product = _this.rawBaseproducts[i]
-                                break;
-                            }
-                        }
-                    }
-
-                    let component1 = {}
-                    let found_1 = false
-                    let component2 = {}
-                    let found_2 = false
-
-                    if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
-                        || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
-
-                        for (let i = 0; i < _this.rawComponents.length; i++) {
-                            if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                                component1 = _this.rawComponents[i]
-                                found_1 = true
-                            }
-                            if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                                component2 = _this.rawComponents[i]
-                                found_2 = true
-                            }
-                            if (found_1 && found_2) {
-                                break
-                            }
-                        }
-                    }
-
-                    let material_stash = []
-
-                    for (let i = 0; i < products.materials.length; i++) {
-                        if (my_product.materials.indexOf(products.materials[i]['name']) > -1) {
-                            material_stash.push(products.materials[i]);
-                        }
-                    }
-
-                    let metatag_stash = []
-
-                    for (let i = 0; i < products.metatags.length; i++) {
-                        if (my_product.metatags.indexOf(products.metatags[i]['name']) > -1) {
-                            metatag_stash.push(products.metatags[i]);
-                        }
-                    }
-
-                    ready_product = {
-                        active: true,
-                        cached_descriptions: my_product.cached_descriptions,
-                        cached_materials: my_product.cached_materials,
-                        cached_metatags: my_product.cached_metatags,
-                        cached_names: my_product.cached_names,
-                        component1: component1,
-                        component2: component2,
-                        base_product: base_product,
-                        detailsLink: my_product.details_link,
-                        db_id: my_product.db_id,
-                        dirty: false,
-                        descriptions: my_product.descriptions,
-                        hidden: false,
-                        id: productStorage.uid++,
-                        materials: material_stash,
-                        metatags: metatag_stash,
-                        modelCode: my_product.id,
-                        name_scheme: null,
-                        names: {},
-                        productImage: my_product.product_image['S'],
-                        properties: my_product.properties,
-                        propertyFormula: my_product.propertyFormula,
-                        updated: Date.now()
-                    }
-
-                    if (is_rejected_products == true) {
-                        if (this.products.length < 10) {
-                            rejected_attributes = {
-                                is_rejected: my_product.is_rejected,
-                                rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
-                                rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
-                                rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
-                                rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                            }
-                            Object.assign(ready_product, rejected_attributes)
-                            rejected_product.push(ready_product);
-                        } else {
-                            return rejected_product
+                my_product = raw_products[key];
+                let base_product = {}
+                if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
+                    for (let i = 0; i < _this.rawBaseproducts.length; i++) {
+                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                            base_product = _this.rawBaseproducts[i]
                             break;
                         }
-                    }else{
-                        _this.products.push(ready_product);
                     }
                 }
+
+                let component1 = {}
+                let found_1 = false
+                let component2 = {}
+                let found_2 = false
+
+                if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
+                    || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
+
+                    for (let i = 0; i < _this.rawComponents.length; i++) {
+                        if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                            component1 = _this.rawComponents[i]
+                            found_1 = true
+                        }
+                        if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                            component2 = _this.rawComponents[i]
+                            found_2 = true
+                        }
+                        if (found_1 && found_2) {
+                            break
+                        }
+                    }
+                }
+
+                let material_stash = []
+
+                for (let i = 0; i < raw_products.materials.length; i++) {
+                    if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1) {
+                        material_stash.push(raw_products.materials[i]);
+                    }
+                }
+
+                let metatag_stash = []
+
+                for (let i = 0; i < raw_products.metatags.length; i++) {
+                    if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
+                        metatag_stash.push(raw_products.metatags[i]);
+                    }
+                }
+
+                ready_product = {
+                    active: true,
+                    cached_descriptions: my_product.cached_descriptions,
+                    cached_materials: my_product.cached_materials,
+                    cached_metatags: my_product.cached_metatags,
+                    cached_names: my_product.cached_names,
+                    component1: component1,
+                    component2: component2,
+                    base_product: base_product,
+                    detailsLink: my_product.details_link,
+                    db_id: my_product.db_id,
+                    dirty: false,
+                    descriptions: my_product.descriptions,
+                    hidden: false,
+                    id: productStorage.uid++,
+                    materials: material_stash,
+                    metatags: metatag_stash,
+                    modelCode: my_product.id,
+                    name_scheme: null,
+                    names: {},
+                    productImage: my_product.product_image['S'],
+                    properties: my_product.properties,
+                    propertyFormula: my_product.propertyFormula,
+                    updated: Date.now()
+                }
+
+                if (is_rejected_products == true) {
+                    rejected_attributes = {
+                        is_rejected: my_product.is_rejected,
+                        rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
+                        rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
+                        rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
+                        rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
+                        deleted_materials_resources: my_product.deleted_materials_resources
+                    }
+                    Object.assign(ready_product, rejected_attributes)
+                }
+
+                products.push(ready_product)
             }
+            return products
         },
         productsTranslationUpdate: function(){
             if(this.dirtyTranslations.isDirty){
