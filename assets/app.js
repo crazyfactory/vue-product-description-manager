@@ -793,20 +793,26 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if (type == 'materials' && (product['is_rejected'] && product['rejected_' + type])) {
+            if (type == 'materials') {
+                if (!(product['is_rejected'] && product['rejected_' + type])) {
+                    return true
+                }
+
                 if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
                     return false
                 }
                 deleted_resource_name = product.deleted_materials_resources.map(function (resource) {
                     return resource.name
                 });
+                if (deleted_resource_name.length === 0) {
+                    return true
+                }
                 resource_names = product[type].map(function (resource) {
                     return resource.name
                 })
-
                 return deleted_resource_name.find(function (name) {
-                        return resource_names.indexOf(name) === -1
-                    }) !== undefined;
+                    return !(resource_names.indexOf(name) > -1)
+                });
             }
 
             return !(product['is_rejected']
@@ -1275,7 +1281,7 @@ new Vue({
                 let base_product = {}
                 if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
                     for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
                             base_product = _this.rawBaseproducts[i]
                             break;
                         }
@@ -1644,6 +1650,7 @@ new Vue({
                 this.showLoading= true
                 this.products = this.selectedRejectedProduct
                 this.makeActive('names')
+                this.selectedRejectedProduct = []
                 this.showLoading= false
             }
         },
