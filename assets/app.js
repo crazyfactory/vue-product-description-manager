@@ -804,7 +804,7 @@ new Vue({
                     return resource.name
                 })
 
-                return delete_resource_name.find(function (name) {
+                return deleted_resource_name.find(function (name) {
                         return resource_names.indexOf(name) === -1
                     }) !== undefined;
             }
