@@ -797,7 +797,7 @@ new Vue({
                 if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
                     return false
                 }
-                delete_resource_name = product.deleted_materials_resources.map(function (resource) {
+                deleted_resource_name = product.deleted_materials_resources.map(function (resource) {
                     return resource.name
                 });
                 resource_names = product[type].map(function (resource) {
@@ -1267,7 +1267,7 @@ new Vue({
         prepareProducts: function(raw_products, is_rejected_products = false) {
             var products = []
             for (let key in raw_products) {
-                if (!(key !== 'success' && key !== 'metatags' && key !== 'materials' && 'propertyFormula' in products[key])) {
+                if (!(['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key])) {
                     continue
                 }
 
