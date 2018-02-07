@@ -787,7 +787,7 @@ new Vue({
                 return this.selectedRejectedProduct.length == this.getRejectedProducts.length;
             },
             set: function (value) {
-                this.selectedRejectedProduct = value ? this.getRejectedProducts.slice(0,500) : [];
+                this.selectedRejectedProduct = value ? this.getRejectedProducts.slice(0,100) : [];
             }
         },
     },
@@ -1746,13 +1746,11 @@ new Vue({
 
         },
         showRejectedProducts: function () {
-            if(this.selectedRejectedProduct.length){
-                if (this.selectedRejectedProduct.length < 500) {
-                    this.products = this.selectedRejectedProduct
-                    this.makeActive('names')
-                }else{
-
-                }
+            if (this.selectedRejectedProduct.length) {
+                this.showLoading= true
+                this.products = this.selectedRejectedProduct
+                this.makeActive('names')
+                this.showLoading= false
             }
         },
         makeActive: function (item) {

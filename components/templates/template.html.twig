@@ -864,7 +864,7 @@
                     <div id="contain_rejected_products">
                         <datatable :source="getRejectedProducts" :editable="false">
                            <datatable-column id="sel" label="sel" width="3.25rem" class="checkable-column" :sortable="false" :groupable="false" data-step="3">
-                                <checkbox id="sel-all" v-model="selectAll" :disabled="selectedRejectedProduct.length >= 500" ></checkbox>
+                                <checkbox id="sel-all" v-model="selectAll" :disabled="selectedRejectedProduct.length >= 100" ></checkbox>
                             </datatable-column>
                             <datatable-column id="modelCode" width="10.25em" :groupable="false" :sortable="true">
                                 Product Code
