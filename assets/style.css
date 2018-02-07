@@ -661,6 +661,7 @@ thead.datatable-columns{
     display: inline-block;
     margin-right: 8px;
     margin-bottom: 8px;
+    margin-top: 12px;
 }
 #contain_rejected_products {
     margin-top: 50px;
