@@ -127,6 +127,25 @@
                     <a v-bind:href="product.productImage" target="_blank"><img v-bind:src="product.productImage" class="img-rounded" width="50"></a>
                   </span>
                                 </label>
+                                <div>
+                                     <span class="label label-danger rejected_tag"
+                                           v-if="!validateRejectedProduct('base_product', product)">
+                                           no baseproduct
+                                        </span>
+                                    <span class="label label-danger rejected_tag"
+                                          v-if="!validateRejectedProduct('component1', product)">
+                                            no component1
+                                        </span>
+                                    <span class="label label-danger rejected_tag"
+                                          v-if="!validateRejectedProduct('component2', product)">
+                                            no component2
+                                        </span>
+                                    <span class="label label-danger rejected_tag"
+                                          v-if="!validateRejectedProduct('materials', product)">
+                                            no material
+                                        </span>
+                                </div>
+
                                 <!-- Generic Product Names by language -->
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
@@ -607,20 +626,25 @@
             </div>
             <div>
                 <h4 class="metatags">
-                    <i v-if="!show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                    <i v-if="show_translation_metatags" @click="toggleTranslationVisibility('metatags')" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                    Metatags <i class="fa fa-floppy-o cursor" title="Save Metatag translations to database" aria-hidden="true" @click="saveTranslationUpdates('metatags')" v-if="dirtyTranslations.metatags.isDirty"></i>
+                    <i v-if="!show_translation_metatags" @click="toggleTranslationVisibility('metatags')"
+                       class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <i v-if="show_translation_metatags" @click="toggleTranslationVisibility('metatags')"
+                       class="fa fa-minus-square-o" aria-hidden="true"></i>
+                    Metatags <i class="fa fa-floppy-o cursor" title="Save Metatag translations to database"
+                                aria-hidden="true" @click="saveTranslationUpdates('metatags')"
+                                v-if="dirtyTranslations.metatags.isDirty"></i>
                 </h4>
                 <p v-if="show_translation_metatags" class="translation_table metatags">
                     <datatable
                             :source="translationsMetatags"
                             :editable="true"
                             :threshold="table.threshold">
-                        <datatable-column id="actions_metatags" label="Actions" :sortable="false" :groupable="false" ></datatable-column>
-                        <datatable-column v-for = "column in activeLanguages" :key="column.id"
-                                          :id = "column.id"
-                                          :label = "column.label"
-                                          :width = "column.width"
+                        <datatable-column id="actions_metatags" label="Actions" :sortable="false"
+                                          :groupable="false"></datatable-column>
+                        <datatable-column v-for="column in activeLanguages" :key="column.id"
+                                          :id="column.id"
+                                          :label="column.label"
+                                          :width="column.width"
                                           :sortable="column.sortable"
                                           :groupable="column.groupable"
                                           :aggregators="column.aggregators"
@@ -628,139 +652,288 @@
                         </datatable-column>
                         <template slot="actions_metatags" scope="cell">
                             <div v-if="cell.row['is_active']=='1'" class="right-distance">
-                                <span @click="deleteResource('metatags', cell)"><i class="attention fa fa-trash-o 2x" aria-hidden="true"></i></span>
-                                <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']==1"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
-                                <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']!=1"><i class="ok fa fa-eye" aria-hidden="true"></i></span>
+                                <span @click="deleteResource('metatags', cell)"><i class="attention fa fa-trash-o 2x"
+                                                                                   aria-hidden="true"></i></span>
+                                <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']==1"><i
+                                            class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                <span @click="setHiddenTag(cell)" v-if="cell.row['is_hidden']!=1"><i
+                                            class="ok fa fa-eye" aria-hidden="true"></i></span>
                                 <span @click="switchTranslationStatus('metatags', cell)">
-                                    <i v-if="cell.row['translation_requested'] == 1" class="request fa fa-bell 2x" aria-hidden="true"></i>
+                                    <i v-if="cell.row['translation_requested'] == 1" class="request fa fa-bell 2x"
+                                       aria-hidden="true"></i>
                                     <i v-else class="complete-request fa fa-check-circle 2x" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </template>
-                        <template slot="de"    scope="cell">
+                        <template slot="de" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-de"></span>
-                                <input class="table_input" v-model:value="cell.row['de']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_de']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-de"></span>
+                                <input class="table_input" v-model:value="cell.row['de']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_de']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
                         <template slot="en-GB" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-gb"></span>
-                                <input class="table_input" v-model:value="cell.row['en-GB']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_en-GB']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-gb"></span>
+                                <input class="table_input" v-model:value="cell.row['en-GB']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_en-GB']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
                         <template slot="en-US" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-us"></span>
-                                <input class="table_input" v-model:value="cell.row['en-US']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_en-US']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-us"></span>
+                                <input class="table_input" v-model:value="cell.row['en-US']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_en-US']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="es"    scope="cell">
+                        <template slot="es" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-es"></span>
-                                <input class="table_input" v-model:value="cell.row['es']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_es']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-es"></span>
+                                <input class="table_input" v-model:value="cell.row['es']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_es']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="fr"    scope="cell">
+                        <template slot="fr" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-fr"></span>
-                                <input class="table_input" v-model:value="cell.row['fr']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_fr']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-fr"></span>
+                                <input class="table_input" v-model:value="cell.row['fr']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_fr']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="it"    scope="cell">
+                        <template slot="it" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-it"></span>
-                                <input class="table_input" v-model:value="cell.row['it']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_it']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-it"></span>
+                                <input class="table_input" v-model:value="cell.row['it']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_it']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="nl"    scope="cell">
+                        <template slot="nl" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-nl"></span>
-                                <input class="table_input" v-model:value="cell.row['nl']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_nl']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-nl"></span>
+                                <input class="table_input" v-model:value="cell.row['nl']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_nl']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="pt"    scope="cell">
+                        <template slot="pt" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-pt"></span>
-                                <input class="table_input" v-model:value="cell.row['pt']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_pt']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-pt"></span>
+                                <input class="table_input" v-model:value="cell.row['pt']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_pt']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="ru"    scope="cell">
+                        <template slot="ru" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-ru"></span>
-                                <input class="table_input" v-model:value="cell.row['ru']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_ru']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-ru"></span>
+                                <input class="table_input" v-model:value="cell.row['ru']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_ru']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="sv"    scope="cell">
+                        <template slot="sv" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-se"></span>
-                                <input class="table_input" v-model:value="cell.row['sv']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_sv']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-se"></span>
+                                <input class="table_input" v-model:value="cell.row['sv']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_sv']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="cs"    scope="cell">
+                        <template slot="cs" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-cz"></span>
-                                <input class="table_input" v-model:value="cell.row['cs']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_cs']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-cz"></span>
+                                <input class="table_input" v-model:value="cell.row['cs']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_cs']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="fi"    scope="cell">
+                        <template slot="fi" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-fi"></span>
-                                <input class="table_input" v-model:value="cell.row['fi']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_fi']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-fi"></span>
+                                <input class="table_input" v-model:value="cell.row['fi']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_fi']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="hr"    scope="cell">
+                        <template slot="hr" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-hr"></span>
-                                <input class="table_input" v-model:value="cell.row['hr']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_hr']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-hr"></span>
+                                <input class="table_input" v-model:value="cell.row['hr']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_hr']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="nb"    scope="cell">
+                        <template slot="nb" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-no"></span>
-                                <input class="table_input" v-model:value="cell.row['nb']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_nb']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-no"></span>
+                                <input class="table_input" v-model:value="cell.row['nb']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_nb']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
-                        <template slot="pl"    scope="cell">
+                        <template slot="pl" scope="cell">
                             <div v-if="cell.row['is_active']=='1'">
-                                <span  class="absolute flag-icon flag-icon-pl"></span>
-                                <input class="table_input" v-model:value="cell.row['pl']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
-                                <span  class="absolute fa fa-tags"></span>
-                                <input class="table_input" v-model:value="cell.row['alias_pl']" type="text" @input="stashUpdate('metatags', cell)" @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute flag-icon flag-icon-pl"></span>
+                                <input class="table_input" v-model:value="cell.row['pl']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
+                                <span class="absolute fa fa-tags"></span>
+                                <input class="table_input" v-model:value="cell.row['alias_pl']" type="text"
+                                       @input="stashUpdate('metatags', cell)"
+                                       @keyup.enter="saveTranslationUpdate('metatags', cell)"/>
                             </div>
                         </template>
                     </datatable>
                 </p>
             </div>
+            <br><br>
+            <div v-if="getRejectedProducts.length">
+                <h4 class="rejected_product">
+                    <i v-if="!show_rejected_products" @click="toggleTranslationVisibility('rejected_products')"
+                       class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <i v-if="show_rejected_products" @click="toggleTranslationVisibility('rejected_products')"
+                       class="fa fa-minus-square-o" aria-hidden="true"></i>
+                    <span class="title-rejected">Rejected Products<span class="nav-counter">[[getRejectedProducts.length]]</span></span>
+                    <span v-if="show_rejected_products" class="request">
+                    <i class="fa fa-wrench" @click="showRejectedProducts()"></i>
+                        </span>
+                </h4>
+                <div v-if="show_rejected_products">
+                    <div id="contain_rejected_products">
+                        <datatable :source="getRejectedProducts" :editable="false">
+                           <datatable-column id="sel" label="sel" width="3.25rem" class="checkable-column" :sortable="false" :groupable="false" data-step="3">
+                                <checkbox id="sel-all" v-model="selectAll" :disabled="selectedRejectedProduct.length >= 100" ></checkbox>
+                            </datatable-column>
+                            <datatable-column id="modelCode" width="10.25em" :groupable="false" :sortable="true">
+                                Product Code
+                            </datatable-column>
+                            <datatable-column id="productImage" width="10.25em" :sortable="false" :groupable="false">
+                                Product Image
+                            </datatable-column>
+                            <datatable-column id="rejected_base_product" width="10.25em" :sortable="true"
+                                              :groupable="false">
+                                Base Product
+                            </datatable-column>
+                            <datatable-column id="rejected_component1" width="10.25em" :sortable="true"
+                                              :groupable="false">
+                                Component1
+                            </datatable-column>
+                            <datatable-column id="rejected_component2" width="10.25em" :sortable="true"
+                                              :groupable="false">
+                                Component2
+                            </datatable-column>
+                            <datatable-column id="rejected_materials" width="10.25em" :sortable="true"
+                                              :groupable="false">
+                                Materials
+                            </datatable-column>
+
+                             <!-- Define the rest of our columns here -->
+
+                            <template slot="sel" scope="cell">
+                                <div class="checkable-column">
+                                    <checkbox :id="cell.row.modelCode" :value="cell.row" v-model="selectedRejectedProduct" :disabled="selectedRejectedProduct.length >= 500"></checkbox>
+                                </div>
+                            </template>
+                            <template slot="productImage" scope="cell">
+                                <div>
+                                    <img v-bind:src="cell.row.productImage" class="img-rounded" width="50">
+                                </div>
+                            </template>
+                            <template slot="rejected_base_product" scope="cell">
+                                <div class="rejected">
+
+                                <i v-if="cell.row.rejected_base_product" aria-hidden="true" class="danger fa fa-times-circle"></i>
+                                    <i v-else class="fa fa-check-circle "></i>
+                                </div>
+                            </template>
+                            <template slot="rejected_component1" scope="cell">
+                                <div class="rejected">
+
+                                <i v-if="cell.row.rejected_component1" aria-hidden="true" class="danger fa fa-times-circle"></i>
+                                    <i v-else class="fa fa-check-circle"></i>
+                                </div>
+                            </template>
+                            <template slot="rejected_component2" scope="cell">
+                                <div class="rejected">
+
+                                <i v-if="cell.row.rejected_component2" aria-hidden="true" class="danger fa fa-times-circle"></i>
+                                    <i v-else class="fa fa-check-circle"></i>
+                                </div>
+                            </template>
+                            <template slot="rejected_materials" scope="cell">
+                                <div class="rejected">
+                                    <i v-if="cell.row.rejected_materials" aria-hidden="true" class="danger fa fa-times-circle"></i>
+                                    <i v-else class="fa fa-check-circle"></i>
+                                </div>
+                            </template>
+                        </datatable>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!--  This is the Translator View -->
         <div v-bind:class="{ 'col-xs-12 col-sm-12 col-md-12': isFullScreen, 'col-xs-12 col-sm-6 col-md-6':isSmallScreen }" @click.stop v-if="show_translator">
             <div v-if="show_description_translator" class="alert alert-info description-translator-view">
