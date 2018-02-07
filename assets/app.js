@@ -818,22 +818,22 @@ new Vue({
             && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
         },
         isRejectedProduct: function (product) {
-            result = []
-            if(product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0){
-                result.push(true)
+            result = false
+            if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
+                result = true
             }
 
             if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
-                result.push(true)
+                result = true
             }
 
             has_component2 = !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].length === 0)
             is_component1_empty = (product['component1'] == null || Object.keys(product['component1']).length === 0 || product['component1'].length === 0)
-            if(has_component2 && is_component1_empty){
-                result.push(true)
+            if (has_component2 && is_component1_empty) {
+                result = true
             }
 
-            return result.length > 0
+            return result
         },
         fetchResource: function(type, variable_name){
             _this = this
