@@ -815,32 +815,29 @@ new Vue({
                 });
             }
 
-			if (type == 'component1' && product['rejected_' + type]
-                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0 || product[type] === '-')) {
-				return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
-			}
+            if (type == 'component1' && product['rejected_' + type]
+                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
+            }
 
             return !(product['is_rejected']
             && product['rejected_' + type]
             && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
         },
         isRejectedProduct: function (product) {
-            result = false
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
-                result = true
+                return true
             }
 
             if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
-                result = true
+                return true
             }
 
-            has_component2 = !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].length === 0 || product['component2'].name == '-')
-            is_component1_empty = (product['component1'] == null || Object.keys(product['component1']).length === 0 || product['component1'].length === 0)
-            if (has_component2 && is_component1_empty) {
-                result = true
+            if (product['component1'] == null || Object.keys(product['component1']).length === 0 || product.length === 0) {
+                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
             }
 
-            return result
+            return false
         },
         fetchResource: function(type, variable_name){
             _this = this
