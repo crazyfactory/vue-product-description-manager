@@ -793,20 +793,31 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if (type == 'materials' && (product['is_rejected'] && product['rejected_' + type])) {
+            if (type == 'materials' && product['is_rejected'] && product['rejected_' + type]) {
+                if (!(product['is_rejected'] && product['rejected_' + type])) {
+                    return true
+                }
+
                 if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
                     return false
                 }
                 deleted_resource_name = product.deleted_materials_resources.map(function (resource) {
                     return resource.name
                 });
+                if (deleted_resource_name.length === 0) {
+                    return true
+                }
                 resource_names = product[type].map(function (resource) {
                     return resource.name
                 })
+                return deleted_resource_name.find(function (name) {
+                    return !(resource_names.indexOf(name) > -1)
+                });
+            }
 
-                return delete_resource_name.find(function (name) {
-                        return resource_names.indexOf(name) === -1
-                    }) !== undefined;
+            if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]
+                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
             }
 
             return !(product['is_rejected']
@@ -814,22 +825,19 @@ new Vue({
             && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
         },
         isRejectedProduct: function (product) {
-            result = false
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
-                result = true
+                return true
             }
 
             if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
-                result = true
+                return true
             }
 
-            has_component2 = !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].length === 0)
-            is_component1_empty = (product['component1'] == null || Object.keys(product['component1']).length === 0 || product['component1'].length === 0)
-            if (has_component2 && is_component1_empty) {
-                result = true
+            if (product['component1'] == null || Object.keys(product['component1']).length === 0 || product.length === 0) {
+                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
             }
 
-            return result
+            return false
         },
         fetchResource: function(type, variable_name){
             _this = this
@@ -1275,7 +1283,7 @@ new Vue({
                 let base_product = {}
                 if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
                     for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value']) {
+                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
                             base_product = _this.rawBaseproducts[i]
                             break;
                         }
@@ -1644,6 +1652,7 @@ new Vue({
                 this.showLoading= true
                 this.products = this.selectedRejectedProduct
                 this.makeActive('names')
+                this.selectedRejectedProduct = []
                 this.showLoading= false
             }
         },
