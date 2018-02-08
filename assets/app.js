@@ -793,7 +793,7 @@ new Vue({
     },
     methods: {
         validateRejectedProduct: function (type, product) {
-            if (type == 'materials') {
+            if (type == 'materials' && product['is_rejected'] && product['rejected_' + type]) {
                 if (!(product['is_rejected'] && product['rejected_' + type])) {
                     return true
                 }
@@ -815,7 +815,7 @@ new Vue({
                 });
             }
 
-            if (type == 'component1' && product['rejected_' + type]
+            if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]
                 && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
                 return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
             }
