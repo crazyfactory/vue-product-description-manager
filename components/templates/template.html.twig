@@ -1197,17 +1197,29 @@
             <div class="col-xs-6 col-sm-4 col-md-4" v-if="newResourceType=='Metatag'">
                 <h4> and aliases</h4>
                 <p>
-                    <label for="newAliasDefault"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasDefault" v-model="newResourceAliasDefault" placeholder="Default Alias (en-GB)"><br>
-
-                    <label for="newAliasDe"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasDe" v-model="newResourceAliasDe" placeholder="German Alias (de)"><br>
-
-                    <label for="newAliasEnUS"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasEnUS" v-model="newResourceAliasEnUS" placeholder="American alias (en-US)"><br>
-
-                    <label for="newAliasNl"><i class="fa fa-tags" aria-hidden="true"></i></label>
-                    <input class="form-control" id="newAliasNl" v-model="newResourceAliasNl" placeholder="Dutch alias (nl)">
+                    <span>
+                        <label for="newAliasDefault"><i class="fa fa-tags" aria-hidden="true"></i></label>
+                        <input class="form-control" id="newAliasDefault" v-model="newResourceAliasDefault"
+                               placeholder="Default Alias (en-GB)">
+                    </span>
+                    <br>
+                    <span v-if="is_active_language('de')">
+                        <label for="newAliasDe"><i class="fa fa-tags" aria-hidden="true"></i></label>
+                        <input class="form-control" id="newAliasDe" v-model="newResourceAliasDe"
+                               placeholder="German Alias (de)">
+                    </span>
+                    <br>
+                    <span v-if="is_active_language('en-US')">
+                        <label for="newAliasEnUS"><i class="fa fa-tags" aria-hidden="true"></i></label>
+                        <input class="form-control" id="newAliasEnUS" v-model="newResourceAliasEnUS"
+                               placeholder="American alias (en-US)">
+                    </span>
+                    <br>
+                    <span v-if="is_active_language('nl')">
+                        <label for="newAliasNl"><i class="fa fa-tags" aria-hidden="true"></i></label>
+                        <input class="form-control" id="newAliasNl" v-model="newResourceAliasNl"
+                               placeholder="Dutch alias (nl)">
+                    </span>
                 </p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
