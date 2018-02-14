@@ -75,6 +75,7 @@ new Vue({
         Multiselect: window.VueMultiselect.default
     },
     data: {
+        totalRejectedProducts: 0,
         selectedRejectedProduct:[],
         rejectedProducts: {
             isLoaded: false,
@@ -771,6 +772,7 @@ new Vue({
                     return response.json()
                 })
                 .then(function (response) {
+                    _this.totalRejectedProducts = response['total_rejected_products']
                     _this.rejectedProducts.products = _this.prepareProducts(response, true)
                     _this.rejectedProducts.isLoaded = true
                     this.showLoading = false
@@ -787,7 +789,7 @@ new Vue({
                 return this.selectedRejectedProduct.length == this.getRejectedProducts.length;
             },
             set: function (value) {
-                this.selectedRejectedProduct = value ? this.getRejectedProducts.slice(0,100) : [];
+                this.selectedRejectedProduct = value ? this.getRejectedProducts : [];
             }
         },
     },
@@ -1275,7 +1277,7 @@ new Vue({
         prepareProducts: function(raw_products, is_rejected_products = false) {
             var products = []
             for (let key in raw_products) {
-                if (!(['success', 'metatags', 'materials'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key])) {
+                if (!(['success', 'metatags', 'materials', 'total_rejected_products'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key])) {
                     continue
                 }
 

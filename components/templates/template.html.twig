@@ -855,7 +855,7 @@
                        class="fa fa-plus-square-o" aria-hidden="true"></i>
                     <i v-if="show_rejected_products" @click="toggleTranslationVisibility('rejected_products')"
                        class="fa fa-minus-square-o" aria-hidden="true"></i>
-                    <span class="title-rejected">Rejected Products<span class="nav-counter">[[getRejectedProducts.length]]</span></span>
+                    <span class="title-rejected">Rejected Products<span class="nav-counter">[[getRejectedProducts.length]] / [[totalRejectedProducts]]</span></span>
                     <span v-if="show_rejected_products" class="request">
                     <i class="fa fa-wrench" @click="showRejectedProducts()"></i>
                         </span>
