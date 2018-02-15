@@ -817,9 +817,11 @@ new Vue({
                 });
             }
 
-            if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]
-                && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
-                return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
+            if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]) {
+                if (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0) {
+                    return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
+                }
+                return !(Object.keys(product['component1'])[0] === 'deleted_component1')
             }
 
             return !(product['is_rejected']
@@ -1304,6 +1306,8 @@ new Vue({
                         if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
                             component1 = _this.rawComponents[i]
                             found_1 = true
+                        } else if (is_rejected_products) {
+                            component1 = {deleted_component1: my_product.component1['value']}
                         }
                         if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
                             component2 = _this.rawComponents[i]
