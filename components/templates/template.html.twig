@@ -141,9 +141,13 @@
                                             no component2
                                         </span>
                                     <span class="label label-danger rejected_tag"
-                                          v-if="!validateRejectedProduct('materials', product)">
+                                          v-if="validateRejectedProduct('materials', product) === false">
                                             no material
                                         </span>
+                                    <span class="label label-warning rejected_tag"
+                                          v-if="validateRejectedProduct('materials', product) === 'deleted_materials'">
+                                            Removed deleted materials
+                                    </span>
                                 </div>
 
                                 <!-- Generic Product Names by language -->

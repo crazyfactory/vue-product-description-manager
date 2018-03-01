@@ -796,37 +796,24 @@ new Vue({
     methods: {
         validateRejectedProduct: function (type, product) {
             if (type == 'materials' && product['is_rejected'] && product['rejected_' + type]) {
-                if (!(product['is_rejected'] && product['rejected_' + type])) {
-                    return true
-                }
-
-                if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
+                if (product[type].length === 0) {
                     return false
                 }
-                deleted_resource_name = product.deleted_materials_resources.map(function (resource) {
-                    return resource.name
-                });
-                if (deleted_resource_name.length === 0) {
-                    return true
+                if (product.deleted_materials_resources.length > 0 && product.initial_materials_amount > 0) {
+                    return "deleted_materials"
                 }
-                resource_names = product[type].map(function (resource) {
-                    return resource.name
-                })
-                return deleted_resource_name.find(function (name) {
-                    return !(resource_names.indexOf(name) > -1)
-                });
             }
 
             if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]) {
-                if (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0) {
-                    return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
+                if (product[type] == null || Object.keys(product[type]).length === 0) {
+                    return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
                 }
                 return !(Object.keys(product['component1'])[0] === 'deleted_component1')
             }
 
             return !(product['is_rejected']
             && product['rejected_' + type]
-            && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
+            && (product[type] == null || Object.keys(product[type]).length === 0))
         },
         isRejectedProduct: function (product) {
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
@@ -1322,7 +1309,7 @@ new Vue({
                 let material_stash = []
 
                 for (let i = 0; i < raw_products.materials.length; i++) {
-                    if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1) {
+                    if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1 && raw_products.materials[i]['is_active'] === "1") {
                         material_stash.push(raw_products.materials[i]);
                     }
                 }
@@ -1368,7 +1355,8 @@ new Vue({
                         rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                         rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                         rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                        deleted_materials_resources: my_product.deleted_materials_resources
+                        deleted_materials_resources: my_product.deleted_materials_resources,
+                        initial_materials_amount: material_stash.length
                     }
                     Object.assign(ready_product, rejected_attributes)
                 }
