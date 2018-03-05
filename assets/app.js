@@ -1322,9 +1322,13 @@ new Vue({
 
                 let material_stash = []
 
-                for (let i = 0; i < raw_products.materials.length; i++) {
-                    if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1 && raw_products.materials[i]['is_active'] === "1") {
-                        material_stash.push(raw_products.materials[i]);
+                let raw_materials = raw_products.materials.map(function (material) {
+                    return material['name']
+                })
+
+                for (let i = 0; i < my_product.materials.length; i++) {
+                    if ((index = raw_materials.indexOf(my_product.materials[i])) > -1 && raw_products.materials[index]['is_active'] === "1") {
+                        material_stash.push(raw_products.materials[index]);
                     }
                 }
 
