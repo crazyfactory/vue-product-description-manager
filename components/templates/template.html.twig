@@ -129,18 +129,22 @@
                                 </label>
                                 <div>
                                      <span class="label label-danger rejected_tag"
+                                           title="Please add base product resource"
                                            v-if="!validateRejectedProduct('base_product', product)">
                                            no baseproduct
                                         </span>
                                     <span class="label label-danger rejected_tag"
+                                          title="Please add component1 resource"
                                           v-if="!validateRejectedProduct('component1', product)">
                                             no component1
                                         </span>
                                     <span class="label label-danger rejected_tag"
+                                          title="Please add component2 resource"
                                           v-if="!validateRejectedProduct('component2', product)">
                                             no component2
                                         </span>
                                     <span class="label label-danger rejected_tag"
+                                          title="Please add materials resource"
                                           v-if="validateRejectedProduct('materials', product) === false">
                                             no material
                                         </span>
