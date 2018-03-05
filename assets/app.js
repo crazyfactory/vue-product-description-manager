@@ -794,26 +794,40 @@ new Vue({
         },
     },
     methods: {
-        validateRejectedProduct: function (type, product) {
-            if (type == 'materials' && product['is_rejected'] && product['rejected_materials']) {
-                if (product[type].length === 0) {
-                    return false
-                }
-                if (product.deleted_materials_resources.length > 0 && product.initial_materials_amount > 0) {
-                    return "deleted_materials"
-                }
+        validateRejectedProduct: function (product) {
+            let verified_resources = {
+                'base_product': true,
+                'component1': true,
+                'component2': true,
+                'materials': true,
+                'no_deleted_materials': true
             }
-
-            if (type == 'component1' && product['is_rejected'] && product['rejected_component1']) {
-                if (product[type] == null || Object.keys(product[type]).length === 0) {
-                    return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
+            for (var type in verified_resources) {
+                if (type === 'no_deleted_materials') {
+                    continue
                 }
-                return !(Object.keys(product['component1'])[0] === 'deleted_component1')
-            }
+                if (type == 'materials' && product['is_rejected'] && product['rejected_materials']) {
+                    if (product[type].length === 0) {
+                        verified_resources.materials = false
+                    }
+                    if (product.deleted_materials_resources.length > 0 && product.initial_materials_amount > 0) {
+                        product.dirty = true
+                        verified_resources['no_deleted_materials'] = false
+                    }
+                }
 
-            return !(product['is_rejected']
-            && product['rejected_' + type]
-            && (product[type] == null || Object.keys(product[type]).length === 0))
+                if (type == 'component1' && product['is_rejected'] && product['rejected_component1']) {
+                    if (product[type] == null || Object.keys(product[type]).length === 0) {
+                        verified_resources.component1 = (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
+                    }
+                    verified_resources.component1 = !(Object.keys(product['component1'])[0] === 'deleted_component1')
+                }
+
+                verified_resources[type] = !(product['is_rejected']
+                && product['rejected_' + type]
+                && (product[type] == null || Object.keys(product[type]).length === 0))
+            }
+            return verified_resources
         },
         isRejectedProduct: function (product) {
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
