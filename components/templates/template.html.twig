@@ -144,9 +144,9 @@
                                           v-if="validateRejectedProduct('materials', product) === false">
                                             no material
                                         </span>
-                                    <span class="label label-warning rejected_tag"
+                                    <span class="info-box rejected_tag"
                                           v-if="validateRejectedProduct('materials', product) === 'deleted_materials'">
-                                            Removed deleted materials
+                                           <i class="fa fa-info" aria-hidden="true"></i> Some material resources were deleted.
                                     </span>
                                 </div>
 
