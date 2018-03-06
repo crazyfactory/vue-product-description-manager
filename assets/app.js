@@ -343,10 +343,12 @@ new Vue({
             this.products.forEach(function (product) {
                 active_languages.forEach(function (language) {
                     materials = product.materials.map(function (material) {
-                        return material[language]
+                        return material[language].trim()
                     })
 
-                    cached_materials = product.cached_materials[language].value.split('/');
+                    cached_materials = product.cached_materials[language].value.split('/').map(function(resource){
+                        return resource.trim();
+                    });
 
                     is_overridden = true
                     //compare cached_materials and materials
