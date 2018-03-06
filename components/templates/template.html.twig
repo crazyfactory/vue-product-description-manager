@@ -184,7 +184,7 @@
                                     </li>
                                 </ul>
                                 <!-- End Product Names by language -->
-                                <div class="indent" v-if="show_material">
+                                <div class="indent" v-if="show_material && validateCacheMaterial">
                                     <!-- material configuration -->
                                     <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
@@ -197,7 +197,7 @@
                                             <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                                                 <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                                             </a>
-                                            <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials && product.materials.length >0 }">
+                                            <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.cached_materials[language.id].is_overridden }">
                                                 [[ product.cached_materials[language.id].value ]]</span>
                                         </li>
                                     </ul>

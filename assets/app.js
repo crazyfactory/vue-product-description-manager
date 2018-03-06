@@ -338,6 +338,34 @@ new Vue({
         }
     },
     computed: {
+        validateCacheMaterial: function () {
+            active_languages = this.activeLanguagesId
+            this.products.forEach(function (product) {
+                active_languages.forEach(function (language) {
+                    materials = product.materials.map(function (material) {
+                        return material[language]
+                    })
+
+                    cached_materials = product.cached_materials[language].value.split('/');
+
+                    is_overridden = true
+                    //compare cached_materials and materials
+                    if (cached_materials.length === materials.length) {
+                        is_overridden = false
+                        for (i = 0; i < materials.length; i++) {
+                            if (cached_materials.indexOf(materials[i]) < 0) {
+                                is_overridden = true
+                                break
+                            }
+                        }
+                    }
+
+                    product.cached_materials[language]['is_overridden'] = is_overridden
+                })
+            })
+
+            return true
+        },
         activeLanguages: function(){
             stash = []
             this.supportedLanguages.forEach(function (item) {
