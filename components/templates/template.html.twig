@@ -190,8 +190,8 @@
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                                             <span v-bind:class="'flag-icon cursor '+language.flag"></span>
                                             <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0 && material">/</span>
-                        <span v-if="material[language.id] && material[language.id]!== undefined">[[ material[language.id] ]]</span>
+                        <span v-if="index > 0 && material && product.cached_materials[language.id].is_overridden">/</span>
+                        <span v-if="material[language.id] && material[language.id]!== undefined && product.cached_materials[language.id].is_overridden">[[ material[language.id] ]]</span>
                       </span>
                                             <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
                                             <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">

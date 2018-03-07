@@ -351,6 +351,9 @@ new Vue({
                     });
 
                     is_overridden = true
+                    if (materials.length === 0) {
+                        is_overridden = false
+                    }
                     //compare cached_materials and materials
                     if (cached_materials.length === materials.length) {
                         is_overridden = false
