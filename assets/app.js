@@ -808,10 +808,8 @@ new Vue({
                     _this.totalRejectedProducts = response['total_rejected_products']
                     _this.rejectedProducts.products = _this.prepareProducts(response)
                     _this.rejectedProducts.isLoaded = true
-                    this.showLoading = false
                 })
                 .catch(function () {
-                    this.showLoading = false
                     _this.addMessage("Sorry, something went wrong!", 'danger')
                 })
             return []
@@ -848,16 +846,17 @@ new Vue({
 
                 if (type == 'component1' && product['is_rejected'] && product['rejected_component1']) {
                     if (product[type] == null || Object.keys(product[type]).length === 0) {
-                        // there are component2 but no component1
+                        // there is component2 but no component1
                         verified_resources.component1 = (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
                     }
-
+                        // component1 was deleted
                     if (product[type] !== null && Object.keys(product[type]).length > 0 && product[type].deleted) {
                         verified_resources.component1 = false
                     }
                 }
 
                 if (type === 'component2' && product['is_rejected'] && product['rejected_component1']) {
+                    // component2 was deleted
                     if (product[type] !== null && Object.keys(product[type]).length > 0 && product[type].deleted) {
                         verified_resources.component2 = false
                     }
@@ -1343,30 +1342,21 @@ new Vue({
 
                 let component1 = {}
                 if (my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length) {
-
+                    component1 = {deleted: true}
                     for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component1['value']) {
-                            if (_this.rawComponents[i]['is_active'] === "1") {
-                                component1 = _this.rawComponents[i]
-                            } else {
-                                component1 = {deleted: true}
-                            }
+                        if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                            component1 = _this.rawComponents[i]
                             break
-                        } else {
-                            component1 = {deleted: true}
                         }
                     }
                 }
 
                 let component2 = {}
                 if (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length) {
+                    component2 = {deleted: true}
                     for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component2['value']) {
-                            if (_this.rawComponents[i]['is_active'] === "1") {
-                                component2 = _this.rawComponents[i]
-                            } else {
-                                component2 = {deleted: true}
-                            }
+                        if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
+                            component2 = _this.rawComponents[i]
                             break
                         }
                     }
