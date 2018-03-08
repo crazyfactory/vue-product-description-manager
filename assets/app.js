@@ -789,7 +789,7 @@ new Vue({
     },
     methods: {
         validateCacheMaterial: function () {
-            active_languages = this.activeLanguagesId
+            active_languages = this.activeLanguagesIds
             this.products.forEach(function (product) {
                 active_languages.forEach(function (language) {
                     materials = product.materials.map(function (material) {
