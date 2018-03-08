@@ -184,9 +184,9 @@
                                     </li>
                                 </ul>
                                 <!-- End Product Names by language -->
-                                <div class="indent" v-if="show_material && validateCacheMaterial.length">
+                                <div class="indent" v-if="show_material">
                                     <!-- material configuration -->
-                                    <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
+                                    <ul class="list-group" v-if="validateCacheMaterial().length">
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                                             <span v-bind:class="'flag-icon cursor '+language.flag"></span>
                                             <span v-for="(material, index) in product.materials">

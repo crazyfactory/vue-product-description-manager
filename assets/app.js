@@ -338,39 +338,6 @@ new Vue({
         }
     },
     computed: {
-        validateCacheMaterial: function () {
-            active_languages = this.activeLanguagesId
-            this.products.forEach(function (product) {
-                active_languages.forEach(function (language) {
-                    materials = product.materials.map(function (material) {
-                        return material[language].trim()
-                    })
-
-                    cached_materials = product.cached_materials[language].value.split('/').map(function(resource){
-                        return resource.trim();
-                    });
-
-                    is_overridden = true
-                    if (materials.length === 0) {
-                        is_overridden = false
-                    }
-                    //compare cached_materials and materials
-                    if (cached_materials.length === materials.length) {
-                        is_overridden = false
-                        for (i = 0; i < materials.length; i++) {
-                            if (cached_materials.indexOf(materials[i]) < 0) {
-                                is_overridden = true
-                                break
-                            }
-                        }
-                    }
-
-                    product.cached_materials[language]['is_overridden'] = is_overridden
-                })
-            })
-
-            return this.products
-        },
         activeLanguages: function(){
             stash = []
             this.supportedLanguages.forEach(function (item) {
@@ -381,14 +348,10 @@ new Vue({
             })
             return stash
         },
-        activeLanguagesId: function () {
-            stash = []
-            this.supportedLanguages.forEach(function (item) {
-                if (item.status) {
-                    stash.push(item.id)
-                }
+        activeLanguagesIds: function () {
+            return this.activeLanguages.map(function(language){
+                return language.id
             })
-            return stash
         },
         optionsBaseProduct: function (){
             stash = []
@@ -825,6 +788,38 @@ new Vue({
         },
     },
     methods: {
+        validateCacheMaterial: function () {
+            active_languages = this.activeLanguagesId
+            this.products.forEach(function (product) {
+                active_languages.forEach(function (language) {
+                    materials = product.materials.map(function (material) {
+                        return material[language].trim()
+                    })
+
+                    cached_materials = product.cached_materials[language].value.split('/').map(function (resource) {
+                        return resource.trim();
+                    });
+                    is_overridden = true
+                    if (materials.length === 0) {
+                        is_overridden = false
+                    }
+                    //compare cached_materials and materials
+                    if (cached_materials.length === materials.length) {
+                        is_overridden = false
+                        for (i = 0; i < materials.length; i++) {
+                            if (cached_materials.indexOf(materials[i]) < 0) {
+                                is_overridden = true
+                                break
+                            }
+                        }
+                    }
+
+                    product.cached_materials[language]['is_overridden'] = is_overridden
+                })
+            })
+
+            return this.products
+        },
         validateRejectedProduct: function (product) {
             let verified_resources = {
                 'base_product': true,
