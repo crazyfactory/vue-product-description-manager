@@ -369,7 +369,7 @@ new Vue({
                 })
             })
 
-            return true
+            return this.products
         },
         activeLanguages: function(){
             stash = []
