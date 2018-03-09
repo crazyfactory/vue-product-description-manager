@@ -1319,63 +1319,95 @@ new Vue({
                     });
             }
         },
+        getActiveResourcesName: function (resources) {
+            let active_resources = []
+            // remove resources that it's not active.
+            resources.forEach(function (value, index) {
+                if (value['is_active'].toString() === "0") {
+                    resources.splice(index, 1);
+                } else {
+                    // keep only name of resource
+                    active_resources.push(value.name)
+                }
+            })
+
+            return active_resources
+        },
         prepareProducts: function(raw_products) {
-            var products = []
+            let products = [],
+                raw_baseproducts = this.getActiveResourcesName(this.rawBaseproducts),
+                raw_components = this.getActiveResourcesName(this.rawComponents)
+
             for (let key in raw_products) {
                 if (!(['success', 'metatags', 'materials', 'total_rejected_products'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key])) {
                     continue
                 }
-
                 my_product = raw_products[key];
                 let base_product = {}
-                if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                    for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
-                            base_product = _this.rawBaseproducts[i]
-                            break;
-                        }
-                    }
+                my_product.base_product['value']
+                // No empty base_product and baseproduct is active
+                if (my_product.base_product['value'] &&
+                    my_product.base_product['value'] !== '-' &&
+                    my_product.base_product['value'].length &&
+                    (index = raw_baseproducts.indexOf(my_product.base_product['value'])) > -1) {
+                    // get all languages of resource to `base_product`
+                    base_product = this.rawBaseproducts[index]
                 }
 
                 let component1 = {}
-                if (my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length) {
+                // No empty component1
+                if (my_product.component1['value'] &&
+                    my_product.component1['value'] !== '-' &&
+                    my_product.component1['value'].length) {
                     component1 = {deleted: true}
-                    for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component1 = _this.rawComponents[i]
-                            break
-                        }
+                    // component1 is active
+                    if ((index = raw_components.indexOf(my_product.component1['value'])) > -1) {
+                        // get all languages of component to `component1`
+                        component1 = this.rawComponents[index]
                     }
                 }
 
                 let component2 = {}
-                if (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length) {
+                // No empty component2
+                if (my_product.component2['value'] &&
+                    my_product.component2['value'] !== '-' &&
+                    my_product.component2['value'].length) {
                     component2 = {deleted: true}
-                    for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component2 = _this.rawComponents[i]
-                            break
-                        }
+                    // component2 is active
+                    if ((index = raw_components.indexOf(my_product.component2['value'])) > -1) {
+                        // get all languages of component to `component2`
+                        component2 = this.rawComponents[index]
                     }
                 }
 
-                let material_stash = []
-
-                let raw_materials = raw_products.materials.map(function (material) {
-                    return material['name']
-                })
+                // Don't use rawMaterials and rawMetatags because they haven't had resource yet.
+                // get only name of raw_products.materials
+                let material_stash = [],
+                    raw_materials = raw_products.materials.map(function (material) {
+                        return material['name']
+                    })
 
                 for (let i = 0; i < my_product.materials.length; i++) {
+                    // fine my_product.materials in raw_products for preventing alphabet order in raw_products.materials
+                    // found resource in raw_material and resource is active
                     if ((index = raw_materials.indexOf(my_product.materials[i])) > -1 && raw_products.materials[index]['is_active'] === "1") {
+                        // get all languages of materials to `material_stash`
                         material_stash.push(raw_products.materials[index]);
                     }
                 }
 
-                let metatag_stash = []
+                // get only name of raw_products.metatags
+                let metatag_stash = [],
+                    raw_metatags = raw_products.metatags.map(function (metatag) {
+                        return metatag['name']
+                    })
 
-                for (let i = 0; i < raw_products.metatags.length; i++) {
-                    if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
-                        metatag_stash.push(raw_products.metatags[i]);
+                for (let i = 0; i < my_product.metatags.length; i++) {
+                    // fine my_product.metatags in raw_products for preventing alphabet order in raw_products.metatags
+                    // found resource in raw_metatags and resource is active
+                    if ((index = raw_metatags.indexOf(my_product.metatags[i])) > -1 && raw_products.metatags[index]['is_active'] === "1") {
+                        // get all languages of metatags to `metatags_stash`
+                        metatag_stash.push(raw_products.metatags[index]);
                     }
                 }
 
@@ -1405,7 +1437,7 @@ new Vue({
                     updated: Date.now()
                 }
 
-                if ( my_product.is_rejected === "1") {
+                if (my_product.is_rejected === "1") {
                     rejected_attributes = {
                         is_rejected: my_product.is_rejected,
                         rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
@@ -1420,6 +1452,7 @@ new Vue({
 
                 products.push(ready_product)
             }
+
             return products
         },
         productsTranslationUpdate: function(){
