@@ -127,34 +127,31 @@
                     <a v-bind:href="product.productImage" target="_blank"><img v-bind:src="product.productImage" class="img-rounded" width="50"></a>
                   </span>
                                 </label>
-                                <span v-for="(value, key) in validateRejectedProduct(product)">
-                                    <span class="label label-danger rejected_tag"
-                                          title="Please add base product resource and save the product"
-                                          v-if="key === 'base_product' && !value">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add base product resource and save the product"
+                                      v-if="!validateBaseProduct(product)">
                                            no baseproduct
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          title="Please add component1 resource and save the product"
-                                          v-if="key === 'component1' && !value">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add component1 resource and save the product"
+                                      v-if="!validateComponent1(product)">
                                             no component1
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          title="Please add component2 resource and save the product"
-                                          v-if="key === 'component2' && !value">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add component2 resource and save the product"
+                                      v-if="!validateComponent2(product)">
                                             no component2
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          title="Please add materials resource and save the product"
-                                          v-if="key === 'materials' && !value">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add materials resource and save the product"
+                                      v-if="!validateMaterials(product)">
                                             no material
                                         </span>
-                                    <span class="info-box rejected_tag"
-                                          title="Please save the product for confirming the resource"
-                                          v-if="key === 'no_deleted_materials' && !value">
+                                <span class="info-box rejected_tag"
+                                      title="Please save the product for confirming the resource"
+                                      v-if="!validateDeletedMaterials(product)">
                                           <i class="fa fa-info" aria-hidden="true"></i> Some material resources were deleted.
                                     </span>
-                                </span>
-
                                 <!-- Generic Product Names by language -->
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
