@@ -797,6 +797,14 @@ new Vue({
         }
     },
     methods: {
+        getResourcesName:function (resources) {
+            if (resources !== null) {
+                return resources.map(function (resource) {
+                    return resource['name']
+                })
+            }
+            return []
+        },
         validateCacheMaterial: function () {
             active_languages = this.activeLanguagesIds
             this.products.forEach(function (product) {
@@ -830,7 +838,13 @@ new Vue({
             return this.products
         },
         validateBaseProduct: function (product) {
-            return !(product['base_product'] == null || Object.keys(product['base_product']).length === 0 || (product['base_product']['is_active']) === 0)
+            if (product['base_product'] == null || Object.keys(product['base_product']).length === 0) {
+                return false
+            }
+            if (((index = this.getResourcesName(this.rawBaseproducts).indexOf(product['base_product']['name'])) > -1) && this.rawBaseproducts[index]['is_active'] === 0) {
+                return false
+            }
+            return true
         },
         validateComponent1: function (product) {
             if (product['component1'] == null || Object.keys(product['component1']).length === 0) {
@@ -838,14 +852,21 @@ new Vue({
                 return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
             }
             // component1 was deleted
-            if ((product['component1'] !== null && Object.keys(product['component1']).length > 0 && product['component1'].deleted) || product['component1']['is_active'] === 0 ) {
+            if ((product['component1'] !== null && Object.keys(product['component1']).length > 0 && product['component1'].deleted)) {
                 return false
             }
+            if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component1']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
+                return false
+            }
+
             return true
         },
         validateComponent2: function (product) {
             // component2 was deleted
-            if ((product['component2'] !== null && Object.keys(product['component2']).length > 0 && product['component2'].deleted) || product['component2']['is_active'] === 0) {
+            if ((product['component2'] !== null && Object.keys(product['component2']).length > 0 && product['component2'].deleted)) {
+                return false
+            }
+            if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component2']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
                 return false
             }
             return true
@@ -854,21 +875,23 @@ new Vue({
             if (product['materials'].length === 0) {
                 return false
             }
-
             return true
         },
         validateDeletedMaterials: function (product) {
+            if (product['materials'].length === 0) {
+                return true
+            }
             if (product.has_deleted_materials) {
                 product.dirty = true
                 return false
             }
             // remove deleted resources
-
             for (let i = 0; i < product.materials.length; i++) {
-                if ((index = this.materialsName.indexOf(product.materials[i]['name'])) > -1 && this.rawMaterials[index]['is_active'] === 0) {
+                if ((index = this.getResourcesName(this.rawMaterials).indexOf(product.materials[i]['name'])) > -1 && this.rawMaterials[index]['is_active'] === 0) {
                     product.materials.splice(i, 1)
                     product.dirty = true
                     product.has_deleted_materials = true
+                    break
                 }
             }
 
