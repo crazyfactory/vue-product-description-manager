@@ -754,6 +754,7 @@ new Vue({
             }
 
             this.showLoading = true
+            this.optionsMaterial
             _this = this
             fetch(
                 api_endpoint,
@@ -786,6 +787,14 @@ new Vue({
                 this.selectedRejectedProduct = value ? this.getRejectedProducts : [];
             }
         },
+        materialsName: function () {
+            if (this.rawMaterials !== null) {
+                return this.rawMaterials.map(function (material) {
+                    return material['name']
+                })
+            }
+            return []
+        }
     },
     methods: {
         validateCacheMaterial: function () {
@@ -854,21 +863,20 @@ new Vue({
                 return false
             }
             // remove deleted resources
-            for (i = 0; i < product.materials.length; i++) {
-                if (product.materials[i].is_active === 0) {
+
+            for (let i = 0; i < product.materials.length; i++) {
+                if ((index = this.materialsName.indexOf(product.materials[i]['name'])) > -1 && this.rawMaterials[index]['is_active'] === 0) {
                     product.materials.splice(i, 1)
-                    break
+                    product.dirty = true
+                    product.has_deleted_materials = true
                 }
-            }
-            // if some resources were deleted, set dirty and return false
-            if (product.material_amount > product.materials.length) {
-                product.dirty = true
-                return false
             }
 
             return true
         },
         isRejectedProduct: function (product) {
+            product.has_deleted_materials = false
+
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
                 return true
             }
@@ -1358,18 +1366,13 @@ new Vue({
                 }
 
                 let material_stash = []
-                let raw_materials = this.rawMaterials.map(function (material) {
-                    return material['name']
-                })
-
                 for (let i = 0; i < my_product.materials.length; i++) {
-                    if ((index = raw_materials.indexOf(my_product.materials[i])) > -1 && this.rawMaterials[index]['is_active'] === "1") {
+                    if ((index = this.materialsName.indexOf(my_product.materials[i])) > -1 && this.rawMaterials[index]['is_active'] === "1") {
                         material_stash.push(this.rawMaterials[index]);
                     }
                 }
 
                 let metatag_stash = []
-
                 for (let i = 0; i < raw_products.metatags.length; i++) {
                     if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
                         metatag_stash.push(raw_products.metatags[i]);
