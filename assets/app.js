@@ -786,14 +786,6 @@ new Vue({
             set: function (value) {
                 this.selectedRejectedProduct = value ? this.getRejectedProducts : [];
             }
-        },
-        materialsName: function () {
-            if (this.rawMaterials !== null) {
-                return this.rawMaterials.map(function (material) {
-                    return material['name']
-                })
-            }
-            return []
         }
     },
     methods: {
@@ -1390,7 +1382,7 @@ new Vue({
 
                 let material_stash = []
                 for (let i = 0; i < my_product.materials.length; i++) {
-                    if ((index = this.materialsName.indexOf(my_product.materials[i])) > -1 && this.rawMaterials[index]['is_active'] === "1") {
+                    if ((index = this.getResourcesName(this.rawMaterials).indexOf(my_product.materials[i])) > -1 && this.rawMaterials[index]['is_active'] === "1") {
                         material_stash.push(this.rawMaterials[index]);
                     }
                 }
