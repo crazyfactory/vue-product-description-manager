@@ -129,27 +129,27 @@
                                 </label>
                                 <span class="label label-danger rejected_tag"
                                       title="Please add base product resource and save the product"
-                                      v-if="!validateBaseProduct(product)">
+                                      v-if="showErrorLabelBaseProduct(product)">
                                            no baseproduct
                                         </span>
                                 <span class="label label-danger rejected_tag"
                                       title="Please add component1 resource and save the product"
-                                      v-if="!validateComponent1(product)">
+                                      v-if="showErrorLabelComponent1(product)">
                                             no component1
                                         </span>
                                 <span class="label label-danger rejected_tag"
                                       title="Please add component2 resource and save the product"
-                                      v-if="!validateComponent2(product)">
+                                      v-if="showErrorLabelComponent2(product)">
                                             no component2
                                         </span>
                                 <span class="label label-danger rejected_tag"
                                       title="Please add materials resource and save the product"
-                                      v-if="!validateMaterials(product)">
+                                      v-if="showErrorLabelMaterials(product)">
                                             no material
                                         </span>
                                 <span class="info-box rejected_tag"
                                       title="Please save the product for confirming the resource"
-                                      v-if="!validateDeletedMaterials(product)">
+                                      v-if="showErrorLabelDeletedMaterials(product)">
                                           <i class="fa fa-info" aria-hidden="true"></i> Some materials were deleted.
                                     </span>
                                 <!-- Generic Product Names by language -->

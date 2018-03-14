@@ -814,53 +814,53 @@ new Vue({
 
             return this.products
         },
-        validateBaseProduct: function (product) {
+        showErrorLabelBaseProduct: function (product) {
             if (product['base_product'] == null || Object.keys(product['base_product']).length === 0) {
-                return false
+                return true
             }
             if (((index = this.getResourcesName(this.rawBaseproducts).indexOf(product['base_product']['name'])) > -1) && this.rawBaseproducts[index]['is_active'] === 0) {
-                return false
+                return true
             }
-            return true
+            return false
         },
-        validateComponent1: function (product) {
+        showErrorLabelComponent1: function (product) {
             if (product['component1'] == null || Object.keys(product['component1']).length === 0) {
                 // there is component2 but no component1
-                return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
+                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
             }
             // component1 was deleted
             if ((product['component1'] !== null && Object.keys(product['component1']).length > 0 && product['component1'].deleted)) {
-                return false
+                return true
             }
             if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component1']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
-                return false
+                return true
             }
 
-            return true
+            return false
         },
-        validateComponent2: function (product) {
+        showErrorLabelComponent2: function (product) {
             // component2 was deleted
             if ((product['component2'] !== null && Object.keys(product['component2']).length > 0 && product['component2'].deleted)) {
-                return false
+                return true
             }
             if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component2']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
-                return false
+                return true
             }
-            return true
+            return false
         },
-        validateMaterials: function (product) {
-            if (product['materials'].length === 0) {
-                return false
-            }
-            return true
-        },
-        validateDeletedMaterials: function (product) {
+        showErrorLabelMaterials: function (product) {
             if (product['materials'].length === 0) {
                 return true
             }
+            return false
+        },
+        showErrorLabelDeletedMaterials: function (product) {
+            if (product['materials'].length === 0) {
+                return false
+            }
             if (product.has_deleted_materials) {
                 product.dirty = true
-                return false
+                return true
             }
             // remove deleted resources
             for (let i = 0; i < product.materials.length; i++) {
@@ -872,7 +872,7 @@ new Vue({
                 }
             }
 
-            return true
+            return false
         },
         isRejectedProduct: function (product) {
             product.has_deleted_materials = false
