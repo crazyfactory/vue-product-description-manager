@@ -754,7 +754,8 @@ new Vue({
             }
 
             this.showLoading = true
-            this.optionsMaterial
+            // get active materials from database and set value to `rawMaterials` for using in `prepareProducts`
+            this.translationsMaterials
             _this = this
             fetch(
                 api_endpoint,
@@ -814,54 +815,75 @@ new Vue({
 
             return this.products
         },
+        isEmptyResource: function (resource) {
+            return (resource == null ||
+                Object.keys(resource).length == 0 || // resource = {}
+                resource.length == 0 // resource = []
+            )
+        },
+        isActiveBaseProduct: function (name) {
+            return this.getResourcesName(this.translationsBaseProducts).indexOf(name) > -1
+        },
+        isActiveComponents: function (name) {
+            return this.getResourcesName(this.translationsComponents).indexOf(name) > -1
+        },
+        isActiveMaterials: function (name) {
+            return this.getResourcesName(this.translationsMaterials).indexOf(name) > -1
+        },
         showErrorLabelBaseProduct: function (product) {
-            if (product['base_product'] == null || Object.keys(product['base_product']).length === 0) {
+            // baseproduct is empty
+            if (this.isEmptyResource(product['base_product'])) {
                 return true
             }
-            if (((index = this.getResourcesName(this.rawBaseproducts).indexOf(product['base_product']['name'])) > -1) && this.rawBaseproducts[index]['is_active'] === 0) {
+            // baseproduct was deleted
+            if (!this.isActiveBaseProduct(product['base_product']['name'])) {
                 return true
             }
             return false
         },
         showErrorLabelComponent1: function (product) {
-            if (product['component1'] == null || Object.keys(product['component1']).length === 0) {
+            if (this.isEmptyResource(product['component1'])) {
                 // there is component2 but no component1
-                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product['component2'].name === '-')
+                return !(this.isEmptyResource(product['component2']) || product['component2'].name === '-')
             }
-            // component1 was deleted
-            if ((product['component1'] !== null && Object.keys(product['component1']).length > 0 && product['component1'].deleted)) {
+            // verify component1 was deleted after prepareProduct().
+            if (product['component1'].deleted) {
                 return true
             }
-            if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component1']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
+            // verify component1 when it was deleted from translations page
+            if (!this.isActiveComponents(product['component1']['name'])) {
                 return true
             }
 
             return false
         },
         showErrorLabelComponent2: function (product) {
-            // component2 was deleted
-            if ((product['component2'] !== null && Object.keys(product['component2']).length > 0 && product['component2'].deleted)) {
+            // verify component2 was deleted after prepareProduct().
+            if (!(this.isEmptyResource(product['component2'])) && product['component2'].deleted) {
                 return true
             }
-            if (((index = this.getResourcesName(this.rawComponents).indexOf(product['component2']['name'])) > -1) && this.rawComponents[index]['is_active'] === 0) {
+            // verify component2 when it was deleted from translations page
+            if (!this.isActiveComponents(product['component2']['name'])) {
                 return true
             }
             return false
         },
         showErrorLabelMaterials: function (product) {
-            if (product['materials'].length === 0) {
+            // no materials
+            if ((this.isEmptyResource(product['materials']))) {
                 return true
             }
             return false
         },
         showErrorLabelDeletedMaterials: function (product) {
+            // verify materials was deleted after prepareProduct().
             if (product.has_deleted_materials) {
                 product.dirty = true
                 return true
             }
-            // remove deleted resources
+            // remove deleted resources when it was deleted from translations page
             for (let i = 0; i < product.materials.length; i++) {
-                if ((index = this.getResourcesName(this.rawMaterials).indexOf(product.materials[i]['name'])) > -1 && this.rawMaterials[index]['is_active'] === 0) {
+                if (!this.isActiveMaterials(product.materials[i]['name'])) {
                     product.materials.splice(i, 1)
                     product.dirty = true
                     product.has_deleted_materials = true
@@ -944,7 +966,8 @@ new Vue({
                 // clear product input
                 this.newProduct = ''
                 this.showLoading = true
-                this.optionsMaterial
+                // get active materials from database and set value to `rawMaterials` for using in `prepareProducts`
+                this.translationsMaterials
                 _this = this
                 fetch(
                     api_endpoint,
