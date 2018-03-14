@@ -805,14 +805,10 @@ new Vue({
                     current_materials_list = product.materials.map(function (material) {
                         if (material.is_active) return material[language].trim()
                     })
-                    // convert materials list to string
-                    current_materials = current_materials_list.join("/")
-                    // convert to array for removing space and convert back to string.
-                    cache_materials = product.cached_materials[language].value.split('/').map(function (material) {
-                        return material.trim()
-                    }).join('/')
+                    // convert materials array to string
+                    current_materials = current_materials_list.join(" / ")
                     //compare cache_material string and current_materials string
-                    product.cached_materials[language]['is_overridden'] = !(cache_materials === current_materials)
+                    product.cached_materials[language]['is_overridden'] = !(product.cached_materials[language].value === current_materials)
                 })
             })
 
