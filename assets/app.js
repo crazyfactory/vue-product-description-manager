@@ -801,29 +801,18 @@ new Vue({
             active_languages = this.activeLanguagesIds
             this.products.forEach(function (product) {
                 active_languages.forEach(function (language) {
-                    materials = product.materials.map(function (material) {
-                        return material[language].trim()
+                    // filter active materials
+                    current_materials_list = product.materials.map(function (material) {
+                        if (material.is_active) return material[language].trim()
                     })
-
-                    cached_materials = product.cached_materials[language].value.split('/').map(function (resource) {
-                        return resource.trim();
-                    });
-                    is_overridden = true
-                    if (materials.length === 0) {
-                        is_overridden = false
-                    }
-                    //compare cached_materials and materials
-                    if (cached_materials.length === materials.length) {
-                        is_overridden = false
-                        for (i = 0; i < materials.length; i++) {
-                            if (cached_materials.indexOf(materials[i]) < 0) {
-                                is_overridden = true
-                                break
-                            }
-                        }
-                    }
-
-                    product.cached_materials[language]['is_overridden'] = is_overridden
+                    // convert materials list to string
+                    current_materials = current_materials_list.join("/")
+                    // convert to array for removing space and convert back to string.
+                    cache_materials = product.cached_materials[language].value.split('/').map(function (material) {
+                        return material.trim()
+                    }).join('/')
+                    //compare cache_material string and current_materials string
+                    product.cached_materials[language]['is_overridden'] = !(cache_materials === current_materials)
                 })
             })
 
