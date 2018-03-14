@@ -855,9 +855,6 @@ new Vue({
             return false
         },
         showErrorLabelDeletedMaterials: function (product) {
-            if (product['materials'].length === 0) {
-                return false
-            }
             if (product.has_deleted_materials) {
                 product.dirty = true
                 return true
@@ -1407,7 +1404,7 @@ new Vue({
                     rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
                     rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                     rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                    has_deleted_materials: my_product.deleted_materials_resources.length > 0 && material_stash.length > 0,
+                    has_deleted_materials: my_product.has_deleted_materials,
                     material_amount: material_stash.length
                 }
 
