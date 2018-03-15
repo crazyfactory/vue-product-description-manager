@@ -829,53 +829,38 @@ new Vue({
             return this.getResourcesName(this.translationsMaterials).indexOf(name) > -1
         },
         showErrorLabelBaseProduct: function (product) {
-            // baseproduct is empty
-            if (this.isEmptyResource(product['base_product'])) {
-                return true
-            }
-            // baseproduct was deleted
-            if (!this.isActiveBaseProduct(product['base_product']['name'])) {
-                return true
-            }
-            return false
+            // baseproduct is empty or baseproduct was deleted
+            return ( this.isEmptyResource(product['base_product']) ||
+            !this.isActiveBaseProduct(product['base_product']['name']))
+                ? true
+                : false
         },
         showErrorLabelComponent1: function (product) {
             if (this.isEmptyResource(product['component1'])) {
                 // there is component2 but no component1
                 return !(this.isEmptyResource(product['component2']) || product['component2'].name === '-')
             }
-            // verify component1 was deleted after prepareProduct().
-            if (product['component1'].deleted) {
-                return true
-            }
-            // verify component1 when it was deleted from translations page
-            if (!this.isActiveComponents(product['component1']['name'])) {
-                return true
-            }
-
-            return false
+            // component1 was deleted
+            return ( product['component1'].deleted || !this.isActiveComponents(product['component1']['name']))
+                ? true
+                : false
         },
         showErrorLabelComponent2: function (product) {
             // component2 is empty
             if ((this.isEmptyResource(product['component2']) || product['component2'].name === '-')) {
                 return false
             }
-            // verify component2 was deleted after prepareProduct().
-            if (!(this.isEmptyResource(product['component2'])) && product['component2'].deleted) {
-                return true
-            }
-            // verify component2 when it was deleted from translations page
-            if (!this.isActiveComponents(product['component2']['name'])) {
-                return true
-            }
-            return false
+
+            // component2 was deleted
+            return ( product['component2'].deleted || !this.isActiveComponents(product['component2']['name']))
+                ? true
+                : false
         },
         showErrorLabelMaterials: function (product) {
             // no materials
-            if ((this.isEmptyResource(product['materials']))) {
-                return true
-            }
-            return false
+            return (this.isEmptyResource(product['materials']))
+                ? true
+                : false
         },
         showErrorLabelDeletedMaterials: function (product) {
             // verify materials was deleted after prepareProduct().
@@ -897,14 +882,13 @@ new Vue({
         },
         isRejectedProduct: function (product) {
             product.has_deleted_materials = false
-            if (this.showErrorLabelBaseProduct(product) ||
-                this.showErrorLabelComponent1(product) ||
-                this.showErrorLabelComponent2(product) ||
-                this.showErrorLabelMaterials(product)
-            ) {
-                return true
-            }
-            return false
+            return (this.showErrorLabelBaseProduct(product) ||
+            this.showErrorLabelComponent1(product) ||
+            this.showErrorLabelComponent2(product) ||
+            this.showErrorLabelMaterials(product))
+                ? true
+                : false
+
         },
         fetchResource: function (type, variable_name) {
             _this = this
