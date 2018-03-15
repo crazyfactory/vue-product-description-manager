@@ -151,7 +151,7 @@ new Vue({
         remove_mode_metatag: false,
         rawBaseproducts: null,
         rawComponents: null,
-        rawMaterials: null,
+        rawMaterials: RawMaterials,
         rawMetatags: null,
         show_actionbar: false,
         show_add_new: false,
@@ -754,8 +754,6 @@ new Vue({
             }
 
             this.showLoading = true
-            // get active materials from database and set value to `rawMaterials` for using in `prepareProducts`
-            this.translationsMaterials
             _this = this
             fetch(
                 api_endpoint,
@@ -858,6 +856,10 @@ new Vue({
             return false
         },
         showErrorLabelComponent2: function (product) {
+            // component2 is empty
+            if ((this.isEmptyResource(product['component2']) || product['component2'].name === '-')) {
+                return false
+            }
             // verify component2 was deleted after prepareProduct().
             if (!(this.isEmptyResource(product['component2'])) && product['component2'].deleted) {
                 return true
@@ -895,19 +897,13 @@ new Vue({
         },
         isRejectedProduct: function (product) {
             product.has_deleted_materials = false
-
-            if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
+            if (this.showErrorLabelBaseProduct(product) ||
+                this.showErrorLabelComponent1(product) ||
+                this.showErrorLabelComponent2(product) ||
+                this.showErrorLabelMaterials(product)
+            ) {
                 return true
             }
-
-            if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
-                return true
-            }
-
-            if (product['component1'] == null || Object.keys(product['component1']).length === 0 || product.length === 0) {
-                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
-            }
-
             return false
         },
         fetchResource: function (type, variable_name) {
@@ -966,8 +962,6 @@ new Vue({
                 // clear product input
                 this.newProduct = ''
                 this.showLoading = true
-                // get active materials from database and set value to `rawMaterials` for using in `prepareProducts`
-                this.translationsMaterials
                 _this = this
                 fetch(
                     api_endpoint,
