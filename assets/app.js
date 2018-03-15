@@ -988,6 +988,7 @@ new Vue({
                         } else {
                             _this.showLoading = false
                             _this.addMessage(response.message, 'danger')
+                            location.reload()
                         }
                     })
                     .catch(function () {
