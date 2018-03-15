@@ -831,7 +831,7 @@ new Vue({
         showErrorLabelBaseProduct: function (product) {
             // baseproduct is empty or baseproduct was deleted
             return ( this.isEmptyResource(product['base_product']) ||
-            !this.isActiveBaseProduct(product['base_product']['name']))
+                !this.isActiveBaseProduct(product['base_product']['name']))
                 ? true
                 : false
         },
@@ -883,9 +883,9 @@ new Vue({
         isRejectedProduct: function (product) {
             product.has_deleted_materials = false
             return (this.showErrorLabelBaseProduct(product) ||
-            this.showErrorLabelComponent1(product) ||
-            this.showErrorLabelComponent2(product) ||
-            this.showErrorLabelMaterials(product))
+                this.showErrorLabelComponent1(product) ||
+                this.showErrorLabelComponent2(product) ||
+                this.showErrorLabelMaterials(product))
                 ? true
                 : false
 
