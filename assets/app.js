@@ -1,4 +1,4 @@
-if (typeof api_endpoint !=='undefined') {
+if (typeof api_endpoint !== 'undefined') {
     // variable needs to come from a local config and holds the path to the api
     var hasApi = true
     // how long is a product kept in local storage? (in ms)
@@ -76,7 +76,7 @@ new Vue({
     },
     data: {
         totalRejectedProducts: 0,
-        selectedRejectedProduct:[],
+        selectedRejectedProduct: [],
         rejectedProducts: {
             isLoaded: false,
             products: []
@@ -89,25 +89,25 @@ new Vue({
         selectedMaterials: [],
         selectedMetatags: [],
         show_description_translator: true,
-        newResourceType:'',
+        newResourceType: '',
         newResourceTypeClass: 'form-goup',
-        newResourceLabelDefault:'',
-        newResourceLabelDefaultClass:'form-goup',
-        newResourceLabelDe:'',
-        newResourceLabelDeClass:'form-group',
-        newResourceLabelEnUS:'',
-        newResourceLabelEnUSClass:'form-group',
-        newResourceLabelNl:'',
-        newResourceLabelNlClass:'form-group',
-        newResourceAliasDefault:'',
-        newResourceAliasDe:'',
-        newResourceAliasEnUS:'',
-        newResourceAliasNl:'',
+        newResourceLabelDefault: '',
+        newResourceLabelDefaultClass: 'form-goup',
+        newResourceLabelDe: '',
+        newResourceLabelDeClass: 'form-group',
+        newResourceLabelEnUS: '',
+        newResourceLabelEnUSClass: 'form-group',
+        newResourceLabelNl: '',
+        newResourceLabelNlClass: 'form-group',
+        newResourceAliasDefault: '',
+        newResourceAliasDe: '',
+        newResourceAliasEnUS: '',
+        newResourceAliasNl: '',
         newResourceIsHidden: false,
         newResourceTranslationRequested: true,
         dirtyTranslations: {
-            isDirty:false,
-            baseProducts:{
+            isDirty: false,
+            baseProducts: {
                 isDirty: false,
                 entryList: [],
                 stash: []
@@ -149,12 +149,12 @@ new Vue({
         products: productStorage.fetch(),
         remove_mode_material: false,
         remove_mode_metatag: false,
-        rawBaseproducts : null,
-        rawComponents : null,
-        rawMaterials : null,
+        rawBaseproducts: null,
+        rawComponents: null,
+        rawMaterials: RawMaterials,
         rawMetatags: null,
         show_actionbar: false,
-        show_add_new:false,
+        show_add_new: false,
         show_export: false,
         show_load: IsAdmin,
         show_material: false,
@@ -178,9 +178,9 @@ new Vue({
         settings: settingStorage.fetch(),
         table: {
             editable: true,
-            threshold:5000,
+            threshold: 5000,
             columns: {
-                default:[
+                default: [
                     {
                         id: "de",
                         icon: "flag-icon-de",
@@ -314,128 +314,124 @@ new Vue({
             deep: true
         },
         newResourceLabelDefault: function (newValue, oldValue) {
-            if(this.newResourceLabelEnUS === '' || this.newResourceLabelEnUS === oldValue){
+            if (this.newResourceLabelEnUS === '' || this.newResourceLabelEnUS === oldValue) {
                 this.newResourceLabelEnUS = newValue
             }
 
-            if(this.newResourceLabelDe === '' || this.newResourceLabelDe === oldValue){
+            if (this.newResourceLabelDe === '' || this.newResourceLabelDe === oldValue) {
                 this.newResourceLabelDe = newValue
             }
-            if(this.newResourceLabelNl === '' || this.newResourceLabelNl === oldValue){
+            if (this.newResourceLabelNl === '' || this.newResourceLabelNl === oldValue) {
                 this.newResourceLabelNl = newValue
             }
         },
         newResourceAliasDefault: function (newValue, oldValue) {
-            if(this.newResourceAliasEnUS === '' || this.newResourceAliasEnUS === oldValue){
+            if (this.newResourceAliasEnUS === '' || this.newResourceAliasEnUS === oldValue) {
                 this.newResourceAliasEnUS = newValue
             }
-            if(this.newResourceAliasDe === '' || this.newResourceAliasDe === oldValue){
+            if (this.newResourceAliasDe === '' || this.newResourceAliasDe === oldValue) {
                 this.newResourceAliasDe = newValue
             }
-            if(this.newResourceAliasNl === '' || this.newResourceAliasNl === oldValue){
+            if (this.newResourceAliasNl === '' || this.newResourceAliasNl === oldValue) {
                 this.newResourceAliasNl = newValue
             }
         }
     },
     computed: {
-        activeLanguages: function(){
+        activeLanguages: function () {
             stash = []
             this.supportedLanguages.forEach(function (item) {
-                if (item.status){
+                if (item.status) {
                     item.translator_id = "translator_" + item.id
                     stash.push(item)
                 }
             })
             return stash
         },
-        activeLanguagesId: function () {
-            stash = []
-            this.supportedLanguages.forEach(function (item) {
-                if (item.status) {
-                    stash.push(item.id)
-                }
+        activeLanguagesIds: function () {
+            return this.activeLanguages.map(function (language) {
+                return language.id
             })
-            return stash
         },
-        optionsBaseProduct: function (){
+        optionsBaseProduct: function () {
             stash = []
             currentLanguage = this.editorLanguage
 
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawBaseproducts==null){
+            if (this.rawBaseproducts == null) {
                 return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
-            else{
+            else {
                 this.rawBaseproducts.forEach(function (item) {
                     search = item[currentLanguage]
-                    if (item.is_active==1){
-                        item['search']=search
+                    if (item.is_active == 1) {
+                        item['search'] = search
                         stash.push(item)
                     }
                 })
                 return stash
             }
         },
-        optionsComponent: function (){
+        optionsComponent: function () {
             stash = []
             currentLanguage = this.editorLanguage
 
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawComponents==null){
+            if (this.rawComponents == null) {
                 return this.fetchResource('get_components', 'rawComponents')
             }
-            else{
+            else {
                 this.rawComponents.forEach(function (item) {
                     search = item[currentLanguage]
-                    if (item.is_active==1){
-                        item['search']=search
+                    if (item.is_active == 1) {
+                        item['search'] = search
                         stash.push(item)
                     }
                 })
                 return stash
             }
         },
-        optionsMaterial: function (){
+        optionsMaterial: function () {
             stash = []
             currentLanguage = this.editorLanguage
 
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawMaterials==null){
+            if (this.rawMaterials == null) {
                 return this.fetchResource('get_materials', 'rawMaterials')
             }
-            else{
+            else {
                 this.rawMaterials.forEach(function (item) {
                     search = item[currentLanguage]
-                    if (item.is_active==1){
-                        item['search']=search
+                    if (item.is_active == 1) {
+                        item['search'] = search
                         stash.push(item)
                     }
                 })
                 return stash
             }
         },
-        optionsMetatag: function (){
+        optionsMetatag: function () {
             stash = []
             currentLanguage = this.editorLanguage
 
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
 
-            if(this.rawMetatags==null){
+            if (this.rawMetatags == null) {
                 return this.fetchResource('get_metatags', 'rawMetatags')
             }
-            else{
+            else {
                 this.rawMetatags.forEach(function (item) {
                     search = item[currentLanguage]
-                    if (item.is_active==1){
-                        item['search']=search
+                    if (item.is_active == 1) {
+                        item['search'] = search
                         item['is_hidden'] = item['is_hidden'].toString();
                         stash.push(item)
                     }
@@ -588,22 +584,22 @@ new Vue({
             })
             return products
         },
-        showUpdatePanel: function (){
-            if(this.translationUpdates.length>0 || this.dirtyTranslations.isDirty){
+        showUpdatePanel: function () {
+            if (this.translationUpdates.length > 0 || this.dirtyTranslations.isDirty) {
                 return true
             }
-            else{
+            else {
                 return false
             }
         },
-        translationsBaseProducts: function(){
-            if(!hasApi){
+        translationsBaseProducts: function () {
+            if (!hasApi) {
                 return []
             }
-            if(this.rawBaseproducts==null){
+            if (this.rawBaseproducts == null) {
                 return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
-            else{
+            else {
                 var response = []
                 this.rawBaseproducts.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1) {
@@ -613,14 +609,14 @@ new Vue({
                 return response
             }
         },
-        translatorBaseProducts: function(){
-            if(!hasApi){
+        translatorBaseProducts: function () {
+            if (!hasApi) {
                 return []
             }
-            if(this.rawBaseproducts==null){
+            if (this.rawBaseproducts == null) {
                 return this.fetchResource('get_baseproducts', 'rawBaseproducts')
             }
-            else{
+            else {
                 var response = []
                 this.rawBaseproducts.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
@@ -631,13 +627,13 @@ new Vue({
             }
         },
         translationsComponents: function () {
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawComponents==null){
+            if (this.rawComponents == null) {
                 return this.fetchResource('get_components', 'rawComponents')
             }
-            else{
+            else {
                 var response = []
                 this.rawComponents.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1) {
@@ -647,14 +643,14 @@ new Vue({
                 return response
             }
         },
-        translatorComponents: function(){
-            if(!hasApi){
+        translatorComponents: function () {
+            if (!hasApi) {
                 return []
             }
-            if(this.rawComponents==null){
+            if (this.rawComponents == null) {
                 return this.fetchResource('get_components', 'rawComponents')
             }
-            else{
+            else {
                 var response = []
                 this.rawComponents.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
@@ -665,13 +661,13 @@ new Vue({
             }
         },
         translationsMaterials: function () {
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawMaterials==null){
+            if (this.rawMaterials == null) {
                 return this.fetchResource('get_materials', 'rawMaterials')
             }
-            else{
+            else {
                 var response = []
                 this.rawMaterials.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1) {
@@ -682,13 +678,13 @@ new Vue({
             }
         },
         translatorMaterials: function () {
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawMaterials==null){
+            if (this.rawMaterials == null) {
                 return this.fetchResource('get_materials', 'rawMaterials')
             }
-            else{
+            else {
                 var response = []
                 this.rawMaterials.forEach(function (option, index) {
                     if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
@@ -699,17 +695,17 @@ new Vue({
             }
         },
         translationsMetatags: function () {
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawMetatags==null){
+            if (this.rawMetatags == null) {
                 return this.fetchResource('get_metatags', 'rawMetatags')
             }
-            else{
+            else {
                 var response = []
 
                 this.rawMetatags.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1){
+                    if (option.name !== '-' && option.is_active == 1) {
                         response.push(option);
                     }
                 })
@@ -717,32 +713,32 @@ new Vue({
             }
         },
         translatorMetatags: function () {
-            if(!hasApi){
+            if (!hasApi) {
                 return []
             }
-            if(this.rawMetatags==null) {
+            if (this.rawMetatags == null) {
                 return this.fetchResource('get_metatags', 'rawMetatags')
             }
-            else{
+            else {
                 var response = []
 
                 this.rawMetatags.forEach(function (option, index) {
-                    if(option.name !== '-' && option.is_active==1 && option.translation_requested == 1 ){
+                    if (option.name !== '-' && option.is_active == 1 && option.translation_requested == 1) {
                         response.push(option);
                     }
                 })
                 return response
             }
         },
-        validNewResource: function(){
-            if(this.newResourceType=='' || this.newResourceLabelDefault==''){
+        validNewResource: function () {
+            if (this.newResourceType == '' || this.newResourceLabelDefault == '') {
                 return false
             }
             else {
                 return true
             }
         },
-        getRejectedProducts: function() {
+        getRejectedProducts: function () {
             if (!hasApi) {
                 return []
             }
@@ -773,12 +769,10 @@ new Vue({
                 })
                 .then(function (response) {
                     _this.totalRejectedProducts = response['total_rejected_products']
-                    _this.rejectedProducts.products = _this.prepareProducts(response, true)
+                    _this.rejectedProducts.products = _this.prepareProducts(response)
                     _this.rejectedProducts.isLoaded = true
-                    this.showLoading = false
                 })
                 .catch(function () {
-                    this.showLoading = false
                     _this.addMessage("Sorry, something went wrong!", 'danger')
                 })
             return []
@@ -791,59 +785,112 @@ new Vue({
             set: function (value) {
                 this.selectedRejectedProduct = value ? this.getRejectedProducts : [];
             }
-        },
+        }
     },
     methods: {
-        validateRejectedProduct: function (type, product) {
-            if (type == 'materials' && product['is_rejected'] && product['rejected_' + type]) {
-                if (!(product['is_rejected'] && product['rejected_' + type])) {
-                    return true
-                }
-
-                if ((product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0)) {
-                    return false
-                }
-                deleted_resource_name = product.deleted_materials_resources.map(function (resource) {
-                    return resource.name
-                });
-                if (deleted_resource_name.length === 0) {
-                    return true
-                }
-                resource_names = product[type].map(function (resource) {
-                    return resource.name
+        getResourcesName: function (resources) {
+            if (resources !== null) {
+                return resources.map(function (resource) {
+                    return resource['name']
                 })
-                return deleted_resource_name.find(function (name) {
-                    return !(resource_names.indexOf(name) > -1)
-                });
             }
-
-            if (type == 'component1' && product['is_rejected'] && product['rejected_' + type]) {
-                if (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0) {
-                    return (product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
-                }
-                return !(Object.keys(product['component1'])[0] === 'deleted_component1')
-            }
-
-            return !(product['is_rejected']
-            && product['rejected_' + type]
-            && (product[type] == null || Object.keys(product[type]).length === 0 || product.length === 0))
+            return []
         },
-        isRejectedProduct: function (product) {
-            if (product['base_product'] == null || Object.keys(product['base_product']).length === 0 || product['base_product'].length === 0) {
-                return true
+        validateCacheMaterial: function () {
+            active_languages = this.activeLanguagesIds
+            this.products.forEach(function (product) {
+                active_languages.forEach(function (language) {
+                    // filter active materials
+                    current_materials_list = product.materials.map(function (material) {
+                        if (material.is_active) return material[language].trim()
+                    })
+                    // convert materials array to string
+                    current_materials = current_materials_list.join(" / ")
+                    //compare cache_material string and current_materials string
+                    product.cached_materials[language]['is_overridden'] = !(product.cached_materials[language].value === current_materials)
+                })
+            })
+
+            return this.products
+        },
+        isEmptyResource: function (resource) {
+            return (resource == null ||
+                Object.keys(resource).length == 0 || // resource = {}
+                resource.length == 0 // resource = []
+            )
+        },
+        isActiveBaseProduct: function (name) {
+            return this.getResourcesName(this.translationsBaseProducts).indexOf(name) > -1
+        },
+        isActiveComponents: function (name) {
+            return this.getResourcesName(this.translationsComponents).indexOf(name) > -1
+        },
+        isActiveMaterials: function (name) {
+            return this.getResourcesName(this.translationsMaterials).indexOf(name) > -1
+        },
+        showErrorLabelBaseProduct: function (product) {
+            // baseproduct is empty or baseproduct was deleted
+            return ( this.isEmptyResource(product['base_product']) ||
+                !this.isActiveBaseProduct(product['base_product']['name']))
+                ? true
+                : false
+        },
+        showErrorLabelComponent1: function (product) {
+            if (this.isEmptyResource(product['component1'])) {
+                // there is component2 but no component1
+                return !(this.isEmptyResource(product['component2']) || product['component2'].name === '-')
+            }
+            // component1 was deleted
+            return ( product['component1'].deleted || !this.isActiveComponents(product['component1']['name']))
+                ? true
+                : false
+        },
+        showErrorLabelComponent2: function (product) {
+            // component2 is empty
+            if ((this.isEmptyResource(product['component2']) || product['component2'].name === '-')) {
+                return false
             }
 
-            if ((product['materials'] == null || Object.keys(product['materials']).length === 0 || product['materials'].length === 0)) {
+            // component2 was deleted
+            return ( product['component2'].deleted || !this.isActiveComponents(product['component2']['name']))
+                ? true
+                : false
+        },
+        showErrorLabelMaterials: function (product) {
+            // no materials
+            return (this.isEmptyResource(product['materials']))
+                ? true
+                : false
+        },
+        showErrorLabelDeletedMaterials: function (product) {
+            // verify materials was deleted after prepareProduct().
+            if (product.has_deleted_materials) {
+                product.dirty = true
                 return true
             }
-
-            if (product['component1'] == null || Object.keys(product['component1']).length === 0 || product.length === 0) {
-                return !(product['component2'] == null || Object.keys(product['component2']).length === 0 || product.length === 0 || product['component2'].name === '-')
+            // remove deleted resources when it was deleted from translations page
+            for (let i = 0; i < product.materials.length; i++) {
+                if (!this.isActiveMaterials(product.materials[i]['name'])) {
+                    product.materials.splice(i, 1)
+                    product.dirty = true
+                    product.has_deleted_materials = true
+                    break
+                }
             }
 
             return false
         },
-        fetchResource: function(type, variable_name){
+        isRejectedProduct: function (product) {
+            product.has_deleted_materials = false
+            return (this.showErrorLabelBaseProduct(product) ||
+                this.showErrorLabelComponent1(product) ||
+                this.showErrorLabelComponent2(product) ||
+                this.showErrorLabelMaterials(product))
+                ? true
+                : false
+
+        },
+        fetchResource: function (type, variable_name) {
             _this = this
             this.showLoading = true
             fetch(
@@ -881,9 +928,9 @@ new Vue({
                 date: today
             }
             this.messages.unshift(msg)
-            setTimeout( function(msg){
-                msg.show=false
-            },5000, msg);
+            setTimeout(function (msg) {
+                msg.show = false
+            }, 5000, msg);
 
         },
         addProduct: function () {
@@ -898,8 +945,8 @@ new Vue({
             if (hasApi) {
                 // clear product input
                 this.newProduct = ''
-                _this = this
                 this.showLoading = true
+                _this = this
                 fetch(
                     api_endpoint,
                     {
@@ -930,14 +977,13 @@ new Vue({
                 this.newProduct = ''
             }
         },
-        addResource: function (){
+        addResource: function () {
             //validate Resourcetype
             source = this.validResourceType()
 
-            if(source && this.validateResourceLabel(source))
-            {
+            if (source && this.validateResourceLabel(source)) {
                 resource = {
-                    'resourceType':this.newResourceType,
+                    'resourceType': this.newResourceType,
                     'name': this.newResourceLabelDefault.replace(" ", "_").toLowerCase(),
                     'is_active': '1',
                     'is_hidden': this.newResourceIsHidden,
@@ -1093,7 +1139,7 @@ new Vue({
             console.log(values)
 
         },
-        debugResources: function(){
+        debugResources: function () {
             console.log('Debug');
             console.log(this.newResourceType)
             console.log(this.newResourceLabelEnUS)
@@ -1207,9 +1253,9 @@ new Vue({
                         return response.json()
                     })
                     .then(function (response) {
-                           product.descriptions[language] = response[language];
-                           product.dirty = true
-                           _this.showLoading = false
+                        product.descriptions[language] = response[language];
+                        product.dirty = true
+                        _this.showLoading = false
                     })
                     .catch(function () {
                         _this.showLoading = false
@@ -1277,7 +1323,7 @@ new Vue({
                     });
             }
         },
-        prepareProducts: function(raw_products, is_rejected_products = false) {
+        prepareProducts: function (raw_products) {
             var products = []
             for (let key in raw_products) {
                 if (!(['success', 'metatags', 'materials', 'total_rejected_products'].indexOf(key) === -1 && 'propertyFormula' in raw_products[key])) {
@@ -1286,50 +1332,51 @@ new Vue({
 
                 my_product = raw_products[key];
                 let base_product = {}
-                if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                    for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
-                            base_product = _this.rawBaseproducts[i]
+                if (!this.isEmptyResource(my_product.base_product['value']) && my_product.base_product['value'] !== '-') {
+                    //loop for getting active base product resources
+                    for (let i = 0; i < this.translatorBaseProducts.length; i++) {
+                        if (this.translatorBaseProducts[i]['name'] === my_product.base_product['value']) {
+                            base_product = this.translatorBaseProducts[i]
                             break;
                         }
                     }
                 }
 
                 let component1 = {}
-                let found_1 = false
+                if (!this.isEmptyResource(my_product.component1['value']) && my_product.component1['value'] !== '-') {
+                    // set deleted for validating component1 was deleted
+                    component1 = {deleted: true}
+                    //loop for keeping active component which there are same resource name in my_product.component1['value']
+                    for (let i = 0; i < this.translationsComponents.length; i++) {
+                        if (this.translationsComponents[i]['name'] === my_product.component1['value']) {
+                            component1 = this.translationsComponents[i]
+                            break
+                        }
+                    }
+                }
+
                 let component2 = {}
-                let found_2 = false
-
-                if ((my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length)
-                    || (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length)) {
-
-                    for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component1 = _this.rawComponents[i]
-                            found_1 = true
-                        } else if (is_rejected_products) {
-                            component1 = {deleted_component1: my_product.component1['value']}
-                        }
-                        if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component2 = _this.rawComponents[i]
-                            found_2 = true
-                        }
-                        if (found_1 && found_2) {
+                if (!this.isEmptyResource(my_product.component2['value']) && my_product.component2['value'] !== '-') {
+                    // set deleted for validating component2 was deleted
+                    component2 = {deleted: true}
+                    //loop for keeping active component which there are same resource name in my_product.component2['value']
+                    for (let i = 0; i < this.translationsComponents.length; i++) {
+                        if (this.translationsComponents[i]['name'] === my_product.component2['value']) {
+                            component2 = this.translationsComponents[i]
                             break
                         }
                     }
                 }
 
                 let material_stash = []
-
-                for (let i = 0; i < raw_products.materials.length; i++) {
-                    if (my_product.materials.indexOf(raw_products.materials[i]['name']) > -1) {
-                        material_stash.push(raw_products.materials[i]);
+                //loop for keeping active materials which there are same resource name in my_product.materials
+                for (let i = 0; i < my_product.materials.length; i++) {
+                    if ((index = this.getResourcesName(this.translationsMaterials).indexOf(my_product.materials[i])) > -1) {
+                        material_stash.push(this.translationsMaterials[index]);
                     }
                 }
 
                 let metatag_stash = []
-
                 for (let i = 0; i < raw_products.metatags.length; i++) {
                     if (my_product.metatags.indexOf(raw_products.metatags[i]['name']) > -1) {
                         metatag_stash.push(raw_products.metatags[i]);
@@ -1359,31 +1406,25 @@ new Vue({
                     productImage: my_product.product_image['S'],
                     properties: my_product.properties,
                     propertyFormula: my_product.propertyFormula,
-                    updated: Date.now()
-                }
-
-                if (is_rejected_products == true) {
-                    rejected_attributes = {
-                        is_rejected: my_product.is_rejected,
-                        rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
-                        rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
-                        rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
-                        rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                        deleted_materials_resources: my_product.deleted_materials_resources
-                    }
-                    Object.assign(ready_product, rejected_attributes)
+                    updated: Date.now(),
+                    is_rejected: my_product.is_rejected,
+                    rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
+                    rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
+                    rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
+                    rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
+                    has_deleted_materials: my_product.has_deleted_materials,
                 }
 
                 products.push(ready_product)
             }
             return products
         },
-        productsTranslationUpdate: function(){
-            if(this.dirtyTranslations.isDirty){
+        productsTranslationUpdate: function () {
+            if (this.dirtyTranslations.isDirty) {
                 this.addMessage('Please save your local changes before you update the Products.', 'danger')
                 return false
             }
-            if(hasApi) {
+            if (hasApi) {
                 _this = this
                 fetch(
                     api_endpoint,
@@ -1406,15 +1447,14 @@ new Vue({
                     })
             }
         },
-        productsTranslationValidation: function(result){
-            if(result.count > 0){
-                proceed=confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor we'll drop all your loaded products.")
-                if(proceed){
+        productsTranslationValidation: function (result) {
+            if (result.count > 0) {
+                proceed = confirm("You are going to update " + result.count + " products! Press `OK` to proceed or `Cancel` to abort the operation. Be aware that therefor we'll drop all your loaded products.")
+                if (proceed) {
                     this.addMessage('Lets update the Products.', 'success')
                     this.showLoading = true
-                    this.products=[]
-                    if(hasApi)
-                    {
+                    this.products = []
+                    if (hasApi) {
                         _this = this
                         fetch(
                             api_endpoint,
@@ -1443,20 +1483,20 @@ new Vue({
                             })
                     }
                 }
-                else{
+                else {
                     this.showLoading = false
                     this.addMessage('Update aborted!', 'info')
                 }
             }
-            else{
+            else {
                 // we got updates, but no effected products
-                this.translationUpdates=[]
+                this.translationUpdates = []
                 this.showLoading = false
                 this.addMessage('No products to update, process aborted!', 'info')
             }
 
         },
-        saveTranslationUpdate: function(type, cell){
+        saveTranslationUpdate: function (type, cell) {
             if (hasApi) {
                 _this = this
                 this.showLoading = true
@@ -1564,14 +1604,14 @@ new Vue({
             }
 
         },
-        stashUpdate: function(type, cell){
+        stashUpdate: function (type, cell) {
             // validate that we stash each row only once
             id = cell.row.id
-            if(this.dirtyTranslations[type]['entryList'].indexOf(id)==-1){
+            if (this.dirtyTranslations[type]['entryList'].indexOf(id) == -1) {
                 // mark Translations as dirty
-                this.dirtyTranslations.isDirty=true
+                this.dirtyTranslations.isDirty = true
                 // mark type Translations as dirty
-                this.dirtyTranslations[type]['isDirty']=true
+                this.dirtyTranslations[type]['isDirty'] = true
                 // add row to stash for update
                 this.dirtyTranslations[type]['entryList'].push(id)
                 this.dirtyTranslations[type]['stash'].push(cell)
@@ -1656,11 +1696,11 @@ new Vue({
         },
         showRejectedProducts: function () {
             if (this.selectedRejectedProduct.length) {
-                this.showLoading= true
+                this.showLoading = true
                 this.products = this.selectedRejectedProduct
                 this.makeActive('names')
                 this.selectedRejectedProduct = []
-                this.showLoading= false
+                this.showLoading = false
             }
         },
         makeActive: function (item) {
@@ -1784,8 +1824,8 @@ new Vue({
             })
             return products
         },
-        is_active_language: function(id){
-            languages_id = this.activeLanguages.map(function( language ) {
+        is_active_language: function (id) {
+            languages_id = this.activeLanguages.map(function (language) {
                 return language['id']
             });
 
@@ -1861,7 +1901,7 @@ new Vue({
                                 product.dirty = true
                             }
                         }
-                        if(remove_material){
+                        if (remove_material) {
                             var index = product.materials.findIndex(i => i.name === item.name)
                             if (index > -1) {
                                 product.materials.splice(index, 1)
@@ -1903,7 +1943,7 @@ new Vue({
                                 product.dirty = true
                             }
                         }
-                        if(remove_metatag){
+                        if (remove_metatag) {
                             var index = product.metatags.findIndex(i => i.name === item.name)
                             if (index > -1) {
                                 product.metatags.splice(index, 1)
@@ -2067,13 +2107,13 @@ new Vue({
         switchMe: function (name) {
             this[name] = !this[name]
         },
-        switchRemoveMaterial: function(){
+        switchRemoveMaterial: function () {
             this.remove_mode_material = !this.remove_mode_material
         },
-        switchRemoveMetatag: function(){
+        switchRemoveMetatag: function () {
             this.remove_mode_metatag = !this.remove_mode_metatag
         },
-        switchTranslatorStatus: function(type, cell){
+        switchTranslatorStatus: function (type, cell) {
             proceed = confirm('Have you translated in all language of "' + cell.row[this.editorLanguage] + '"? Please only proceed if you are sure about it.');
 
             if (proceed && hasApi) {
@@ -2109,7 +2149,7 @@ new Vue({
                 }
             }
         },
-        switchTranslationStatus: function(type, cell){
+        switchTranslationStatus: function (type, cell) {
             if (hasApi) {
                 _this = this
                 fetch(
@@ -2219,7 +2259,7 @@ new Vue({
                     break
             }
         },
-        toggleDescriptionTranslator: function(){
+        toggleDescriptionTranslator: function () {
             this.show_description_translator = !this.show_description_translator
         },
         updateNameSchemes: function () {
@@ -2277,47 +2317,47 @@ new Vue({
             item.value = item.original_value
             item.edit = false
         },
-        validateNavigation : function (item){
-            if(this.dirtyTranslations.isDirty){
-                if(confirm("You have unsaved Translation changes. Press `OK` to procceed or `Cancel` to stay and save them.") == true){
+        validateNavigation: function (item) {
+            if (this.dirtyTranslations.isDirty) {
+                if (confirm("You have unsaved Translation changes. Press `OK` to procceed or `Cancel` to stay and save them.") == true) {
                     return true
                 }
                 else return false
             }
             else return true
         },
-        validateNewProducts: function (){
+        validateNewProducts: function () {
 
             // get all modelCodes into a list
-            modelCodes=[]
-            this.products.forEach(function(product){
-                if(modelCodes.indexOf(product.modelCode)<0){
+            modelCodes = []
+            this.products.forEach(function (product) {
+                if (modelCodes.indexOf(product.modelCode) < 0) {
                     modelCodes.push(product.modelCode)
                 }
             })
 
             // have a look at the request productCodes
-            newProductQuery= this.newProduct.trim()
-            newProductList= newProductQuery.split(" ")
-            response= []
+            newProductQuery = this.newProduct.trim()
+            newProductList = newProductQuery.split(" ")
+            response = []
 
-            newProductList.forEach(function (query_name){
+            newProductList.forEach(function (query_name) {
                 product_name = query_name.toUpperCase()
 
-                if(modelCodes.indexOf(product_name)<0){
+                if (modelCodes.indexOf(product_name) < 0) {
                     response.push(product_name)
                 }
             })
 
-            if(response.length<1){
+            if (response.length < 1) {
                 this.addMessage("No valid Product codes given", "danger")
-                this.newProduct=''
+                this.newProduct = ''
                 return false
             }
             else return response.join(" ")
         },
-        validResourceType: function(){
-            switch(this.newResourceType) {
+        validResourceType: function () {
+            switch (this.newResourceType) {
                 case 'Base Product':
                     return this.translationsBaseProducts
                     break
@@ -2331,73 +2371,69 @@ new Vue({
                     return this.translationsMetatags
                     break
                 default:
-                    this.addMessage('Please choose a valid Resource Type', 'info' )
+                    this.addMessage('Please choose a valid Resource Type', 'info')
                     this.newResourceTypeClass = "form-group has-error has-feedback"
                     return false
             }
         },
-        validateResourceLabel: function(source){
+        validateResourceLabel: function (source) {
             has_error = false
             is_unique = true
 
             // validate that every label has an entry and we dont have duplicates
-            if(this.newResourceLabelDefault==''){
-                this.newResourceLabelDefaultClass= "form-group has-error has-feedback"
-                has_error=true
+            if (this.newResourceLabelDefault == '') {
+                this.newResourceLabelDefaultClass = "form-group has-error has-feedback"
+                has_error = true
             }
-            if(this.newResourceLabelDe==''){
-                this.newResourceLabelDeClass= "form-group has-error has-feedback"
-                has_error=true
+            if (this.newResourceLabelDe == '') {
+                this.newResourceLabelDeClass = "form-group has-error has-feedback"
+                has_error = true
             }
-            if(this.newResourceLabelEnUS==''){
-                this.newResourceLabelEnUSClass= "form-group has-error has-feedback"
-                has_error=true
+            if (this.newResourceLabelEnUS == '') {
+                this.newResourceLabelEnUSClass = "form-group has-error has-feedback"
+                has_error = true
             }
-            if(this.newResourceLabelNl==''){
-                this.newResourceLabelNlClass= "form-group has-error has-feedback"
-                has_error=true
+            if (this.newResourceLabelNl == '') {
+                this.newResourceLabelNlClass = "form-group has-error has-feedback"
+                has_error = true
             }
-            if(has_error){
-                this.addMessage('Labels can not be empty. Please fix the indicated fields.', 'info' )
+            if (has_error) {
+                this.addMessage('Labels can not be empty. Please fix the indicated fields.', 'info')
                 return false
             }
 
             _this = this
             labelDefault = _this.newResourceLabelDefault
-            labelDe      = _this.newResourceLabelDe
-            labelEnUS    = _this.newResourceLabelEnUS
-            labelNl      = _this.newResourceLabelNl
+            labelDe = _this.newResourceLabelDe
+            labelEnUS = _this.newResourceLabelEnUS
+            labelNl = _this.newResourceLabelNl
 
-            error_message='A problem occured while validating your new '+ this.newResourceType +' request.'
+            error_message = 'A problem occured while validating your new ' + this.newResourceType + ' request.'
 
-            source.forEach( function (item, index) {
-                if(labelDefault.toLowerCase() == item['en-GB'].toLowerCase())
-                {
-                    _this.newResourceLabelDefaultClass= "form-group has-error has-feedback"
+            source.forEach(function (item, index) {
+                if (labelDefault.toLowerCase() == item['en-GB'].toLowerCase()) {
+                    _this.newResourceLabelDefaultClass = "form-group has-error has-feedback"
                     has_error = true
-                    error_message=error_message+' The default label (`' + labelDefault + '`) already exists as `'+ item['en-GB'] +'`.'
+                    error_message = error_message + ' The default label (`' + labelDefault + '`) already exists as `' + item['en-GB'] + '`.'
                 }
-                if(labelDe.toLowerCase() == item['de'].toLowerCase())
-                {
-                    _this.newResourceLabelDeClass= "form-group has-error has-feedback"
+                if (labelDe.toLowerCase() == item['de'].toLowerCase()) {
+                    _this.newResourceLabelDeClass = "form-group has-error has-feedback"
                     has_error = true
-                    error_message=error_message+' The german label (`' + labelDe + '`) already exists as `'+ item['de'] +'`.'
+                    error_message = error_message + ' The german label (`' + labelDe + '`) already exists as `' + item['de'] + '`.'
                 }
-                if(labelEnUS.toLowerCase() == item['en-US'].toLowerCase())
-                {
-                    _this.newResourceLabelEnUSClass= "form-group has-error has-feedback"
+                if (labelEnUS.toLowerCase() == item['en-US'].toLowerCase()) {
+                    _this.newResourceLabelEnUSClass = "form-group has-error has-feedback"
                     has_error = true
-                    error_message=error_message+' The american label (`' + labelEnUS + '`) already exists as `'+ item['en-US'] +'`.'
+                    error_message = error_message + ' The american label (`' + labelEnUS + '`) already exists as `' + item['en-US'] + '`.'
                 }
-                if(labelNl.toLowerCase() == item['nl'].toLowerCase())
-                {
-                    _this.newResourceLabelNlClass= "form-group has-error has-feedback"
+                if (labelNl.toLowerCase() == item['nl'].toLowerCase()) {
+                    _this.newResourceLabelNlClass = "form-group has-error has-feedback"
                     has_error = true
-                    error_message=error_message+' The dutch label (`' + labelNl + '`) already exists as `'+ item['nl'] +'`.'
+                    error_message = error_message + ' The dutch label (`' + labelNl + '`) already exists as `' + item['nl'] + '`.'
                 }
             })
-            if(has_error){
-                this.addMessage(error_message, 'info' )
+            if (has_error) {
+                this.addMessage(error_message, 'info')
                 return false
             }
 

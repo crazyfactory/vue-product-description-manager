@@ -127,25 +127,31 @@
                     <a v-bind:href="product.productImage" target="_blank"><img v-bind:src="product.productImage" class="img-rounded" width="50"></a>
                   </span>
                                 </label>
-                                <div>
-                                     <span class="label label-danger rejected_tag"
-                                           v-if="!validateRejectedProduct('base_product', product)">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add base product resource and save the product"
+                                      v-if="showErrorLabelBaseProduct(product)">
                                            no baseproduct
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          v-if="!validateRejectedProduct('component1', product)">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add component1 resource and save the product"
+                                      v-if="showErrorLabelComponent1(product)">
                                             no component1
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          v-if="!validateRejectedProduct('component2', product)">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add component2 resource and save the product"
+                                      v-if="showErrorLabelComponent2(product)">
                                             no component2
                                         </span>
-                                    <span class="label label-danger rejected_tag"
-                                          v-if="!validateRejectedProduct('materials', product)">
+                                <span class="label label-danger rejected_tag"
+                                      title="Please add materials resource and save the product"
+                                      v-if="showErrorLabelMaterials(product)">
                                             no material
                                         </span>
-                                </div>
-
+                                <span class="info-box rejected_tag"
+                                      title="Please save the product for confirming the resource"
+                                      v-if="showErrorLabelDeletedMaterials(product)">
+                                          <i class="fa fa-info" aria-hidden="true"></i> Some materials were deleted.
+                                    </span>
                                 <!-- Generic Product Names by language -->
                                 <ul v-if="show_names && (product.base_product || product.component1 || product.component2 || product.cached_names)" class="list-group indent">
                                     <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
@@ -177,18 +183,18 @@
                                 <!-- End Product Names by language -->
                                 <div class="indent" v-if="show_material">
                                     <!-- material configuration -->
-                                    <ul class="list-group" v-if="product.materials.length >0 || product.cached_materials">
+                                    <ul class="list-group" v-if="validateCacheMaterial().length">
                                         <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
                                             <span v-bind:class="'flag-icon cursor '+language.flag"></span>
                                             <span v-for="(material, index) in product.materials">
-                        <span v-if="index > 0 && material">/</span>
-                        <span v-if="material[language.id] && material[language.id]!== undefined">[[ material[language.id] ]]</span>
+                        <span v-if="index > 0 && material && product.cached_materials[language.id].is_overridden">/</span>
+                        <span v-if="material[language.id] && material[language.id]!== undefined && product.cached_materials[language.id].is_overridden">[[ material[language.id] ]]</span>
                       </span>
                                             <i class="fa fa-pull-right fa-trash-o cursor" @click="removeMaterial(product);"></i>
                                             <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                                                 <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                                             </a>
-                                            <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.materials && product.materials.length >0 }">
+                                            <span v-if="product.cached_materials && product.cached_materials[language.id]" class="cached" v-bind:class="{ 'override': product.cached_materials[language.id].is_overridden }">
                                                 [[ product.cached_materials[language.id].value ]]</span>
                                         </li>
                                     </ul>
