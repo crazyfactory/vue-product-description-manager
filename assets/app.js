@@ -1347,41 +1347,47 @@ new Vue({
 
                 my_product = raw_products[key];
                 let base_product = {}
-                if (my_product.base_product['value'] && my_product.base_product['value'] !== '-' && my_product.base_product['value'].length) {
-                    for (let i = 0; i < _this.rawBaseproducts.length; i++) {
-                        if (_this.rawBaseproducts[i]['name'] === my_product.base_product['value'] && _this.rawBaseproducts[i]['is_active'] === "1") {
-                            base_product = _this.rawBaseproducts[i]
+                if (!this.isEmptyResource(my_product.base_product['value']) && my_product.base_product['value'] !== '-') {
+                    //loop for getting active base product resources
+                    for (let i = 0; i < this.translatorBaseProducts.length; i++) {
+                        if (this.translatorBaseProducts[i]['name'] === my_product.base_product['value']) {
+                            base_product = this.translatorBaseProducts[i]
                             break;
                         }
                     }
                 }
 
                 let component1 = {}
-                if (my_product.component1['value'] && my_product.component1['value'] !== '-' && my_product.component1['value'].length) {
+                if (!this.isEmptyResource(my_product.component1['value']) && my_product.component1['value'] !== '-') {
+                    // set deleted for validating component1 was deleted
                     component1 = {deleted: true}
-                    for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component1['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component1 = _this.rawComponents[i]
+                    //loop for keeping active component which there are same resource name in my_product.component1['value']
+                    for (let i = 0; i < this.translationsComponents.length; i++) {
+                        if (this.translationsComponents[i]['name'] === my_product.component1['value']) {
+                            component1 = this.translationsComponents[i]
                             break
                         }
                     }
                 }
 
                 let component2 = {}
-                if (my_product.component2['value'] && my_product.component2['value'] !== '-' && my_product.component2['value'].length) {
+                if (!this.isEmptyResource(my_product.component2['value']) && my_product.component2['value'] !== '-') {
+                    // set deleted for validating component2 was deleted
                     component2 = {deleted: true}
-                    for (let i = 0; i < _this.rawComponents.length; i++) {
-                        if (_this.rawComponents[i]['name'] === my_product.component2['value'] && _this.rawComponents[i]['is_active'] === "1") {
-                            component2 = _this.rawComponents[i]
+                    //loop for keeping active component which there are same resource name in my_product.component2['value']
+                    for (let i = 0; i < this.translationsComponents.length; i++) {
+                        if (this.translationsComponents[i]['name'] === my_product.component2['value']) {
+                            component2 = this.translationsComponents[i]
                             break
                         }
                     }
                 }
 
                 let material_stash = []
+                //loop for keeping active materials which there are same resource name in my_product.materials
                 for (let i = 0; i < my_product.materials.length; i++) {
-                    if ((index = this.getResourcesName(this.rawMaterials).indexOf(my_product.materials[i])) > -1 && this.rawMaterials[index]['is_active'] === "1") {
-                        material_stash.push(this.rawMaterials[index]);
+                    if ((index = this.getResourcesName(this.translationsMaterials).indexOf(my_product.materials[i])) > -1) {
+                        material_stash.push(this.translationsMaterials[index]);
                     }
                 }
 
@@ -1422,7 +1428,6 @@ new Vue({
                     rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
                     rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
                     has_deleted_materials: my_product.has_deleted_materials,
-                    material_amount: material_stash.length
                 }
 
                 products.push(ready_product)
