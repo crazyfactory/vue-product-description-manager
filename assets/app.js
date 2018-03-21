@@ -1330,6 +1330,7 @@ new Vue({
                     continue
                 }
 
+                let is_rejected_base_product = true
                 my_product = raw_products[key];
                 let base_product = {}
                 if (!this.isEmptyResource(my_product.base_product['value']) && my_product.base_product['value'] !== '-') {
@@ -1337,11 +1338,13 @@ new Vue({
                     for (let i = 0; i < this.translatorBaseProducts.length; i++) {
                         if (this.translatorBaseProducts[i]['name'] === my_product.base_product['value']) {
                             base_product = this.translatorBaseProducts[i]
+                            is_rejected_base_product = false
                             break;
                         }
                     }
                 }
 
+                let is_rejected_component1 = true
                 let component1 = {}
                 if (!this.isEmptyResource(my_product.component1['value']) && my_product.component1['value'] !== '-') {
                     // set deleted for validating component1 was deleted
@@ -1350,11 +1353,17 @@ new Vue({
                     for (let i = 0; i < this.translationsComponents.length; i++) {
                         if (this.translationsComponents[i]['name'] === my_product.component1['value']) {
                             component1 = this.translationsComponents[i]
+                            is_rejected_component1 = false
                             break
                         }
                     }
+                } else {
+                    // no component1 but there are component2
+                    is_rejected_component1 = !(this.isEmptyResource(my_product.component2['value']) ||
+                    my_product.component2['value'] == '-')
                 }
 
+                let is_rejected_component2 = true
                 let component2 = {}
                 if (!this.isEmptyResource(my_product.component2['value']) && my_product.component2['value'] !== '-') {
                     // set deleted for validating component2 was deleted
@@ -1363,16 +1372,26 @@ new Vue({
                     for (let i = 0; i < this.translationsComponents.length; i++) {
                         if (this.translationsComponents[i]['name'] === my_product.component2['value']) {
                             component2 = this.translationsComponents[i]
+                            is_rejected_component2 = false
                             break
                         }
                     }
+                } else {
+                    // component2 was empty
+                    is_rejected_component2 = false
                 }
 
+                // no materials
+                let is_rejected_materials = my_product.materials.length < 1
+                // there are some deleted materials
+                let has_deleted_materials = false
                 let material_stash = []
                 //loop for keeping active materials which there are same resource name in my_product.materials
                 for (let i = 0; i < my_product.materials.length; i++) {
                     if ((index = this.getResourcesName(this.translationsMaterials).indexOf(my_product.materials[i])) > -1) {
                         material_stash.push(this.translationsMaterials[index]);
+                    } else {
+                        has_deleted_materials = true
                     }
                 }
 
@@ -1408,11 +1427,11 @@ new Vue({
                     propertyFormula: my_product.propertyFormula,
                     updated: Date.now(),
                     is_rejected: my_product.is_rejected,
-                    rejected_base_product: my_product.rejected_type.indexOf('no_baseproduct') > -1,
-                    rejected_component1: my_product.rejected_type.indexOf('no_component1') > -1,
-                    rejected_component2: my_product.rejected_type.indexOf('no_component2') > -1,
-                    rejected_materials: my_product.rejected_type.indexOf('no_material') > -1,
-                    has_deleted_materials: my_product.has_deleted_materials,
+                    rejected_base_product: is_rejected_base_product,
+                    rejected_component1: is_rejected_component1,
+                    rejected_component2: is_rejected_component2,
+                    rejected_materials: (is_rejected_materials || has_deleted_materials),
+                    has_deleted_materials: has_deleted_materials
                 }
 
                 products.push(ready_product)
