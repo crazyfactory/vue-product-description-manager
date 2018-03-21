@@ -1359,7 +1359,8 @@ new Vue({
                     }
                 } else {
                     // no component1 but there are component2
-                    is_rejected_component1 = !(this.isEmptyResource(my_product.component2['value']) || my_product.component2['value'] == '-')
+                    is_rejected_component1 = !(this.isEmptyResource(my_product.component2['value']) ||
+                    my_product.component2['value'] == '-')
                 }
 
                 let is_rejected_component2 = true
