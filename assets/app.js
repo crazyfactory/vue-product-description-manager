@@ -800,14 +800,17 @@ new Vue({
             active_languages = this.activeLanguagesIds
             this.products.forEach(function (product) {
                 active_languages.forEach(function (language) {
-                    // filter active materials
-                    current_materials_list = product.materials.map(function (material) {
-                        if (material.is_active) return material[language].trim()
-                    })
-                    // convert materials array to string
-                    current_materials = current_materials_list.join(" / ")
-                    //compare cache_material string and current_materials string
-                    product.cached_materials[language]['is_overridden'] = !(product.cached_materials[language].value === current_materials)
+                    product.cached_materials[language]['is_overridden'] = false
+                    if (product.materials.length > 0) {
+                        // filter active materials
+                        current_materials_list = product.materials.map(function (material) {
+                            if (material.is_active) return material[language].trim()
+                        })
+                        // convert materials array to string
+                        current_materials = current_materials_list.join(" / ")
+                        //compare cache_material string and current_materials string
+                        product.cached_materials[language]['is_overridden'] = product.cached_materials[language].value !== current_materials
+                    }
                 })
             })
 
