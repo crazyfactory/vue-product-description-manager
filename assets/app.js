@@ -1363,7 +1363,7 @@ new Vue({
                 } else {
                     // no component1 but there are component2
                     is_rejected_component1 = !(this.isEmptyResource(my_product.component2['value']) ||
-                    my_product.component2['value'] == '-')
+                        my_product.component2['value'] == '-')
                 }
 
                 let is_rejected_component2 = true
@@ -1606,9 +1606,9 @@ new Vue({
                             _this.dirtyTranslations[type].stash = []
                             _this.dirtyTranslations[type].entryList = []
                             if (!(_this.dirtyTranslations.baseProducts.isDirty
-                                || _this.dirtyTranslations.components.isDirty
-                                || _this.dirtyTranslations.materials.isDirty
-                                || _this.dirtyTranslations.metatags.isDirty)
+                                    || _this.dirtyTranslations.components.isDirty
+                                    || _this.dirtyTranslations.materials.isDirty
+                                    || _this.dirtyTranslations.metatags.isDirty)
                             ) {
                                 _this.dirtyTranslations.isDirty = false
                             }
@@ -2107,6 +2107,27 @@ new Vue({
                 }
 
             })
+        },
+        setDescriptions: function (language, description){
+            // sets description text for one language on all active products
+            if(language == 'undefined'){
+                // early finish if we don't have language
+                return
+            }
+
+            if(description == 'undefined'){
+                //use empty string if description is undefined
+                description=''
+            }
+
+            var products = this.products
+            products.forEach(function (product) {
+                if(product.active){
+                    product.descriptions[language]['value'] = description;
+                    product.dirty = true
+                }
+            })
+
         },
         sortBy: function (sortKey) {
             console.log(sortKey);
