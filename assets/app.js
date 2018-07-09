@@ -859,11 +859,23 @@ new Vue({
                 ? true
                 : false
         },
-        showErrorLabelMaterials: function (product) {
+        showErrorLabelMaterials: function (product)
+        {
             // no materials
-            return (this.isEmptyResource(product['materials']))
-                ? true
-                : false
+            const re = /^CF-ST*/g
+            if (this.isEmptyResource(product['materials']))
+            {
+                if (((product['modelCode'] || '').match(re) || []).length)
+                {
+                    if (product['rejected_materials'])
+                    {
+                        product.dirty = true
+                    }
+                    return false
+                }
+                return true
+            }
+            return false;
         },
         showErrorLabelDeletedMaterials: function (product) {
             // verify materials was deleted after prepareProduct().
@@ -1220,6 +1232,12 @@ new Vue({
                             product.hidden = false
                             product.active = true
                             product.updated = Date.now()
+
+                            const re = /^CF-ST*/g
+                            if (((product['modelCode'] || '').match(re) || []).length && product['rejected_materials'])
+                            {
+                                product['rejected_materials'] = false;
+                            }
 
                             for (var language in product.names) {
                                 product.names[language]['dirty'] = false;
