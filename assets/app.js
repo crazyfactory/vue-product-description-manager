@@ -862,20 +862,9 @@ new Vue({
         showErrorLabelMaterials: function (product)
         {
             // no materials
-            const re = /^CF-ST*/g
-            if (this.isEmptyResource(product['materials']))
-            {
-                if (((product['modelCode'] || '').match(re) || []).length)
-                {
-                    if (product['rejected_materials'])
-                    {
-                        product.dirty = true
-                    }
-                    return false
-                }
-                return true
-            }
-            return false;
+            return (this.isEmptyResource(product['materials']) && !product['modelCode'].startsWith("CF-ST"))
+                ? true
+                : false;
         },
         showErrorLabelDeletedMaterials: function (product) {
             // verify materials was deleted after prepareProduct().
@@ -1233,9 +1222,7 @@ new Vue({
                             product.active = true
                             product.updated = Date.now()
 
-                            const re = /^CF-ST*/g
-                            if (((product['modelCode'] || '').match(re) || []).length && product['rejected_materials'])
-                            {
+                            if (product['modelCode'].startsWith("CF-ST") && product['rejected_materials']) {
                                 product['rejected_materials'] = false;
                             }
 
