@@ -831,6 +831,9 @@ new Vue({
         isActiveMaterials: function (name) {
             return this.getResourcesName(this.translationsMaterials).indexOf(name) > -1
         },
+        ignoreMaterial: function (product) {
+            return product['modelCode'].startsWith("CF-ST")
+        },
         showErrorLabelBaseProduct: function (product) {
             // baseproduct is empty or baseproduct was deleted
             return ( this.isEmptyResource(product['base_product']) ||
@@ -861,7 +864,7 @@ new Vue({
         },
         showErrorLabelMaterials: function (product) {
             // no materials
-            return (this.isEmptyResource(product['materials']) && !product['modelCode'].startsWith("CF-ST"))
+            return (this.isEmptyResource(product['materials']) && !this.ignoreMaterial(product))
                 ? true
                 : false
         },
@@ -1181,14 +1184,14 @@ new Vue({
         },
         exportProduct: function (product) {
             // validate if baseProduct or Material is empty for this product
-            if (!product.base_product || (!product.materials.length && !product.modelCode.startsWith("CF-ST"))) {
-                if (!product.materials.length && !product.modelCode.startsWith("CF-ST")) {
+            if (!(product.base_product && (product.materials.length || this.ignoreMaterial(product)))) {
+                if (!(product.materials.length || this.ignoreMaterial(product))) {
                     msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
                 }
                 if (!product.base_product) {
                     msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
                 }
-                if (!product.base_product && (!product.materials.length && !product.modelCode.startsWith("CF-ST"))) {
+                if (!(product.base_product || (product.materials.length || this.ignoreMaterial(product)))) {
                     msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode + "` ?"
                 }
                 if (!confirm(msg)) return
