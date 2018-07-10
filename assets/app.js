@@ -1182,13 +1182,13 @@ new Vue({
         exportProduct: function (product) {
             // validate if baseProduct or Material is empty for this product
             if (!product.base_product || !product.materials.length) {
-                if (!product.materials.length) {
+                if (!product.materials.length && !product.modelCode.startsWith("CF-ST")) {
                     msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
                 }
                 if (!product.base_product) {
                     msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
                 }
-                if (!product.base_product && !product.materials.length) {
+                if (!product.base_product && (!product.materials.length && !product.modelCode.startsWith("CF-ST"))) {
                     msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode + "` ?"
                 }
                 if (!confirm(msg)) return
@@ -1385,7 +1385,7 @@ new Vue({
                 }
 
                 // no materials
-                let is_rejected_materials = my_product.materials.length < 1
+                let is_rejected_materials = my_product.materials.length < 1 && !my_product.id.startsWith("CF-ST")
                 // there are some deleted materials
                 let has_deleted_materials = false
                 let material_stash = []
