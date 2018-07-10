@@ -861,7 +861,7 @@ new Vue({
         },
         showErrorLabelMaterials: function (product) {
             // no materials
-            return (this.isEmptyResource(product['materials']))
+            return (this.isEmptyResource(product['materials']) && !product['modelCode'].startsWith("CF-ST"))
                 ? true
                 : false
         },
