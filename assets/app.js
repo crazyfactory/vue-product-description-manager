@@ -859,12 +859,11 @@ new Vue({
                 ? true
                 : false
         },
-        showErrorLabelMaterials: function (product)
-        {
+        showErrorLabelMaterials: function (product) {
             // no materials
             return (this.isEmptyResource(product['materials']) && !product['modelCode'].startsWith("CF-ST"))
                 ? true
-                : false;
+                : false
         },
         showErrorLabelDeletedMaterials: function (product) {
             // verify materials was deleted after prepareProduct().
