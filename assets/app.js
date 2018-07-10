@@ -1181,7 +1181,7 @@ new Vue({
         },
         exportProduct: function (product) {
             // validate if baseProduct or Material is empty for this product
-            if (!product.base_product || !product.materials.length) {
+            if (!product.base_product || (!product.materials.length && !product.modelCode.startsWith("CF-ST"))) {
                 if (!product.materials.length && !product.modelCode.startsWith("CF-ST")) {
                     msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
                 }
