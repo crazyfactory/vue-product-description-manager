@@ -1221,10 +1221,6 @@ new Vue({
                             product.active = true
                             product.updated = Date.now()
 
-                            if (product['modelCode'].startsWith("CF-ST") && product['rejected_materials']) {
-                                product['rejected_materials'] = false;
-                            }
-
                             for (var language in product.names) {
                                 product.names[language]['dirty'] = false;
                                 product.names[language]['edit'] = false;
