@@ -831,6 +831,9 @@ new Vue({
         isActiveMaterials: function (name) {
             return this.getResourcesName(this.translationsMaterials).indexOf(name) > -1
         },
+        ignoreMaterial: function (modelCode) {
+            return modelCode.startsWith("CF-ST")
+        },
         showErrorLabelBaseProduct: function (product) {
             // baseproduct is empty or baseproduct was deleted
             return ( this.isEmptyResource(product['base_product']) ||
@@ -861,7 +864,7 @@ new Vue({
         },
         showErrorLabelMaterials: function (product) {
             // no materials
-            return (this.isEmptyResource(product['materials']) && !product['modelCode'].startsWith("CF-ST"))
+            return (this.isEmptyResource(product['materials']) && !this.ignoreMaterial(product['modelCode']))
                 ? true
                 : false
         },
@@ -1181,14 +1184,14 @@ new Vue({
         },
         exportProduct: function (product) {
             // validate if baseProduct or Material is empty for this product
-            if (!product.base_product || !product.materials.length) {
-                if (!product.materials.length) {
+            if (!(product.base_product && (product.materials.length || this.ignoreMaterial(product['modelCode'])))) {
+                if (!(product.materials.length || this.ignoreMaterial(product['modelCode']))) {
                     msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
                 }
                 if (!product.base_product) {
                     msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
                 }
-                if (!product.base_product && !product.materials.length) {
+                if (!(product.base_product || (product.materials.length || this.ignoreMaterial(product['modelCode'])))) {
                     msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode + "` ?"
                 }
                 if (!confirm(msg)) return
@@ -1385,7 +1388,7 @@ new Vue({
                 }
 
                 // no materials
-                let is_rejected_materials = my_product.materials.length < 1
+                let is_rejected_materials = my_product.materials.length < 1 && !this.ignoreMaterial(my_product.id)
                 // there are some deleted materials
                 let has_deleted_materials = false
                 let material_stash = []
