@@ -801,7 +801,7 @@ new Vue({
             this.products.forEach(function (product) {
                 active_languages.forEach(function (language) {
                     if(product.cached_materials[language]['is_overridden'] === undefined){
-                    product.cached_materials[language]['is_overridden'] = false
+                        product.cached_materials[language]['is_overridden'] = false
                     }
                     if (product.materials.length > 0) {
                         // filter active materials
