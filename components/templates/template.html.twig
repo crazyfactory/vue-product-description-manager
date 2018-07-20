@@ -142,11 +142,6 @@
                                       v-if="showErrorLabelComponent2(product)">
                                             no component2
                                         </span>
-                                <span class="label label-danger rejected_tag"
-                                      title="Please add materials resource and save the product"
-                                      v-if="showErrorLabelMaterials(product)">
-                                            no material
-                                        </span>
                                 <span class="info-box rejected_tag"
                                       title="Please save the product for confirming the resource"
                                       v-if="showErrorLabelDeletedMaterials(product)">
@@ -931,7 +926,7 @@
                             </template>
                             <template slot="rejected_materials" scope="cell">
                                 <div class="rejected">
-                                    <i v-if="cell.row.rejected_materials" aria-hidden="true" class="danger fa fa-times-circle"></i>
+                                    <i v-if="cell.row.has_deleted_materials" aria-hidden="true" class="danger fa fa-times-circle"></i>
                                     <i v-else class="fa fa-check-circle"></i>
                                 </div>
                             </template>

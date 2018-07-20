@@ -864,12 +864,6 @@ new Vue({
                 ? true
                 : false
         },
-        showErrorLabelMaterials: function (product) {
-            // no materials
-            return (this.isEmptyResource(product['materials']) && !this.ignoreMaterial(product['modelCode']))
-                ? true
-                : false
-        },
         showErrorLabelDeletedMaterials: function (product) {
             // verify materials was deleted after prepareProduct().
             if (product.has_deleted_materials) {
@@ -892,8 +886,7 @@ new Vue({
             product.has_deleted_materials = false
             return (this.showErrorLabelBaseProduct(product) ||
                 this.showErrorLabelComponent1(product) ||
-                this.showErrorLabelComponent2(product) ||
-                this.showErrorLabelMaterials(product))
+                this.showErrorLabelComponent2(product))
                 ? true
                 : false
 
@@ -1389,8 +1382,6 @@ new Vue({
                     is_rejected_component2 = false
                 }
 
-                // no materials
-                let is_rejected_materials = my_product.materials.length < 1 && !this.ignoreMaterial(my_product.id)
                 // there are some deleted materials
                 let has_deleted_materials = false
                 let material_stash = []
@@ -1438,7 +1429,6 @@ new Vue({
                     rejected_base_product: is_rejected_base_product,
                     rejected_component1: is_rejected_component1,
                     rejected_component2: is_rejected_component2,
-                    rejected_materials: (is_rejected_materials || has_deleted_materials),
                     has_deleted_materials: has_deleted_materials
                 }
 
