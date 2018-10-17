@@ -1333,9 +1333,9 @@ new Vue({
                 let base_product = {}
                 if (!this.isEmptyResource(my_product.base_product['value']) && my_product.base_product['value'] !== '-') {
                     //loop for getting active base product resources
-                    for (let i = 0; i < this.translatorBaseProducts.length; i++) {
-                        if (this.translatorBaseProducts[i]['name'] === my_product.base_product['value']) {
-                            base_product = this.translatorBaseProducts[i]
+                    for (let i = 0; i < this.translationsBaseProducts.length; i++) {
+                        if (this.translationsBaseProducts[i]['name'] === my_product.base_product['value']) {
+                            base_product = this.translationsBaseProducts[i]
                             is_rejected_base_product = false
                             break;
                         }
