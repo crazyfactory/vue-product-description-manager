@@ -250,15 +250,14 @@ input[type="checkbox"] {
 
 .product-list li .toggle {
     text-align: center;
-    width: 40px;
     /* auto, since non-WebKit browsers doesn't support input styling */
-    height: auto;
     position: absolute;
     top: 0;
     bottom: 0;
-    margin: 5px 0 auto 0;
+    margin: 25px 0 auto 0;
     border: none; /* Mobile Safari */
-
+    height: 20px;
+    width:20px;
 }
 
 .product-list li label {
@@ -520,7 +519,9 @@ label.white-space{
     }
 
     .product-list li .toggle {
-        height: 40px;
+        margin-top: 25px;
+        height: 20px;
+        width:20px;
     }
 
     .toggle-all {
