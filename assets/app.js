@@ -1050,7 +1050,7 @@ new Vue({
 
                 const data = new FormData()
                 data.append('data', file)
-                data.apeend('action', 'import_names_and_descriptions_by_csv')
+                data.append('action', 'import_names_and_descriptions_by_csv')
                 fetch(api_endpoint, {
                     credentials: 'include',
                     method: 'POST',
