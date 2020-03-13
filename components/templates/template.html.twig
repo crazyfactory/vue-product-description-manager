@@ -26,6 +26,8 @@
     <!-- end active messages -->
     <!-- Settings button -->
     <div class="container">
+        <input id="names_and_descriptions_file_input" class="margin-bottom" accept=".csv" type="file"/>
+        <button @click="importNamesAndDescriptionsByCsv()" class="btn btn-default">Import names and descriptions by csv</button>
         <i class="fa fa-cogs fa-2x fa-pull-right" aria-hidden="true" title="Set languages for Editor and Preview features" @click="toggle_settings"></i>
     </div>
     <!-- end settings button -->
