@@ -1068,7 +1068,7 @@ new Vue({
                         location.reload()
                     }
                 }).catch(function () {
-                    reject("Sorry, something went wrong!")
+                    _this.addMessage("Sorry, something went wrong!", 'danger')
                 })
             }
         },
