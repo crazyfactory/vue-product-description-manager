@@ -1040,6 +1040,38 @@ new Vue({
                     })
             }
         },
+        importNamesAndDescriptionsByCsv: function () {
+            if (hasApi) {
+                const file = document.getElementById('names_and_descriptions_file_input').files[0]
+                if (!file) {
+                    alert('Please select csv file!')
+                    return
+                }
+
+                const data = new FormData()
+                data.append('data', file)
+                data.append('action', 'import_names_and_descriptions_by_csv')
+                fetch(api_endpoint, {
+                    credentials: 'include',
+                    method: 'POST',
+                    body: data
+                }).then(function (response) {
+                  return response.json()
+                }).then(function (response) {
+                    if (response.success) {
+                        _this.showLoading = false
+                        _this.addMessage(response.message, 'success')
+                        location.reload()
+                    } else {
+                        _this.showLoading = false
+                        _this.addMessage(response.message, 'danger')
+                        location.reload()
+                    }
+                }).catch(function () {
+                    _this.addMessage("Sorry, something went wrong!", 'danger')
+                })
+            }
+        },
         bulkSaveProducts: function () {
             if (hasApi) {
                 let model_code = []
