@@ -169,6 +169,7 @@ new Vue({
         show_translation_components: false,
         show_translation_materials: false,
         show_translation_metatags: false,
+        show_translation_metatags_modal: false,
         show_translation_descriptions: false,
         show_translator_base_products: false,
         show_translator_components: false,
@@ -1869,6 +1870,9 @@ new Vue({
                 })
             })
             return products
+        },
+        openMetatagsModal: function() {
+            this.show_translation_metatags_modal = true;
         },
         is_active_language: function (id) {
             languages_id = this.activeLanguages.map(function (language) {
