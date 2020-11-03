@@ -69,21 +69,8 @@ var settingStorage = {
 }
 
 Vue.component("metatags-modal", {
-   template: '#metatags-modal-template',
-   props: ['cell', 'field', 'close', 'save'],
-   data: function () {
-       return {
-           items: [],
-           newItem: ''
-       }
-   },
-    mounted: function () {
-       this.$nextTick(function () {
-           if (this.field && this.cell.row[this.field]) {
-                this.items = this.cell.row[this.field].split(',');
-           }
-       })
-    },
+    template: '#metatags-modal-template',
+    props: ['cell', 'field', 'close', 'save'],
     methods: {
        add: function () {
            if (this.newItem) {
@@ -103,7 +90,19 @@ Vue.component("metatags-modal", {
             this.save('metatags', this.cell);
             this.close();
         }
-
+    },
+    data: function () {
+        return {
+            items: [],
+            newItem: ''
+        }
+    },
+    mounted: function () {
+        this.$nextTick(function () {
+            if (this.field && this.cell.row[this.field]) {
+                this.items = this.cell.row[this.field].split(',');
+            }
+        })
     }
 });
 
