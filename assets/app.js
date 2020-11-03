@@ -84,7 +84,7 @@ Vue.component("metatags-modal", {
         saveToDB: function () {
             const result = this.items.filter(function (el) {
                 return el != null;
-            });
+            }).map(s => s.trim());
             this.cell.row[this.field] = result.join(',');
 
             this.save('metatags', this.cell);
