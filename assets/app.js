@@ -70,7 +70,7 @@ var settingStorage = {
 
 Vue.component("metatags-modal", {
     template: '#metatags-modal-template',
-    props: ['cell', 'field', 'close', 'save'],
+    props: ['cell', 'lang', 'close', 'save'],
     methods: {
        add: function () {
            if (this.newItem) {
@@ -94,13 +94,17 @@ Vue.component("metatags-modal", {
     data: function () {
         return {
             items: [],
-            newItem: ''
+            newItem: '',
+            flagIcon: '',
+            field: ''
         }
     },
     mounted: function () {
         this.$nextTick(function () {
-            if (this.field && this.cell.row[this.field]) {
+            this.field = `alias_${this.lang}`;
+            if (this.cell.row[this.field]) {
                 this.items = this.cell.row[this.field].split(',');
+                this.flagIcon = `flag-icon flag-icon-${this.lang.replace('en-', '').toLowerCase()}`;
             }
         })
     }
@@ -191,7 +195,7 @@ new Vue({
         rawMaterials: RawMaterials,
         rawMetatags: null,
         selected_translation_metatags_cell: null,
-        selected_translation_metatags_field: null,
+        selected_translation_metatags_lang: null,
         show_actionbar: false,
         show_add_new: false,
         show_export: false,
@@ -1910,14 +1914,14 @@ new Vue({
             })
             return products
         },
-        openMetatagsModal: function(cell, field) {
+        openMetatagsModal: function(cell, lang) {
             this.selected_translation_metatags_cell = cell;
-            this.selected_translation_metatags_field = field;
+            this.selected_translation_metatags_lang = lang;
             this.show_translation_metatags_modal = true;
         },
         closeMetatagsModal: function() {
             this.selected_translation_metatags_cell = null;
-            this.selected_translation_metatags_field = null;
+            this.selected_translation_metatags_lang = null;
             this.show_translation_metatags_modal = false;
         },
         is_active_language: function (id) {
