@@ -72,12 +72,12 @@ Vue.component("metatags-modal", {
     template: '#metatags-modal-template',
     props: ['cell', 'lang', 'close', 'save'],
     methods: {
-       add: function () {
-           if (this.newItem) {
-               this.items.push(this.newItem);
-               this.newItem = '';
-           }
-       },
+        add: function () {
+            if (this.newItem) {
+                this.items.push(this.newItem);
+                this.newItem = '';
+            }
+        },
         remove: function (index) {
            this.items.splice(index, 1);
         },
