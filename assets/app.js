@@ -68,6 +68,47 @@ var settingStorage = {
     }
 }
 
+Vue.component("metatags-modal", {
+    template: '#metatags-modal-template',
+    props: ['cell', 'lang', 'close', 'save'],
+    methods: {
+        add: function () {
+            if (this.newItem) {
+                this.items.push(this.newItem);
+                this.newItem = '';
+            }
+        },
+        remove: function (index) {
+           this.items.splice(index, 1);
+        },
+        saveToDB: function () {
+            const result = this.items.filter(function (el) {
+                return el != null;
+            }).map(s => s.trim());
+            this.cell.row[this.field] = result.join(',');
+
+            this.save('metatags', this.cell);
+            this.close();
+        }
+    },
+    data: function () {
+        return {
+            items: [],
+            newItem: '',
+            flagIcon: '',
+            field: ''
+        }
+    },
+    mounted: function () {
+        this.$nextTick(function () {
+            this.field = `alias_${this.lang}`;
+            if (this.cell.row[this.field]) {
+                this.items = this.cell.row[this.field].split(',');
+                this.flagIcon = `flag-icon flag-icon-${this.lang.replace('en-', '').toLowerCase()}`;
+            }
+        })
+    }
+});
 
 new Vue({
     el: '#app',
@@ -153,6 +194,8 @@ new Vue({
         rawComponents: null,
         rawMaterials: RawMaterials,
         rawMetatags: null,
+        selected_translation_metatags_cell: null,
+        selected_translation_metatags_lang: null,
         show_actionbar: false,
         show_add_new: false,
         show_export: false,
@@ -169,6 +212,7 @@ new Vue({
         show_translation_components: false,
         show_translation_materials: false,
         show_translation_metatags: false,
+        show_translation_metatags_modal: false,
         show_translation_descriptions: false,
         show_translator_base_products: false,
         show_translator_components: false,
@@ -1869,6 +1913,16 @@ new Vue({
                 })
             })
             return products
+        },
+        openMetatagsModal: function(cell, lang) {
+            this.selected_translation_metatags_cell = cell;
+            this.selected_translation_metatags_lang = lang;
+            this.show_translation_metatags_modal = true;
+        },
+        closeMetatagsModal: function() {
+            this.selected_translation_metatags_cell = null;
+            this.selected_translation_metatags_lang = null;
+            this.show_translation_metatags_modal = false;
         },
         is_active_language: function (id) {
             languages_id = this.activeLanguages.map(function (language) {
