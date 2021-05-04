@@ -179,7 +179,7 @@ new Vue({
         isAdmin: IsAdmin,
         isFullScreen: !IsAdmin,
         isLoading: false,
-        languages_autodescription: ['de', 'en-GB', 'en-US', 'es', 'nl', 'fr', 'pt', 'it', 'sv', 'hr', 'cs', 'fi', 'nb', 'pl', 'da', 'hu'],
+        languages_autodescription: ['de', 'en-GB', 'en-US', 'es', 'nl', 'fr', 'pt', 'it', 'sv', 'hr', 'cs', 'fi', 'nb', 'pl', 'da', 'hu', 'sk','sl'],
         messages: messageStorage.fetch(),
         newProduct: '',
         // Preview filter
