@@ -1178,10 +1178,8 @@ new Vue({
             this.selectedMetatags = []
         },
         closeEditMe: function (item) {
-            data = {...item}
-            item.value = " "
-            item.value = item.value.replace(/\r?\n|\r/g, "")
             item.edit = false
+            item.value = item.value.replace(/\r?\n|\r/g, "")
         },
         manuallyDescriptionSave: function (product, language) {
             product.manually_descriptions[language].edit = false
