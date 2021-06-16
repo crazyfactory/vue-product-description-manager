@@ -249,26 +249,61 @@
                                         <ul class="list-group">
                                             <!-- Language dependent items -->
                                             <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
-
-                                                <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="product.descriptions[language.id] && !product.descriptions[language.id].edit" @click="editMe(product.descriptions[language.id], product)"></i>
-                                                <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor" aria-hidden="true" v-show="product.descriptions[language.id] && product.descriptions[language.id].edit" @click="closeEditMe(product.descriptions[language.id])"></i>
-
-                                                <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)" v-if="languages_autodescription.indexOf(language.id)>-1"></i>
-                                                <i class="fa fa-clone fa-pull-right cursor" title="Set this description for all active products in this language" aria-hidden="true" @click="setDescriptions(language.id, product.descriptions[language.id].value)"></i>
-
                                                 <span v-bind:class="'flag-icon '+language.flag" ></span>
-                                                <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
-                                                    <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
-                                                </a>
-                                                <!-- original description -->
+                                                <div class="description-container">
+                                                    <span><b>Publish Description:</b></span>
+                                                    <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
+                                                        <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
+                                                    </a>
 
-                                                <span v-if="product.cached_descriptions && product.cached_descriptions[language.id] && product.descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value) }">
-                                                    [[ product.cached_descriptions[language.id].value ]]</span>
-                                                <!-- end original description -->
-                                                <span v-if="!product.cached_descriptions || ((product.descriptions[language.id] && product.cached_descriptions[language.id]) && !(product.descriptions[language.id].value == product.cached_descriptions[language.id].value))" class="cursor" @click="editMe(product.descriptions[language.id],product)">
-                                                    [[product.descriptions[language.id].value ]]</span>
-                                                <div class="editable" v-if="product.descriptions[language.id]" v-show="product.descriptions[language.id].edit">
-                                                    <textarea v-model="product.descriptions[language.id].value" @keyup.enter="closeEditMe(product.descriptions[language.id])"></textarea>
+                                                    <!-- original description -->
+                                                    <div v-if="product.cached_descriptions && product.cached_descriptions[language.id] && product.descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value.trim() == product.cached_descriptions[language.id].value.trim()) }">
+                                                    [[ product.cached_descriptions[language.id].value ]]</div>
+                                                    <!-- end original description -->
+
+                                                    <div v-if="!product.cached_descriptions || ((product.descriptions[language.id] && product.cached_descriptions[language.id]) && !(product.descriptions[language.id].value.trim() == product.cached_descriptions[language.id].value.trim()))">
+                                                    [[ product.descriptions[language.id].value ]]</div>
+                                                </div>
+                                                <hr>
+                                                <div class="description-container">
+                                                    <span><b>Auto Description:</b></span>
+                                                    <!-- Icon -->
+                                                    <i class="fa fa-refresh fa-pull-right cursor" title="Generate new description" aria-hidden="true" @click="getGeneratedDescription(product, language.id)" v-if="languages_autodescription.indexOf(language.id)>-1"></i>
+                                                    <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor Auto Desscription" aria-hidden="true" @click="closeEditAutoDescription(product,language.id)"></i>
+                                                    <i class="fa fa-clone fa-pull-right cursor" title="Set this auto description for all active products in this language" aria-hidden="true" @click="setDescriptions(language.id, product.auto_descriptions[language.id].value, 'auto_descriptions')"></i>
+                                                    <!-- end icon -->
+
+                                                    <!-- original description -->
+                                                    <div v-if="product.cached_auto_descriptions && product.cached_auto_descriptions[language.id] && product.auto_descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.auto_descriptions[language.id].value.trim() == product.cached_auto_descriptions[language.id].value.trim()) }">
+                                                        [[ product.cached_auto_descriptions[language.id].value ]]
+                                                    </div>
+                                                    <!-- end original description -->
+
+                                                    <div v-if="!product.cached_auto_descriptions || ((product.auto_descriptions[language.id] && product.cached_auto_descriptions[language.id]) && !(product.auto_descriptions[language.id].value == product.cached_auto_descriptions[language.id].value))">
+                                                        [[ product.auto_descriptions[language.id].value ]]
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="description-container">
+                                                    <span><b>Manually Description:</b></span>
+                                                    <!-- Icon -->
+                                                    <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="product.manually_descriptions[language.id] && !product.manually_descriptions[language.id].edit" @click="editMe(product.manually_descriptions[language.id],product)"></i>
+                                                    <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor Test" aria-hidden="true" v-show="product.manually_descriptions[language.id] && product.manually_descriptions[language.id].edit" @click="closeEditManuallyDescription(product, language.id)"></i>
+                                                    <i class="fa fa-clone fa-pull-right cursor" title="Set this manually description for all active products in this language" aria-hidden="true" @click="setDescriptions(language.id, product.manually_descriptions[language.id].value, 'manually_descriptions')"></i>
+                                                    <!-- end icon -->
+
+                                                    <!-- original description -->
+                                                    <div v-if="product.cached_manually_descriptions && product.cached_manually_descriptions[language.id] && product.manually_descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.manually_descriptions[language.id].value.trim() === product.cached_manually_descriptions[language.id].value.trim()) }">
+                                                        [[ product.cached_manually_descriptions[language.id].value ]]
+                                                    </div>
+                                                    <!-- end original description -->
+
+                                                    <div v-if="!product.cached_manually_descriptions || ((product.manually_descriptions[language.id] && product.cached_manually_descriptions[language.id]) && !(product.manually_descriptions[language.id].value == product.cached_manually_descriptions[language.id].value))" class="cursor" @click="editMe(product.manually_descriptions[language.id],product)">
+                                                        [[ product.manually_descriptions[language.id].value ]]</div>
+
+                                                    <div class="editable" v-if="product.manually_descriptions[language.id]" v-show="product.manually_descriptions[language.id].edit">
+                                                        <textarea v-model="product.manually_descriptions[language.id].value" @keyup.enter="manuallyDescriptionSave(product, language.id)"></textarea>
+                                                    </div>
                                                 </div>
 
                                             </li>
