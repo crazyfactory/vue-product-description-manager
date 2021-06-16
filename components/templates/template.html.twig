@@ -288,7 +288,7 @@
                                                     <span><b>Manually Description:</b></span>
                                                     <!-- Icon -->
                                                     <i class="fa fa-pencil fa-pull-right cursor" title="Add custom description" aria-hidden="true" v-show="product.manually_descriptions[language.id] && !product.manually_descriptions[language.id].edit" @click="editMe(product.manually_descriptions[language.id],product)"></i>
-                                                    <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor Test" aria-hidden="true" v-show="product.manually_descriptions[language.id] && product.manually_descriptions[language.id].edit" @click="closeEditManuallyDescription(product, language.id)"></i>
+                                                    <i class="fa fa-times-circle-o fa-pull-right cursor" title="Close Editor Manually Description" aria-hidden="true" v-show="product.manually_descriptions[language.id] && product.manually_descriptions[language.id].edit" @click="closeEditManuallyDescription(product, language.id)"></i>
                                                     <i class="fa fa-clone fa-pull-right cursor" title="Set this manually description for all active products in this language" aria-hidden="true" @click="setDescriptions(language.id, product.manually_descriptions[language.id].value, 'manually_descriptions')"></i>
                                                     <!-- end icon -->
 
@@ -298,7 +298,7 @@
                                                     </div>
                                                     <!-- end original description -->
 
-                                                    <div v-if="!product.cached_manually_descriptions || ((product.manually_descriptions[language.id] && product.cached_manually_descriptions[language.id]) && !(product.manually_descriptions[language.id].value == product.cached_manually_descriptions[language.id].value))" class="cursor" @click="editMe(product.manually_descriptions[language.id],product)">
+                                                    <div v-if="!product.cached_manually_descriptions || ((product.manually_descriptions[language.id] && product.cached_manually_descriptions[language.id]) && !(product.manually_descriptions[language.id].value.trim() == product.cached_manually_descriptions[language.id].value.trim()))" class="cursor" @click="editMe(product.manually_descriptions[language.id],product)">
                                                         [[ product.manually_descriptions[language.id].value ]]</div>
 
                                                     <div class="editable" v-if="product.manually_descriptions[language.id]" v-show="product.manually_descriptions[language.id].edit">
