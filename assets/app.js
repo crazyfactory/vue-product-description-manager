@@ -1186,6 +1186,8 @@ new Vue({
             _this.prepareDescrition(product, language)
         },
         prepareDescrition: function (product, language) {
+            product.manually_descriptions[language].value = product.manually_descriptions[language].value.replace(/\r?\n|\r/g, "")
+
             if (product.manually_descriptions[language].value !== '') {
                 product.descriptions[language].value = product.manually_descriptions[language].value
             } else if (product.auto_descriptions[language].value !== product.descriptions[language].value) {
