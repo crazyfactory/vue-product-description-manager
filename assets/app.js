@@ -1187,11 +1187,14 @@ new Vue({
         },
         prepareDescrition: function (product, language) {
             product.manually_descriptions[language].value = product.manually_descriptions[language].value.replace(/\r?\n|\r/g, "")
+            product.descriptions[language].value = product.auto_descriptions[language].value
 
-            if (product.manually_descriptions[language].value !== '') {
-                product.descriptions[language].value = product.manually_descriptions[language].value
-            } else if (product.auto_descriptions[language].value !== product.descriptions[language].value) {
-                product.descriptions[language].value = product.auto_descriptions[language].value
+            if (product.manually_descriptions[language].value && product.auto_descriptions[language].value) {
+                product.descriptions[language].value += '<br><br>'
+            }
+
+            if (product.manually_descriptions[language].value) {
+                product.descriptions[language].value += product.manually_descriptions[language].value
             }
         },
         customLabel: function (option) {
