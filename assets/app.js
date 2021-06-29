@@ -1005,6 +1005,10 @@ new Vue({
                     .then(function (response) {
                         _this.showLoading = false
                         _this.products.push(..._this.prepareProducts(response))
+
+                        _this.products.forEach(function (product) {
+                            _this.prepareDescriptions(product)
+                        })
                     })
                     .catch(function () {
                         _this.showLoading = false
@@ -1183,9 +1187,16 @@ new Vue({
         },
         manuallyDescriptionSave: function (product, language) {
             product.manually_descriptions[language].edit = false
-            _this.prepareDescrition(product, language)
+            product.manually_descriptions[language].value = product.manually_descriptions[language].value.replace(/\r?\n|\r/g, "")
+            this.prepareDescription(product, language)
         },
-        prepareDescrition: function (product, language) {
+        autoDescriptionSave: function (product, language) {
+            product.auto_descriptions[language].edit = false
+            product.auto_descriptions[language].value = product.auto_descriptions[language].value.replace(/\r?\n|\r/g, "")
+            this.prepareDescription(product, language)
+        },
+        prepareDescription: function (product, language) {
+            product.dirty = true
             product.manually_descriptions[language].value = product.manually_descriptions[language].value.replace(/\r?\n|\r/g, "")
             product.descriptions[language].value = product.auto_descriptions[language].value
 
@@ -1196,6 +1207,20 @@ new Vue({
             if (product.manually_descriptions[language].value) {
                 product.descriptions[language].value += product.manually_descriptions[language].value
             }
+        },
+        prepareDescriptions: function (product) {
+            this.supportedLanguages.forEach(function (language) {
+                if (product.descriptions[language.id].value === ''
+                    && (product.auto_descriptions[language.id].value || product.manually_descriptions[language.id].value)
+                ) {
+                    _this.prepareDescription(product, language.id)
+                }
+            })
+        },
+        mergeAllActiveDescriptions: function (product) {
+            this.activeLanguagesIds.forEach(function (language) {
+                _this.prepareDescription(product, language)
+            })
         },
         customLabel: function (option) {
             return option[this.editorLanguage];
@@ -1344,7 +1369,7 @@ new Vue({
                     })
                     .then(function (response) {
                         product.auto_descriptions[language] = response[language];
-                        _this.prepareDescrition(product,language)
+                        _this.prepareDescription(product,language)
 
                         product.dirty = true
                         _this.showLoading = false
@@ -1782,14 +1807,14 @@ new Vue({
             product.manually_descriptions[language].value = data.value.replace(/\r?\n|\r/g, "")
             product.manually_descriptions[language].edit = false
 
-            _this.prepareDescrition(product,language)
+            _this.prepareDescription(product,language)
         },
         closeEditAutoDescription: function (product, language) {
             data = {...product.cached_auto_descriptions[language]}
             product.auto_descriptions[language].value = data.value.replace(/\r?\n|\r/g, "")
             product.auto_descriptions[language].edit = false
 
-            _this.prepareDescrition(product,language)
+            _this.prepareDescription(product,language)
         },
         clearAutoDescription: function (product, language) {
             product.auto_descriptions[language].value = product.auto_descriptions[language].value.replace(/\r?\n|\r/g, "")
@@ -2258,7 +2283,7 @@ new Vue({
                     }
 
                     product.dirty = true
-                    _this.prepareDescrition(product,language)
+                    _this.prepareDescription(product,language)
                 }
             })
 
