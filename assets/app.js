@@ -1196,6 +1196,7 @@ new Vue({
             this.prepareDescription(product, language)
         },
         prepareDescription: function (product, language) {
+            product.dirty = true
             product.manually_descriptions[language].value = product.manually_descriptions[language].value.replace(/\r?\n|\r/g, "")
             product.descriptions[language].value = product.auto_descriptions[language].value
 
@@ -1212,7 +1213,6 @@ new Vue({
                 if (product.descriptions[language.id].value === ''
                     && (product.auto_descriptions[language.id].value || product.manually_descriptions[language.id].value)
                 ) {
-                    product.dirty = true
                     _this.prepareDescription(product, language.id)
                 }
             })
