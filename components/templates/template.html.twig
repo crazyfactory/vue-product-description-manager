@@ -245,7 +245,7 @@
                                         </ul>
                                     </div>
                                     <div v-if="product.descriptions && preview_filter_description" class="indent description">
-                                        <h5><i class="fa fa-info-circle fa-pull-left" aria-hidden="true" ></i> Descriptions:</h5>
+                                        <h5><i class="fa fa-info-circle fa-pull-left" aria-hidden="true" ></i> Descriptions: | <i class="fa fa-compress" aria-hidden="true" @click="mergeAllActiveDescriptions(product)" ></i> | </h5>
                                         <ul class="list-group">
                                             <!-- Language dependent items -->
                                             <li class="list-group-item small" v-for="language in settings.supportedLanguages" v-show="language.status">
@@ -255,6 +255,8 @@
                                                     <a class="product_action fa fa-pull-right cursor" v-if="product.detailsLink" target="_blank" v-bind:href="product.detailsLink +'&lang='+language.id" v-bind:title="'Inspect product '+ product.modelCode +' for language '+ language.id" aria-hidden="true">
                                                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                                                     </a>
+                                                    <i class="fa fa-compress fa-pull-right cursor" aria-hidden="true" @click="prepareDescription(product,language.id)" ></i>
+
 
                                                     <!-- original description -->
                                                     <div v-if="product.cached_descriptions && product.cached_descriptions[language.id] && product.descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value.trim() == product.cached_descriptions[language.id].value.trim()) }">

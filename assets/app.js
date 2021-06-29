@@ -1007,7 +1007,7 @@ new Vue({
                         _this.products.push(..._this.prepareProducts(response))
 
                         _this.products.forEach(function (product) {
-                            _this.prepareAllDescriptions(product)
+                            _this.prepareDescriptions(product)
                         })
                     })
                     .catch(function () {
@@ -1207,14 +1207,19 @@ new Vue({
                 product.descriptions[language].value += product.manually_descriptions[language].value
             }
         },
-        prepareAllDescriptions: function (product) {
+        prepareDescriptions: function (product) {
             this.supportedLanguages.forEach(function (language) {
                 if (product.descriptions[language.id].value === ''
                     && (product.auto_descriptions[language.id].value || product.manually_descriptions[language.id].value)
                 ) {
                     product.dirty = true
-                    this.prepareDescription(product, language.id)
+                    _this.prepareDescription(product, language.id)
                 }
+            })
+        },
+        mergeAllActiveDescriptions: function (product) {
+            this.activeLanguagesIds.forEach(function (language) {
+                _this.prepareDescription(product, language)
             })
         },
         customLabel: function (option) {
@@ -1802,14 +1807,14 @@ new Vue({
             product.manually_descriptions[language].value = data.value.replace(/\r?\n|\r/g, "")
             product.manually_descriptions[language].edit = false
 
-            this.prepareDescription(product,language)
+            _this.prepareDescription(product,language)
         },
         closeEditAutoDescription: function (product, language) {
             data = {...product.cached_auto_descriptions[language]}
             product.auto_descriptions[language].value = data.value.replace(/\r?\n|\r/g, "")
             product.auto_descriptions[language].edit = false
 
-            this.prepareDescription(product,language)
+            _this.prepareDescription(product,language)
         },
         clearAutoDescription: function (product, language) {
             product.auto_descriptions[language].value = product.auto_descriptions[language].value.replace(/\r?\n|\r/g, "")
