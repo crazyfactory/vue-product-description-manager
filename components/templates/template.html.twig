@@ -256,7 +256,7 @@
                                                         <i class="product_action fa fa-rocket cursor text-info" aria-hidden="true"></i>
                                                     </a>
                                                     <i class="fa fa-compress fa-pull-right cursor" aria-hidden="true" @click="prepareDescription(product,language.id)" ></i>
-
+                                                    <i class="fa fa-clone fa-pull-right cursor" title="Set this description for all active products in this language" aria-hidden="true" @click="setPublishDescriptions(language.id, product)"></i>
 
                                                     <!-- original description -->
                                                     <div v-if="product.cached_descriptions && product.cached_descriptions[language.id] && product.descriptions[language.id]" class="cached" v-bind:class="{ 'override': !(product.descriptions[language.id].value.trim() == product.cached_descriptions[language.id].value.trim()) }">

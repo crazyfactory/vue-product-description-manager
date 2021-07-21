@@ -2288,6 +2288,18 @@ new Vue({
             })
 
         },
+        setPublishDescriptions: function (language, this_product){
+            var products = this.products;
+            products.forEach(function (product) {
+                if (product.active) {
+                    product.descriptions[language]['value'] = this_product.descriptions[language]['value'];
+                    product.auto_descriptions[language]['value'] = this_product.auto_descriptions[language]['value'];
+                    product.manually_descriptions[language]['value'] = this_product.manually_descriptions[language]['value'];
+
+                    product.dirty = true
+                }
+            })
+        },
         sortBy: function (sortKey) {
             console.log(sortKey);
             this.reverse = (this.sortKey == sortKey) ? !this.reverse : false;
