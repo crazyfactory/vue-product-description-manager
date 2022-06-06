@@ -847,16 +847,14 @@ new Vue({
                     if(product.cached_materials[language]['is_overridden'] === undefined){
                         product.cached_materials[language]['is_overridden'] = false
                     }
-                    if (product.materials.length > 0) {
                         // filter active materials
-                        current_materials_list = product.materials.map(function (material) {
-                            if (material.is_active) return material[language].trim()
-                        })
-                        // convert materials array to string
-                        current_materials = current_materials_list.join(" / ")
-                        //compare cache_material string and current_materials string
-                        product.cached_materials[language]['is_overridden'] = product.cached_materials[language].value !== current_materials
-                    }
+                    current_materials_list = product.materials.map(function (material) {
+                        if (material.is_active) return material[language].trim()
+                    })
+                    // convert materials array to string
+                    current_materials = current_materials_list.join(" / ")
+                    //compare cache_material string and current_materials string
+                    product.cached_materials[language]['is_overridden'] = product.cached_materials[language].value !== current_materials
                 })
             })
 
@@ -1122,10 +1120,18 @@ new Vue({
         },
         bulkSaveProducts: function () {
             if (hasApi) {
-                let model_code = []
                 this.showLoading = true
+                let msg = this.getEmptyDescriptorMsg(this.selectedDirtyProducts);
+
+                if (msg && !confirm(msg)) {
+                    this.showLoading = false
+                    return;
+                }
+
+                let model_code = []
                 let promise_status_list = this.selectedDirtyProducts.reduce((promiseChain, item) => {
                     item['is_rejected'] = _this.isRejectedProduct(item)
+
                     return promiseChain.then(() => new Promise((resolve, reject) => {
                         fetch(api_endpoint, {
                             credentials: 'include',
@@ -1291,20 +1297,37 @@ new Vue({
         debugSettings: function () {
             console.log(this.settings)
         },
-        exportProduct: function (product) {
-            // validate if baseProduct or Material is empty for this product
-            if (!(product.base_product && product.materials.length)) {
-                if (!(product.materials.length)) {
-                    msg = "Are you sure to set no Material for `" + product.modelCode + "` ?"
+        getEmptyDescriptorMsg: function (products) {
+            let emptyResource = {'materials': [], 'base_product': []};
+            let msg = '';
+
+            products.forEach(function (product) {
+                if (!product.materials.length) {
+                    emptyResource.materials.push(product.modelCode)
                 }
-                if (!product.base_product) {
-                    msg = "Are you sure to set no BaseProduct for `" + product.modelCode + "` ?"
+
+                if (!(product.base_product && Object.keys(product.base_product).length)) {
+                    emptyResource.base_product.push(product.modelCode)
                 }
-                if (!(product.base_product || product.materials.length)) {
-                    msg = "Are you sure to set no BaseProduct and no Material for `" + product.modelCode + "` ?"
+            })
+
+            if (emptyResource.base_product.length) {
+                msg += "\n- No BaseProduct:  `" + emptyResource.base_product.toString() + "` ?"
                 }
-                if (!confirm(msg)) return
+
+            if (emptyResource.materials.length) {
+                msg += "\n- No Material:  `" + emptyResource.materials.toString() + "` ?"
             }
+
+            return msg ? "Are you sure to set empty data?" + msg : null;
+        },
+        exportProduct: function (product) {
+            let msg = this.getEmptyDescriptorMsg([product])
+
+            if (msg && !confirm(msg)) {
+                return;
+            }
+
             product['is_rejected'] = this.isRejectedProduct(product);
 
             if (hasApi) {
